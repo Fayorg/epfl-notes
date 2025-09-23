@@ -11,13 +11,13 @@ They are also available on my portfolio, in a nicely formatted and automatically
     [TEX](/classes/PHYS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15445)
 
 -   **MATH-101: Analysis I**  
-    [TEX](/classes/MATH-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14840)
+    [PDF](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101.pdf) • [TEX](/classes/MATH-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14840)
 
 -   **MATH-111: Linear Algebra I**  
-    [TEX](/classes/MATH-111/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=18502)
+    [PDF](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-111.pdf) • [TEX](/classes/MATH-111/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=18502)
 
 -   **CS-101: Advanced Information, Computation and Communication I**  
-    [TEX](/classes/CS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15272)
+    [PDF](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-101.pdf) • [TEX](/classes/CS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15272)
 
 -   **CS-107: Introduction to programming**  
     [TEX](/classes/CS-107/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14847)
