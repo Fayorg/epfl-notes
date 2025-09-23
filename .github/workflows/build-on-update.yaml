@@ -64,6 +64,9 @@ jobs:
           # latexmk will run pdflatex (or xelatex if your main.tex needs it)
           # Use -silent for less log noise, remove if you want full logs
           latexmk -pdf -outdir=build main.tex
+          echo "Renaming output PDF"
+          mv build/main.pdf build/${{ matrix.folder }}.pdf
+          echo "Build output files:"
           ls -l build || true
       
       - name: Dump LaTeX log if failed
