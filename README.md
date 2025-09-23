@@ -1,3 +1,5 @@
+![epfl](./media/epfl_red.jpg)
+
 # Notes for my classes at EPFL
 
 This repository contains all my lecture notes from my CS studies at EPFL, written in a clean format.  
