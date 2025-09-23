@@ -55,6 +55,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
+      - name: Change theme to bright in main.tex
+        run: |
+          sed -i '/\\input{..\/..\/template\/header\.tex}/i \\
+          \def\theme{bright}' classes/${{ matrix.folder }}/main.tex
 
       - name: Build LaTeX for folder ${{ matrix.folder }}
         working-directory: classes/${{ matrix.folder }}
@@ -68,23 +73,46 @@ jobs:
           mv build/main.pdf build/${{ matrix.folder }}.pdf
           echo "Build output files:"
           ls -l build || true
-      
-      - name: Dump LaTeX log if failed
-        if: failure()
+
+      - name: Change theme to dark in main.tex
         run: |
-          echo "====== LaTeX log (truncated) ======"
-          tail -n 200 build/main.log || true
+          sed -i '/\\input{..\/..\/template\/header\.tex}/i \\
+          \def\theme{dark}' classes/${{ matrix.folder }}/main.tex
+
+      - name: Build LaTeX for folder ${{ matrix.folder }}
+        working-directory: classes/${{ matrix.folder }}
+        run: |
+          echo "Building ${PWD}/main.tex"
+          mkdir -p build
+          # latexmk will run pdflatex (or xelatex if your main.tex needs it)
+          # Use -silent for less log noise, remove if you want full logs
+          latexmk -pdf -outdir=build main.tex
+          echo "Renaming output PDF"
+          mv build/main.pdf build/${{ matrix.folder }}-dark.pdf
+          echo "Build output files:"
+          ls -l build || true
 
       - name: Install AWS CLI
         run: |
           apt-get update
           apt-get install -y awscli
 
-      - name: Upload PDF to DigitalOcean Space
+      - name: Upload Bright PDF to DigitalOcean Space
         run: |
           aws s3 cp \
             classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf \
             s3://${{ secrets.S3_BUCKET }}/notes/${{ matrix.folder }}.pdf \
+            --endpoint-url ${{ secrets.S3_ENDPOINT }} \
+            --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_KEY }}
+
+      - name: Upload Dark PDF to DigitalOcean Space
+        run: |
+          aws s3 cp \
+            classes/${{ matrix.folder }}/build/${{ matrix.folder }}-dark.pdf \
+            s3://${{ secrets.S3_BUCKET }}/notes/${{ matrix.folder }}-dark.pdf \
             --endpoint-url ${{ secrets.S3_ENDPOINT }} \
             --acl public-read
         env:
