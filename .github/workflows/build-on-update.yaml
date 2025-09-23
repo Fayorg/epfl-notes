@@ -74,8 +74,14 @@ jobs:
           mkdir -p build
           # latexmk will run pdflatex (or xelatex if your main.tex needs it)
           # Use -silent for less log noise, remove if you want full logs
-          latexmk -pdf -silent -outdir=build main.tex
+          latexmk -pdf -pdflatex="xelatex -interaction=nonstopmode %O %S" -outdir=build main.tex
           ls -l build || true
+      
+      - name: Dump LaTeX log if failed
+        if: failure()
+        run: |
+          echo "====== LaTeX log (truncated) ======"
+          tail -n 200 build/main.log || true
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
