@@ -43,7 +43,8 @@ jobs:
   build:
     needs: detect-changed-folders
     runs-on: ubuntu-latest
-    # Skip build job if no folders found
+    container:
+      image: ghcr.io/moderncv/debian-texlive-docker:main
     if: ${{ needs.detect-changed-folders.outputs.folders != '[]' }}
     strategy:
       fail-fast: false
@@ -55,18 +56,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install TeX (minimal useful packages)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-xetex \
-            texlive-fonts-recommended \
-            latexmk \
-            git \
-            python3
-
       - name: Build LaTeX for folder ${{ matrix.folder }}
         working-directory: ${{ matrix.folder }}
         run: |
@@ -74,7 +63,7 @@ jobs:
           mkdir -p build
           # latexmk will run pdflatex (or xelatex if your main.tex needs it)
           # Use -silent for less log noise, remove if you want full logs
-          latexmk -pdf -pdflatex="xelatex -interaction=nonstopmode %O %S" -outdir=build main.tex
+          latexmk -pdf -outdir=build main.tex
           ls -l build || true
       
       - name: Dump LaTeX log if failed
