@@ -83,4 +83,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.S3_SECRET_KEY}}
           aws_bucket: ${{ secrets.S3_BUCKET }}
           source_dir: classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf
-          dest_dir: notes/${{ matrix.folder }}.pdf
+          destination_dir: notes/${{ matrix.folder }}.pdf
