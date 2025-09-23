@@ -78,5 +78,5 @@ jobs:
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.folder }}-pdf
-          path: classes/${{ matrix.folder }}/build/*.pdf
+          name: ${{ matrix.folder }}.pdf
+          path: classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf
