@@ -1,49 +1,84 @@
-name: Build LaTeX Docs
-
+name: Build changed LaTeX classes
 on:
   push:
     paths:
       - 'classes/**'
 
 jobs:
-  detect:
+  detect-changed-folders:
     runs-on: ubuntu-latest
     outputs:
-      changed: ${{ steps.filter.outputs.changes }}
+      folders: ${{ steps.set_folders.outputs.folders }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
-        id: filter
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
         with:
-          filters: |
-            classes/*:
-              - 'classes/*/**'
+          fetch-depth: 0
+
+      - name: List changed files
+        id: list_changes
+        run: |
+          echo "Listing changed files between ${{ github.event.before }} and ${{ github.sha }}"
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt || true
+          echo "=== changed_files.txt ==="
+          cat changed_files.txt || true
+
+      - name: Derive unique class folders and set output
+        id: set_folders
+        run: |
+          # extract `classes/<folder>` from changed file paths
+          folders=$(awk -F/ '/^classes\//{print $1"/"$2}' changed_files.txt | sort -u)
+
+          if [ -z "$folders" ]; then
+            # no matching folders -> empty JSON array
+            echo "No changed classes detected."
+            echo "folders=[]" >> $GITHUB_OUTPUT
+          else
+            # build JSON array from lines (using python3)
+            json=$(printf '%s\n' "$folders" | python3 -c 'import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))')
+            echo "Detected folders: $json"
+            echo "folders=$json" >> $GITHUB_OUTPUT
+          fi
 
   build:
-    needs: detect
-    if: needs.detect.outputs.changed != ''
+    needs: detect-changed-folders
     runs-on: ubuntu-latest
+    # Skip build job if no folders found
+    if: ${{ needs.detect-changed-folders.outputs.folders != '[]' }}
     strategy:
+      fail-fast: false
       matrix:
-        folder: ${{ fromJSON(needs.detect.outputs.changed) }}
-      max-parallel: 2
+        folder: ${{ fromJson(needs.detect-changed-folders.outputs.folders) }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Install LaTeX
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-xetex latexmk
-      - name: Build PDF
+      - name: Checkout (to get sources)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install TeX (minimal useful packages)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            latexmk \
+            git \
+            python3
+
+      - name: Build LaTeX for folder ${{ matrix.folder }}
         working-directory: ${{ matrix.folder }}
         run: |
+          echo "Building ${PWD}/main.tex"
           mkdir -p build
-          
-          # Create a wrapper file that sets the theme
-          # cat > build/main_${{ matrix.theme }}.tex <<EOF
-          # \def\backgroundcolor{${{ matrix.theme }}}
-          # \input{main.tex}
-          # EOF
+          # latexmk will run pdflatex (or xelatex if your main.tex needs it)
+          # Use -silent for less log noise, remove if you want full logs
+          latexmk -pdf -silent -outdir=build main.tex
+          ls -l build || true
 
-          latexmk -pdf -quiet -outdir=build build/main.tex
-      - uses: actions/upload-artifact@v4
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.folder }}
+          name: ${{ matrix.folder }}-pdf
           path: ${{ matrix.folder }}/build/*.pdf
