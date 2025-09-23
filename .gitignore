@@ -12,3 +12,4 @@
 
 # remove any generated pdf
 *.pdf
+classes/**/main.synctex(busy)
