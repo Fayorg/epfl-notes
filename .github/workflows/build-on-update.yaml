@@ -1,0 +1,49 @@
+name: Build LaTeX Docs
+
+on:
+  push:
+    paths:
+      - 'classes/**'
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            classes/*:
+              - 'classes/*/**'
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.changed != ''
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ${{ fromJSON(needs.detect.outputs.changed) }}
+      max-parallel: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-xetex latexmk
+      - name: Build PDF
+        working-directory: ${{ matrix.folder }}
+        run: |
+          mkdir -p build
+          
+          # Create a wrapper file that sets the theme
+          # cat > build/main_${{ matrix.theme }}.tex <<EOF
+          # \def\backgroundcolor{${{ matrix.theme }}}
+          # \input{main.tex}
+          # EOF
+
+          latexmk -pdf -quiet -outdir=build build/main.tex
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.folder }}
+          path: ${{ matrix.folder }}/build/*.pdf
