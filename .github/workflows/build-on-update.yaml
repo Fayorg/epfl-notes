@@ -34,8 +34,8 @@ jobs:
             echo "No changed classes detected."
             echo "folders=[]" >> $GITHUB_OUTPUT
           else
-            # build JSON array from lines (using python3)
-            json=$(printf '%s\n' "$folders" | python3 -c 'import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))')
+            # build JSON array from lines (using python3), strip "classes/"
+            json=$(printf '%s\n' "$folders" | python3 -c 'import sys,json; print(json.dumps([l.strip().split("/",1)[1] for l in sys.stdin if l.strip()]))')
             echo "Detected folders: $json"
             echo "folders=$json" >> $GITHUB_OUTPUT
           fi
@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build LaTeX for folder ${{ matrix.folder }}
-        working-directory: ${{ matrix.folder }}
+        working-directory: classes/${{ matrix.folder }}
         run: |
           echo "Building ${PWD}/main.tex"
           mkdir -p build
