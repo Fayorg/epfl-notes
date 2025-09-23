@@ -138,20 +138,6 @@
 ]{conjpurplebox}
 
 % Redefine proof environment to get a full control.
-\makeatletter
-\renewenvironment{proof}[1][\proofname]{\par
-	\pushQED{\qed}%
-	\normalfont \topsep-2\p@\@plus6\p@\relax
-	\trivlist
-	\item[\hskip\labelsep
-	            \color{RawSienna!70!black}\sffamily\bfseries
-	            #1\@addpunct{.}]\ignorespaces
-	\begin{mdframed}[linewidth=2pt,rightline=false, topline=false, bottomline=false,linecolor=RawSienna, backgroundcolor=RawSienna!1]
-		}{%
-		\popQED\endtrivlist\@endpefalse
-	\end{mdframed}
-}
-\makeatother
 \declaretheorem[style=thmexplanationbox, numbered=no, name=Proof]{tmpexplanation}
 \newenvironment{explanation}[1][]{\vspace{-10pt}\pushQED{\(\circledast\)}\begin{tmpexplanation}}{\null\hfill\popQED\end{tmpexplanation}}
 
