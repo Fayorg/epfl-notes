@@ -75,8 +75,12 @@ jobs:
           echo "====== LaTeX log (truncated) ======"
           tail -n 200 build/main.log || true
 
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload PDF to S3
+        id: S3
         with:
-          name: ${{ matrix.folder }}.pdf
-          path: classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf
+          aws_key_id: ${{ secrets.S3_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.S3_SECRET_KEY}}
+          aws_bucket: ${{ secrets.S3_BUCKET }}
+          source_dir: classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf
+          dest_dir: notes/${{ matrix.folder }}.pdf
