@@ -58,8 +58,7 @@ jobs:
       
       - name: Change theme to bright in main.tex
         run: |
-          sed -i '/\\input{..\/..\/template\/header\.tex}/i \\
-          \def\theme{bright}' classes/${{ matrix.folder }}/main.tex
+          awk '{if($0 ~ /\\input{..\/..\/template\/header\.tex}/){print "\\def\\theme{bright}"} print}' classes/${{ matrix.folder }}/main.tex > temp.tex && mv temp.tex classes/${{ matrix.folder }}/main.tex
 
       - name: Build LaTeX for folder ${{ matrix.folder }}
         working-directory: classes/${{ matrix.folder }}
@@ -76,8 +75,7 @@ jobs:
 
       - name: Change theme to dark in main.tex
         run: |
-          sed -i '/\\input{..\/..\/template\/header\.tex}/i \\
-          \def\theme{dark}' classes/${{ matrix.folder }}/main.tex
+          awk '{if($0 ~ /\\input{..\/..\/template\/header\.tex}/){print "\\def\\theme{dark}"} print}' classes/${{ matrix.folder }}/main.tex > temp.tex && mv temp.tex classes/${{ matrix.folder }}/main.tex
 
       - name: Build LaTeX for folder ${{ matrix.folder }}
         working-directory: classes/${{ matrix.folder }}
