@@ -75,13 +75,18 @@ jobs:
           echo "====== LaTeX log (truncated) ======"
           tail -n 200 build/main.log || true
 
-      - uses: shallwefootball/s3-upload-action@master
-        name: Upload PDF to S3
-        id: S3
-        with:
-          aws_key_id: ${{ secrets.S3_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.S3_SECRET_KEY}}
-          aws_bucket: ${{ secrets.S3_BUCKET }}
-          endpoint: ${{ secrets.S3_ENDPOINT }}
-          source_dir: classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf
-          destination_dir: notes/${{ matrix.folder }}.pdf
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Upload PDF to DigitalOcean Space
+        run: |
+          aws s3 cp \
+            classes/${{ matrix.folder }}/build/${{ matrix.folder }}.pdf \
+            s3://${{ secrets.S3_BUCKET }}/notes/${{ matrix.folder }}.pdf \
+            --endpoint-url ${{ secrets.S3_ENDPOINT }} \
+            --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_KEY }}
