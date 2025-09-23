@@ -8,6 +8,7 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.synctex
 
 # remove any generated pdf
 *.pdf
