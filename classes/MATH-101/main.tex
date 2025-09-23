@@ -1,0 +1,29 @@
+\documentclass[a4paper]{report}
+\def\theme{dark}
+
+\input{../../template/header.tex}
+
+\author{Elie Baier}
+\title{Analysis I}
+
+\thispagestyle{empty}
+
+\usepackage{adjustbox}
+\usepackage{centernot}
+
+\input{../../template/theme.tex}
+
+\begin{document}
+
+\input{title}
+
+\tableofcontents
+\newpage
+
+\foreach \c in {0,...,10}{
+    \IfFileExists{chapters/chapter_\c.tex} {
+        \input{chapters/chapter_\c.tex}
+    }{}
+}
+    
+\end{document}

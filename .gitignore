@@ -1,0 +1,13 @@
+# remove latex intermediate files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# remove any generated pdf
+*.pdf

@@ -1,0 +1,27 @@
+\documentclass[a4paper]{report}
+\def\theme{dark}
+
+\input{../../template/header.tex}
+
+\author{Elie Baier}
+\title{Advanced Information, Computation and Communication I}
+
+\thispagestyle{empty}
+
+\usepackage{adjustbox}
+\usepackage{centernot}
+
+\input{../../template/theme.tex}
+
+\begin{document}
+
+\input{title}
+\tableofcontents
+
+\foreach \c in {1,...,5}{
+    \IfFileExists{chapters/chapter_\c.tex} {
+        \input{chapters/chapter_\c.tex}
+    }{}
+}
+    
+\end{document}

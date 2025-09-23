@@ -1,0 +1,49 @@
+% +++++ DEFINITIONS +++++
+\declaretheoremstyle[
+	headfont=\bfseries\sffamily\color{definition-header-text}, bodyfont=\normalfont,
+    postheadhook={},
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+            roundcorner=3pt,
+			linecolor=ForestGreen, backgroundcolor=definition-background, fontcolor=definition-body-text,
+			nobreak=false
+		}
+]{thmgreenbox}
+
+\declaretheorem[style=thmgreenbox, name=Definition, numberwithin=section]{definitionbase}
+\NewDocumentEnvironment{definition}{o} % This is a wrapper to get new line when a name is provided
+{
+    \IfNoValueTF{#1}
+    {\begin{definitionbase}}
+    {
+      \begin{definitionbase}[#1]$\newline$
+    }
+}
+{
+  \end{definitionbase}%
+}
+
+% +++++ EXAMPLES +++++
+\declaretheoremstyle[
+	headfont=\bfseries\sffamily\color{example-header-text}, bodyfont=\normalfont,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=NavyBlue, backgroundcolor=example-background, fontcolor=definition-body-text,
+			nobreak=false
+		}
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Example]{eg}
+
+% +++++ THEOREMS +++++
+\declaretheoremstyle[
+	headfont=\bfseries\sffamily\color{theorem-header-text}, bodyfont=\normalfont,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=RawSienna, backgroundcolor=theorem-background, fontcolor=theorem-body-text,
+			nobreak=false
+		}
+]{thmredbox}
+\declaretheorem[style=thmredbox, name=Theorem, numberwithin=section]{theorem}

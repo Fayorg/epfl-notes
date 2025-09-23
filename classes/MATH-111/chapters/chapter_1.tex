@@ -1,0 +1,122 @@
+\chapter{Linear Equations}
+
+
+\begin{theorem}
+    A linear system can only have zero, one or an infinity of solutions.
+\end{theorem}
+
+\begin{theorem}
+    Elementary operations can be applied to a system without changing the solution of the given system. The following operations can be used:
+
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Switch equations between them.
+        \item Multiply an equation by a reel number not null.
+        \item Add a multple of another equation from the system.
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}[Leading coefficient]
+    For a matrix $n \times m$, the leading coefficient of a non-null line is the left most coefficient.
+\end{definition}
+
+\begin{definition}[Row echelon form]
+    A matrix is said in row echelon form if:
+
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item All null lines (if present) are at the bottom of the matrix.
+        \item The leading coefficient of a non-null line is always to the right of the leading coefficient of the line above.
+        \item All coefficients below a leading coefficient are null.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Reduced row echelon form]
+    A matrix is said in reduced row echelon form if:
+
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item It is in row echelon form.
+        \item All leading coefficients are equal to 1.
+        \item All coefficients above a leading coefficient are null.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Lines equivalent]
+    A matrix is said lines equivalent to another matrix if we can go from the first one to the second one only with elementary operations.
+\end{definition}
+All lines equivalent matrix when in reduced row echelon form will have the same leading coefficients at the same positions.
+
+\section{Vectorials equations}
+
+\begin{definition}[$\mathbb{R}^n$]
+    $\mathbb{R}^n$ is the set of all column matrices (vectors) of size $n \times 1$.
+\end{definition}
+
+\begin{definition}[Vector of $\mathbb{R}^n$]
+    An element of $\mathbb{R}^n$ is called a vector of $\mathbb{R}^n$.
+\end{definition}
+
+\begin{definition}[Components]
+    The components of a vector are the coefficients of the vector.
+\end{definition}
+
+\begin{eg}
+    Each vector of $\mathbb{R}^n$ can be identified with a point in an n-dimensional space. For example, the vector $\begin{bmatrix} 2 \\ 3 \\ 5 \end{bmatrix}$ can be identified with the point (2, 3, 5) in a 3-dimensional space.
+\end{eg}
+A vector can also be called a column vector and row vectors are $1 \times n$ matrices.
+
+\subsection{Vector operations}
+Let $\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$ be two vectors of $\mathbb{R}^n$.
+\begin{definition}[Addition]
+    The addition of two vectors of $\mathbb{R}^n$ is the vector obtained by adding the components of the two vectors.
+    \[
+    \vec{u} + \vec{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}
+    \]
+\end{definition}
+
+\begin{eg}
+    $\newline$
+    Let $\vec{a} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ and $\vec{b} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$, then:
+    \[
+    \vec{a} + \vec{b} = \begin{bmatrix}1 + 4 \\ 2 + 5 \\ 3 + 6 \\ \end{bmatrix} = \begin{bmatrix} 5 \\ 7 \\ 9 \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{definition}[Substraction]
+    The subtraction of two vectors of $\mathbb{R}^n$ is the vector obtained by subtracting the components of the two vectors.
+    \[
+    \vec{u} - \vec{v} = \begin{bmatrix} u_1 - v_1 \\ u_2 - v_2 \\ \vdots \\ u_n - v_n \end{bmatrix}
+    \]
+\end{definition}
+
+\begin{eg}
+    $\newline$
+    Let $\vec{a} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ and $\vec{b} = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}$, then:
+    \[
+    \vec{a} - \vec{b} = \begin{bmatrix}1 - 4 \\ 2 - 5 \\ 3 - 6 \\ \end{bmatrix} = \begin{bmatrix} -3 \\ -3 \\ -3 \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{definition}[Scalar mutiplication]
+    Vectors can be mutiplied by a scalar $c \in \mathbb{R}$ by multiplying each component of the vector by $c$.
+    \[
+    c \cdot \vec{u} = c \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix} = \begin{bmatrix} c \cdot  u_1 \\ c \cdot  u_2 \\ \vdots \\ c \cdot  u_n \end{bmatrix}
+    \]
+\end{definition}
+
+\begin{eg}
+    $\newline$
+    Let $\vec{a} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ and $c = 3$, then:
+    \[
+    c \cdot \vec{a} = 3 \cdot \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} = \begin{bmatrix} 3 \cdot 1 \\ 3 \cdot 2 \\ 3 \cdot 3 \end{bmatrix} = \begin{bmatrix} 3 \\ 6 \\ 9 \end{bmatrix}
+    \]
+\end{eg}
+The following properties hold for vectors $\vec{u}, \vec{v}, \vec{w} \in \mathbb{R}^n$ and scalars $c, d \in \mathbb{R}$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\vec{u} + \vec{v} = \vec{v} + \vec{u}$ (Commutative property of addition)
+    \item $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$ (Associative property of addition)
+    \item There exists a zero vector $\vec{0} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$ such that $\vec{u} + \vec{0} = \vec{u}$ (Existence of additive identity)
+    \item For every vector $\vec{u}$, there exists an additive inverse $-\vec{u}$ such that $\vec{u} + (-\vec{u}) = \vec{0}$ (Existence of additive inverse)
+    \item $c \cdot (\vec{u} + \vec{v}) = c \cdot \vec{u} + c \cdot \vec{v}$ (Distributive property of scalar multiplication over vector addition)
+    \item $(c + d) \cdot \vec{u} = c \cdot \vec{u} + d \cdot \vec{u}$ (Distributive property of scalar addition over vector multiplication)
+    \item $(c \cdot d) \cdot \vec{u} = c \cdot (d \cdot \vec{u})$ (Associative property of scalar multiplication)
+    \item $1 \cdot \vec{u} = \vec{u}$ (Existence of multiplicative identity)
+\end{itemize}

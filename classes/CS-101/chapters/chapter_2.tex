@@ -1,0 +1,48 @@
+\chapter{Predicate Logic}
+In propositional logic, some expression cannot be expressed easily or cannot be expressed at all. For example, the statement "x + 2 = 5.” is not a proposition because it contains a variable x. However, we can express this statement as a predicate.
+
+\section{Propositional Functions}
+
+\section{Quantifiers}
+
+\subsection{Universal Quantifier}
+
+\subsection{Existential Quantifier}
+
+\subsection{Uniqueness Quantifier}
+
+\subsection{Precedence, Scope and Binding}
+
+\subsection{Validity and Satisfiability}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+\begin{eg}
+    Given these two assemptions: 
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item "Running is not difficult or not many students like running"
+        \item "If jumping is easy, then running is not difficult"
+    \end{itemize}
+    How many of the following are valid conclusion of these assemptions?
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item "Jumping is not easy, if many students like running"
+        \item "Jumping is not easy or running is difficult"
+        \item "If not many students like running, then either jumping is not easy or running is not difficult"
+        \item "Running is not difficult or jumping is not easy"
+    \end{itemize}
+    $\newline$
+    Answer: 3 (1, 3, 4)\\ \\
+    Explaination: Let's translate the propositions as following:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $D$: "Running is difficult"
+        \item $M$: "Many student like running"
+        \item $J$: "Jumping is easy"
+    \end{itemize}
+    And the premises translate to:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $D \lor \neg M$
+        \item $J \to \neg D \equiv \neg J \lor \neg D$ 
+    \end{itemize}
+    1. If $M$ holds, premise (1) forces $D$ (because $D \lor \neg M$ and $\neg M$ is false). From the contrapositive of (2) we have $D \to \neg J$. So $M \to D$ and $D \to \neg J$ gives $M \to \neg J$. \textbf{Valid.}
+\end{eg}

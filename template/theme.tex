@@ -1,0 +1,42 @@
+% --- Dark Theme ---
+\newcommand{\defineDarkTheme}{
+    \colorlet{page-background}{blue!10!black}
+    \pagecolor{page-background}
+    \color{white}
+
+    \colorlet{primary}{violet}
+    \colorlet{secondary}{cyan}
+
+    \colorlet{definition-background}{page-background}
+    \colorlet{definition-header-text}{ForestGreen!80!white}
+    \colorlet{definition-body-text}{white}
+
+    \colorlet{example-background}{page-background}
+    \colorlet{example-header-text}{NavyBlue!80!white}
+    \colorlet{example-body-text}{white}
+
+    \colorlet{theorem-background}{page-background}
+    \colorlet{theorem-header-text}{RawSienna!80!white}
+    \colorlet{theorem-body-text}{white}
+}
+
+% --- Light Theme ---
+\newcommand{\defineLightTheme}{
+    \colorlet{primary}{orange}
+    \colorlet{secondary}{blue}
+
+    \colorlet{definition-background}{ForestGreen!5}
+    \colorlet{definition-header-text}{ForestGreen!70!black}
+    \colorlet{definition-body-text}{black}
+
+    \colorlet{example-background}{NavyBlue!5}
+    \colorlet{example-header-text}{NavyBlue!70!black}
+    \colorlet{example-body-text}{black}
+
+    \colorlet{theorem-background}{RawSienna!5}
+    \colorlet{theorem-header-text}{RawSienna!80!white}
+    \colorlet{theorem-body-text}{black}
+}
+
+% Theme selection
+\ifdefstring{\theme}{dark}{\defineDarkTheme}{\defineLightTheme}

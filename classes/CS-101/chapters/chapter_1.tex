@@ -1,0 +1,533 @@
+\chapter{Propositional Logic}
+
+\section{Basic Definitions}
+\begin{definition}[Proposition]
+    A proposition is a declarative sentence that is either true or false, but not both.
+\end{definition}
+
+\begin{eg}
+    Here are some examples of propositions and non-propositions:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item "It is raining." - This is a proposition because it can be either true or false.
+        \item "2 + 2 = 4." - This is a proposition because it is always true.
+        \item "The sky is blue." - This is a proposition because it can be either true or false depending on the time of day and weather conditions.
+        \item "x + 2 = 5." - This is not a proposition because it contains a variable (x) and its truth value depends on the value of x.
+        \item "Close the door!" - This is not a proposition because it is an imperative sentence and does not have a truth value.
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Atomic Proposition]
+    An atomic proposition is a proposition that cannot be broken down into simpler propositions. It is a basic building block of propositional logic.
+\end{definition}
+Proposition can be expressed using variables, typically denoted by letters such as \(p\), \(q\), \(r\), etc. Furthermore, a proposition that is always true is denoted by $T$, while a proposition that is always false is denoted by $F$.
+
+\begin{definition}[Compound Proposition]
+    A compound proposition is a proposition that is formed by combining two or more atomic propositions using logical connectives.
+    The most common logical connectives are:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Negation ($\neg$): The negation of a proposition $p$ is denoted by $\neg p$.
+        \item Conjunction ($\land$): The conjunction of two propositions $p$ and $q$ is denoted by $p \land q$.
+        \item Disjunction ($\lor$): The disjunction of two propositions $p$ and $q$ is denoted by $p \lor q$.
+        \item Implication ($\to$): The implication of two propositions $p$ and $q$ is denoted by $p \to q$.
+        \item Biconditional ($\leftrightarrow$): The biconditional of two propositions $p$ and $q$ is denoted by $p \leftrightarrow q$.
+    \end{itemize}
+\end{definition}
+
+\subsection{Truth Tables}
+\begin{definition}[Truth Table]
+    A truth table is a mathematical table used to determine the truth value of a compound proposition based on the truth values of its atomic propositions. It lists all possible combinations of truth values for the atomic propositions and shows the resulting truth value of the compound proposition for each combination.
+\end{definition}
+
+\begin{eg}
+    Consider the compound proposition \(p \land q\), where \(p\) and \(q\) are atomic propositions. The truth table for this compound proposition is as follows:
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \land q \\
+            \hline
+            T & T & T \\
+            T & F & F \\
+            F & T & F \\
+            F & F & F
+        \end{array}
+    \]
+    In this truth table, the first two columns represent all possible combinations of truth values for the atomic propositions \(p\) and \(q\). The third column shows the resulting truth value of the compound proposition \(p \land q\) for each combination.
+\end{eg}
+
+\section{Logical Connectives}
+\subsection{Negation and Conjunction}
+\begin{definition}[Negation]
+    The negation of a proposition $p$ is denoted by $\neg p$ (also $\bar{p}$), read "not $p$". It is true when $p$ is false, and false when $p$ is true.
+    \[
+        \begin{array}{c|c}
+            p & \neg p \\
+            \hline
+            T & F \\
+            F & T
+        \end{array}
+    \]
+    In plain English, $\neg p$ can be expressed as "It is not the case that $p$" or "It is false that $p$".
+\end{definition}
+
+\begin{eg}
+    Let \(p\) be the proposition "It is raining." Then, \(\neg p\) is the proposition "It is not the case that it is raining" or more simply "It is not raining."
+\end{eg}
+
+\begin{definition}[Conjunction]
+    The conjunction of two propositions $p$ and $q$ is denoted by $p \land q$, read "p and q". It is true when both $p$ and $q$ are true, and false otherwise.
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \land q \\
+            \hline
+            T & T & T \\
+            T & F & F \\
+            F & T & F \\
+            F & F & F
+        \end{array}
+    \]
+    % In plain English, $p \land q$ can be expressed as "Both $p$ and $q$ are true".
+\end{definition}
+
+\begin{eg}
+    Let \(p\) be the proposition "It is raining." and \(q\) be the proposition "It is cold." Then, \(p \land q\) is the proposition "It is raining and it is cold."
+\end{eg}
+
+\subsection{Disjunction}
+\begin{definition}[Disjunction]
+    The disjunction of two propositions $p$ and $q$ is denoted by $p \lor q$, read "p or q". It is true when at least one of $p$ or $q$ is true, and false when both are false.
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \lor q \\
+            \hline
+            T & T & T \\
+            T & F & T \\
+            F & T & T \\
+            F & F & F
+        \end{array}
+    \]
+    % In plain English, $p \lor q$ can be expressed as "At least one of $p$ or $q$ is true".
+\end{definition}
+
+\begin{eg}
+    Let \(p\) be the proposition "It is raining." and \(q\) be the proposition "It is cold." Then, \(p \lor q\) is the proposition "It is raining or it is cold."
+\end{eg}
+In natural language, "or" has two distinct meanings:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Inclusive or: This is the meaning used in propositional logic, where "or" means "at least one of the statements is true". For example, "Candidates for this position should have a degree in mathematics or computer science" means you can have either one or both.
+    \item Exclusive or: This meaning implies that only one of the statements can be true, but not both. For example, "Soup or salad comes with this entrée" means you must choose one and only one.
+\end{itemize}
+In propositional logic, we always use the inclusive or.
+
+\begin{definition}[XOR]
+    The exclusive or of two propositions $p$ and $q$ is denoted by $p \oplus q$, read "p xor q". It is true when exactly one of $p$ or $q$ is true, and false otherwise.
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \oplus q \\
+            \hline
+            T & T & F \\
+            T & F & T \\
+            F & T & T \\
+            F & F & F
+        \end{array}
+    \]
+    In plain English, $p \oplus q$ can be expressed as "Exactly one of $p$ or $q$ is true".
+\end{definition}
+
+\subsection{Implication}
+\begin{definition}[Implication]
+    The implication of two propositions $p$ and $q$ is denoted by $p \to q$, read "if p then q" or "p implies q". It is false when $p$ is true and $q$ is false, and true otherwise.
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \to q \\
+            \hline
+            T & T & T \\
+            T & F & F \\
+            F & T & T \\
+            F & F & T
+        \end{array}
+    \]
+    In plain English, $p \to q$ can be expressed as "If $p$ is true, then $q$ must also be true".
+\end{definition}
+Implication does not require any connection between the premise and the conclusion.\\
+A common error is to think that $p \to q$ is the same as $q \to p$. This is not true in general.
+
+\begin{eg}
+    A simple way to understand implications is to think of an obligation or contract:
+    \begin{center}
+        Politician: "If I am elected, I will lower taxes."
+    \end{center}
+    If the politician is elected (p is true) and does not lower taxes (q is false), they have broken their promise (the implication is false). \\
+    If the politician is not elected (p is false), then no one cares.
+\end{eg}
+In mathematics, $p \to q$ is often read as "$p$ is a sufficient condition for $q$", or "$q$ is a necessary condition for $p$".
+
+\begin{eg}
+    Let's consider the difference between sufficient and necessary conditions with an example:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Sufficient condition: "If it is raining, then the ground is wet." Here, raining is a sufficient condition for the ground being wet. If it is raining, we can be sure that the ground is wet. However, the ground can also be wet for other reasons (e.g., someone watering the garden).
+        \item Necessary condition: "If the ground is wet, then it has rained." Here, the ground being wet is a necessary condition for it having rained. If the ground is not wet, we can be sure that it has not rained. However, the ground can be wet for other reasons (e.g., someone watering the garden). 
+    \end{itemize}
+\end{eg}
+A condition that is both necessary and sufficient is called a \textbf{biconditional}.
+
+\subsection{Biconditional}
+\begin{definition}[Biconditional]
+    The biconditional of two propositions $p$ and $q$ is denoted by $p \leftrightarrow q$, read "p if and only if q" or "p iff q". It is true when both $p$ and $q$ have the same truth value, and false otherwise.
+    \[
+        \begin{array}{c|c|c}
+            p & q & p \leftrightarrow q \\
+            \hline
+            T & T & T \\
+            T & F & F \\
+            F & T & F \\
+            F & F & T
+        \end{array}
+    \]
+    In plain English, $p \leftrightarrow q$ can be expressed as "$p$ is true if and only if $q$".
+\end{definition}
+$$$$
+In English, "if and only if" is often abbreviated as "iff" and it has many alternative phrasings, such as:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item "$p$ is necessary and sufficient for $q$"
+    \item "$p$ is equivalent to $q$"
+    \item "if $p$ then $q$, and conversely"
+    \item "$p$ exactly when $q$"
+    \item "$p$ just in case $q$"
+\end{itemize}
+In natural language the biconditional is often implicit in statements like "You can drive a car if you have a driving license", which means "You can drive a car if and only if you have a driving license".
+
+\subsection{Precedence of Logical Connectives}
+\begin{definition}[Precedence of Logical Connectives]
+    The precedence of logical connectives is the order in which they are evaluated in a compound proposition. This order determines how the proposition is interpreted and evaluated. The precedence of logical connectives from highest to lowest is as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Negation ($\neg$)
+        \item Conjunction ($\land$)
+        \item Disjunction ($\lor$)
+        \item Implication ($\to$) 
+        \item Biconditional ($\leftrightarrow$)
+    \end{itemize}
+    If needed, parentheses can be used to explicitly indicate the order of evaluation.
+\end{definition}
+\begin{eg}
+    Consider the compound proposition \(p \lor q \land \neg r\). According to the precedence of logical connectives, we first evaluate the negation, then the conjunction, and finally the disjunction. Therefore, the proposition is interpreted as \(p \lor (q \land (\neg r))\).
+\end{eg}
+
+\subsection{Translation between English and Logic}
+\begin{eg}
+    Let \(p\) be the proposition "It is below freezing." and \(q\) be the proposition "It is snowing.", to express "It is snowing if and only if it is below freezing." in propositional logic, we can write:
+    \[ p \leftrightarrow q \]
+\end{eg}
+\begin{eg}
+    Let \(p\) be the proposition "you drive over 50 km/h in Lausanne." and \(q\) be the proposition "you get a speeding ticket.", to express "You drive over 50 km/h in Lausanne despite not getting a speeding ticket." in propositional logic, we can write:
+    \[ \neg p \land q \]
+\end{eg}
+
+\section{Classification, Satisfiability and Equivalence of Propositions}
+\subsection{Classification of Propositions}
+\begin{definition}[Tautology]
+    A tautology is a compound proposition that is always true, regardless of the truth values of its atomic propositions.
+\end{definition}
+\begin{eg}
+    The proposition \(p \lor \neg p\) is a tautology because it is always true, regardless of the truth value of \(p\).
+    \[
+        \begin{array}{c|c}
+            p & p \lor \neg p \\
+            \hline
+            T & T \\
+            F & T
+        \end{array}
+    \]
+\end{eg}
+
+\begin{definition}[Contradiction]
+    A contradiction is a compound proposition that is always false, regardless of the truth values of its atomic propositions.
+\end{definition}
+\begin{eg}
+    The proposition \(p \land \neg p\) is a contradiction because it is always false, regardless of the truth value of \(p\).
+    \[
+        \begin{array}{c|c}
+            p & p \land \neg p \\
+            \hline
+            T & F \\
+            F & F
+        \end{array}
+    \]
+\end{eg}
+
+\begin{definition}[Contingency]
+    A contingency is a compound proposition that is neither a tautology nor a contradiction. Its truth value depends on the truth values of its atomic propositions.
+\end{definition}
+\begin{eg}
+    The proposition $p$ is a contingency because its truth value depends on the truth value of $p$.
+\end{eg}
+
+\begin{eg}
+    Let's show that the proposition $(p \land q) \to (p \lor q)$ is a tautology.
+    \[
+        \begin{array}{c|c|c|c|c}
+            p & q & p \land q & p \lor q & (p \land q) \to (p \lor q) \\
+            \hline
+            T & T & T & T & T \\
+            T & F & F & T & T \\
+            F & T & F & T & T \\
+            F & F & F & F & T
+        \end{array}
+    \]
+    Since the last column is always true, the proposition is a tautology.
+\end{eg}
+
+\subsection{Satisfiability of Propositions}
+\begin{definition}[Satisfiable Proposition]
+    A proposition is satisfiable if there exists at least one assignment of truth values to its atomic propositions that makes the compound proposition true. If no such assignment exists, the proposition is unsatisfiable (a contradiction).
+\end{definition}
+
+\begin{eg}
+    Let's determine if the proposition $(p \lor  \neg q) \land (q \lor \neg r) \land (r \lor \neg p)$ is satisfiable.
+    \[
+        \begin{array}{c|c|c|c|c|c|c}
+            p & q & r & p \lor \neg q & q \lor \neg r & r \lor \neg p & (p \lor  \neg q) \land (q \lor \neg r) \land (r \lor \neg p) \\
+            \hline
+            T & T & T & T & T & T & T \\
+            T & T & F & T & F & F & F \\
+            T & F & T & T & T & F & F \\
+            T & F & F & T & T & T & T \\
+            F & T & T & F & T & T & F \\
+            F & T & F & F & F & T & F \\
+            F & F & T & T & T & T & T \\
+            F & F & F & T & T & T & T
+        \end{array}
+    \]
+    Since there are assignments that make the proposition true (for example, \(p = T, \ q = T, \ r = T\)), the proposition is satisfiable.
+    $$$$
+    Another easier way to determine satisfiability is to manually try to find an assignment that makes the proposition true. For example, we can set \(p = T\), \(q = T\), and \(r = T\) to make the proposition true avoiding the construction of a truth table which can be cumbersome for propositions with many variables ($2^n$ rows for \(n\) variables).
+\end{eg}
+
+\subsection{Equivalence of Propositions}
+\begin{definition}[Logical Equivalence]
+    Two propositions \(p\) and \(q\) are said to be equivalent, denoted \(p \equiv q\), if they have the same truth value in every possible scenario (or if $p \to q$ is a tautology).
+\end{definition}
+
+\begin{eg}
+    Let's show that the propositions \(p \to q\) and \(\neg p \lor q\) are equivalent.
+    \[
+        \begin{array}{c|c|c|c|c}
+            p & q & p \to q & \neg p & \neg p \lor q \\
+            \hline
+            T & T & T & F & T \\
+            T & F & F & F & F \\
+            F & T & T & T & T \\
+            F & F & T & T & T
+        \end{array}
+    \]
+    Since the columns for \(p \to q\) and \(\neg p \lor q\) are identical, the propositions are equivalent.
+\end{eg}
+
+\subsection{Logical Equivalences}
+Non exhaustive list of important logical equivalences:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Identity Laws:
+    \[ p \land T \equiv p \]
+    \[ p \lor F \equiv p \]
+    \item Domination Laws:
+    \[ p \lor T \equiv T \]
+    \[ p \land F \equiv F \]
+    \item Idempotent Laws:
+    \[ p \lor p \equiv p \]
+    \[ p \land p \equiv p \]
+    \item Double Negation Law:
+    \[ \neg (\neg p) \equiv p \]
+    \item Commutative Laws:
+    \[ p \lor q \equiv q \lor p \]
+    \[ p \land q \equiv q \land p \]
+    \item Associative Laws:
+    \[ (p \lor q) \lor r \equiv p \lor (q \lor r) \]
+    \[ (p \land q) \land r \equiv p \land (q \land r) \]
+    \item Distributive Laws:
+    \[ p \land (q \lor r) \equiv (p \land q) \lor (p \land r) \]
+    \[ p \lor (q \land r) \equiv (p \lor q) \land (p \lor r) \]
+    \item De Morgan's Laws:
+    \[ \neg (p \land q) \equiv \neg p \lor \neg q \]
+    \[ \neg (p \lor q) \equiv \neg p \land \neg q \]
+    \item Absorption Laws:
+    \[ p \lor (p \land q) \equiv p \]
+    \[ p \land (p \lor q) \equiv p \]
+    \item Negation Laws:
+    \[ p \lor \neg p \equiv T \]
+    \[ p \land \neg p \equiv F \]
+\end{itemize}
+More equivalences laws can be found on moodle (or in the cheetsheet for the exam).
+
+\begin{eg}
+    Since we know that $p \to q \equiv \neg q \to \neg p$ we also know that, for example, $(p_1 \lor p_2) \to (q_1 \land q_2) \equiv \neg (q_1 \land q_2) \to \neg (p_1 \lor p_2)$.
+\end{eg}
+
+\subsection{Contrapositive, Converse, and Inverse}
+\begin{definition}[Contrapositive]
+    The contrapositive of an implication \(p \to q\) is the implication \((\neg q) \to (\neg p)\). An implication is logically equivalent to its contrapositive.
+\end{definition}
+\begin{definition}[Converse]
+    The converse of an implication \(p \to q\) is the implication \(q \to p\). An implication is not logically equivalent to its converse in general.
+\end{definition}
+\begin{definition}[Inverse]
+    The inverse of an implication \(p \to q\) is the implication \(\neg p \to \neg q\). An implication is not logically equivalent to its inverse in general.
+\end{definition}
+
+\subsection{Equivalence Proofs}
+To prove that $A \equiv B$, we use a sequence of logical equivalences starting from $A$ and ending at $B$ (or vice versa). Each step in the sequence must be justified by a known logical equivalence.
+\begin{eg}
+    Let's show that $\neg (p \lor (\neg p \land q)) \equiv \neg p \land \neg q$.
+    \begin{align*}
+        \neg (p \lor (\neg p \land q)) &\equiv \neg p \land \neg (\neg p \land q) &\text{(De Morgan's Law)} \\
+        &\equiv \neg p \land (\neg \neg p \lor \neg q) &\text{(De Morgan's Law)} \\
+        &\equiv \neg p \land (p \lor \neg q) &\text{(Double Negation)} \\
+        &\equiv (\neg p \land p) \lor (\neg p \land \neg q) &\text{(Distributive Law)} \\
+        &\equiv F \lor (\neg p \land \neg q) &\text{(Negation Law)} \\
+        &\equiv \neg p \land \neg q &\text{(Identity Law)}
+    \end{align*}
+    Therefore, we have shown that $\neg (p \lor (\neg p \land q)) \equiv \neg p \land \neg q$.
+\end{eg}
+
+\subsection{Methods to Prove Tautology, Contingency or Contradiction}
+How to prove that an expression is a tautology, contigency or contradiction:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Truth Table (most straightforward but can be cumbersome for many variables).
+    \item Equivalence Proof (shorter but requires knowledge of equivalence laws and intuition).
+    \item Counter Example (shorter but requires intuition).
+\end{itemize}
+
+\subsection{Do We Need All Propositions?}
+\begin{definition}[Functionally Complete Set of Connectives]
+    A set of logical connectives is functionally complete if every compound proposition can be expressed using only the connectives in that set.
+\end{definition}
+
+\begin{eg}
+    The set of connectives \(\{\neg, \land, \lor\}\) is functionally complete because we can express all other connectives using only negation and conjunction. For example:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Implication: \(p \to q \equiv \neg p \lor q \equiv \neg (\neg p \land \neg q)\)
+        \item Biconditional: \(p \leftrightarrow q \equiv (p \to q) \land (q \to p) \equiv (\neg p \lor q) \land (\neg q \lor p)\)
+    \end{itemize}
+    Therefore, we can express any compound proposition using only negation and conjunction.
+\end{eg}
+
+\section{Disjunctive Normal Form and Conjunctive Normal Form}
+\begin{definition}[Normal Form]
+    A normal form is a standardized way of expressing a compound proposition that can be used in automated proofing of theorems.
+\end{definition}
+The two most common normal forms are the disjunctive normal form (DNF) and the conjunctive normal form (CNF).
+
+\begin{definition}[Disjunctive Normal Form]
+    A compound proposition is in disjunctive normal form (DNF) if it is a disjunction of one or more conjunctions of one or more midterms (or literals). A midterm is either an atomic proposition or its negation.
+\end{definition}
+\begin{eg}
+    The following propositions are in (full) disjunctive normal form:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \((p \land q) \lor (\neg p \land r)\) (full DNF)
+        \item \((\neg p \land q) \lor (p \land \neg r)\) (full DNF)
+        \item \(p \lor (\neg q \land r)\) (not full DNF, because the first term is not a conjunction)
+    \end{itemize}
+\end{eg}
+To find the DNF of a proposition, we can use a truth table to identify the rows where the proposition is true, and then construct the DNF by taking the disjunction of the conjunctions of the literals corresponding to those rows.
+\begin{eg}
+    Find the DNF of the proposition $(p \lor q) \to \neg r$.
+    \[
+        \begin{array}{c|c|c|c|c|c}
+            p & q & r & p \lor q & \neg r & (p \lor q) \to \neg r \\
+            \hline
+            T & T & T & T & F & F \\
+            T & T & F & T & T & T \\
+            T & F & T & T & F & F \\
+            T & F & F & T & T & T \\
+            F & T & T & T & F & F \\
+            F & T & F & T & T & T \\
+            F & F & T & F & F & T \\
+            F & F & F & F & T & T
+        \end{array}
+    \]
+    The proposition is true for the rows 2, 4, 6, 7, and 8. Therefore, the DNF is:
+    \[ (p \land q \land \neg r) \lor (p \land \neg q \land \neg r) \lor (\neg p \land q \land \neg r) \lor (\neg p \land \neg q \land r) \lor (\neg p \land \neg q \land \neg r) \]
+\end{eg}
+
+\begin{definition}[Conjunctive Normal Form]
+    A compound proposition is in conjunctive normal form (CNF) if it is a conjunction of one or more disjunctions of one or more clauses (or literals). A clause is either an atomic proposition or its negation.
+\end{definition}
+\begin{eg}
+    The following propositions are in (full) conjunctive normal form:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \((p \lor q) \land (\neg p \lor r)\) (full CNF)
+        \item \((\neg p \lor q) \land (p \lor \neg r)\) (full CNF)
+        \item \(p \land (\neg q \lor r)\) (not full CNF, because the first term is not a disjunction)
+    \end{itemize}
+\end{eg}
+To find the CNF of a proposition, we can use a truth table to identify the rows where the proposition is false, and then construct the CNF by taking the conjunction of the disjunctions of the literals corresponding to those rows.
+\begin{eg}
+    Find the CNF of the proposition $(p \lor q) \to \neg r$.
+    \[
+        \begin{array}{c|c|c|c|c|c}
+            p & q & r & p \lor q & \neg r & (p \lor q) \to \neg r \\
+            \hline
+            T & T & T & T & F & F \\
+            T & T & F & T & T & T \\
+            T & F & T & T & F & F \\
+            T & F & F & T & T & T \\
+            F & T & T & T & F & F \\
+            F & T & F & T & T & T \\
+            F & F & T & F & F & T \\
+            F & F & F & F & T & T
+        \end{array}
+    \]
+    The proposition is false for the rows 1, 3, and 5. Therefore, the CNF is:
+    \[ ( \neg p \lor \neg q \lor \neg r) \land ( \neg p \lor q \lor \neg r) \land (p \lor \neg q \lor \neg r) \]
+\end{eg}
+Let now take the same example that will show the link between DNF and CNF.
+\begin{eg}
+    If we take the DNF of the same proposition that was used above but we negate it, it becomes $\neg ((p \lor q) \to \neg r)$ and the truth table is:
+    \[
+        \begin{array}{c|c|c|c|c|c|c}
+            p & q & r & p \lor q & \neg r & (p \lor q) \to \neg r & \neg ((p \lor q) \to \neg r) \\
+            \hline
+            T & T & T & T & F & F & T \\
+            T & T & F & T & T & T & F \\
+            T & F & T & T & F & F & T \\
+            T & F & F & T & T & T & F \\
+            F & T & T & T & F & F & T \\
+            F & T & F & T & T & T & F \\
+            F & F & T & F & F & T & F \\
+            F & F & F & F & T & T & F
+        \end{array}
+    \]
+    The proposition is true for the rows 1, 3, and 5. Therefore, the DNF of $\neg ((p \lor q) \to \neg r)$ is:
+    \[ (p \land q \land r) \lor (p \land \neg q \land r) \lor (\neg p \land q \land r) \]
+    If we now negate this DNF, we get back to the CNF of the original proposition:
+    \[ \neg ((p \land q \land r) \lor (p \land \neg q \land r) \lor (\neg p \land q \land r)) \equiv (\neg p \lor \neg q \lor \neg r) \land (\neg p \lor q \lor \neg r) \land (p \lor \neg q \lor \neg r) \]
+    This shows the link between DNF and CNF: the negation of the DNF of a proposition is equivalent to the CNF of the negation of that proposition.
+\end{eg}
+
+\subsection{Finding DNF and CNF without Truth Table}
+To find the DNF and CNF of a proposition without using a truth table, we can use logical equivalences and simplifications. Here is a general recipe:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Eliminate equivalences and implications
+    \item Move negation inward using De Morgan's Law
+    \item Use distributive and associative laws (for DNF: $a \land (b \lor c) \equiv (a \land b) \lor (a \land c)$, for CNF: $a \lor (b \land c) \equiv (a \lor b) \land (a \lor c)$)
+\end{itemize}
+
+\begin{eg}
+    Let's put the proposition, $s \to \neg (p \to q)$, in DNF and CNF form without using a truth table:
+    \begin{align*}
+        s \to \neg (p \to q) &\equiv \neg s \lor \neg (p \to q) &\text{(Implication)} \\
+        &\equiv \neg s \lor \neg (\neg p \lor q) &\text{(Implication)} \\
+        &\equiv \neg s \lor (p \land \neg q) &\text{(De Morgan's Law)} \\
+    \end{align*}
+    The proposition is now in DNF form. If we want to get the full DNF we can substitute the following:
+    \begin{center}
+        $(p \land \neg q) \equiv (p \land \neg q \land s) \lor (p \land \neg q \land \neg s)$ \\
+        $\neg s \equiv (\neg s \land p \land q) \lor (\neg s \land \neg p \land q) \lor (\neg s \land \neg p \land \neg q) \lor (\neg s \land p \land \neg q)$
+    \end{center}
+    At most we will have $2^n$ terms in the full DNF where $n$ is the number of atomic propositions but in some cases some terms will be the same.\\ \\
+    Now if we want to get the CNF form, we can continue:
+    \begin{align*}
+        \neg s \lor (p \land \neg q) &\equiv (\neg s \lor p) \land (\neg s \lor \neg q) &\text{(Distributive Law)} \\
+    \end{align*}
+    The proposition is now in CNF form.
+\end{eg}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
