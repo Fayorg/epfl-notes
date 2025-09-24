@@ -615,4 +615,322 @@ Let $\vec{v_1}, ..., \vec{v_n}$ be linearly independent vectors and $\vec{w}$ be
     Since there are more vectors (columns) than dimensions (rows), the system must have at least one free variable. This is because the maximum number of pivot positions in a matrix with $m$ rows is $m$, and since $n > m$, there must be at least one column without a pivot position. Therefore, the homogeneous system has a non-trivial solution. By the definition of linear dependence, this means that the set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ is linearly dependent. This completes the proof.
 \end{proof}
 
+\section{Transformations}
+A matrix $A$ of size $m \times n$ defines a transformation (or function) for each vector $\vec{x} \in \mathbb{R}^n$ to a vector $A \cdot \vec{x} \in \mathbb{R}^m$.
+
+\begin{definition}[transformation]
+    A transformation $T$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ is a rule that assigns to each vector $\vec{x} \in \mathbb{R}^n$ a vector $T(\vec{x}) \in \mathbb{R}^m$. We can define it as:
+    \[
+        T: \mathbb{R}^n \to \mathbb{R}^m, \quad \vec{x} \mapsto T(\vec{x})
+    \]
+\end{definition}
+For $x$ in $\mathbb{R}^n$, $T(\vec{x})$ is called the image of $\vec{x}$ under the transformation $T$. The set of all images of vectors in $\mathbb{R}^n$ is called the range of $T$.
+
+\subsection{Matrix transformations}
+\begin{definition}[Matrix transformation]
+    A matrix transformation is a transformation $T$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ such that there exists a matrix $A$ of size $m \times n$ such that for every vector $\vec{x} \in \mathbb{R}^n$, $T(\vec{x}) = A \cdot \vec{x}$.
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 \\ -3
+        3 \\ 5
+        -1 \\ 7
+    \end{bmatrix}, T: \mathbb{R}^2 \to \mathbb{R}^3$ be the matrix transformation defined by $T$. Then:
+    \[
+        T(\vec{x}) = A \cdot \vec{x} = \begin{bmatrix}
+            1 & -3 \\
+            3 & 5 \\
+            -1 & 7
+        \end{bmatrix} \cdot \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix}
+            x_1 - 3x_2 \\
+            3x_1 + 5x_2 \\
+            -x_1 + 7x_2
+        \end{bmatrix}
+    \]
+    Let $\vec{u} = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$, then:
+    \[
+        T(\vec{u}) = A \cdot \vec{u} = \begin{bmatrix}
+            1 & -3 \\
+            3 & 5 \\
+            -1 & 7
+        \end{bmatrix} \cdot \begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix}
+            2 - 3(-1) \\
+            3(2) + 5(-1) \\
+            -2 + 7(-1)
+        \end{bmatrix} = \begin{bmatrix}
+            5 \\ 1 \\ -9
+        \end{bmatrix}
+    \]
+    Let $\vec{b} = \begin{bmatrix} 3 \\ 2 \\ -5 \end{bmatrix}$ in $\mathbb{R}^3$. To find if there exists a vector (or vectors) $\vec{x} \in \mathbb{R}^2$ such that $T(\vec{x}) = \vec{b}$, we need to solve the equation:
+    \[
+        A \cdot \vec{x} = \vec{b} \quad \Leftrightarrow \quad \begin{bmatrix}
+            1 & -3 \\
+            3 & 5 \\
+            -1 & 7
+        \end{bmatrix} \cdot \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \\ -5 \end{bmatrix}
+    \]
+    The augmented matrix is:
+    \[
+        \begin{bmatrix}
+            1 & -3 & 3 \\
+            3 & 5 & 2 \\
+            -1 & 7 & -5
+        \end{bmatrix}
+    \]
+    We can use elementary operations to reduce the matrix:
+    \[
+        \begin{bmatrix}
+            1 & 0 & \frac{3}{2} \\
+            0 & 1 & -\frac{1}{2} \\
+            0 & 0 & 0
+        \end{bmatrix}
+    \]
+    Thus, the solution set is:
+    \[
+        \begin{cases}
+            x_1 = \frac{3}{2} \\
+            x_2 = -\frac{1}{2}
+        \end{cases}
+    \]
+    Therefore, there exists a unique vector $\vec{x} = \begin{bmatrix} \frac{3}{2} \\ -\frac{1}{2} \end{bmatrix}$ such that $T(\vec{x}) = \vec{b}$. \\
+    Let $\vec{c} = \begin{bmatrix} 3 \\ 2 \\ 5 \end{bmatrix}$ be another vector in $\mathbb{R}^3$. To find if there exists a vector (or vectors) $\vec{x} \in \mathbb{R}^2$ such that $T(\vec{x}) = \vec{c}$, we need to solve the equation:
+    \[
+        A \cdot \vec{x} = \vec{c} \quad \Leftrightarrow \quad \begin{bmatrix}
+            1 & -3 \\
+            3 & 5 \\
+            -1 & 7
+        \end{bmatrix} \cdot \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \\ 5 \end{bmatrix}
+    \]
+    The augmented matrix is:
+    \[
+        \begin{bmatrix}
+            1 & -3 & 3 \\
+            3 & 5 & 2 \\
+            -1 & 7 & 5
+        \end{bmatrix}
+    \]
+    We can use elementary operations to reduce the matrix:
+    \[
+        \begin{bmatrix}
+            1 & 0 & \frac{3}{2} \\
+            0 & 1 & -\frac{1}{2} \\
+            0 & 0 & \frac{5}{2}
+        \end{bmatrix}
+    \]
+    We can see that the last row corresponds to the equation $\frac{5}{2} = 0$, which is a contradiction. Thus, there is no solution and there is no vector $\vec{x} \in \mathbb{R}^2$ such that $T(\vec{x}) = \vec{c}$.
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 0
+    \end{bmatrix}$ and $T: \mathbb{R}^3 \to \mathbb{R}^3$ be the matrix transformation defined by $T$. Then:
+    \[
+        T(\vec{x}) = A \cdot \vec{x} = \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 0
+        \end{bmatrix} \cdot \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix}
+            x_1 \\ x_2 \\ 0
+        \end{bmatrix}
+    \]
+    Geometrically, this transformation projects every vector in $\mathbb{R}^3$ onto the $x_1$-$x_2$ plane by setting the $x_3$-coordinate to zero. \\
+    \begin{center}
+        % Projection onto the x1-x2 plane
+        \begin{tikzpicture}[scale=0.85]
+            % Axes
+            \draw[->] (0,0,0) -- (3,0,0) node[right] {$x_1$};
+            \draw[->] (0,0,0) -- (0,2,0) node[above] {$x_3$};
+            \draw[->] (0,0,0) -- (0,0,3) node[above] {$x_2$};
+
+            % Projection onto x1-x2 plane
+            \fill[secondary!40,opacity=0.3] (0,0,0) -- (3,0,0) -- (3,0,3) -- (0,0,3) -- cycle;
+
+            % Point in space
+            \fill[] (2,2,1) circle (2pt) node[above right] {$\vec{x}$};
+            \fill[] (1,-1,2.5) circle (2pt) node[right] {$\vec{v}$};
+
+            % Projection line
+            \draw[dashed] (2,2,1) -- (2,0,1);
+            \draw[dashed] (1,-1,2.5) -- (1,0,2.5);
+
+            % Projection point
+            \fill[primary] (2,0,1) circle (2pt) node[below right] {$T(\vec{x})$};
+            \fill[primary] (1,0,2.5) circle (2pt) node[above right] {$T(\vec{v})$};
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\subsection{Linear transformations}
+% A matrix transformation follows the same rules as matrix multiplication, thus it preserves vector addition and scalar multiplication. It will be proven later that the converse is also true: any transformation that preserves vector addition and scalar multiplication can be represented by a matrix transformation.
+\begin{definition}[Linear transformation]
+    A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be linear if for all vectors $\vec{u}, \vec{v} \in \mathbb{R}^n$ and all scalars $c \in \mathbb{R}$, the following properties hold:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Additivity: $T(\vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v})$
+        \item Homogeneity: $T(c \vec{u}) = c T(\vec{u})$
+    \end{itemize}
+\end{definition}
+Two properties can be deduced from the two above:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $T(\vec{0}) = T(0 \cdot \vec{u}) = 0 \cdot T(\vec{u}) = \vec{0}$.
+    \item $T(c \vec{u} + d \vec{v}) = T(c \cdot \vec{u}) + T(d \cdot \vec{v}) = c \cdot T(\vec{u}) + d \cdot T(\vec{v})$
+\end{itemize}
+
+\begin{eg}
+    Let $r \in \mathbb{R}$ and $T: \mathbb{R}^2 \to \mathbb{R}^2$ be the transformation defined by:
+    \[
+        T(\vec{x}) = r \cdot \vec{x} = r \cdot \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} r x_1 \\ r x_2 \end{bmatrix}
+    \]
+    Let's show that $T$ is a linear transformation. Let $\vec{u} = \begin{bmatrix} u_1 \\ u_2 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} v_1 \\ v_2 \end{bmatrix}$ be two vectors in $\mathbb{R}^2$ and $c \in \mathbb{R}$ be a scalar. We have:
+    \[
+        T(\vec{u} + \vec{v}) = r \cdot (\vec{u} + \vec{v}) = r \cdot \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \end{bmatrix} = \begin{bmatrix} r(u_1 + v_1) \\ r(u_2 + v_2) \end{bmatrix} = \begin{bmatrix} r u_1 \\ r u_2 \end{bmatrix} + \begin{bmatrix} r v_1 \\ r v_2 \end{bmatrix} = T(\vec{u}) + T(\vec{v})
+    \]
+    and
+    \[
+        T(c \vec{u}) = r \cdot (c \vec{u}) = r \cdot \begin{bmatrix} c u_1 \\ c u_2 \end{bmatrix} = \begin{bmatrix} r(c u_1) \\ r(c u_2) \end{bmatrix} = c \cdot \begin{bmatrix} r u_1 \\ r u_2 \end{bmatrix} = c \cdot T(\vec{u})
+    \]
+    Thus, $T$ is a linear transformation. Geometrically, this transformation scales every vector in $\mathbb{R}^2$ by a factor of $r$. \\
+    Note that if $r = 1$, $T$ is the identity transformation, if $r > 1$, $T$ is an expansion, if $0 < r < 1$, $T$ is a contraction, and if $r < 0$, $T$ is a reflection followed by a scaling.
+\end{eg}
+
+\begin{eg}
+    Let $T(\vec{x}) = \begin{bmatrix}
+        0 & -1 \\
+        1 & 0
+    \end{bmatrix} \begin{bmatrix}
+        x_1 \\ x_2
+    \end{bmatrix} = \begin{bmatrix}
+        -x_2 \\ x_1
+    \end{bmatrix}$ be a transformation from $\mathbb{R}^2$ to $\mathbb{R}^2$. It's visible that $T$ is a matrix transformation, thus it is a linear transformation. \\
+    Let $\vec{u} = \begin{bmatrix}
+        2 \\ 0
+    \end{bmatrix}, \vec{v} = \begin{bmatrix}
+        0 \\ 3
+    \end{bmatrix}$ be two vectors in $\mathbb{R}^2$. We have:
+    \[
+        T(\vec{u}) = \begin{bmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{bmatrix} \begin{bmatrix}
+            2 \\ 0
+        \end{bmatrix} = \begin{bmatrix}
+            0 \\ 2
+        \end{bmatrix}
+    \]
+    and
+    \[
+        T(\vec{v}) = \begin{bmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{bmatrix} \begin{bmatrix}
+            0 \\ 3
+        \end{bmatrix} = \begin{bmatrix}
+            -3 \\ 0
+        \end{bmatrix}
+    \]
+    Geometrically, this transformation rotates every vector in $\mathbb{R}^2$ by 90 degrees counterclockwise about the origin.
+\end{eg}
+
+\begin{eg}
+    Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be a linear transformation and let $\vec{u}, \vec{v}$ be two linearly independent vectors in $\mathbb{R}^2$ and $\vec{w} = c_1 \vec{u} + c_2 \vec{v}$ be a linear combination of $\vec{u}$ and $\vec{v}$ where $0 \leq c_1, c_2 \leq 1$.
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+
+            \draw[thick,->,secondary] (0,0) -- (0.7,0.5) node[midway, above] {$\vec{w}$};
+
+            \fill[secondary!40,opacity=0.3] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+        \end{tikzpicture}
+    \end{center}
+    If we apply the transformation $T$ to $\vec{u}, \vec{v}$ and $\vec{w}$, we get:
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            \draw[thick,->,primary] (0,0) -- (0.8,0.1) node[midway, below=0.1cm] {$T(\vec{u})$};
+            \draw[thick,->,primary] (0,0) -- (0.2,1.1) node[midway, left=0.2cm] {$T(\vec{v})$};
+
+            \draw[thick,->,secondary] (0,0) -- (0.7,0.8) node[midway, above=0.3cm] {$T(\vec{w})$};
+
+            \fill[secondary!40,opacity=0.3] (0,0) -- (0.8,0.1) -- (1,1.2) -- (0.2,1.1) -- cycle;
+        \end{tikzpicture}
+    \end{center}
+    We can see that $T(\vec{w}) = T(c_1 \vec{u} + c_2 \vec{v}) = c_1 T(\vec{u}) + c_2 T(\vec{v})$ is a linear combination of $T(\vec{u})$ and $T(\vec{v})$. Thus, the image of the square defined by $\vec{u}$ and $\vec{v}$ is the parallelogram defined by $T(\vec{u})$ and $T(\vec{v})$.
+\end{eg}
+% For all linear transformations $T: \mathbb{R}^n \to \mathbb{R}^m$, there exists a matrix $A$ of size $m \times n$ such that $T(\vec{x}) = A \cdot \vec{x}$ for all $\vec{x} \in \mathbb{R}^n$. The columns of $A$ are the images of the columns of the identity matrix $I_n$ under the transformation $T$.
+
+\subsection{Matrix representation of linear transformations}
+\begin{theorem}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation. Then there exists a unique matrix $A$ of size $m \times n$ such that for every vector $\vec{x} \in \mathbb{R}^n$, $T(\vec{x}) = A \cdot \vec{x}$. Where $A$ is given by:
+    \[
+        A = \begin{bmatrix} | & | && | \\ T(\vec{e_1}) & T(\vec{e_2}) & \ldots & T(\vec{e_n}) \\ | & | && | \end{bmatrix}
+    \]
+    where $\vec{e_1}, \vec{e_2}, \ldots, \vec{e_n}$ are the columns of the identity matrix $I_n$.
+\end{theorem}
+\begin{proof}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation. Let $\vec{e_1}, \vec{e_2}, \ldots, \vec{e_n}$ be the columns of the identity matrix $I_n$. Define the matrix $A$ as:
+    \[
+        A = \begin{bmatrix} | & | && | \\ T(\vec{e_1}) & T(\vec{e_2}) & \ldots & T(\vec{e_n}) \\ | & | && | \end{bmatrix}
+    \]
+    For any vector $\vec{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n$, we can express $\vec{x}$ as a linear combination of the standard basis vectors:
+    \[
+        \vec{x} = x_1 \vec{e_1} + x_2 \vec{e_2} + \ldots + x_n \vec{e_n}
+    \]
+    Applying the linear transformation $T$ to both sides, we have:
+    \[
+        T(\vec{x}) = T(x_1 \vec{e_1} + x_2 \vec{e_2} + \ldots + x_n \vec{e_n})
+    \]
+    By the properties of linear transformations (additivity and homogeneity), we can rewrite this as:
+    \[
+        T(\vec{x}) = x_1 T(\vec{e_1}) + x_2 T(\vec{e_2}) + \ldots + x_n T(\vec{e_n})
+    \]
+    This can be expressed in matrix form as:
+    \[
+        T(\vec{x}) = A \cdot \vec{x}
+    \]
+    where $A$ is the matrix defined above. Thus, for every vector $\vec{x} \in \mathbb{R}^n$, we have $T(\vec{x}) = A \cdot \vec{x}$. \\
+    To show that $A$ is unique, suppose there exists another matrix $B$ of size $m \times n$ such that for every vector $\vec{x} \in \mathbb{R}^n$, $T(\vec{x}) = B \cdot \vec{x}$. In particular, this must hold for the standard basis vectors:
+    \[
+        T(\vec{e_i}) = B \cdot \vec{e_i} \quad \text{for } i = 1, 2, \ldots, n
+    \]
+    Since $B \cdot \vec{e_i}$ is simply the $i$-th column of $B$, it follows that the columns of $B$ must be equal to the columns of $A$. Therefore, $B = A$, proving the uniqueness of $A$. This completes the proof.
+\end{proof}
+
+\begin{eg}
+    Let $e_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $e_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ be two column vectors of $I_2$ (the identity matrix of size 2). Let $T: \mathbb{R}^2 \to \mathbb{R}^3$ be a linear transformation such that:
+    \[
+        T(e_1) = \begin{bmatrix} 3 \\ -1 \\ 0 \end{bmatrix}, \quad T(e_2) = \begin{bmatrix} 2 \\ 2 \\ 6 \end{bmatrix}
+    \]
+    By linearity, for any vector $\vec{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \in \mathbb{R}^2$, we have:
+    \[
+        T(\vec{x}) = T(x_1 e_1 + x_2 e_2) = x_1 T(e_1) + x_2 T(e_2)
+    \]
+    Thus:
+    \[
+        T(\vec{x}) = x_1 \begin{bmatrix} 3 \\ -1 \\ 0 \end{bmatrix} + x_2 \begin{bmatrix} 2 \\ 2 \\ 6 \end{bmatrix} = \begin{bmatrix}3 & 2 \\ -1 & 2 \\ 0 & 6\end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = A \cdot \vec{x}
+    \]
+    where $A = \begin{bmatrix}3 & 2 \\ -1 & 2 \\ 0 & 6\end{bmatrix}$ is the matrix associated with the linear transformation $T$.
+\end{eg}
+
+\begin{eg}
+    Let $T(\vec{x}) = 3 \cdot \vec{x}$ be an expansion transformation from $\mathbb{R}^2$ to $\mathbb{R}^2$. To find the matrix associated with $T$, we need to determine the images of the standard basis vectors $\vec{e_1}$ and $\vec{e_2}$ under the transformation $T$:
+    \[
+        T(\vec{e_1}) = 3 \cdot \vec{e_1} = 3 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 3 \\ 0 \end{bmatrix}, \quad T(\vec{e_2}) = 3 \cdot \vec{e_2} = 3 \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 3 \end{bmatrix}
+    \]
+    Thus, the matrix associated with $T$ is:
+    \[
+        A = \begin{bmatrix} | & | \\ T(\vec{e_1}) & T(\vec{e_2}) \\ | & | \end{bmatrix} = \begin{bmatrix} 3 & 0 \\ 0 & 3 \end{bmatrix}
+    \]
+\end{eg}
+
 \section{Exercises}
+% maybe exercise at the end of w3c1 classe
