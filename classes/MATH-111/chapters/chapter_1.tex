@@ -375,4 +375,244 @@ A homogeneous system always has at least one solution, called the trivial soluti
     A homogeneous system $A \cdot \vec{x} = \vec{0}$ has a non-trivial solution if and only if the system has at least one free variable.
 \end{theorem}
 
+\begin{eg}
+    Let the system of equations be:
+    \[
+        \begin{cases}
+            3x_1 + 5x_2 - 4x_3 = 0 \\
+            -3x_1 - 2x_2 + 4x_3 = 0 \\
+            6x_1 + x_2 - 8x_3 = 0
+        \end{cases}
+    \]
+    The augmented matrix is:
+    \[
+        \begin{bmatrix}
+            3 & 5 & -4 & 0 \\
+            -3 & -2 & 4 & 0 \\
+            6 & 1 & -8 & 0
+        \end{bmatrix}
+    \]
+    We can use elementary operations to reduce the matrix:
+    \[
+        \begin{bmatrix}
+            1 & 0 & \frac{-4}{3} & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{bmatrix}
+    \]
+    We can see that $x_3$ is a free variable, thus there exists a non-trivial solution. We can express $x_1$ and $x_2$ in terms of $x_3$:
+    \[
+        \begin{cases}
+            x_1 = \frac{4}{3}x_3 \\
+            x_2 = 0 \\
+            x_3 = x_3
+        \end{cases}
+    \]
+    Letting $x_3 = t$ where $t \in \mathbb{R}$, we can express the solution set as:
+    \[
+        \vec{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{4}{3}t \\ 0 \\ t \end{bmatrix} = t \cdot \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}, \quad t \in \mathbb{R}
+    \]
+    The solution set can be expressed as the span of the vector $\vec{v} = \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}$ thus it is a line in $\mathbb{R}^3$ passing through the origin and directed by the vector $\vec{v}$.
+\end{eg}
+
+\begin{eg}
+    Let the system of equations be:
+    \[
+        \begin{cases}
+            10x_1 - 3x_2 - 2x_3 = 0 \\
+        \end{cases}
+    \]
+    The augmented matrix is:
+    \[
+        \begin{bmatrix}
+            10 & -3 & -2 & 0
+        \end{bmatrix}
+    \]
+    We can see that $x_2$ and $x_3$ are free variables, thus there exists a non-trivial solution. We can express $x_1$ in terms of $x_2$ and $x_3$:
+    \[
+        \begin{cases}
+            x_1 = \frac{3}{10}x_2 + \frac{1}{5}x_3 \\
+            x_2 = x_2 \\
+            x_3 = x_3
+        \end{cases}
+    \]
+    Letting $x_2 = s$ and $x_3 = t$ where $s, t \in \mathbb{R}$, we can express the solution set as:
+    \[
+        \vec{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{3}{10}s + \frac{1}{5}t \\ s \\ t \end{bmatrix} = s \cdot \begin{bmatrix} \frac{3}{10} \\ 1 \\ 0 \end{bmatrix} + t \cdot \begin{bmatrix} \frac{1}{5} \\ 0 \\ 1 \end{bmatrix}, \quad s, t \in \mathbb{R}
+    \]
+    The solution set can be expressed as the span of the vectors $\vec{v_1} = \begin{bmatrix} \frac{3}{10} \\ 1 \\ 0 \end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} \frac{1}{5} \\ 0 \\ 1 \end{bmatrix}$ thus it is a plane in $\mathbb{R}^3$ passing through the origin and directed by the vectors $\vec{v_1}$ and $\vec{v_2}$.
+\end{eg}
+
+\subsection{Non-homogeneous systems}
+In the more general case of a non-homogeneous system $A \cdot \vec{x} = \vec{b}$, it is sufficient to find one particular solution $\vec{p}$ to the equation and all solutions of the associated homogeneous equation $A \cdot \vec{x} = \vec{0}$ to express the solution set of the more general non-homogeneous system.
+\begin{theorem}
+    If $\vec{p}$ is a particular solution of the non-homogeneous system $A \cdot \vec{x} = \vec{b}$, then the solution set of the system is:
+    \[
+        \{ \vec{p} + \vec{h} \mid \vec{h} \text{ is a solution of } A \cdot \vec{x} = \vec{0} \}
+    \]
+    In other words, the solution set of the non-homogeneous system is obtained by translating the solution set of the associated homogeneous system by the vector $\vec{p}$.
+\end{theorem}
+% Figure of the translation with a vector here
+\begin{proof}
+    Let $\vec{p}$ be a particular solution of the non-homogeneous system $A \cdot \vec{x} = \vec{b}$ and let $\vec{h}$ be a solution of the associated homogeneous system $A \cdot \vec{x} = \vec{0}$. We want to show that $\vec{p} + \vec{h}$ is a solution of the non-homogeneous system. We have:
+    \[
+        A(\vec{p} + \vec{h}) = A\vec{p} + A\vec{h} = \vec{b} + \vec{0} = \vec{b}
+    \]
+    Thus, $\vec{p} + \vec{h}$ is indeed a solution of the non-homogeneous system. Conversely, let $\vec{s}$ be any solution of the non-homogeneous system. We want to show that there exists a solution $\vec{h}$ of the associated homogeneous system such that $\vec{s} = \vec{p} + \vec{h}$. We have:
+    \[
+        A\vec{s} = \vec{b}
+    \]
+    and
+    \[
+        A\vec{p} = \vec{b}
+    \]
+    Subtracting these two equations, we get:
+    \[
+        A(\vec{s} - \vec{p}) = A\vec{s} - A\vec{p} = \vec{b} - \vec{b} = \vec{0}
+    \]
+    Thus, $\vec{s} - \vec{p}$ is a solution of the associated homogeneous system. Letting $\vec{h} = \vec{s} - \vec{p}$, we have $\vec{s} = \vec{p} + \vec{h}$ where $\vec{h}$ is a solution of the associated homogeneous system. This completes the proof.
+\end{proof}
+
+\begin{eg}
+    If $\vec{p}$ is a solution of the non-homogeneous system $A \cdot \vec{x} = \vec{b}$ and all solutions of the associated homogeneous system $A \cdot \vec{x} = \vec{0}$ are given by:
+    \[
+        \vec{h} = s \cdot \vec{u} + t \cdot \vec{v}, \quad s, t \in \mathbb{R}
+    \]
+    where $\vec{u}$ and $\vec{v}$ are two vectors in $\mathbb{R}^n$, then the solution set of the non-homogeneous system is:
+    \[
+        \{ \vec{p} + s \cdot \vec{u} + t \cdot \vec{v} \mid s, t \in \mathbb{R} \}
+    \]
+\end{eg}
+
+\section{Linear independence}
+Let a matrix $A$ with column vectors $\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n} \in \mathbb{R}^m$. The homogeneous system $A \cdot \vec{x} = \vec{0}$ can be written as the vectorial equation:
+\[
+    x_1 \cdot \vec{a_1} + x_2 \cdot \vec{a_2} + \ldots + x_n \cdot \vec{a_n} = \vec{0}
+\]
+Asking if $A \cdot \vec{x} = \vec{0}$ has a non-trivial solution is the same as asking if one of the vectors $\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}$ can be generated by the others.
+\begin{definition}[Linear independence]
+    The set of vectors $\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n} \in \mathbb{R}^m$ is said to be linearly independent (or free) if the vectorial equation:
+    \[
+        x_1 \cdot \vec{a_1} + x_2 \cdot \vec{a_2} + \ldots + x_n \cdot \vec{a_n} = \vec{0}
+    \]
+    has only the trivial solution $x_1 = x_2 = \ldots = x_n = 0$. Otherwise, the set of vectors is said to be linearly dependent.
+\end{definition}
+
+\begin{eg}
+    Let $\vec{a_1} = \begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix}$ and $\vec{a_2} = \begin{bmatrix}2 \\ 1 \\ 0\end{bmatrix}$ be two vectors in $\mathbb{R}^3$. The augmented matrix of the associated homogeneous system is:
+    \[
+        \begin{bmatrix}
+            1 & 2 & 0 \\
+            1 & 1 & 0 \\
+            1 & 0 & 0
+        \end{bmatrix}
+    \]
+    We can use elementary operations to reduce the matrix:
+    \[
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 0
+        \end{bmatrix}
+    \]
+    We can see that there are no free variables (or that the only solution is the trivial one), thus the set of vectors $\{\vec{a_1}, \vec{a_2}\}$ is linearly independent.
+\end{eg}
+A family with a single vector $\{\vec{a_1}\}$ is linearly dependent if and only if $\vec{a_1} = \vec{0}$. A family with two vectors $\{\vec{a_1}, \vec{a_2}\}$ is linearly dependent if and only if one of the vectors is a multiple of the other (or they are not co-linear).
+\begin{proof}
+    Let $\vec{a_1}, \vec{a_2} \in \mathbb{R}^m$. The vectorial equation:
+    \[
+        x_1 \cdot \vec{a_1} + x_2 \cdot \vec{a_2} = \vec{0}
+    \]
+    has a non-trivial solution if and only if there exist $c_1, c_2 \in \mathbb{R}$, not both zero, such that:
+    \[
+        c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} = \vec{0}
+    \]
+    If $c_1 \neq 0$, we can rewrite this as:
+    \[
+        \vec{a_1} = -\frac{c_2}{c_1} \cdot \vec{a_2}
+    \]
+    which means that $\vec{a_1}$ is a multiple of $\vec{a_2}$. Similarly, if $c_2 \neq 0$, we can rewrite this as:
+    \[
+        \vec{a_2} = -\frac{c_1}{c_2} \cdot \vec{a_1}
+    \]
+    which means that $\vec{a_2}$ is a multiple of $\vec{a_1}$. Conversely, if one of the vectors is a multiple of the other, then there exist $k \in \mathbb{R}$ such that $\vec{a_1} = k \cdot \vec{a_2}$ or $\vec{a_2} = k' \cdot \vec{a_1}$ for some $k' \in \mathbb{R}$. In either case, we can find non-zero coefficients $c_1$ and $c_2$ such that:
+    \[
+        c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} = 0
+    \]
+    Thus, the set of vectors $\{\vec{a_1}, \vec{a_2}\}$ is linearly dependent.
+\end{proof}
+
+\begin{theorem}
+    If a set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ in $\mathbb{R}^m$ are linearly dependent, then at least one of the vectors can be expressed as a linear combination of the others.
+\end{theorem}
+\begin{proof}
+    Let $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ be a set of linearly dependent vectors in $\mathbb{R}^m$. By definition, there exist scalars $c_1, c_2, \ldots, c_n$, not all zero, such that:
+    \[
+        c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} + \ldots + c_n \cdot \vec{a_n} = \vec{0}
+    \]
+    Without loss of generality, assume that $c_k \neq 0$ for some $k$ (where $1 \leq k \leq n$). We can rearrange the equation to express $\vec{a_k}$ as a linear combination of the other vectors:
+    \[
+        c_k \cdot \vec{a_k} = - (c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} + \ldots + c_{k-1} \cdot \vec{a_{k-1}} + c_{k+1} \cdot \vec{a_{k+1}} + \ldots + c_n \cdot \vec{a_n})
+    \]
+    Dividing both sides by $c_k$, we get:
+    \[
+        \vec{a_k} = -\frac{c_1}{c_k} \cdot \vec{a_1} -\frac{c_2}{c_k} \cdot \vec{a_2} - \ldots -\frac{c_{k-1}}{c_k} \cdot \vec{a_{k-1}} -\frac{c_{k+1}}{c_k} \cdot \vec{a_{k+1}} - \ldots -\frac{c_n}{c_k} \cdot \vec{a_n}
+    \]
+    Thus, $\vec{a_k}$ can be expressed as a linear combination of the other vectors in the set. This completes the proof.
+\end{proof}
+The converse is also true:
+\begin{theorem}
+    If at least one of the vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ in $\mathbb{R}^m$ is a linear combination of the ones before it, then the set of vectors is linearly dependent.
+\end{theorem}
+\begin{proof}
+    Let $\vec{a_k}$ be a vector in the set that can be expressed as a linear combination of the previous vectors:
+    \[
+        \vec{a_k} = d_1 \cdot \vec{a_1} + d_2 \cdot \vec{a_2} + \ldots + d_{k-1} \cdot \vec{a_{k-1}}
+    \]
+    for some scalars $d_1, d_2, \ldots, d_{k-1}$. We can rearrange this equation to form a linear combination that equals the zero vector:
+    \[
+        -\vec{a_k} + d_1 \cdot \vec{a_1} + d_2 \cdot \vec{a_2} + \ldots + d_{k-1} \cdot \vec{a_{k-1}} = \vec{0}
+    \]
+    This can be rewritten as:
+    \[
+        0 \cdot \vec{a_1} + 0 \cdot \vec{a_2} + \ldots + (-1) \cdot \vec{a_k} + 0 \cdot \vec{a_{k+1}} + \ldots + 0 \cdot \vec{a_n} = 0
+    \]
+    Here, we have found a non-trivial solution (not all coefficients are zero) to the vectorial equation:
+    \[
+        c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} + \ldots + c_n \cdot \vec{a_n} = \vec{0}
+    \]
+    where $c_k = -1$ and all other $c_i = 0$. Thus, the set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ is linearly dependent. This completes the proof.
+\end{proof}
+Let $\vec{v_1}, ..., \vec{v_n}$ be linearly independent vectors and $\vec{w}$ be another vector. The set $\{\vec{v_1}, ..., \vec{v_n}, \vec{w}\}$ is linearly dependent if and only if $\vec{w}$ is in the span of $\{\vec{v_1}, ..., \vec{v_n}\}$.
+
+\begin{theorem}
+    If a set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ in $\mathbb{R}^m$ contains the zero vector, then the set is linearly dependent.
+\end{theorem}
+\begin{proof}
+    Let $\vec{a_k} = \vec{0}$ (where $1 \leq k \leq n$) be the zero vector in the set. We can form a linear combination that equals the zero vector:
+    \[
+        0 \cdot \vec{a_1} + 0 \cdot \vec{a_2} + \ldots + 1 \cdot \vec{a_k} + 0 \cdot \vec{a_{k+1}} + \ldots + 0 \cdot \vec{a_n} = \vec{0}
+    \]
+    Here, we have found a non-trivial solution (not all coefficients are zero) to the vectorial equation:
+    \[
+        c_1 \cdot \vec{a_1} + c_2 \cdot \vec{a_2} + \ldots + c_n \cdot \vec{a_n} = \vec{0}
+    \]
+    where $c_k = 1$ and all other $c_i = 0$. Thus, the set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ is linearly dependent. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    A family of $n$ vectors in $\mathbb{R}^m$ is linearly dependent if $n > m$.
+\end{theorem}
+\begin{proof}
+    Let $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ be a set of $n$ vectors in $\mathbb{R}^m$ where $n > m$. The associated homogeneous system can be represented by the augmented matrix:
+    \[
+        \begin{bmatrix}
+            | & | & & | \\
+            \vec{a_1} & \vec{a_2} & \ldots & \vec{a_n} \\
+            | & | & & |
+        \end{bmatrix}
+    \]
+    Since there are more vectors (columns) than dimensions (rows), the system must have at least one free variable. This is because the maximum number of pivot positions in a matrix with $m$ rows is $m$, and since $n > m$, there must be at least one column without a pivot position. Therefore, the homogeneous system has a non-trivial solution. By the definition of linear dependence, this means that the set of vectors $\{\vec{a_1}, \vec{a_2}, \ldots, \vec{a_n}\}$ is linearly dependent. This completes the proof.
+\end{proof}
+
 \section{Exercises}
