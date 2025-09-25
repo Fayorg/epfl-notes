@@ -1,0 +1,255 @@
+\chapter{Matrix Algebra}
+
+\section{Matrix Operations}
+\begin{definition}[Coefficient]
+    The coefficient of a matrix is an individual element within the matrix, typically denoted by its row and column indices. \\
+    For a matrix \( A \) with elements \( a_{ij} \), the coefficient \( a_{ij} \) represents the element located in the \( i \)-th row and \( j \)-th column.
+\end{definition}
+The columns of a matrix $A$ are often denoted by $\vec{a_1}, ..., \vec{a_n} \in \mathbb{R}^m$, such as:
+\[
+    A = 
+    \begin{bmatrix}
+        | & | &        & | \\
+        \vec{a_1} & \vec{a_2} & ... & \vec{a_n} \\
+        | & | &        & |
+    \end{bmatrix}
+\]
+\begin{definition}[Diagonal Coefficient]
+    A diagonal coefficient of a matrix is an element located on the main diagonal of a matrix, which starts from the top left corner and extends to the either the bottom or the right, depending on the matrix's dimensions. For a square matrix \( A \) of size \( n \times n \), the diagonal coefficients are those elements \( a_{ii} \) where the row index \( i \) is equal to the column index \( j \) (i.e., \( i = j \)).
+\end{definition}
+
+\begin{definition}[Diagonal Matrix]
+    A diagonal matrix is a square matrix in which all the elements outside the main diagonal are zero. The main diagonal itself can contain either zero or non-zero elements. \\
+    Formally, a matrix \( D \) of size \( n \times n \) is called a diagonal matrix if \( D_{ij} = 0 \) for all \( i \neq j \). The elements on the main diagonal can be represented as \( D_{ii} \) for \( i = 1, 2, ..., n \).
+\end{definition}
+\begin{eg}
+    An example of a diagonal matrix is:
+    \[
+        D = 
+        \begin{bmatrix}
+            5 & 0 & 0 \\
+            0 & -3 & 0 \\
+            0 & 0 & 2
+        \end{bmatrix}
+    \]
+    In this matrix, all the off-diagonal elements are zero, while the diagonal elements are \( 5, -3, \) and \( 2 \).
+\end{eg}
+
+\subsection{Matrix Addition and Scalar Multiplication}
+\begin{definition}[Matrix Addition]
+    Matrix addition is the operation of adding two matrices of the same dimensions by adding their corresponding elements. \\
+    If \( A \) and \( B \) are two matrices of size \( m \times n \), then their sum \( C = A + B \) is also a matrix of size \( m \times n \), where each element \( c_{ij} \) is given by:
+    \[
+        c_{ij} = a_{ij} + b_{ij}
+    \]
+    for all \( i = 1, 2, ..., m \) and \( j = 1, 2, ..., n \).
+\end{definition}
+\begin{eg}
+    Consider the following two matrices:
+    \[
+        A = 
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6
+        \end{bmatrix}
+        , \quad
+        B = 
+        \begin{bmatrix}
+            7 & 8 & 9 \\
+            10 & 11 & 12
+        \end{bmatrix}
+    \]
+    The sum of these matrices is:
+    \[
+        C = A + B = 
+        \begin{bmatrix}
+            1+7 & 2+8 & 3+9 \\
+            4+10 & 5+11 & 6+12
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+            8 & 10 & 12 \\
+            14 & 16 & 18
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{definition}[Scalar Multiplication]
+    Scalar multiplication is the operation of multiplying each element of a matrix by a scalar (a real number). \\
+    If \( A \) is a matrix of size \( m \times n \) and \( k \) is a scalar, then the product \( B = kA \) is also a matrix of size \( m \times n \), where each element \( b_{ij} \) is given by:
+    \[
+        b_{ij} = k \cdot a_{ij}
+    \]
+    for all \( i = 1, 2, ..., m \) and \( j = 2, 3, ..., n \).
+\end{definition}
+\begin{eg}
+    Consider the following matrix and scalar:
+    \[
+        A = 
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6
+        \end{bmatrix}
+        , \quad k = 3
+    \]
+    The product of the scalar and the matrix is:
+    \[
+        B = kA = 3 \cdot
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            3 \cdot 1 & 3 \cdot 2 & 3 \cdot 3 \\
+            3 \cdot 4 & 3 \cdot 5 & 3 \cdot 6
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            3 & 6 & 9 \\
+            12 & 15 & 18
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let \( A, B, \) and \( C \) be matrices of the same dimensions, and let \( k \) and \( l \) be scalars. The following properties hold for matrix addition and scalar multiplication:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( A + B = B + A \) (Commutative Property of Addition)
+        \item \( (A + B) + C = A + (B + C) \) (Associative Property of Addition)
+        \item There exists a zero matrix \( 0 \) such that \( A + 0 = A \) (Identity Element of Addition)
+        \item For every matrix \( A \), there exists a matrix \( -A \) such that \( A + (-A) = 0 \) (Inverse Element of Addition)
+        \item \( k(A + B) = kA + kB \) (Distributive Property of Scalar Multiplication over Matrix Addition)
+        \item \( (k + l)A = kA + lA \) (Distributive Property of Scalar Multiplication over Scalar Addition)
+        \item \( k(lA) = (kl)A \) (Associative Property of Scalar Multiplication)
+        \item \( 1A = A \) (Identity Element of Scalar Multiplication)
+    \end{itemize}
+\end{theorem}
+
+\subsection{Matrix Multiplication}
+\begin{definition}[Matrix Multiplication]
+    Matrix multiplication is the operation of multiplying two matrices to produce a new matrix. For two matrices \( A \) and \( B \), where \( A \) is of size \( m \times n \) and \( B \) is of size \( n \times p \), the product \( C = AB \) is a matrix of size \( m \times p \). The element \( c_{ij} \) of the resulting matrix \( C \) is calculated as:
+    \[
+        c_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj}
+    \]
+    for all \( i = 1, 2, ..., m \) and \( j = 1, 2, ..., p \).
+\end{definition}
+\begin{eg}
+    Consider the following matrices:
+    \[
+        A = 
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6
+        \end{bmatrix}
+        , \quad
+        B = 
+        \begin{bmatrix}
+            7 & 8 \\
+            9 & 10 \\
+            11 & 12
+        \end{bmatrix}
+    \]
+    The product of these matrices is:
+    \[
+        C = AB = 
+        \begin{bmatrix}
+            (1 \cdot 7 + 2 \cdot 9 + 3 \cdot 11) & (1 \cdot 8 + 2 \cdot 10 + 3 \cdot 12) \\
+            (4 \cdot 7 + 5 \cdot 9 + 6 \cdot 11) & (4 \cdot 8 + 5 \cdot 10 + 6 \cdot 12)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            58 & 64 \\
+            139 & 154
+        \end{bmatrix}
+    \]
+\end{eg}
+\begin{theorem}
+    Let \( A, B, \) and \( C \) be matrices of appropriate dimensions for multiplication, and let \( k \) be a scalar. The following properties hold for matrix multiplication:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( A(BC) = (AB)C \) (Associative Property of Multiplication)
+        \item \( A(B + C) = AB + AC \) (Distributive Property of Multiplication over Addition)
+        \item \( (A + B)C = AC + BC \) (Distributive Property of Multiplication over Addition)
+        \item \( k(AB) = (kA)B = A(kB) \) (Scalar Multiplication Property)
+        \item There exists an identity matrix \( I \) such that \( AI = IA = A \) (Identity Element of Multiplication)
+    \end{itemize}
+\end{theorem}
+Notes:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Matrix multiplication is generally not commutative, meaning that \( AB \neq BA \) in most cases.
+    \item Generally, matrix multiplication is not cancellative, meaning that from \( AB = AC \), we cannot generally conclude that \( B = C \).
+    \item If \( AB = 0 \) (the zero matrix), it does not necessarily imply that either \( A = 0 \) or \( B = 0 \).
+\end{itemize}
+\begin{eg}
+    Consider the following matrices:
+    \[
+        A = 
+        \begin{bmatrix}
+            1 & 2 \\
+            3 & 4
+        \end{bmatrix}
+        , \quad
+        B = 
+        \begin{bmatrix}
+            5 & 6 \\
+            7 & 8
+        \end{bmatrix}
+    \]
+    The products of these matrices are:
+    \[
+        AB = 
+        \begin{bmatrix}
+            (1 \cdot 5 + 2 \cdot 7) & (1 \cdot 6 + 2 \cdot 8) \\
+            (3 \cdot 5 + 4 \cdot 7) & (3 \cdot 6 + 4 \cdot 8)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            19 & 22 \\
+            43 & 50
+        \end{bmatrix}
+    \]
+    and
+    \[
+        BA = 
+        \begin{bmatrix}
+            (5 \cdot 1 + 6 \cdot 3) & (5 \cdot 2 + 6 \cdot 4) \\
+            (7 \cdot 1 + 8 \cdot 3) & (7 \cdot 2 + 8 \cdot 4)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            23 & 34 \\
+            31 & 46
+        \end{bmatrix}
+    \]
+    As we can see, \( AB \neq BA \), demonstrating that matrix multiplication is not commutative.
+\end{eg}
+\begin{eg}
+    Consider the following matrices:
+    \[
+        A = 
+        \begin{bmatrix}
+            1 & -1 \\
+            1 & -1
+        \end{bmatrix}
+        , \quad
+        B = 
+        \begin{bmatrix}
+            1 & 1 \\
+            1 & 1
+        \end{bmatrix}
+    \]
+    The product of these matrices is:
+    \[
+        AB = 
+        \begin{bmatrix}
+            (1 \cdot 1 + -1 \cdot 1) & (1 \cdot 1 + -1 \cdot 1) \\
+            (1 \cdot 1 + -1 \cdot 1) & (1 \cdot 1 + -1 \cdot 1)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}
+    \]
+    Here, \( AB = 0 \) (the zero matrix), but neither \( A = 0 \) nor \( B = 0 \).
+\end{eg}

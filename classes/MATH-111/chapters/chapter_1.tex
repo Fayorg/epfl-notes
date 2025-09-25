@@ -121,7 +121,7 @@ The following properties hold for vectors $\vec{u}, \vec{v}, \vec{w} \in \mathbb
     \item $1 \cdot \vec{u} = \vec{u}$ (Existence of multiplicative identity)
 \end{itemize}
 
-% MISSING LECTURES HERE
+% TODO: MISSING LECTURES HERE
 
 \section{Linear combinations}
 \begin{definition}[Linear combination]
@@ -932,5 +932,234 @@ Two properties can be deduced from the two above:
     \]
 \end{eg}
 
+\section{Type of transformations}
+For all the examples below, the starting graph would be a unit square defined by the vectors $\vec{u} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ in $\mathbb{R}^2$.
+\begin{center}
+    \begin{tikzpicture}[scale=2.5]
+        % Axes
+        \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+        \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+        % Original vectors
+        \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+        \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+
+        % Shaded area
+        \fill[secondary!40,opacity=0.3] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Scaling transformations}
+\begin{definition}[Scaling transformation]
+    A scaling transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^n$ defined by $T(\vec{x}) = r \cdot \vec{x}$ for some scalar $r \in \mathbb{R}$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $r = 1$, it is called the identity transformation;
+        \item If $r > 1$, it is called an expansion;
+        \item If $0 < r < 1$, it is called a contraction;
+        \item If $r < 0$, it is a reflection followed by a scaling.
+    \end{itemize}
+    Its associated matrix is $A = r \cdot I_n$, where $I_n$ is the identity matrix of size $n$.
+\end{definition}
+
+\begin{eg}
+    Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be a horizontal contraction transformation. The associated matrix is:
+    \[
+        A = \begin{bmatrix} k & 0 \\ 0 & 1 \end{bmatrix}
+    \]
+    Geometrically, this transformation scales every vector in $\mathbb{R}^2$ by a factor of $k$ in the $x_1$ direction, where $0 < k < 1$. \\
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            % Original vectors
+            %\draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,secondary] (0,0) -- (0.6,0) node[midway, below] {T($\vec{u}$)};
+            \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0) -- (0.6,0) -- (0.6,1) -- (0,1) -- cycle;
+            \draw[dashed] (1,0) -- (1,1) -- (0,1);
+        \end{tikzpicture}
+    \end{center}
+    where $T(\vec{u}) = \begin{bmatrix} k \\ 0 \end{bmatrix}$ and $T(\vec{v}) = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$. \\
+    Note that if $k > 1$, it would be a horizontal expansion transformation. \\
+    In the case of a vertical contraction or expansion transformation, the associated matrix would be:
+    \[
+        A = \begin{bmatrix} 1 & 0 \\ 0 & k \end{bmatrix}
+    \]
+    and the graph would be contracted or expanded in the $x_2$ direction.
+\end{eg}
+
+\subsection{Reflection transformations}
+\begin{definition}[Reflection transformation]
+    A reflection transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^n$ defined by $T(\vec{x}) = -\vec{x}$ in the case of reflection across the origin. Its associated matrix is $A = -I_n$, where $I_n$ is the identity matrix of size $n$.
+\end{definition}
+
+\begin{eg}
+    Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be a reflection transformation across the $x_1$-axis. The associated matrix is:
+    \[
+        A = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}
+    \]
+    Geometrically, this transformation reflects every vector in $\mathbb{R}^2$ across the $x_1$-axis by negating the $x_2$-coordinate. \\
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-1.2) -- (0,1.2) node[above] {$x_2$};
+
+            % Original vectors
+            \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+            \draw[thick,->,secondary] (0,0) -- (0,-1) node[midway, left] {$T(\vec{v})$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0) -- (1,0) -- (1,-1) -- (0,-1) -- cycle;
+            \draw[dashed] (1,0) -- (1,1) -- (0,1);
+        \end{tikzpicture}
+    \end{center}
+    where $T(\vec{u}) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $T(\vec{v}) = \begin{bmatrix} 0 \\ -1 \end{bmatrix}$. \\
+    Note that if the reflection were across the $x_2$-axis, the associated matrix would be:
+    \[
+        A = \begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix}
+    \]
+    and the graph would be reflected across the $x_2$-axis by negating the $x_1$-coordinate. \\
+    Other common reflections include reflection across the line $x_2 = x_1$, with associated matrix:
+    \[
+        A = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
+    \]
+    and the graph would be reflected across the line $x_2 = x_1$ by swapping the $x_1$ and $x_2$ coordinates. \\
+    Relfection across the line $x_2 = -x_1$ has associated matrix:
+    \[
+        A = \begin{bmatrix} 0 & -1 \\ -1 & 0 \end{bmatrix}
+    \]
+    and the graph would be reflected across the line $x_2 = -x_1$ by swapping and negating the $x_1$ and $x_2$ coordinates. \\
+    Reflection can be done across any line through the origin in $\mathbb{R}^2$ or any plane through the origin in $\mathbb{R}^3$, but the associated matrices would be more complex.
+\end{eg}
+
+\subsection{Transversion transformations}
+\begin{definition}[Transversion transformation]
+    A transvection keeps all points on a certain line (the “axis” of the transvection) fixed, and “slides” everything else parallel to that line. It's associated matrix in the case of $\mathbb{R}^2$ is of the form:
+    \[
+        A = \begin{bmatrix}
+            1 & k \\
+            0 & 1
+        \end{bmatrix}
+    \]
+    for a horizontal transvection, or
+    \[
+        A = \begin{bmatrix}
+            1 & 0 \\
+            k & 1
+        \end{bmatrix}
+    \]
+    for a vertical transvection, where $k \in \mathbb{R}$.
+\end{definition}
+\begin{eg}
+    Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be a horizontal transversion transformation. The associated matrix is:
+    \[
+        A = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}
+    \]
+    Geometrically, this transformation shears every vector in $\mathbb{R}^2$ horizontally.
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.8,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            % Original vectors
+            \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+            \draw[thick,->,secondary] (0,0) -- (-0.6,1) node[midway, left] {T($\vec{v})$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0) -- (1,0) -- (0.4,1) -- (-0.6,1) -- cycle;
+            \draw[dashed] (1,0) -- (1,1) -- (0,1);
+        \end{tikzpicture}
+    \end{center}
+    where $T(\vec{u}) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, $T(\vec{v}) = \begin{bmatrix} k \\ 1 \end{bmatrix}$ and $k < 0$. If the transvection were such that $k > 0$, the graph would be sheared in the opposite direction (to the right). \\
+    Reciprocally, in the case of a vertical transvection transformation, the associated matrix would be:
+    \[
+        A = \begin{bmatrix} 1 & 0 \\ k & 1 \end{bmatrix}
+    \]
+    and the graph would be sheared vertically.
+\end{eg}
+
+\subsection{Projection transformations}
+\begin{definition}[Projection transformation]
+    A projection transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ defined by projecting every vector in $\mathbb{R}^n$ onto a subspace of $\mathbb{R}^m$.
+\end{definition}
+\begin{eg}
+    Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be a projection transformation onto the $x_1$ axis. The associated matrix is:
+    \[
+        A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
+    \]
+    Geometrically, this transformation projects every vector in $\mathbb{R}^2$ onto the $x_1$ axis.
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.2,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            % Original vectors
+            \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0) -- (0,1) node[midway, left] {$\vec{v}$};
+            \fill[secondary] (0,0) circle (1pt) node[below left] {T($\vec{v})$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0.05) -- (1,0.05) -- (1,-0.05) -- (0,-0.05) -- cycle;
+            \draw[dashed] (1,0) -- (1,1) -- (0,1);
+        \end{tikzpicture}
+    \end{center}
+    where $T(\vec{u}) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $T(\vec{v}) = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$. \\
+    Note that if the projection were onto the $x_2$ axis, the associated matrix would be:
+    \[
+        A = \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+    \]
+    and the graph would be projected onto the $x_2$ axis.
+\end{eg}
+
+\section{Injectivity, surjectivity and bijectivity}
+\begin{definition}[Injective transformation]
+    A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be injective (or one-to-one) if for every vector $\vec{y} \in \mathbb{R}^m$, there is at most one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$.
+\end{definition}
+
+\begin{definition}[Surjective transformation]
+    A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be surjective (or onto) if for every vector $\vec{y} \in \mathbb{R}^m$, there is at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$.
+\end{definition}
+
+\begin{theorem}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation. $T$ is injective if and only if the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$.
+\end{theorem}
+\begin{proof}
+    ($\Rightarrow$) Suppose $T$ is injective. We want to show that the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. Assume there exists a non-trivial solution $\vec{x_1} \neq \vec{0}$ such that $T(\vec{x_1}) = \vec{0}$. Since $T(\vec{0}) = \vec{0}$, we have two distinct vectors $\vec{x_1}$ and $\vec{0}$ such that $T(\vec{x_1}) = T(\vec{0}) = \vec{0}$. This contradicts the injectivity of $T$. Therefore, the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. \\
+    ($\Leftarrow$) Suppose the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. We want to show that $T$ is injective. Assume there exist two distinct vectors $\vec{x_1}, \vec{x_2} \in \mathbb{R}^n$ such that $T(\vec{x_1}) = T(\vec{x_2})$. Then:
+    \[
+        T(\vec{x_1}) - T(\vec{x_2}) = \vec{0}
+    \]
+    By the linearity of $T$, we have:
+    \[
+        T(\vec{x_1} - \vec{x_2}) = \vec{0}
+    \]
+    Since the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution, it follows that $\vec{x_1} - \vec{x_2} = \vec{0}$, which implies $\vec{x_1} = \vec{x_2}$. This contradicts our assumption that $\vec{x_1}$ and $\vec{x_2}$ are distinct. Therefore, $T$ is injective.
+\end{proof}
+
+\begin{theorem}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation and $A$ be its associated matrix. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $T$ is injective if and only if the columns of $A$ are linearly independent (i.e., $A$ has a pivot in every column);
+        \item $T$ is surjective if and only if the columns of $A$ span $\mathbb{R}^m$ (i.e., $A$ has a pivot in every row);
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation and $A$ be its associated matrix. We have $T(\vec{x}) = A \cdot \vec{x}$ for all $\vec{x} \in \mathbb{R}^n$. \\ \\
+    $\circ$ In the case of injectivity: \\
+    ($\Rightarrow$) Suppose $T$ is injective. By the previous theorem, the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. This means that the null space of $A$ contains only the zero vector, which implies that the columns of $A$ are linearly independent. Therefore, $A$ has a pivot in every column. \\
+    ($\Leftarrow$) Suppose the columns of $A$ are linearly independent (i.e., $A$ has a pivot in every column). This means that the null space of $A$ contains only the zero vector, which implies that the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. By the previous theorem, this means that $T$ is injective. \\ \\
+    $\circ$ In the case of surjectivity: \\
+    ($\Rightarrow$) Suppose $T$ is surjective. This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. This implies that the range of $A$ is $\mathbb{R}^m$, which means that the columns of $A$ span $\mathbb{R}^m$. Therefore, $A$ has a pivot in every row. \\
+    ($\Leftarrow$) Suppose the columns of $A$ span $\mathbb{R}^m$ (i.e., $A$ has a pivot in every row). This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $A \cdot \vec{x} = \vec{y}$. This implies that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. Therefore, $T$ is surjective.
+\end{proof}
 \section{Exercises}
 % maybe exercise at the end of w3c1 classe
