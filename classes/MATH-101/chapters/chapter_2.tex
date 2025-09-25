@@ -1,7 +1,12 @@
 \chapter{Complex numbers}
-The equation $x^2 + 1 = 0$ has no solution in $\mathbb{R}$. To solve this problem, we introduce a new number $i$ such that $i^2 = -1$. The set of complex numbers is defined as follows. \\
+The equation $x^2 + 1 = 0$ has no solution in $\mathbb{R}$. To solve this problem, we introduce a new number $i$ such that $i^2 = -1$.
 \begin{proof}
     Let's prove that the equation $x^2 + 1 = 0$ has no solution in $\mathbb{R}$.
+    Assume that there exists $x \in \mathbb{R}$ such that $x^2 + 1 = 0$. Then, we have:
+    \[
+        x^2 = -1
+    \]
+    However, the left-hand side is non-negative for all $x \in \mathbb{R}$, while the right-hand side is negative. This is a contradiction. Therefore, there are no solutions in $\mathbb{R}$.
 \end{proof}
 
 \section{Definition and properties of complex numbers}
@@ -330,5 +335,207 @@ Let $y = \pi$, then:
 \end{theorem}
 This formula links the 5 most important constants in mathematics: $e, i, \pi, 1, 0$.
 
-\section{Exercices} % week 2 assignement
+\section{Conjugate of a complex number}
+\begin{definition}[Conjugate of a complex number]
+    The conjugate of a complex number $z = a + bi$ is defined as:
+    \[
+        \overline{z} = a - bi
+    \]
+    or in polar form for $z = r e^{i \theta}$:
+    \[
+        \overline{z} = r e^{-i \theta} = r(\cos(-\theta) + i \sin(-\theta)) = r(\cos(\theta) - i \sin(\theta))
+    \]
+\end{definition}
+If $\bar{z} \neq 0$, then:
+\[
+    z \bar{z} = (a + bi)(a - bi) = a^2 + b^2 = |z|^2
+\]
+
+\subsection{Properties of the conjugate}
+Let $z_1, z_2 \in \mathbb{C}$ and $\lambda \in \mathbb{R}$, we have:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\overline{\overline{z}} = z$
+    \item $\overline{z_1 \pm z_2} = \overline{z_1} \pm \overline{z_2}$
+    \item $\overline{z_1 z_2} = \overline{z_1} \, \overline{z_2}$
+    \item $\overline{\left(\frac{z_1}{z_2}\right)} = \frac{\overline{z_1}}{\overline{z_2}}$ if $z_2 \neq 0$
+    \item $\overline{\lambda z} = \lambda \overline{z}$
+\end{itemize}
+Also, we have:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\text{Re}(z) = \frac{z + \overline{z}}{2}$
+    \item $\text{Im}(z) = \frac{z - \overline{z}}{2i}$
+\end{itemize}
+If $|z| = 1$, then in polar form for $z = \cos(\phi) + i \sin(\phi)$, we have:
+\[
+    \cos(\phi) = \frac{e^{i\phi} + e^{-i\phi}}{2}, \quad \sin(\phi) = \frac{e^{i\phi} - e^{-i\phi}}{2i}
+\]
+
+\begin{eg}
+    Let's express $(\sin(\phi))^4$:
+    \[
+        (\sin(\phi))^4 = \left( \frac{e^{i\phi} - e^{-i\phi}}{2i} \right)^4 = \frac{(e^{i\phi} - e^{-i\phi})^4}{16 i^4} = \frac{e^{4i\phi} - 4e^{2i\phi} + 6 - 4e^{-2i\phi} + e^{-4i\phi}}{16}
+    \]
+    Since $-4e^{2i\phi} - 4e^{-2i\phi} = -8 \cos(2\phi)$ and $e^{4i\phi} + e^{-4i\phi} = 2 \cos(4\phi)$, we get:
+    \[
+        (\sin(\phi))^4 = \frac{3}{8} - \frac{1}{2} \cos(2\phi) + \frac{1}{8} \cos(4\phi)
+    \]
+\end{eg}
+
+\section{Roots of complex numbers}
+\begin{definition}[n-th roots of a complex number]
+    Let $z \in \mathbb{C}^*$ and $n \in \mathbb{N}^*$. The n-th roots of $z$ are the solutions of the equation:
+    \[    w^n = z
+    \]
+    If we write $z$ in polar form as $z = r e^{i \theta}$, then the n-th roots of $z$ are given by:
+    \[
+        w_k = r^{\frac{1}{n}} e^{i \frac{\theta + 2k\pi}{n}} \quad k = 0, 1, \ldots, n-1
+    \]
+    There are $n$ distinct n-th roots of $z$.
+\end{definition}
+\begin{proof}
+    Let $w = \rho e^{i \phi}$ be an n-th root of $z$. We have:
+    \[
+        w^n = (\rho e^{i \phi})^n = \rho^n e^{i n \phi} = r e^{i \theta}
+    \]
+    By comparing the moduli and arguments, we get:
+    \[
+        \rho^n = r \implies \rho = r^{\frac{1}{n}}
+    \]
+    and
+    \[
+        n \phi = \theta + 2k\pi \implies \phi = \frac{\theta + 2k\pi}{n} \quad k \in \mathbb{Z}
+    \]
+    Since the argument is defined up to an additive factor of $2\pi$, we only need to consider $k = 0, 1, \ldots, n-1$ to get all distinct n-th roots. Thus, the n-th roots of $z$ are given by:
+    \[
+        w_k = r^{\frac{1}{n}} e^{i \frac{\theta + 2k\pi}{n}} \quad k = 0, 1, \ldots, n-1
+    \]
+\end{proof}
+
+\begin{eg}
+    Let $z^2 = w = re^{i \theta}$ (where $r > 0$) be a complex number. Then:
+    \[
+        z_k = r^{\frac{1}{2}} e^{i \frac{\theta + 2k\pi}{2}} \quad k = 0, 1
+    \]
+    Thus, the two square roots of $w$ are:
+    \[        z_0 = r^{\frac{1}{2}} e^{i \frac{\theta}{2}}, \quad z_1 = r^{\frac{1}{2}} e^{i \left(\frac{\theta}{2} + \pi\right)} = -r^{\frac{1}{2}} e^{i \frac{\theta}{2}} = -z_0
+    \]
+    More explicitly:
+    \[
+        (z_1)^2 = (z_2)^2 = w
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's solve the equation $z^3 = -1 + i$ ($z \in \mathbb{C})$. Let $w = -1 + i = \sqrt{2} e^{i \frac{3\pi}{4}}$ be the complex number. We have:
+    \[
+        z_k = (\sqrt{2})^{\frac{1}{3}} e^{i \frac{\frac{3\pi}{4} + 2k\pi}{3}} = 2^{\frac{1}{6}} e^{i \left(\frac{\pi}{4} + \frac{2k\pi}{3}\right)} \quad k = 0, 1, 2
+    \]
+    Thus, the three cube roots of $w$ are:
+    \[
+        z_0 = 2^{\frac{1}{6}} e^{i \frac{\pi}{4}}, \quad z_1 = 2^{\frac{1}{6}} e^{i \left(\frac{\pi}{4} + \frac{2\pi}{3}\right)} = 2^{\frac{1}{6}} e^{i \frac{11\pi}{12}}, \quad z_2 = 2^{\frac{1}{6}} e^{i \left(\frac{\pi}{4} + \frac{4\pi}{3}\right)} = 2^{\frac{1}{6}} e^{i \frac{19\pi}{12}}
+    \]
+\end{eg}
+
+\begin{eg}
+    Let $z \in \mathbb{C}, z \neq 0$. We want to find all complex numbers such that $(\frac{z}{\bar{z}})^3 = \bar{z}$. We have:
+    \[
+        z = r e^{i \theta} \implies \bar{z} = r e^{-i \theta}
+    \]
+    Thus:
+    \[
+        \left(\frac{z}{\bar{z}}\right)^3 = \left(\frac{r e^{i \theta}}{r e^{-i \theta}}\right)^3 = (e^{2i \theta})^3 = e^{6i \theta}
+    \]
+    We want to solve:
+    \[        e^{6i \theta} = r e^{-i \theta}
+    \]
+    By comparing the moduli and arguments, we get:
+    \[        r = 1
+    \]
+    and
+    \[        6 \theta = -\theta + 2k\pi \implies 7 \theta = 2k\pi \implies \theta = \frac{2k\pi}{7}, \quad k \in \mathbb{Z}
+    \]
+    Thus, the solutions are:
+    \[        z_k = e^{i \frac{2k\pi}{7}}, \quad k = 0, 1, \ldots, 6 \]
+\end{eg}
+
+\section{Polynomials with complex coefficients}
+\begin{definition}[Polynomial with complex coefficients]
+    A polynomial with complex coefficients is a function $P: \mathbb{C} \to \mathbb{C}$ defined by:
+    \[
+        P(z) = a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + a_0
+    \]
+    where $a_0, a_1, \ldots, a_n \in \mathbb{C}$ and $a_n \neq 0$. The degree of the polynomial is $n$.
+\end{definition}
+In the case of quadratic polynomials, like in the case with real coefficients, we have:
+\[
+    z = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]
+except that now $a, b, c \in \mathbb{C}$, thus:
+\[
+    \sqrt{b^2 - 4ac} \in \mathbb{C} \implies w \in \mathbb{C} : w^2 = b^2 - 4ac
+\]
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+    Every non-constant polynomial with complex coefficients, $P(z) = a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + a_0$ where $a_n \neq 0$ can be factored as:
+    \[
+        P(z) = a_n (z - z_1)^{m_1}(z - z_2)^{m_2} \ldots (z - z_n)^{m_n}
+    \]
+    where $z_1, z_2, \ldots, z_n \in \mathbb{C}$ are the distinct roots of $P(z)$ and $m_1, m_2, \ldots, m_n \in \mathbb{N}^*$ ($m_1 + m_2 + \ldots + m_n = n$) are their respective multiplicities.
+\end{theorem}
+
+\begin{eg}
+    Let's check if $P(z) = z^2 + (1-i)z - i$ is divisible by $z - i$. We have:
+    \[        P(i) = i^2 + (1-i)i - i = -1 + i + 1 - i = 0
+    \]
+    Thus, $P(z)$ is divisible by $z - i$.
+\end{eg}
+
+\subsection{Polynomials with real coefficients}
+If $P(x) = a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0$ is a polynomial with real coefficients, then its complex roots come in conjugate pairs. That is, if $z = a + bi$ is a root of $P(x)$, then its conjugate $\bar{z} = a - bi$ is also a root of $P(x)$.
+\begin{proof}
+    Let $z = a + bi$ be a root of $P(x)$, then:
+    \[        P(z) = a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + a_0 = 0
+    \]
+    Taking the complex conjugate of both sides, we get:
+    \[        \overline{P(z)} = \overline{a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + a_0} = 0
+    \]
+    Since the coefficients are real, this simplifies to:
+    \[        P(\bar{z}) = a_n \bar{z}^n + a_{n-1} \bar{z}^{n-1} + \ldots + a_1 \bar{z} + a_0 = 0
+    \]
+    Thus, $\bar{z}$ is also a root of $P(x)$.
+\end{proof}
+Every polynomial with real coefficients of degree $n \geq 2$ can be factored as a product of linear and irreducible quadratic factors with real coefficients.
+
+\section{Subset of complex numbers}
+\begin{eg}
+    Let $z_o \in \mathbb{C}, r \in \mathbb{R} > 0$. The set of complex numbers defined by:
+    \[        |z - z_0| = r
+    \]
+    where $z = x + yi$ and $z_0 = x_0 + y_0 i$, can be expressed as:
+    \[        |(x + yi) - (x_0 + y_0 i)| = r
+    \]
+    \[        \sqrt{(x - x_0)^2 + (y - y_0)^2} = r
+    \]
+    \[        (x - x_0)^2 + (y - y_0)^2 = r^2
+    \]
+    This is the equation of a circle with center $(x_0, y_0)$ and radius $r$ in the Cartesian plane. Thus, the set of complex numbers $z$ such that $|z - z_0| = r$ represents a circle in the complex plane with center $z_0$ and radius $r$.
+\end{eg}
+
+\begin{eg}
+    Let $z \in \mathbb{C}^*: (\frac{|z|}{z})^4 = \frac{1}{\sqrt{2}}(1 + i)$. We have:
+    \[        z = r e^{i \theta} \implies |z| = r, \quad \frac{|z|}{z} = \frac{r}{r e^{i \theta}} = e^{-i \theta}
+    \]
+    Thus:
+    \[        (e^{-i \theta})^4 = e^{-4i \theta} = \frac{1}{\sqrt{2}}(1 + i) = e^{i \frac{\pi}{4}}
+    \]
+    By comparing the arguments, we get:
+    \[        -4 \theta = \frac{\pi}{4} + 2k\pi \implies \theta = -\frac{\pi}{16} - \frac{k\pi}{2}, \quad k = 0,1,2,3
+    \]
+    Thus, the solutions are:
+    \[        \theta \in \left\{ -\frac{\pi}{16} - \frac{k\pi}{2} \mid k = 0,1,2,3 \right\}
+    \]
+    and $r$ can take any positive real value. Therefore, the geometric representation of the solutions is given by 4 open half-lines originating from the origin, making angles of $-\frac{\pi}{16}, -\frac{9\pi}{16}, -\frac{17\pi}{16}, -\frac{25\pi}{16}$ with the positive real axis.
+\end{eg}
+
+\section{Exercices} % week 3 assignement
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
