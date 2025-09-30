@@ -1,0 +1,338 @@
+\chapter{Sets and Functions}
+
+\section{Sets}
+\begin{definition}[Set]
+    A set is a well-defined collection of distinct objects, considered as an object in its own right. Sets are typically denoted by capital letters (e.g., $A$, $B$, $C$), and the objects within a set are called elements or members. The notation $x \in A$ indicates that $x$ is an element of the set $A$, while $x \notin A$ indicates that $x$ is not an element of $A$.
+\end{definition}
+The order in a set and duplicate elements do not matter. For example, the sets $\{1, 2, 3\}$, $\{3, 2, 1\}$, and $\{1, 2, 2, 3\}$ are all considered equal. \\
+To describe a set, we can use:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item All members are listed between curly braces, e.g., $A = \{1, 2, 3, 4, 5\} = \{1, \ldots, 5\}$ (Roster form).
+    \item A property or condition that characterizes its members, e.g., $B = \{x \mid P(x)\}$ (Set-builder form).
+\end{itemize}
+
+\begin{eg}
+    Some examples of sets:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The set of all letters in the English alphabet: $A = \{a, b, c, \ldots, z\}$.
+        \item The set of all even natural numbers: $E = \{x \mid x = 2n, n \in \mathbb{N}\}$.
+        \item The set of all prime numbers less than 10: $P = \{2, 3, 5, 7\}$.
+        \item The set of all real numbers between 0 and 1: $R = \{x \mid 0 < x < 1, x \in \mathbb{R}\}$.
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    Some sets are given special names:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The empty set (or null set) is the set that contains no elements, denoted by $\emptyset$ or $\{\}$.
+        \item The set of natural numbers is denoted by $\mathbb{N} = \{0, 1, 2, \ldots\}$.
+        \item The set of integers is denoted by $\mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\}$.
+        \item The set of positive integers is denoted by $\mathbb{Z}^+ = \{1, 2, 3, \ldots\}$.
+        \item The set of real numbers is denoted by $\mathbb{R}$.
+        \item The set of complex numbers is denoted by $\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}, i^2 = -1\}$.
+    \end{itemize}
+\end{eg}
+Sets can also contain other sets as elements. For example, $A = \{1, 2, \{3, 4\}\}$ is a set containing the elements 1, 2, and the set $\{3, 4\}$.
+
+\begin{definition}[Empty Set]
+    The empty set is the unique set that contains no elements. It is denoted by $\emptyset$ or $\{\}$. The empty set is a subset of every set, including itself.
+\end{definition}
+
+\begin{definition}[Singleton Set]
+    A singleton set is a set that contains exactly one element. For example, $\{a\}$ is a singleton set containing the element $a$.
+\end{definition}
+Note that the empty set $\emptyset$ is different from the singleton set $\{\emptyset\}$, which contains the empty set as its only element.
+
+\begin{definition}[Universal Set]
+    The universal set is the set that contains all the objects or elements under consideration, usually denoted by $U$. The specific elements of the universal set depend on the context of the discussion.
+\end{definition}
+
+\subsection{Interval Notation}
+\begin{definition}[Interval]
+    An interval is a set of real numbers that contains all real numbers between any two numbers in the set. Intervals can be classified into several types based on whether they include or exclude their endpoints:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Closed interval: $[a, b] = \{x \in \mathbb{R} \mid a \leq x \leq b\}$ (includes both endpoints).
+        \item Open interval: $(a, b) = \{x \in \mathbb{R} \mid a < x < b\}$ (excludes both endpoints).
+        \item Half-open (or half-closed) interval: $[a, b) = \{x \in \mathbb{R} \mid a \leq x < b\}$ (includes $a$ but excludes $b$), and $(a, b] = \{x \in \mathbb{R} \mid a < x \leq b\}$ (excludes $a$ but includes $b$).
+        \item Infinite intervals: $[a, \infty) = \{x \in \mathbb{R} \mid x \geq a\}$, $(a, \infty) = \{x \in \mathbb{R} \mid x > a\}$, $(-\infty, b] = \{x \in \mathbb{R} \mid x \leq b\}$, and $(-\infty, b) = \{x \in \mathbb{R} \mid x < b\}$.
+    \end{itemize}
+\end{definition}
+
+\subsection{Venn Diagrams}
+\begin{definition}[Venn Diagram]
+    A Venn diagram is a graphical representation of sets and their relationships using overlapping circles or other shapes. Each circle represents a set, and the overlapping regions represent the intersections of the sets. Venn diagrams are useful for visualizing concepts such as union, intersection, and complement of sets.
+\end{definition}
+
+\begin{eg}
+    Here is a simple Venn diagram representing the set $V$ of vowel letters in the English alphabet:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+            \draw[primary] (-1,-.3) circle (2) node[above=2cm] {$V$};
+            \node[primary] at (-1.3,0.8) {a};
+            \node[primary] at (0.1,0.6) {e};
+            \node[primary] at (-1.6,-0.5) {i};
+            \node[primary] at (0,-1) {o};
+            \node[primary] at (-1,-1.6) {u};
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\subsection{Subsets}
+\begin{definition}[Subset]
+    A set $A$ is a subset of a set $B$ (or $B$ is a superset of $A$), denoted by $A \subseteq B$, if every element of $A$ is also an element of $B$. If $A$ is a subset of $B$ but $A \neq B$, then we say that $A$ is a proper subset of $B$, denoted by $A \subset B$.
+\end{definition}
+\begin{eg}
+    Some examples of subsets:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\{1, 2\} \subseteq \{1, 2, 3, 4, 5\}$.
+        \item $\{a, e, i\} \subseteq \{a, b, c, d, e, f, g, h, i\}$.
+        \item $\emptyset \subseteq A$ for any set $A$.
+        \item $\{1, 2, 3\} \supseteq \{1, 2, 3\}$ (every set is a superset of itself).
+    \end{itemize}
+\end{eg}
+To show that $A \subseteq B$, we need to prove that if $x \in A$, then $x \in B$. To show that $A \not\subseteq B$, we need to find an element $x$ such that $x \in A$ and $x \notin B$.
+\begin{theorem}
+    For any sets $A$ we have $\emptyset \subseteq A$ and $A \subseteq A$.
+\end{theorem}
+\begin{proof}
+    To show that $\emptyset \subseteq A$, we need to prove that if $x \in \emptyset$, then $x \in A$. Since there are no elements in the empty set, the statement is vacuously true. Therefore, $\emptyset \subseteq A$ for any set $A$. \\
+    To show that $A \subseteq A$, we need to prove that if $x \in A$, then $x \in A$. This is trivially true since every element of $A$ is also an element of $A$. Therefore, $A \subseteq A$.
+\end{proof}
+
+\begin{definition}[Proper Subset]
+    A set $A$ is a proper subset of a set $B$, denoted by $A \subset B$, if $A \subseteq B$ and there exists at least one element in $B$ that is not in $A$. We can write this as:
+    \[ \forall x(x \in A \to x \in B) \land \exists y(y \in B \land y \notin A) \]
+\end{definition}
+
+\begin{definition}[Set Equality]
+    Two sets $A$ and $B$ are equal, denoted by $A = B$, if they contain exactly the same elements. This means that $A \subseteq B$ and $B \subseteq A$. We can write this as:
+    \[ A = B \iff \forall x(x \in A \leftrightarrow x \in B) \]
+\end{definition}
+
+\begin{definition}[Power Set]
+    The power set of a set $A$, denoted by $\mathcal{P}(A)$, is the set of all subsets of $A$. This includes the empty set and $A$ itself. If $A$ has $n$ elements, then the power set $\mathcal{P}(A)$ has $2^n$ elements.
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2\}$, then the power set of $A$ is:
+    \[ \mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\} \]
+    The size of a set $A$ is denoted by $|A|$. In this case, $|A| = 2$ and $|\mathcal{P}(A)| = 2^2 = 4$.
+\end{eg}
+Note that if $A = \{a, a, b\}$, then $|A| = 2$ because sets do not care about duplicate elements.
+
+\subsection{Tuples}
+\begin{definition}[Tuple]
+    An $n$-tuple is an ordered collection of $n$ elements, denoted by $(a_1, a_2, \ldots, a_n)$. The order of the elements matters, and duplicate elements are allowed. Two $n$-tuples are equal if and only if they have the same elements in the same order.
+\end{definition}
+Note that 2-tuples are also called ordered pairs, and 3-tuples are also called ordered triples.
+
+\begin{definition}[Cartesian Product]
+    The Cartesian product of two sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs $(a, b)$ where $a \in A$ and $b \in B$. Formally,
+    \[ A \times B = \{(a, b) \mid a \in A, b \in B\} \]
+\end{definition}
+Note that $A \times B \neq B \times A$ in general.
+\begin{eg}
+    If $A = \{1, 2\}$ and $B = \{x, y\}$, then the Cartesian product of $A$ and $B$ is:
+    \[ A \times B = \{(1, x), (1, y), (2, x), (2, y)\} \]
+    And the product $B \times A$ is:
+    \[ B \times A = \{(x, 1), (x, 2), (y, 1), (y, 2)\} \]
+    The size of the Cartesian product is given by $|A \times B| = |A| \cdot |B|$. In this case, $|A| = 2$, $|B| = 2$, and $|A \times B| = 2 \cdot 2 = 4$.
+\end{eg}
+\begin{eg}
+    The Cartesian product of the sets $A_1, A_2, \ldots, A_n$ is defined as:
+    \[ A_1 \times A_2 \times \cdots \times A_n = \{(a_1, a_2, \ldots, a_n) \mid a_i \in A_i \text{ for } i = 1, 2, \ldots, n\} \]
+    is the set of ordered n-tuples. If all sets are equal, i.e., $A_1 = A_2 = \cdots = A_n = A$, then we write:
+    \[ A^n = \underbrace{A \times A \times \cdots \times A}_{n \text{ times}} \]
+    The size of the Cartesian product in this case is given by $|A^n| = |A|^n$.
+\end{eg}
+
+\begin{definition}[Truth Set of Predicates]
+    The truth set of a predicate $P(x)$ is the set of all elements in the domain $D$ of discourse for which the predicate is true. It is denoted by:
+    \[ \{x \in D \mid P(x)\} \]
+\end{definition}
+\begin{eg}
+    The truth set of the predicate $P(x)$, where the domain $D$ is the integers and $P(x) = |x| = 1$ is the set $\{-1, 1\}$.
+\end{eg}
+
+\begin{definition}[Cardinality of a Set]
+    The cardinality of a set $A$, denoted by $|A|$, is the number of elements in the set. If $A$ is a finite set, then its cardinality is a non-negative integer. If $A$ is an infinite set, its cardinality is described using concepts from set theory, such as countable and uncountable infinity.
+\end{definition}
+\begin{eg}
+    Some examples of cardinality:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $A = \{1, 2, 3\}$, then $|A| = 3$.
+        \item If $B = \{\emptyset\}$, then $|B| = 1$.
+        \item $|\emptyset| = 0$.
+        \item The set of natural numbers $\mathbb{N}$ is infinite and countable, so its cardinality is denoted by $\aleph_0$ (aleph-null).
+        \item The set of real numbers $\mathbb{R}$ is uncountably infinite, and its cardinality is denoted by $2^{\aleph_0}$ (the cardinality of the continuum).
+    \end{itemize}
+\end{eg}
+
+\subsection{Set Operations}
+\begin{definition}[Union]
+    The union of two sets $A$ and $B$, denoted by $A \cup B$, is the set of all elements that are in $A$, in $B$, or in both. Formally,
+    \[ A \cup B = \{x \mid x \in A \text{ or } x \in B\} \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \fill[secondary!40,opacity=.3] (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the union of $A$ and $B$ is:
+    \[ A \cup B = \{1, 2, 3, 4, 5\} \]
+    where $5 = |A \cup B| \leq |A| + |B| = 3 + 3 = 6$.
+\end{eg}
+
+\begin{definition}[Intersection]
+    The intersection of two sets $A$ and $B$, denoted by $A \cap B$, is the set of all elements that are in both $A$ and $B$. Formally,
+    \[ A \cap B = \{x \mid x \in A \text{ and } x \in B\} \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \fill[secondary!40,opacity=.3] (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the intersection of $A$ and $B$ is:
+    \[ A \cap B = \{3\} \]
+    where $|A \cap B| = 1 \leq \min(|A|, |B|) = \min(3, 3) = 3$.
+\end{eg}
+\begin{definition}[Cardinality of Set Union]
+    The cardinality of the union of two sets $A$ and $B$ is given by the formula:
+    \[ |A \cup B| = |A| + |B| - |A \cap B| \]
+\end{definition}
+\begin{definition}[Difference]
+    The difference of two sets $A$ and $B$, denoted by $A - B$ or $A \setminus B$, is the set of all elements that are in $A$ but not in $B$. Formally,
+    \[ A - B = \{x \mid x \in A \text{ and } x \notin B\} \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the difference of $A$ and $B$ is:
+    \[ A - B = \{1, 2\} \]
+    where $|A - B| = 2$.
+\end{eg}
+
+\begin{definition}[Complement]
+    The complement of a set $A$ with respect to a universal set $U$, denoted by $A^c$ or $\overline{A}$, is the set of all elements in $U$ that are not in $A$. Formally,
+    \[ A^c = \{x \in U \mid x \notin A\} \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-4, -2.5) rectangle (4, 2.5)
+                (-1,-.3) circle (2);
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+Note that the complement of the complement of $A$ is $A$ itself, i.e., $(A^c)^c = A$.
+\begin{eg}
+    If the universal set $U = \{1, 2, 3, 4, 5\}$ and $A = \{1, 2, 3\}$, then the complement of $A$ is:
+    \[ A^c = \{4, 5\} \]
+    where $|A^c| = 2$.
+\end{eg}
+
+\begin{definition}[Symmetric Difference]
+    The symmetric difference of two sets $A$ and $B$, denoted by $A \oplus B$ or $A \Delta B$, is the set of elements that are in either $A$ or $B$ but not in both. Formally,
+    \[ A \oplus B = (A - B) \cup (B - A) = (A \cup B) - (A \cap B) \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the symmetric difference of $A$ and $B$ is:
+    \[ A \oplus B = \{1, 2, 4, 5\} \]
+    where $|A \oplus B| = 4$.
+\end{eg}
+
+\subsection{Generalised Unions and Intersections}
+Note that the union and intersection operations are commutative and associative, this means that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $A \cup B = B \cup A$ and $A \cap B = B \cap A$ (Commutative Laws).
+    \item $(A \cup B) \cup C = A \cup (B \cup C)$ and $(A \cap B) \cap C = A \cap (B \cap C)$ (Associative Laws).
+    \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ and $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ (Distributive Laws).
+\end{itemize}
+
+\begin{definition}[Generalised Union and Intersection]
+    The generalised union and intersection of a collection of sets $\{A_i \mid i \in I\}$, where $I$ is an index set, are defined as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Generalised Union: $\bigcup_{i \in I} A_i = \{x \mid x \in A_i \text{ for some } i \in I\}$
+        \item Generalised Intersection: $\bigcap_{i \in I} A_i = \{x \mid x \in A_i \text{ for all } i \in I\}$
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    For $i = 1,2,\ldots$, let $A_i = \{i, i + 1, i + 2, \ldots\}$. Then:
+    \[ \bigcup_{i=1}^{n} A_i = A_1 = \{1, 2, 3, \ldots\} \]
+    and
+    \[ \bigcap_{i=1}^{n} A_i = A_n = \{n, n + 1, n + 2, \ldots\} \]
+\end{eg}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+\begin{eg}
+    How many elements does each of the following sets have where $a$ and $b$ are distinct elements?
+    \begin{enumerate}[label=(\alph*),itemsep=1pt]
+        \item $\mathcal{P}(\{a, b, \{a, b\}\})$
+        \item $\mathcal{P}(\{\emptyset, a, \{a\}, \{\{a\}\}\})$
+        \item $\mathcal{P}(\mathcal{P}(\emptyset))$
+    \end{enumerate}
+    $\newline$
+    Answer:
+    \begin{enumerate}[label=(\alph*),itemsep=1pt]
+        \item The set $\{a, b, \{a, b\}\}$ has 3 elements, so its power set has $2^3 = 8$ elements.
+        \item The set $\{\emptyset, a, \{a\}, \{\{a\}\}\}$ has 4 elements, so its power set has $2^4 = 16$ elements.
+        \item The set $\mathcal{P}(\emptyset)$ is the power set of the empty set, which has 1 element (the empty set itself). Therefore, $\mathcal{P}(\mathcal{P}(\emptyset))$ has $2^1 = 2$ elements.
+    \end{enumerate}
+\end{eg}
