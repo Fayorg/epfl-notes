@@ -126,7 +126,107 @@ The columns of a matrix $A$ are often denoted by $\vec{a_1}, ..., \vec{a_n} \in 
     \end{itemize}
 \end{theorem}
 
+\subsection{Transpose of a Matrix}
+\begin{definition}[Transpose of a Matrix]
+    The transpose of a matrix \( A \), denoted as \( A^T \), is obtained by swapping the rows and columns of \( A \). If \( A \) is an \( m \times n \) matrix, then its transpose \( A^T \) will be an \( n \times m \) matrix. The element at the \( i \)-th row and \( j \)-th column of \( A \) becomes the element at the \( j \)-th row and \( i \)-th column of \( A^T \). Formally, if \( A = [a_{ij}] \), then:
+    \[
+        A^T = [a_{ji}]
+    \]
+    for all valid indices \( i \) and \( j \).
+\end{definition}
+\begin{eg}
+    Let
+    \[
+        A = \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6
+        \end{bmatrix}
+    \]
+    Then the transpose of \( A \) is:
+    \[
+        A^T = \begin{bmatrix}
+            1 & 4 \\
+            2 & 5 \\
+            3 & 6
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let \( A \) and \( B \) be matrices of appropriate dimensions for addition and multiplication, and let \( k \) be a scalar. The following properties hold for the transpose of matrices:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( (A^T)^T = A \) (Involution Property)
+        \item \( (A + B)^T = A^T + B^T \) (Transpose of a Sum)
+        \item \( (kA)^T = kA^T \) (Transpose of a Scalar Multiple)
+        \item \( (AB)^T = B^T A^T \) (Transpose of a Product)
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let's prove the property \( (AB)^T = B^T A^T \). Let \( A \) be an \( m \times n \) matrix and \( B \) be an \( n \times p \) matrix. The product \( AB \) is an \( m \times p \) matrix, and its transpose \( (AB)^T \) is a \( p \times m \) matrix. The element at the \( i \)-th row and \( j \)-th column of \( AB \) is given by:
+    \[
+        (AB)_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj}
+    \]
+    Therefore, the element at the \( j \)-th row and \( i \)-th column of \( (AB)^T \) is:
+    \[
+        (AB)^T_{ji} = (AB)_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj}
+    \]
+    Now, consider the product \( B^T A^T \). The transpose \( B^T \) is a \( p \times n \) matrix, and \( A^T \) is an \( n \times m \) matrix. The product \( B^T A^T \) is a \( p \times m \) matrix, and its element at the \( j \)-th row and \( i \)-th column is given by:
+    \[
+        (B^T A^T)_{ji} = \sum_{k=1}^{n} b_{jk} a_{ki}
+    \]
+    Since matrix multiplication is defined such that the order of multiplication matters, we can see that:
+    \[
+        (B^T A^T)_{ji} = (AB)^T_{ji}
+    \]
+    for all valid indices \( i \) and \( j \). Thus, we conclude that:
+    \[
+        (AB)^T = B^T A^T
+    \]
+\end{proof}
+More generally, for any number of matrices \( A_1, A_2, \ldots, A_k \):
+\[
+    (A_1 A_2 \cdots A_k)^T = A_k^T A_{k-1}^T \cdots A_1^T
+\]
+
 \subsection{Matrix Multiplication}
+Let's first remark that for a matrix $A$ of size $m \times n$, we can create column/row vectors to extract columns/rows of $A$:
+\[
+    A = 
+    \begin{bmatrix}
+        | & | &        & | \\
+        \vec{a_1} & \vec{a_2} & ... & \vec{a_n} \\
+        | & | &        & |
+    \end{bmatrix}
+\]
+If we want to extract the $j$-th column of $A$, we can use the following multiplication:
+\[
+    A \cdot \vec{e_j} = \vec{a_j}
+\]
+where $\vec{e_j}$ is the $j$-th standard basis vector in $\mathbb{R}^n$:
+\[
+    \vec{e_j} = 
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        ... \\
+        1 \\
+        ... \\
+        0
+    \end{bmatrix}
+\]
+where the $1$ is in the $j$-th position. \\
+Similarly, we can extract the $i$-th row of $A$ by using the following multiplication:
+\[
+    \vec{e_i}^T \cdot A = \vec{r_i}
+\]
+where $\vec{e_i}^T$ is the transpose of the $i$-th standard basis vector in $\mathbb{R}^m$:
+\[
+    \vec{e_i}^T = 
+    \begin{bmatrix}
+        0 & 0 & ... & 1 & ... & 0
+    \end{bmatrix}
+\]
+where the $1$ is in the $i$-th position, and $\vec{r_i}$ is the $i$-th row of $A$.
 \begin{definition}[Matrix Multiplication]
     Matrix multiplication is the operation of multiplying two matrices to produce a new matrix. For two matrices \( A \) and \( B \), where \( A \) is of size \( m \times n \) and \( B \) is of size \( n \times p \), the product \( C = AB \) is a matrix of size \( m \times p \). The element \( c_{ij} \) of the resulting matrix \( C \) is calculated as:
     \[
@@ -134,6 +234,18 @@ The columns of a matrix $A$ are often denoted by $\vec{a_1}, ..., \vec{a_n} \in 
     \]
     for all \( i = 1, 2, ..., m \) and \( j = 1, 2, ..., p \).
 \end{definition}
+\begin{proof}
+    Let's prove the definition of matrix multiplication using the concept of row and column vectors. Let \( A \) be an \( m \times n \) matrix and \( B \) be an \( n \times p \) matrix. The product \( C = AB \) will be an \( m \times p \) matrix. To find the element \( c_{ij} \) in the resulting matrix \( C \), we can express it as the dot product of the \( i \)-th row of \( A \) and the \( j \)-th column of \( B \). The \( i \)-th row of \( A \) can be represented as \( \vec{r_i} = \vec{e_i}^T A \) and the \( j \)-th column of \( B \) can be represented as \( \vec{b_j} = B \vec{e_j} \). Therefore, we have:
+    \[
+        c_{ij} = \vec{r_i} \cdot \vec{b_j} = (\vec{e_i}^T A) \cdot (B \vec{e_j})
+    \]
+    Expanding this dot product, we have:
+    \[
+        c_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj}
+    \]
+    This shows that each element \( c_{ij} \) of the resulting matrix \( C \) is obtained by summing the products of the corresponding elements from the \( i \)-th row of \( A \) and the \( j \)-th column of \( B \). Thus, we have proven the definition of matrix multiplication.
+\end{proof}
+
 \begin{eg}
     Consider the following matrices:
     \[
@@ -252,4 +364,259 @@ Notes:
         \end{bmatrix}
     \]
     Here, \( AB = 0 \) (the zero matrix), but neither \( A = 0 \) nor \( B = 0 \).
+\end{eg}
+
+\begin{definition}[Power of a Matrix]
+    Let $A$ be a square matrix of size $n \times n$. The power of $A$ is defined as:
+    \[
+        A^k = \underbrace{A \cdot A \cdot A \cdots A}_{k \text{ times}}
+    \]
+    for any integer $k \geq 1$, and $A^0 = I_n$, where $I_n$ is the identity matrix of size $n$.
+\end{definition}
+
+\section{Inverse of a Matrix}
+In real number, the inverse of a non-zero number $a$ is the number $b$ such that $a \cdot b = 1$. Similarly, we can define the inverse of a matrix.
+\begin{definition}[Inverse of a Matrix]
+    Let $A$ be a square matrix of size $n \times n$. The inverse of $A$, denoted as $A^{-1}$, is a matrix of the same size such that:
+    \[
+        A \cdot A^{-1} = A^{-1} \cdot A = I_n
+    \]
+    where $I_n$ is the identity matrix of size $n$. If such a matrix $A^{-1}$ exists, then $A$ is said to be invertible or non-singular. If no such matrix exists, then $A$ is said to be non-invertible or singular.
+\end{definition}
+
+\begin{theorem}
+    If a matrix $A$ is invertible, then its inverse $A^{-1}$ is unique.
+\end{theorem}
+\begin{proof}
+    Suppose there are two inverses of $A$, denoted as $B$ and $C$. By the definition of the inverse, we have:
+    \[
+        A \cdot B = I_n \quad \text{and} \quad A \cdot C = I_n
+    \]
+    To show that $B = C$, we can do the following:
+    \[
+        B = B \cdot I_n = B \cdot (A \cdot C) = (B \cdot A) \cdot C = I_n \cdot C = C
+    \]
+    Therefore, the inverse of $A$ is unique.
+\end{proof}
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        3 & 5 \\
+        2 & 3
+    \end{bmatrix}$ and $B = \begin{bmatrix}
+        -3 & 5 \\
+        2 & -3
+    \end{bmatrix}$ be two matrices. We can verify that:
+    \[
+        A \cdot B = \begin{bmatrix}
+            3 & 5 \\
+            2 & 3
+        \end{bmatrix} \cdot \begin{bmatrix}
+            -3 & 5 \\
+            2 & -3
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix} = I_2
+    \]
+    and
+    \[
+        B \cdot A = \begin{bmatrix}
+            -3 & 5 \\
+            2 & -3
+        \end{bmatrix} \cdot \begin{bmatrix}
+            3 & 5 \\
+            2 & 3
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix} = I_2
+    \]
+    Thus, $B$ is the inverse of $A$, denoted as $A^{-1} = B$.
+\end{eg}
+Note that if $A$ is invertible, then $A^{-1}$ is also invertible and $(A^{-1})^{-1} = A$.
+
+\begin{theorem}
+    If $A$ is an invertible matrix, then for any vector $\vec{b} \in \mathbb{R}^n$, the equation $A \cdot \vec{x} = \vec{b}$ has a unique solution given by:
+    \[
+        \vec{x} = A^{-1} \cdot \vec{b}
+    \]
+\end{theorem}
+\begin{proof}
+    To prove this, we start with the equation:
+    \[
+        A \cdot \vec{x} = \vec{b}
+    \]
+    Since $A$ is invertible, we can multiply both sides of the equation by $A^{-1}$:
+    \[
+        A^{-1} \cdot (A \cdot \vec{x}) = A^{-1} \cdot \vec{b}
+    \]
+    Using the associative property of matrix multiplication, we have:
+    \[
+        (A^{-1} \cdot A) \cdot \vec{x} = A^{-1} \cdot \vec{b}
+    \]
+    Since $A^{-1} \cdot A = I_n$, where $I_n$ is the identity matrix, we can simplify the left side:
+    \[
+        I_n \cdot \vec{x} = A^{-1} \cdot \vec{b}
+    \]
+    The identity matrix multiplied by any vector $\vec{x}$ is just $\vec{x}$ itself, so we have:
+    \[
+        \vec{x} = A^{-1} \cdot \vec{b}
+    \]
+    This shows that the equation $A \cdot \vec{x} = \vec{b}$ has a unique solution given by $\vec{x} = A^{-1} \cdot \vec{b}$.
+\end{proof}
+If $A$ is invertible, then the column of $A$ are linearly independent and span $\mathbb{R}^n$.
+
+\subsection{Finding the Inverse of a 2x2 Matrix}
+\begin{definition}[Inverse of a 2x2 Matrix]
+Let $A = \begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix} \in \mathbb{R}^2$, then we can verify that $A$ is invertible if and only if $ad - bc \neq 0$. In this case, the inverse of $A$ is given by:
+\[
+    A^{-1} = \frac{1}{ad - bc} \begin{bmatrix}
+        d & -b \\
+        -c & a
+    \end{bmatrix}
+\]
+\end{definition}
+
+\begin{definition}[Determinant of a 2x2 Matrix]
+    The determinant of a 2x2 matrix \( A = \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix} \) is a scalar value that can be computed using the formula:
+    \[
+        \text{det}(A) = ad - bc
+    \]
+    The determinant provides important information about the matrix, such as whether it is invertible. Specifically, the matrix \( A \) is invertible if and only if \( \text{det}(A) \neq 0 \).
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        2 & 3 \\
+        2 & 4
+    \end{bmatrix}$. Then, we can compute the determinant of \( A \):
+    \[
+        \text{det}(A) = (2)(4) - (3)(2) = 8 - 6 = 2
+    \]
+    Since \( \text{det}(A) \neq 0 \), the matrix \( A \) is invertible. The inverse of \( A \) can be calculated as:
+    \[
+        A^{-1} = \frac{1}{2} \begin{bmatrix}
+            4 & -3 \\
+            -2 & 2
+        \end{bmatrix}
+    \]
+    To verify, we can check that:
+    \[
+        A \cdot A^{-1} = \begin{bmatrix}
+            2 & 3 \\
+            2 & 4
+        \end{bmatrix} \cdot \frac{1}{2} \begin{bmatrix}
+            4 & -3 \\
+            -2 & 2
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix} = I_2
+    \]
+    This means that for a system of equations represented by \( A \cdot \vec{x} = \vec{b} \) (for any $\vec{b} \in \mathbb{R}^2$), the unique solution can be found using:
+    \[
+        \vec{x} = A^{-1} \cdot \vec{b}
+    \]
+\end{eg}
+\begin{theorem}
+    If $A$ and $B$ are invertible matrices of the same size, the the following properties hold:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The inverse of $A^{-1}$ is $A$, i.e.:
+        \[
+            (A^{-1})^{-1} = A
+        \]
+        \item The product $AB$ is also invertible, and its inverse is given by:
+        \[
+            (AB)^{-1} = B^{-1} A^{-1}
+        \]
+        \item The transpose of $A$ is also invertible, and its inverse is given by:
+        \[
+            (A^T)^{-1} = (A^{-1})^T
+        \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let's prove the second property: \( (AB)^{-1} = B^{-1} A^{-1} \). We need to show that multiplying \( AB \) by \( B^{-1} A^{-1} \) results in the identity matrix \( I_n \). We have:
+    \[
+        (AB)(B^{-1} A^{-1}) = A(B B^{-1}) A^{-1} = A I_n A^{-1} = A A^{-1} = I_n
+    \]
+    Similarly, we can show that:
+    \[
+        (B^{-1} A^{-1})(AB) = B^{-1}(A^{-1} A)B = B^{-1} I_n B = B^{-1} B = I_n
+    \]
+    Since both products yield the identity matrix, we conclude that \( (AB)^{-1} = B^{-1} A^{-1} \).
+\end{proof}
+
+\subsection{Finding the Inverse of a Matrix}
+\begin{theorem}
+    Let $A$ be a square matrix of size $n \times n$. To find the inverse of $A$, we can augment $A$ with the identity matrix $I_n$ and perform row operations to transform $A$ into $I_n$. The augmented matrix will then transform into $[I_n | A^{-1}]$. If $A$ cannot be transformed into $I_n$, then $A$ is not invertible.
+\end{theorem}
+\begin{proof}
+    Let's prove column by column. Let $\vec{e_1}, \vec{e_2}, ..., \vec{e_n}$ be the columns of the identity matrix $I_n$. The matrix $A^{-1}$ is of size $n \times n$, and we can denote its columns as $\vec{y_1}, \vec{y_2}, ..., \vec{y_n}$, we then have:
+    \[
+        A^{-1} = \begin{bmatrix}
+            | & | &        & | \\
+            \vec{y_1} & \vec{y_2} & ... & \vec{y_n} \\
+            | & | &        & |
+        \end{bmatrix}
+    \]
+    where the $k$-th column is $\vec{y_k}$ that we can also obtain by:
+    \[
+        \vec{y_k} = A^{-1} \cdot \vec{e_k}
+    \]
+    If we then multiply the left side by $A$, we have:
+    \[
+        A \cdot \vec{y_k} = A \cdot (A^{-1} \cdot \vec{e_k}) = (A \cdot A^{-1}) \cdot \vec{e_k} = I_n \cdot \vec{e_k} = \vec{e_k}
+    \]
+    This means that to find the $k$-th column of $A^{-1}$, we need to solve the equation:
+    \[
+        A \cdot \vec{y_k} = \vec{e_k}
+    \]
+    for each $k = 1, 2, ..., n$. By augmenting $A$ with $I_n$ and performing row operations, we are effectively solving these equations simultaneously. If we can transform $A$ into $I_n$, then the augmented part will transform into $A^{-1}$. If we cannot transform $A$ into $I_n$, then there exists no solution for at least one of these equations, indicating that $A$ is not invertible.
+\end{proof}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        2 & 3 \\
+        2 & 4
+    \end{bmatrix}$ be a matrix. To find its inverse, we augment it with the identity matrix $I_2$:
+    \[
+        [A | I_2] = \left[\begin{array}{cc|cc}
+            2 & 3 & 1 & 0 \\
+            2 & 4 & 0 & 1
+        \end{array}\right]
+    \]
+    We then perform row operations to transform the left side into the identity matrix:
+    \[
+        \xrightarrow{R_2 \leftarrow R_2 - R_1}
+        \left[\begin{array}{cc|cc}
+            2 & 3 & 1 & 0 \\
+            0 & 1 & -1 & 1
+        \end{array}\right]
+        \xrightarrow{R_1 \leftarrow R_1 - 3R_2}
+        \left[\begin{array}{cc|cc}
+            2 & 0 & 4 & -3 \\
+            0 & 1 & -1 & 1
+        \end{array}\right]
+    \]
+    \[
+        \xrightarrow{R_1 \leftarrow \frac{1}{2} R_1}
+        \left[\begin{array}{cc|cc}
+            1 & 0 & 2 & -\frac{3}{2} \\
+            0 & 1 & -1 & 1
+        \end{array}\right]
+    \]
+    The left side is now the identity matrix, and the right side is the inverse of $A$:
+    \[
+        A^{-1} = \begin{bmatrix}
+            2 & -\frac{3}{2} \\
+            -1 & 1
+        \end{bmatrix}
+    \]
 \end{eg}
