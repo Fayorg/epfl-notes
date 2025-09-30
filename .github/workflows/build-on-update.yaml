@@ -56,10 +56,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=${{ github.sha }}::7
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
       - name: Adding hash as a variable
         run: |
           calculatedSha=${{ github.sha }}::7
-          awk '{if($0 ~ /\\input{..\/..\/template\/header\.tex}/){print "\\def\\githubhash{$calculatedSha}"} print}' classes/${{ matrix.folder }}/main.tex > temp.tex && mv temp.tex classes/${{ matrix.folder }}/main.tex
+          awk '{if($0 ~ /\\input{..\/..\/template\/header\.tex}/){print "\\def\\githubhash{${{ env.COMMIT_SHORT_SHA }}}"} print}' classes/${{ matrix.folder }}/main.tex > temp.tex && mv temp.tex classes/${{ matrix.folder }}/main.tex
 
       - name: Change theme to bright in main.tex
         run: |
