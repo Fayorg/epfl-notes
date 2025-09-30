@@ -1,0 +1,321 @@
+\chapter{Methods of Proof}
+\begin{definition}[Argument]
+    An argument consists of a set of premises and a conclusion. The premises are propositions that are assumed to be true, and the conclusion is a proposition that is inferred from the premises. An argument is often written in the following form:
+    \[
+        \begin{array}{rl}
+            & P_1 \\
+            & P_2 \\
+            & ... \\
+            & P_n \\
+            \hline
+            \therefore & Q
+        \end{array}
+    \]
+    where $P_1, P_2, ..., P_n$ are the premises and $Q$ is the conclusion.
+\end{definition}
+
+\begin{definition}[Argument Form]
+    An argument form is a template for an argument that uses propositional variables instead of specific propositions. For example, the argument form for modus ponens is:
+    \[
+        \begin{array}{rl}
+            & p \to q \\
+            & p \\
+            \hline
+            \therefore & q
+        \end{array}
+    \]
+    where $p$ and $q$ are propositional variables that can be replaced with any propositions.
+\end{definition}
+
+\begin{definition}[Valid Argument]
+    An argument is valid if and only if the conclusion is true whenever all the premises are true.
+\end{definition}
+
+% TODO: example with passed exams to go to second year
+% \begin{eg}
+    
+% \end{eg}
+
+\section{Inference Rules}
+\begin{definition}[Inference Rule]
+    An inference rule is a valid argument form that can be used to derive a conclusion from a set of premises. Some common inference rules are:
+\end{definition}
+
+\subsection{Rules of Inference for Propositions}
+\begin{definition}[Modus Ponens]
+    If $P \to Q$ is true and $P$ is true, then $Q$ must be true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \to Q \\
+            & P \\
+            \hline
+            \therefore & Q
+        \end{array}
+    \]
+    It can also be written as a tautology: $(P \land (P \to Q)) \to Q$.
+\end{definition}
+
+\begin{definition}[Conjunction]
+    If $P$ is true and $Q$ is true, then $P \land Q$ is true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \\
+            & Q \\
+            \hline
+            \therefore & P \land Q
+        \end{array}
+    \]
+    It can also be written as a tautology: $((P) \land (Q)) \to (Q \land P)$.
+\end{definition}
+
+\begin{definition}[Modus Tollens]
+    If $P \to Q$ is true and $\neg Q$ is true, then $\neg P$ must be true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \to Q \\
+            & \neg Q \\
+            \hline
+            \therefore & \neg P
+        \end{array}
+    \]
+    It can also be written as a tautology: $(\neg Q \land (P \to Q)) \to \neg P$.
+\end{definition}
+
+\begin{definition}[Hypothetical Syllogism]
+    If $P \to Q$ is true and $Q \to R$ is true, then $P \to R$ must be true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \to Q \\
+            & Q \to R \\
+            \hline
+            \therefore & P \to R
+        \end{array}
+    \]
+    It can also be written as a tautology: $((P \to Q) \land (Q \to R)) \to (P \to R)$.
+\end{definition}
+
+\begin{eg}
+    Let $p =$ "I have passed AICC", $q =$ "I can advance to year 2 of studies" and the premises be:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item "I have passed AICC. I can advance to year 2 of studies." ($p \to q$)
+        \item "I cannot advanced to year 2 of studies." ($\neg q$)
+    \end{itemize}
+    We can represent the argument as follows:
+    \[
+        \begin{array}{rl}
+            & p \to q \\
+            & \neg q \\
+            \hline
+            \therefore & \neg p
+        \end{array}
+    \]
+    We can conclude that "I have not passed AICC." ($\neg p$) by using modus tollens.
+\end{eg}
+
+\begin{definition}[Disjunctive Syllogism]
+    If $P \lor Q$ is true and $\neg P$ is true, then $Q$ must be true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \lor Q \\
+            & \neg P \\
+            \hline
+            \therefore & Q
+        \end{array}
+    \]
+    It can also be written as a tautology: $((P \lor Q) \land \neg P) \to Q$.
+\end{definition}
+
+\begin{definition}[Addition]
+    If $P$ is true, then $P \lor Q$ is true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \\
+            \hline
+            \therefore & P \lor Q
+        \end{array}
+    \]
+    It can also be written as a tautology: $P \to (P \lor Q)$.
+\end{definition}
+
+\begin{definition}[Simplification]
+    If $P \land Q$ is true, then $P$ is true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \land Q \\
+            \hline
+            \therefore & P
+        \end{array}
+    \]
+    It can also be written as a tautology: $(P \land Q) \to P$.
+\end{definition}
+
+\begin{definition}[Resolution]
+    If $P \lor Q$ is true and $\neg P \lor R$ is true, then $Q \lor R$ must be true. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P \lor Q \\
+            & \neg P \lor R \\
+            \hline
+            \therefore & Q \lor R
+        \end{array}
+    \]
+    It can also be written as a tautology: $((P \lor Q) \land (\neg P \lor R)) \to (Q \lor R)$.
+\end{definition}
+
+\begin{eg}
+    In the sentence "It is below freezing now. Therefore, it is below freezing or raining now", let $p =$ "It is below freezing now" and $q =$ "It is raining now". We can represent the argument as follows:
+    \[
+        \begin{array}{rl}
+            & p \\
+            \hline
+            \therefore & p \lor q
+        \end{array}
+    \]
+    Since this argument follows the form of addition, we can conclude that "It is below freezing or raining now." ($p \lor q$).
+\end{eg}
+
+\begin{eg}
+    In the sentence "If it rains today, the we will not have a barbecue today. If we do not have a barbecue today, then we will have a barbecue tomorrow", let $p =$ "It rains today", $q =$ "We will have a barbecue today" and $r =$ "We will have a barbecue tomorrow". We can represent the argument as follows:
+    \[
+        \begin{array}{rl}
+            & p \to \neg q \\
+            & \neg q \to r \\
+            \hline
+            \therefore & p \to r
+        \end{array}
+    \]
+    Since this argument follows the form of hypothetical syllogism, we can conclude that "If it rains today, then we will have a barbecue tomorrow." ($p \to r$).
+\end{eg}
+Note that even seemingly "obvious" conclusions imply an argument.
+\begin{eg}
+    From $p \land (p \to q)$, we can conclude $q$:
+    \[
+        \begin{array}{rl}
+            & p \land (p \to q) \\
+            \hline
+            \therefore & q
+        \end{array}
+    \]
+    This can be simplified to:
+    \[
+        \begin{array}{rl}
+            & p \\
+            & p \to q \\
+            \hline
+            \therefore & q
+        \end{array}
+    \]
+\end{eg}
+
+\subsection{Rules of Inference for Quantified Statements}
+\begin{definition}[Universal Instantiation]
+    If $P(x)$ is a predicate and $c$ is an element in the domain of discourse, then from $\forall x P(x)$ we can conclude $P(c)$. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & \forall x P(x) \\
+            \hline
+            \therefore & P(c)
+        \end{array}
+    \]
+\end{definition}
+
+\begin{definition}[Universal Generalization]
+    If $P(c)$ is true for an arbitrary element $c$ in the domain of discourse, then we can conclude $\forall x P(x)$. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P(c) \\
+            \hline
+            \therefore & \forall x P(x)
+        \end{array}
+    \]
+    Note that $c$ must be arbitrary, meaning that it cannot have any special properties that distinguish it from other elements in the domain.
+\end{definition}
+
+\begin{definition}[Existential Instantiation]
+    If $P(x)$ is a predicate and $c$ is an element in the domain of discourse, then from $\exists x P(x)$ we can conclude $P(c)$. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & \exists x P(x) \\
+            \hline
+            \therefore & P(c)
+        \end{array}
+    \]
+    Note that $c$ must be a new element that does not appear elsewhere in the argument.
+\end{definition}
+
+\begin{definition}[Existential Generalization]
+    If $P(c)$ is true for some element $c$ in the domain of discourse, then we can conclude $\exists x P(x)$. It is often written as follows:
+    \[
+        \begin{array}{rl}
+            & P(c) \\
+            \hline
+            \therefore & \exists x P(x)
+        \end{array}
+    \]
+\end{definition}
+
+\begin{eg}
+    Let the domain of discourse be all students in a class, let $A$ be a student in the class" and let the predicate $P(x) =$ "x has taken a course in Java". Given the premise "All students in the class have taken a course in Java." ($\forall x P(x)$), we can represent the argument as follows:
+    \[
+        \begin{array}{rl}
+            & \forall x P(x) \\
+            \hline
+            \therefore & P(Sara)
+        \end{array}
+    \]
+    where Sara is a student in the class. By using universal instantiation, we can conclude that "Sara has taken a course in Java." ($P(Sara)$).
+\end{eg}
+
+\begin{eg}
+    Let's use the rules of inference to construct a valid argument showing that "Someone who passed the first exam has not read the book". Let's define some predicates as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $P(x)$: "x passed the first exam"
+        \item $B(x)$: "x has read the book"
+        \item $C(x)$: "x is in this class"
+    \end{itemize}
+    The the conslusion can be expressed as:
+    \[
+        \exists x (P(x) \land \neg B(x))
+    \]
+    The premises are:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item "Everyone in this class passed the first exam". ($\forall x (C(x) \to P(x))$)
+        \item "A student in this class has not read the book". ($\exists x (C(x) \land \neg B(x))$)
+    \end{itemize}
+    We can represent the argument as follows:
+    \[
+        \begin{array}{rl}
+            & \forall x (C(x) \to P(x)) \\
+            & \exists x (C(x) \land \neg B(x)) \\
+            \hline
+            \therefore & \exists x (P(x) \land \neg B(x))
+        \end{array}
+    \]
+    From the second premise, we can use existential instantiation to introduce a new constant $c$ such that:
+    \[
+        C(c) \land \neg B(c)
+    \]
+    From this, we can use simplification to obtain:
+    \[
+        C(c)
+    \]
+    From the first premise, we can use universal instantiation to obtain:
+    \[
+        C(c) \to P(c)
+    \]
+    From this and $C(c)$, we can use modus ponens to obtain:
+    \[
+        P(c)
+    \]
+    Finally, we can use conjunction to obtain:
+    \[
+        P(c) \land \neg B(c)
+    \]
+    And then we can use existential generalization to obtain the conclusion:
+    \[
+        \exists x (P(x) \land \neg B(x))
+    \]
+\end{eg}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
