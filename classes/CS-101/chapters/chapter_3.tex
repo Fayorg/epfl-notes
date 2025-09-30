@@ -317,5 +317,192 @@ Note that even seemingly "obvious" conclusions imply an argument.
     \]
 \end{eg}
 
+\section{Terminology for Proofs}
+\begin{definition}[Mathematical Proof]
+    A mathematical proof is a finite sequence of statements that starts with the premises and ends with the conclusion, where each statement is either a premise or follows from previous statements by a valid inference rule.
+\end{definition}
+
+\begin{definition}[Theorem]
+    A theorem is a mathematical statement that can be shown to be true using:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Axioms: statements that are assumed to be true without proof
+        \item Definitions: statements that define new concepts or terms
+        \item Previously proven theorems
+        \item Valid inference rules
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    Let's take some examples of axioms, definitions and theorems:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Axiom: "For any integer $n$, $n + 0 = n$."
+        \item Definition: "An integer $n$ is even if there exists an integer $k$ such that $n = 2k$."
+        \item Theorem: "The sum of two even integers is even."
+    \end{itemize}
+\end{eg}
+In mathematics, computer science and related fields, informal proofs are often written in a natural language, such as English, with mathematical notation and symbols used to express mathematical concepts and relationships. In these proofs often:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Use more than one valid inference rule in a single step.
+    \item Might omit steps if they are considered "obvious" or "trivial".
+    \item Use inference rules that are not explicitly stated.
+    \item Are easier to read and understand for humans.
+\end{itemize}
+However, the underlying structure of the proof is still based on the principles of logic and valid inference rules.
+
+\begin{definition}[Lemma, Corollary and Conjecture]
+    A lemma is a proven statement that is used as a stepping stone to prove a larger theorem. A corollary is a statement that follows directly from a theorem or lemma. A conjecture is a statement that is believed to be true but has not yet been proven.
+\end{definition}
+
+\section{Proving Theorems}
+To prove theorems of the form:
+\[
+    \forall x (P(x) \to Q(x))
+\]
+we can use the following strategy:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Assume $P(c)$ for an arbitrary constant $c$.
+    \item Use valid inference rules to derive $Q(c)$.
+    \item Conclude, by universal generalization, that $\forall x (P(x) \to Q(x))$ is true.
+\end{itemize}
+
+\begin{definition}[Trivial Proof]
+    A trivial proof is a proof that is considered obvious or self-evident, often because it relies on basic axioms or definitions.
+\end{definition}
+
+\begin{definition}[Vacuous Proof]
+    A vacuous proof is a proof that shows a statement is true because the premise is false.
+\end{definition}
+
+\begin{eg}
+    Let $P(n)$ be "If $a$ and $b$ are positive integers with $a \geq b$, then $a^n \geq b^n$", where the domain of discourse is the set of positive integers. We want to prove that $P(0)$ is true. \\
+    Since $a^0 = 1$ and $b^0 = 1$ for any positive integers $a$ and $b$, we have $1 \geq 1$, which is true. Therefore, $P(0)$ is true by a trivial proof.
+\end{eg}
+
+\begin{eg}
+    Let's prove that if $n$ is an integer with $10 \leq n \leq 15$ which is a perfect square, then $n$ is also a perfect cube. \\
+    There are no integers $n$ such that $10 \leq n \leq 15$ which are perfect squares as $3^2 = 9$ and $4^2 = 16$. Therefore, the hypothesis $p$ is false, and the statement is true by a vacuous proof.
+\end{eg}
+
+\subsection{Direct Proofs}
+\begin{definition}[Direct Proof]
+    A direct proof is a proof that shows a statement is true by using definitions, axioms, theorems and valid inference rules to derive the conclusion directly from the premises.
+\end{definition}
+
+\begin{eg}
+    Let's prove that if $n$ is an odd integer, then $n^2$ is also an odd integer. \\
+    Let $n$ be an arbitrary odd integer. By definition of odd integers, there exists an integer $k$ such that $n = 2k + 1$. We can then compute:
+    \[
+        n^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1
+    \]
+    Since $2k^2 + 2k$ is an integer, we can conclude that $n^2$ is also an odd integer by definition of odd integers. Therefore, we have shown that if $n$ is an odd integer, then $n^2$ is also an odd integer by a direct proof.
+\end{eg}
+
+\subsection{Indirect Proofs}
+\begin{definition}[Proof by Contraposition]
+    A proof by contraposition is a proof that shows a statement of the form $P \to Q$ is true by proving its contrapositive $\neg Q \to \neg P$ is true.
+\end{definition}
+
+\begin{eg}
+    Let's prove that if $n^2$ is an odd integer, then $n$ is also an odd integer by contraposition. \\
+    The contrapositive of the statement is "If $n$ is not an odd integer, then $n^2$ is not an odd integer", which is equivalent to "If $n$ is an even integer, then $n^2$ is an even integer". \\
+    Let $n$ be an arbitrary even integer. By definition of even integers, there exists an integer $k$ such that $n = 2k$. We can then compute:
+    \[
+        n^2 = (2k)^2 = 4k^2 = 2(2k^2)
+    \]
+    Since $2k^2$ is an integer, we can conclude that $n^2$ is also an even integer by definition of even integers. Therefore, we have shown that if $n^2$ is an odd integer, then $n$ is also an odd integer by a proof by contraposition.
+\end{eg}
+
+\begin{definition}[Proof by Contradiction]
+    A proof by contradiction is a proof that shows a statement $P$ is true by assuming the negation of the conclusion $\neg Q$ is also true then performing a direct proof to derive a contradiction, for example, in the form of:
+    \[
+        (P \land \neg Q) \to (R \land \neg R) \equiv (P \land \neg Q) \to \text{False}
+    \]
+    This type of proof works because:
+    \[
+        (P \land \neg Q) \to \text{False} \equiv \neg (P \land \neg Q) \equiv \neg P \lor Q \equiv P \to Q
+    \]
+\end{definition}
+
+\begin{eg}
+    Let's prove that if $n^2$ is an odd integer, then $n$ is also an odd integer by contradiction. \\
+    We will assume the negation of the conclusion, which is "n is not an odd integer", and show that this leads to a contradiction. \\
+    Let $n$ be an arbitrary integer such that $n^2$ is an odd integer and $n$ is not an odd integer. By definition of odd integers, if $n$ is not an odd integer, then $n$ must be an even integer. Therefore, there exists an integer $k$ such that $n = 2k$. We can then compute:
+    \[
+        n^2 = (2k)^2 = 4k^2 = 2(2k^2)
+    \]
+    Since $2k^2$ is an integer, we can conclude that $n^2$ is also an even integer by definition of even integers. However, this contradicts our assumption that $n^2$ is an odd integer. Therefore, we have shown that if $n^2$ is an odd integer, then $n$ is also an odd integer by a proof by contradiction.
+\end{eg}
+
+\begin{eg}
+    Let's prove that $\sqrt{2}$ is irrational by contradiction. \\
+    We will assume the negation of the conclusion, which is "$\sqrt{2}$ is rational", and show that this leads to a contradiction. \\
+    If $\sqrt{2}$ is rational, then there exist integers $a$ and $b$ such that $\sqrt{2} = \frac{a}{b}$, where $b \neq 0$ and $a$ and $b$ have no common factors (i.e., the fraction is in lowest terms). We can then compute:
+    \[
+        2 = \left(\frac{a}{b}\right)^2 = \frac{a^2}{b^2}
+    \]
+    Multiplying both sides by $b^2$, we get:
+    \[
+        2b^2 = a^2
+    \]
+    This implies that $a^2$ is even, since it is equal to $2b^2$. By the definition of even integers, this means that $a$ must also be even. Therefore, there exists an integer $k$ such that $a = 2k$. We can then compute:
+    \[
+        2b^2 = (2k)^2 = 4k^2
+    \]
+    Dividing both sides by 2, we get:
+    \[
+        b^2 = 2k^2
+    \]
+    This implies that $b^2$ is even, since it is equal to $2k^2$. By the definition of even integers, this means that $b$ must also be even. However, this contradicts our assumption that $a$ and $b$ have no common factors, since both $a$ and $b$ are even. Therefore, we have shown that $\sqrt{2}$ is irrational by a proof by contradiction.
+\end{eg}
+
+\begin{definition}[Proof by Cases]
+    A proof by cases is a proof that shows a statement $P$ is true by dividing the problem into a finite number of cases ($(p_1 \lor p_2 \lor \ldots \lor p_n) \to Q$) and proving that each case $p_i \to Q$ is true.
+\end{definition}
+\begin{eg}
+    Let's prove that if $n$ is an integer, then $n^2 \geq n$. \\
+    We can divide the problem into 3 cases:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Negative integers ($n < 0$)
+        \item Zero ($n = 0$)
+        \item Positive integers ($n > 0$)
+    \end{itemize}
+    Then we can prove that $n^2 \geq n$ is true for each case:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $n < 0$, then $n^2$ is positive and $n$ is negative, so $n^2 \geq n$ is true.
+        \item If $n = 0$, then $n^2 = 0$ and $n = 0$, so $n^2 \geq n$ is true.
+        \item If $n > 0$, then $n \geq 1 \iff n^2 \geq n$, so $n^2 \geq n$ is true.
+    \end{itemize}
+    Since $n^2 \geq n$ is true for all cases, we can conclude that if $n$ is an integer, then $n^2 \geq n$ by a proof by cases.
+\end{eg}
+
+\begin{definition}[Without Loss of Generality]
+    In a proof by cases, we can sometimes assume "without loss of generality" (WLOG) that a certain case holds, if the other cases are symmetric or similar. This means that we can prove the statement for one case and then conclude that it holds for all cases.
+\end{definition}
+
+\begin{definition}[Counterexample]
+    A counterexample is an example that shows a statement is false. To disprove a statement of the form $\forall x P(x)$, we can provide a counterexample $c$ such that $\neg P(c)$ is true.
+\end{definition}
+\begin{eg}
+    Let's disprove the statement "All prime numbers are odd." \\
+    A counterexample is the prime number 2, which is even. Therefore, the statement is false.
+\end{eg}
+
+\subsection{Proofs of Equivalences}
+To prove a statement of the form $P \leftrightarrow Q$, we can use the following strategy:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Prove $P \to Q$ using a direct proof or an indirect proof.
+    \item Prove $Q \to P$ using a direct proof or an indirect proof.
+\end{itemize}
+To prove an existence proof of the form $\exists x P(x)$, we can use one of the following strategies:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Provide a specific example (or witness) $c$ such that $P(c)$ is true (constructive proof).
+    \item Show that the negation of the statement leads to a contradiction (non-constructive proof).
+\end{itemize}
+To prove a uniqueness proof of the form "There exists a unique $x$ such that $P(x)$", we can use the following strategy:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Prove the existence of such an $x$ using a constructive or non-constructive proof.
+    \item Prove the uniqueness of such an $x$ by assuming there are two such elements $x$ and $y$ and showing that $x = y$.
+\end{itemize}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
