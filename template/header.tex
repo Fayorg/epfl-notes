@@ -10,6 +10,7 @@
 
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
+\usepackage{xstring}
 
 \mdfsetup{skipabove=1em,skipbelow=0em}
 
@@ -173,7 +174,7 @@
         \begin{minipage}{0.8\textwidth}
             \normalsize
             \centering
-            Version: \texttt{\githubhash}\\
+            Version: \texttt{\StrLeft{\githubhash}{7}}\\
         \end{minipage}\\
     }{}
 }
