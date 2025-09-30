@@ -167,3 +167,13 @@
 #1\\
 \end{minipage}\\
 }
+
+\newcommand{\versionhash}{
+    \ifdef{\githubhash}{
+        \begin{minipage}{0.8\textwidth}
+            \normalsize
+            \centering
+            Version: \texttt{\githubhash}\\
+        \end{minipage}\\
+    }{}
+}
