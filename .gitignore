@@ -9,6 +9,7 @@
 *.fdb_latexmk
 *.synctex.gz
 *.synctex
+*.DS_Store
 
 # remove any generated pdf
 *.pdf
