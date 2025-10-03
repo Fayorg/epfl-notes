@@ -1,0 +1,238 @@
+\chapter{Determinants}
+For a square matrix \(A = \begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}\), then $A$ is invertible if and only if \(ad - bc \neq 0\). This quantity is called the determinant of $A$. Let's generalize this to larger square matrices.
+\begin{definition}[Determinant]
+    Let $A = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{bmatrix}$ be an \(n \times n\) matrix. The determinant of $A$ is defined as:
+    \[
+        \det(A) = \sum_{j = 1}^{n} a_{ij} (-1)^{i+j} \det(A_{ij})
+    \]
+    where \(A_{ij}\) is the \((n-1) \times (n-1)\) matrix obtained by removing the \(i\)-th row and \(j\)-th column from $A$. Note that the $i$-th row can be chosen arbitrarily, and the formula still holds. \\ 
+    This definition is recursive, with the base case being that the determinant of a \(1 \times 1\) matrix \([a]\) is simply \(a\).
+\end{definition}
+This is an expansion along the \(i\)-th row. We can also define an expansion along the \(j\)-th column:
+\[
+    \det(A) = \sum_{i = 1}^{n} a_{ij} (-1)^{i+j} \det(A_{ij})
+\]
+The determinant can be computed using either row or column expansion, and the result will be the same. However, the choice of row or column can affect the computational efficiency, especially for larger matrices.
+
+\begin{theorem}
+    For a matrix $A \in \mathbb{R}^{n \times n}$, we have:
+    \[
+        \det(A) = \det(A^T)
+    \]
+\end{theorem}
+
+\begin{definition}[Minor and Cofactor]
+    The minor \(M_{ij}\) of an element \(a_{ij}\) in a matrix $A$ is the determinant of the submatrix \(A_{ij}\) obtained by removing the \(i\)-th row and \(j\)-th column from $A$. The cofactor \(C_{ij}\) is defined as:
+    \[
+        C_{ij} = (-1)^{i+j} M_{ij}
+    \]
+\end{definition}
+
+\begin{eg}
+    Let's compute the determinant of a \(2 \times 2\) matrix using the definition:
+    \[
+        A = \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+    \]
+    Then, we have:
+    \[
+        \det(A) = \sum_{j = 1}^{2} a_{ij} (-1)^{i+j} \det(A_{ij})
+    \]
+    For \(i = 1\), we get:
+    \[
+        \det(A) = a_{11} (-1)^{1+1} \det(A_{11}) + a_{12} (-1)^{1+2} \det(A_{12})
+    \]
+    where \(A_{11} = [d]\) and \(A_{12} = [c]\). Thus:
+    \[
+        \det(A) = a_{11} \cdot d - a_{12} \cdot c = ad - bc
+    \]
+    Let prove that $i$ can be chosen arbitrarily. For \(i = 2\), we have:
+    \[
+        \det(A) = a_{21} (-1)^{2+1} \det(A_{21}) + a_{22} (-1)^{2+2} \det(A_{22})
+    \]
+    where \(A_{21} = [b]\) and \(A_{22} = [a]\). Thus:
+    \[
+        \det(A) = -a_{21} \cdot b + a_{22} \cdot a = -cb + ad = ad - bc
+    \]
+    Therefore, the determinant is the same regardless of the row chosen for expansion.
+\end{eg}
+
+\begin{eg}
+    Let's compute the determinant of a \(3 \times 3\) matrix:
+    \[
+        B = \begin{bmatrix}
+            a_{11} & a_{12} & a_{13} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{31} & a_{32} & a_{33}
+        \end{bmatrix}
+    \]
+    We can expand along the first row (\(i = 1\)):
+    \[
+        \det(B) = a_{11} (-1)^{1+1} \det(B_{11}) + a_{12} (-1)^{1+2} \det(B_{12}) + a_{13} (-1)^{1+3} \det(B_{13})
+    \]
+    where:
+    \[
+        B_{11} = \begin{bmatrix}
+            a_{22} & a_{23} \\
+            a_{32} & a_{33}
+        \end{bmatrix}, \quad
+        B_{12} = \begin{bmatrix}
+            a_{21} & a_{23} \\
+            a_{31} & a_{33}
+        \end{bmatrix}, \quad
+        B_{13} = \begin{bmatrix}
+            a_{21} & a_{22} \\
+            a_{31} & a_{32}
+        \end{bmatrix}
+    \]
+    Now, we compute the determinants of these \(2 \times 2\) matrices:
+    \[
+        \det(B_{11}) = a_{22}a_{33} - a_{23}a_{32}, \quad
+        \det(B_{12}) = a_{21}a_{33} - a_{23}a_{31}, \quad
+        \det(B_{13}) = a_{21}a_{32} - a_{22}a_{31}
+    \]
+    Substituting these back into the determinant formula, we get:
+    \[
+        \det(B) = a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})
+    \]
+    Simplifying this expression, we have:
+    \[
+        \det(B) = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}
+    \]
+    This is the determinant of the \(3 \times 3\) matrix \(B\).
+\end{eg}
+\begin{eg}
+    Let's compute the determinant of a $2 \times 2$ matrix using the column expansion:
+    \[
+        C = \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+    \]
+    Then, we have:
+    \[
+        \det(C) = \sum_{i = 1}^{2} a_{ij} (-1)^{i+j} \det(C_{ij})
+    \]
+    For \(j = 1\), we get:
+    \[
+        \det(C) = a_{11} (-1)^{1+1} \det(C_{11}) + a_{21} (-1)^{2+1} \det(C_{21})
+    \]
+    where \(C_{11} = [d]\) and \(C_{21} = [b]\). Thus:
+    \[
+        \det(C) = a_{11} \cdot d - a_{21} \cdot b = ad - bc
+    \]
+    Let prove that $j$ can be chosen arbitrarily. For \(j = 2\), we have:
+    \[
+        \det(C) = a_{12} (-1)^{1+2} \det(C_{12}) + a_{22} (-1)^{2+2} \det(C_{22})
+    \]
+    where \(C_{12} = [c]\) and \(C_{22} = [a]\). Thus:
+    \[
+        \det(C) = -a_{12} \cdot c + a_{22} \cdot a = -bc + ad = ad - bc
+    \]
+    Therefore, the determinant is the same regardless of the column chosen for expansion (or using row expansion).
+\end{eg}
+
+\begin{eg}
+    Let's compute the determinant of a $4 \times 4$ matrix:
+    \[
+        D = \begin{bmatrix}
+            0 & 1 & 3 & 0 \\
+            2 & 0 & 1 & 2 \\
+            0 & 1 & 4 & 2 \\
+            0 & 1 & 1 & 1
+        \end{bmatrix}
+    \]
+    If we don't choose wisely, this can get very tedious. Let's expand along the first column (\(j = 1\)):
+    \begin{align*}
+        \det(D) &= 0 \cdot (-1)^{2} \cdot \det(D_{11}) + 2 \cdot (-1)^{3} \cdot \det(D_{21}) \\
+        &\quad + 0 \cdot (-1)^{4} \cdot \det(D_{31}) + 0 \cdot (-1)^{5} \cdot \det(D_{41}) \\
+        &= 2 \cdot (-1)^{3} \cdot \det(D_{21})
+    \end{align*}
+    where:
+    \[
+        D_{21} = \begin{bmatrix}
+            1 & 3 & 0 \\
+            1 & 4 & 2 \\
+            1 & 1 & 1
+        \end{bmatrix}
+    \]
+    Now, we compute the determinant of this \(3 \times 3\) matrix:
+    \[
+        \det(D_{21}) = 1(4 \cdot 1 - 2 \cdot 1) - 3(1 \cdot 1 - 2 \cdot 1) + 0(1 \cdot 1 - 4 \cdot 1)
+    \]
+    Simplifying this expression, we have:
+    \[
+        \det(D_{21}) = 1(4 - 2) - 3(1 - 2) + 0 = 2 + 3 = 5
+    \]
+    Substituting this back into the determinant formula, we get:
+    \[
+        \det(D) = 2 \cdot (-1)^{3} \cdot 5 = -10
+    \]
+    Therefore, the determinant of the \(4 \times 4\) matrix \(D\) is \(-10\).
+\end{eg}
+Remark that in the previous example, we chose to expand along the first column because it contained the most zeros, which simplified our calculations. Choosing a row or column with more zeros can significantly reduce the number of terms we need to compute, making the process more efficient.
+
+\begin{theorem}
+    If $A$ is a triangular matrix (upper or lower) or a diagonal matrix, then the determinant of $A$ is the product of its diagonal entries. In other words, if:
+    \[
+        A = \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{nn}
+        \end{bmatrix}
+    \]
+    or
+    \[
+        A = \begin{bmatrix}
+            a_{11} & 0 & \cdots & 0 \\
+            a_{21} & a_{22} & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+    \]
+    then:
+    \[
+        \det(A) = a_{11} \cdot a_{22} \cdots a_{nn}
+    \]
+\end{theorem}
+\begin{proof}
+    We will prove this for an upper triangular matrix; the proof for a lower triangular matrix is analogous. We proceed by induction on \(n\), the size of the matrix. \\
+    \textbf{Base Case:} For \(n = 1\), the matrix is simply \([a_{11}]\), and its determinant is \(a_{11}\), which is the product of its diagonal entries. \\
+    \textbf{Inductive Step:} Assume the statement holds for all upper triangular matrices of size \(k \times k\). Now consider an upper triangular matrix \(A\) of size \((k+1) \times (k+1)\):
+    \[
+        A = \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1,k+1} \\
+            0 & a_{22} & \cdots & a_{2,k+1} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{k+1,k+1}
+        \end{bmatrix}
+    \]
+    We can expand the determinant along the first row:
+    \[
+        \det(A) = a_{11} (-1)^{1+1} \det(A_{11}) + \sum_{j=2}^{k+1} a_{1j} (-1)^{1+j} \det(A_{1j})
+    \]
+    where \(A_{11}\) is the \(k \times k\) upper triangular matrix obtained by removing the first row and first column, and each \(A_{1j}\) (for \(j > 1\)) has at least one row of zeros (the first column of these submatrices will be all zeros since they come from the first row of \(A\)). Therefore, their determinants are zero:
+    \[
+        \det(A) = a_{11} \det(A_{11}) + 0 = a_{11} \det(A_{11})
+    \]
+    By the inductive hypothesis, we know that:
+    \[
+        \det(A_{11}) = a_{22} a_{33} \cdots a_{k+1,k+1}
+    \]
+    Thus:
+    \[
+        \det(A) = a_{11} \cdot a_{22} a_{33} \cdots a_{k+1,k+1}
+    \]
+    This completes the inductive step, and hence the proof.
+\end{proof}

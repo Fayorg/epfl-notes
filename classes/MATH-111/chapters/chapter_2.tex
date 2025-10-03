@@ -620,3 +620,209 @@ Let $A = \begin{bmatrix}
         \end{bmatrix}
     \]
 \end{eg}
+
+\section{Elementary Matrices}
+Elementary operations are the row operations that we can perform on a matrix. There are three types of elementary row operations:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Interchanging two rows.
+    \item Multiplying a row by a non-zero scalar.
+    \item Adding a multiple of one row to another row.
+\end{itemize}
+These operations can be represented by elementary matrices that can be multiplied with the original matrix to perform the corresponding row operation.
+\begin{definition}[Elementary Matrix]
+    An elementary matrix is a matrix that is obtained by performing a single elementary row operation on an identity matrix. There are three types of elementary matrices corresponding to the three types of elementary row operations:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Type 1: Interchanging two rows of the identity matrix.
+        \item Type 2: Multiplying a row of the identity matrix by a non-zero scalar.
+        \item Type 3: Adding a multiple of one row of the identity matrix to another row.
+    \end{itemize}
+    When an elementary matrix \( E \) is multiplied by a matrix \( A \) from the left (i.e., \( EA \)), it performs the corresponding row operation on \( A \).
+\end{definition}
+\begin{eg}
+    Let's apply each type of elementary row operation to a matrix \( A \) using elementary matrices. Consider the matrix:
+    \[
+        A = \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9
+        \end{bmatrix}
+    \]
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Type 1: Interchanging the first and second rows. The elementary matrix for this operation is:
+        \[
+            E_1 = \begin{bmatrix}
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        Multiplying \( E_1 \) by \( A \):
+        \[
+            E_1 A = \begin{bmatrix}
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 2 & 3 \\
+                4 & 5 & 6 \\
+                7 & 8 & 9
+            \end{bmatrix} = \begin{bmatrix}
+                4 & 5 & 6 \\
+                1 & 2 & 3 \\
+                7 & 8 & 9
+            \end{bmatrix}
+        \]
+        \item Type 2: Multiplying the second row by 3. The elementary matrix for this operation is:
+        \[
+            E_2 = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 3 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        Multiplying \( E_2 \) by \( A \):
+        \[
+            E_2 A = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 3 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 2 & 3 \\
+                4 & 5 & 6 \\
+                7 & 8 & 9
+            \end{bmatrix} = \begin{bmatrix}
+                1 & 2 & 3 \\
+                12 & 15 & 18 \\
+                7 & 8 & 9
+            \end{bmatrix}
+        \]
+        \item Type 3: Adding 2 times the first row to the third row. The elementary matrix for this operation is:
+        \[
+            E_3 = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                2 & 0 & 1
+            \end{bmatrix}
+        \]
+        Multiplying \( E_3 \) by \( A \):
+        \[
+            E_3 A = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                2 & 0 & 1
+            \end{bmatrix} \begin{bmatrix}
+                1 & 2 & 3 \\
+                4 & 5 & 6 \\
+                7 & 8 & 9
+            \end{bmatrix} = \begin{bmatrix}
+                1 & 2 & 3 \\
+                4 & 5 & 6 \\
+                9 & 12 & 15
+            \end{bmatrix}
+        \]
+    \end{itemize}
+\end{eg}
+Since these elementary row operations are reversible, each elementary matrix is invertible. The inverse of an elementary matrix corresponds to the reverse of the original row operation:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The inverse of a Type 1 elementary matrix (row interchange) is the same matrix, as interchanging the same two rows again will revert to the original configuration.
+    \item The inverse of a Type 2 elementary matrix (row scaling) is obtained by multiplying the same row by the reciprocal of the original scalar.
+    \item The inverse of a Type 3 elementary matrix (row addition) is obtained by subtracting the same multiple of the original row from the target row.
+\end{itemize}
+\begin{eg}
+    Let's find the inverses of the elementary matrices from the previous example:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For the Type 1 elementary matrix \( E_1 \):
+        \[
+            E_1 = \begin{bmatrix}
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        The inverse is:
+        \[
+            E_1^{-1} = E_1 = \begin{bmatrix}
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        \item For the Type 2 elementary matrix \( E_2 \):
+        \[
+            E_2 = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 3 & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        The inverse is:
+        \[
+            E_2^{-1} = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & \frac{1}{3} & 0 \\
+                0 & 0 & 1
+            \end{bmatrix}
+        \]
+        \item For the Type 3 elementary matrix \( E_3 \):
+        \[
+            E_3 = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                2 & 0 & 1
+            \end{bmatrix}
+        \]
+        The inverse is:
+        \[
+            E_3^{-1} = \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                -2 & 0 & 1
+            \end{bmatrix}
+        \]
+    \end{itemize}
+\end{eg}
+If there exists a sequence of elementary row operations that transforms a matrix \( A \) into the identity matrix \( I_n \), we have:
+\[
+    E_k E_{k-1} \cdots E_2 E_1 A = I_n
+\]
+where \( E_1, E_2, \ldots, E_k \) are the elementary matrices corresponding to the row operations. By multiplying on the right both sides by the inverse of $A$, we get:
+\[
+    E_k E_{k-1} \cdots E_2 E_1 A A^{-1} = I_n A^{-1}
+\]
+Since \( A A^{-1} = I_n \), we have:
+\[
+    E_k E_{k-1} \cdots E_2 E_1 = A^{-1}
+\]
+Thus, we can express the inverse of \( A \) as a product of elementary matrices.
+
+\section{Invertible Matrix Theorem}
+\begin{theorem}
+    Let $A$ be a square matrix of size $n \times n$. The following statements are equivalent (meaning that they are either all true or all false):
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $A$ is invertible.
+        \item $A$ is row equivalent to the identity matrix $I_n$
+        \item $A$ has $n$ pivot positions.
+        \item The equation $A \cdot \vec{x} = 0$ has only the trivial solution $\vec{x} = 0$.
+        \item The columns of $A$ are linearly independent.
+        \item The linear transformation $T(\vec{x}) = A \cdot \vec{x}$ is injective (one-to-one).
+        \item The equation $A \cdot \vec{x} = \vec{b}$ has a unique solution for every $\vec{b} \in \mathbb{R}^n$.
+        \item The columns of $A$ span $\mathbb{R}^n$.
+        \item The linear transformation $T(\vec{x}) = A \cdot \vec{x}$ is surjective (onto).
+        \item There exists a matrix $C$ such that $C \cdot A = I_n$.
+        \item There exists a matrix $D$ such that $A \cdot D = I_n$.
+        \item The transpose of $A$, denoted as $A^T$, is invertible.
+    \end{itemize}
+\end{theorem}
+
+\subsection{Inverse of Linear Transformations}
+\begin{definition}[Inverse of a Linear Transformation]
+    Let \( T: \mathbb{R}^n \to \mathbb{R}^n \) be a linear transformation. The inverse of \( T \) (or the reciprocal), denoted as \( T^{-1} \), is a function \( T^{-1}: \mathbb{R}^n \to \mathbb{R}^n \) such that:
+    \[
+        T(T^{-1}(\vec{y})) = \vec{y} \quad \text{for all } \vec{y} \in \mathbb{R}^n
+    \]
+    and
+    \[
+        T^{-1}(T(\vec{x})) = \vec{x} \quad \text{for all } \vec{x} \in \mathbb{R}^n
+    \]
+    If such a function \( T^{-1} \) exists, then \( T \) is said to be invertible and the associated matrix of \( T^{-1} \) is the inverse of the matrix of \( T \).
+\end{definition}
