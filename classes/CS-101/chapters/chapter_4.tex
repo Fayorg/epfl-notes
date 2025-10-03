@@ -318,6 +318,215 @@ Note that the union and intersection operations are commutative and associative,
     \[ \bigcap_{i=1}^{n} A_i = A_n = \{n, n + 1, n + 2, \ldots\} \]
 \end{eg}
 
+\subsection{Set Operations vs Propositional Calculus Connectives}
+There is a strong analogy between set operations and propositional calculus connectives:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Union ($\cup$) corresponds to logical disjunction (OR, $\lor$).
+    \item Intersection ($\cap$) corresponds to logical conjunction (AND, $\land$).
+    \item Complement ($^c$) corresponds to logical negation (NOT, $\neg$).
+    \item XOR ($\oplus$) corresponds to logical exclusive disjunction (XOR, $\oplus$).
+\end{itemize}
+This strong analogy also extends to the laws governing these operations, such as De Morgan's laws, distributive laws, and associative laws.
+
+\begin{eg}
+    De Morgan's laws for sets state that:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The complement of the union of two sets is the intersection of their complements:
+        \[ (A \cup B)^c = A^c \cap B^c \]
+        \item The complement of the intersection of two sets is the union of their complements:
+        \[ (A \cap B)^c = A^c \cup B^c \]
+    \end{itemize}
+    These laws are analogous to De Morgan's laws in propositional logic:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The negation of a disjunction is the conjunction of the negations:
+        \[ \neg (P \lor Q) \equiv (\neg P) \land (\neg Q) \]
+        \item The negation of a conjunction is the disjunction of the negations:
+        \[ \neg (P \land Q) \equiv (\neg P) \lor (\neg Q) \]
+    \end{itemize}
+\end{eg}
+The list of identities provided in the Logical Equivalences sub-section can be directly translated into set identities by replacing logical connectives with their corresponding set operations.
+
+\subsection{Proving Set Identities}
+To prove set identities, we can use various methods such as:
+\begin{eg}
+    To prove that $(A \cap B)^c = A^c \cup B^c$, we can show that using the Set Builder Notation:
+    \begin{align*}
+        (A \cap B)^c &= \{x \mid x \notin (A \cap B)\} &\text{(Definition of complement)}\\
+        &= \{x \mid \neg (x \in (A \cap B))\} &\text{(Definition of $\notin$)}\\
+        &= \{x \mid \neg (x \in A \land x \in B)\} &\text{(Definition of intersection)}\\
+        &= \{x \mid x \notin A \lor x \notin B\} &\text{(De Morgan's Law)}\\
+        &= \{x \mid x \in A^c \lor x \in B^c\} &\text{(Definition of complement)}\\
+        &= A^c \cup B^c &\text{(Definition of union)}
+    \end{align*}
+\end{eg}
+
+\begin{eg}
+    Let's prove that a set is a subset of another set, specifically that:
+    \[ A \cap (B \cup C) \subseteq (A \cap B) \cup (A \cap C) \]
+    Thus:
+    \begin{align*}
+        A \cap (B \cup C) &= \{x \mid x \in A \land x \in (B \cup C)\} &\text{(Definition of intersection)}\\
+        &= \{x \mid x \in A \land (x \in B \lor x \in C)\} &\text{(Definition of union)}\\
+        &= \{x \mid (x \in A \land x \in B) \lor (x \in A \land x \in C)\} &\text{(Distributive Law)}\\
+        &= \{x \mid x \in (A \cap B) \lor x \in (A \cap C)\} &\text{(Definition of intersection)}\\
+        &= (A \cap B) \cup (A \cap C) &\text{(Definition of union)}
+    \end{align*}
+\end{eg}
+
+\begin{eg}
+    Let's prove that $(A \cap B)^c = A^c \cup B^c$ using a membership table:
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c}
+            $x \in A$ & $x \in B$ & $x \in A \cap B$ & $x \in (A \cap B)^c$ & $x \in A^c$ & $x \in B^c$ & $x \in A^c \cup B^c$\\
+            \hline
+            T & T & T & F & F & F & F\\
+            T & F & F & T & F & T & T\\
+            F & T & F & T & T & F & T\\
+            F & F & F & T & T & T & T\\
+        \end{tabular}
+    \end{center}
+    Since the columns for $x \in (A \cap B)^c$ and $x \in A^c \cup B^c$ are identical, we conclude that $(A \cap B)^c = A^c \cup B^c$.
+\end{eg}
+
+\section{Functions}
+\begin{definition}[Function]
+    Let $A$ and $B$ be two non-empty sets. A function (or mapping, transformation) $f$ from $A$ to $B$, denoted by $f: A \to B$, is an assignment of exactly one element of $B$ to each element of $A$.
+\end{definition}
+
+\begin{definition}
+    Given a function $f: A \to B$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The set $A$ is called the domain of $f$.
+        \item The set $B$ is called the codomain of $f$.
+        \item We say that $f$ maps $A$ to $B$.
+        \item If $f(a) = b$, we say that $b$ is the image of $a$ under $f$, and $a$ is a preimage of $b$.
+        \item The range (or image) of $f$ is the set of all images of elements of $A$, denoted by $\text{range}(f)$ or $\text{Im}(f)$, and is a subset of $B$.
+        \item If $S \subseteq A$, then the image of $S$ under $f$ is the set $f(S) = \{f(x) \mid x \in S\} \subseteq B$.
+    \end{itemize}
+\end{definition}
+Note that the range is a set of archived values, while the codomain is a set of potential values thus making the range a subset of the codomain.
+
+\begin{eg}
+    Let $A = \{a,b,c,d,e\}$ and $B = \{1,2,3,4\}$ with $f(a) = 2$, $f(b) = 1$, $f(c) = 4$, $f(d) = 1$ and $f(e) = 1$. \\ 
+    The image of the subset $S = \{b,c,d\}$ is the set $f(S) = \{1,4\}$.
+\end{eg}
+
+\begin{definition}[Real-Valued Function]
+    A real-valued function is a function whose codomain is the set of real numbers, i.e., $f: A \to \mathbb{R}$.
+\end{definition}
+
+\begin{definition}[Integer-Valued Function]
+    An integer-valued function is a function whose codomain is the set of integers, i.e., $f: A \to \mathbb{Z}$.
+\end{definition}
+
+\subsection{Adding and Multiplying Functions}
+Two real-functions or two integer-functions with the same domain can be added and multiplied.
+\begin{definition}[Sum and Product of Functions]
+    Let $f: A \to \mathbb{R}$ and $g: A \to \mathbb{R}$ be two real-valued functions with the same domain $A$. The sum and product of $f$ and $g$ are defined as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Sum: $(f + g)(x) = f(x) + g(x)$ for all $x \in A$.
+        \item Product: $(f \cdot g)(x) = f(x) \cdot g(x)$ for all $x \in A$.
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    Let $f_1(x) = x^2$ and $f_2(x) = x - x^2$ from $\mathbb{R}$ to $\mathbb{R}$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The sum of $f_1$ and $f_2$ is:
+        \[ (f_1 + f_2)(x) = f_1(x) + f_2(x) = x^2 + (x - x^2) = x \]
+        \item The product of $f_1$ and $f_2$ is:
+        \[ (f_1 \cdot f_2)(x) = f_1(x) \cdot f_2(x) = x^2 \cdot (x - x^2) = x^3 - x^4 \]
+    \end{itemize}
+\end{eg}
+Functions can be represented in various ways, including:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item An explicit statement of the assignment (a graph of nodes and relations).
+    \item A formula (e.g., $f(x) = x^2$).
+    \item A computer program (python program that output $n^2$ when the input is $n$).
+\end{itemize}
+
+\subsection{Injective, Surjective and Bijective Functions}
+\begin{definition}[Injective Function]
+    A function $f: A \to B$ is injective (or one-to-one) if different elements in the domain map to different elements in the codomain. Formally, $f$ is injective if:
+    \[ \forall a_1, a_2 \in A, (f(a_1) = f(a_2) \implies a_1 = a_2) \]
+\end{definition}
+
+\begin{definition}[Surjective Function]
+    A function $f: A \to B$ is surjective (or onto) if every element in the codomain has at least one preimage in the domain. Formally, $f$ is surjective if:
+    \[ \forall b \in B, \exists a \in A \text{ such that } f(a) = b \]
+\end{definition}
+
+\begin{definition}[Bijective Function]
+    A function $f: A \to B$ is bijective if it is both injective and surjective. This means that every element in the codomain is mapped to by exactly one element in the domain.
+\end{definition}
+
+\begin{eg}
+    Let's show that $f(x) = x + 1$ from $\mathbb{Z}$ to $\mathbb{Z}$ is bijective.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item To show that $f$ is injective, assume that $f(a_1) = f(a_2)$ for some $a_1, a_2 \in \mathbb{Z}$. Then:
+        \[ a_1 + 1 = a_2 + 1 \implies a_1 = a_2 \]
+        Thus, $f$ is injective.
+        \item To show that $f$ is surjective, let $b \in \mathbb{Z}$ be an arbitrary element in the codomain. We need to find an $a \in \mathbb{Z}$ such that $f(a) = b$. Let $a = b - 1$. Then:
+        \[ f(a) = f(b - 1) = (b - 1) + 1 = b \]
+        Thus, $f$ is surjective.
+    \end{itemize}
+    Since $f$ is both injective and surjective, it is bijective.
+\end{eg}
+In general to show that a function is:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Injective: Assume $f(a_1) = f(a_2)$ and show that $a_1 = a_2$.
+    \item Not Injective: Find $a_1 \neq a_2$ such that $f(a_1) = f(a_2)$.
+    \item Surjective: Let $b \in B$ and find $a \in A$ such that $f(a) = b$.
+    \item Not Surjective: Find $b \in B$ such that there is no $a \in A$ with $f(a) = b$.
+\end{itemize}
+\subsection{Inverse Functions}
+\begin{definition}[Inverse Function]
+    Let $f: A \to B$ be a bijective function. The inverse function of $f$, denoted by $f^{-1}: B \to A$, is defined by the rule that for each $b \in B$, $f^{-1}(b) = a$ if and only if $f(a) = b$. In other words, $f^{-1}$ reverses the mapping of $f$.
+\end{definition}
+\begin{eg}
+    Let $f(x) = x + 1$ from $\mathbb{Z}$ to $\mathbb{Z}$. We have already shown that $f$ is bijective. To find the inverse function $f^{-1}$, we need to solve for $x$ in terms of $y$ where $y = f(x)$:
+    \[ y = x + 1 \implies x = y - 1 \]
+    Thus, the inverse function is:
+    \[ f^{-1}(y) = y - 1 \]
+    for all $y \in \mathbb{Z}$.
+\end{eg}
+
+\subsection{Composition and Partial Functions}
+\begin{definition}[Composition of Functions]
+    Let $f: A \to B$ and $g: B \to C$ be two functions. The composition of $f$ and $g$, denoted by $g \circ f$, is a function from $A$ to $C$ defined by:
+    \[ (g \circ f)(x) = g(f(x)) \]
+    for all $x \in A$.
+\end{definition}
+Note that the composition of functions is not commutative (i.e., in general, $g \circ f \neq f \circ g$).
+\begin{eg}
+    Let $f(x) = 2x$ from $\mathbb{R}$ to $\mathbb{R}$ and $g(x) = x + 3$ from $\mathbb{R}$ to $\mathbb{R}$. Then the composition $g \circ f$ is given by:
+    \[ (g \circ f)(x) = g(f(x)) = g(2x) = 2x + 3 \]
+    for all $x \in \mathbb{R}$. \\
+    The composition $f \circ g$ is given by:
+    \[ (f \circ g)(x) = f(g(x)) = f(x + 3) = 2(x + 3) = 2x + 6 \]
+    for all $x \in \mathbb{R}$. \\
+    Note that $g \circ f \neq f \circ g$.
+\end{eg}
+
+\begin{definition}[Partial Function]
+    A partial function $f$ from a set $A$ to a set $B$ is a mapping of each element $a$ in a subset $S$ with $S \subseteq A$ called the domain of definition of $f$, to a unique element $b$ in $B$. If $a \in A \setminus S$, we say that $f$ is undefined at $a$.
+\end{definition}
+When the domain of definition is the entire set $A$ ($S = A$), then $f$ is a total function. A partial function is often used when its exact domain is not known (or difficult to determine) or when it is not necessary to define the function for all elements of $A$.
+
+\begin{eg}
+    Let the function $f: \mathbb{Z} \to \mathbb{N}$ defined as $f(x) = \sqrt{x}$, if and only if, $x = m^2$ (i.e., $x$ is a perfect square for some integer $m$). Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The domain of definition of $f$ is $S = \{0, 1, 4, 9, 16, \ldots\}$ (the set of all non-negative perfect squares).
+        \item The codomain of $f$ is $\mathbb{N}$ (the set of natural numbers).
+        \item The range of $f$ is $\{0, 1, 2, 3, 4, \ldots\}$ (the set of all natural numbers).
+        \item The function $f$ is undefined for all integers that are not perfect squares (e.g., $f(2)$, $f(3)$, $f(5)$, etc. are undefined).
+    \end{itemize}
+\end{eg}
+
+% \subsection{Generating Functions}
+% Notes taken by hand from Prof. on moodle on Intro to generating functions.
+% TODO: Complete and move to right chapter.
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
