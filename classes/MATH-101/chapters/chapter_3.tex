@@ -346,3 +346,203 @@ But if $b_n \to L \neq 0$ then $a_n$ must converge. \\
     By the squeeze theorem, we conclude that:
     \[ \lim_{n \to \infty} b_n = \frac{\sqrt{3}}{5} \]
 \end{eg}
+
+\begin{eg}
+    Let's prove the limit of $a_n = \sqrt[n]{a}, \ a > 0$ is $1$. \\
+    Let $a > 1$ then $\forall x \in \mathbb{R} \implies (x-1)(x^{n-1} + x^{n-2} + \ldots + x + 1) = x^n -1, \ \forall n \in \mathbb{N}^*$. Thus, we have:
+    \[
+        x-1 = \frac{x^n - 1}{x^{n-1} + x^{n-2} + \ldots + x + 1}
+    \]
+    Let $x = \sqrt[n]{a} > 1$ then we have:
+    \[
+        0 < \sqrt[n]{a} - 1 = \frac{a - 1}{\sqrt[n]{a^{n-1}} + \sqrt[n]{a^{n-2}} + \ldots + \sqrt[n]{a} + 1} < \frac{a - 1}{n}
+    \]
+    By the squeeze theorem, we conclude that:
+    \[ \lim_{n \to \infty} a_n = 1 \]
+    If $a = 1$ then $a_n = 1$ thus $\lim_{n \to \infty} a_n = 1$. \\
+    If $0 < a < 1$ then we can write $a_n = \sqrt[n]{\frac{1}{b}}$ with $b = \frac{1}{a} > 1$. Thus, we have:
+    \[ \lim_{n \to \infty} a_n = \lim_{n \to \infty} \sqrt[n]{\frac{1}{b}} = \frac{1}{\lim_{n \to \infty} \sqrt[n]{b}} = \frac{1}{1} = 1 \]
+\end{eg}
+
+\subsection{Geometric Sequences}
+\begin{definition}[Geometric sequence]
+    A geometric sequence is a sequence of numbers where each term after the first is found by multiplying the previous term by a constant called the common ratio. The general form of a geometric sequence can be expressed as:
+    \[
+        a_n = a_0 \cdot r^{n}
+    \]
+    for \( n \in \mathbb{N} \), \( a_0 \in \mathbb{R}, \ a_0 \neq 0\) and \( r \in \mathbb{R} \). We then have the following limites:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If \( |r| < 1 \), then \( \lim_{n \to \infty} a_n = 0 \).
+        \item If \( r = 1 \), then \( \lim_{n \to \infty} a_n = a_0 \).
+        \item If $|r| > 1$ or \( r = -1 \), then the sequence diverges.
+    \end{itemize}
+\end{definition}
+\begin{proof}
+    Let \( (a_n) \) be a geometric sequence defined by:
+    \[
+        a_n = a_0 \cdot r^{n}
+    \]
+    for \( n \in \mathbb{N} \), \( a_0 \in \mathbb{R}, \ a_0 \neq 0\) and \( r \in \mathbb{R} \). We analyze the limit of the sequence \( (a_n) \) as \( n \) approaches infinity based on the value of the common ratio \( r \): \\
+    If $r > 1$. Let $r = 1 + h$ with $h > 0$. Then we have:
+    \[ r^n = (1 + h)^n = 1 + \begin{pmatrix}
+n \\ 1
+\end{pmatrix} h + \begin{pmatrix}
+n \\ 2
+\end{pmatrix} h^2 + \ldots + \begin{pmatrix}
+n \\ n
+\end{pmatrix} h^n \geq 1 + \begin{pmatrix}n \\ 1
+    \end{pmatrix} h  = 1 + nh \quad \forall n \geq 0\]
+    Then we have:
+    \[ |a_n| = |a_0| \cdot |r|^n \geq |a_0| (1 + nh) \to \infty \]
+    If $0 < r < 1$. Let $r = 1 - h$ with $h > 0$. Then we have:
+    \[ |a_n| = |a_0| \cdot |r|^n \geq |a_0| (1 - nh) \to 0 \]
+
+% TODO: Complete proof
+\end{proof}
+
+\begin{eg}
+    Let $a_n = (-3)^{-3n}$. Then we have:
+    \[ a_n = ((-3)^{-3})^n = ((-1)^{-3} \cdot 3^{-3})^n = (-1 \cdot \frac{1}{27})^n = (-\frac{1}{27})^n \]
+    Then $r = -\frac{1}{27}$ thus $|r| < 1$. By the definition of geometric sequence, we conclude that:
+    \[ \lim_{n \to \infty} a_n = 0 \]
+\end{eg}
+
+\begin{eg}
+    Let $a_n = \sqrt{\frac{2^{2n + 1}}{3^{n + 8}}}$. Then we have:
+    \[ a_n = \sqrt{\frac{2 \cdot 4^n}{3^8 \cdot 3^n}} = \frac{\sqrt{2}}{\sqrt{3^8}} \cdot \left(\frac{4}{3}\right)^{n/2} \]
+    Then $r = \frac{4}{3}$ thus $|r| > 1$. By the definition of geometric sequence, we conclude that the sequence diverges.
+    % TODO: finish example
+\end{eg}
+
+\subsection{Properties of Limits}
+Some properties of limits:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If $\lim_{n \to \infty} x_n = l \in \mathbb{R}$, then $\lim_{n \to \infty} |x_n| = |l|$.
+    \item If $\lim_{n \to \infty} |x_n| = 0$, then $\lim_{n \to \infty} x_n = 0$.
+    \item If $\lim_{n \to \infty} |x_n| = l \in \mathbb{R}^*$, then $\lim_{n \to \infty} x_n$ does not exist.
+    \item If $a_n$ is bounded and $b_n \to 0$, then $a_n b_n \to 0$.
+\end{itemize}
+\begin{proof}
+    Let's prove that if $a_n$ is bounded and $b_n \to 0$, then $a_n b_n \to 0$. \\
+    Since \( (a_n) \) is bounded, there exists a constant \( M > 0 \) such that \( |a_n| \leq M \) for all \( n \in \mathbb{N} \). Since \( (b_n) \) converges to 0, for every \( \epsilon > 0 \), there exists a natural number \( N \) such that for all \( n \geq N \), \( |b_n - 0| < \frac{\epsilon}{M} \). This implies that:
+    \[ |b_n| < \frac{\epsilon}{M} \]
+    Now, for all \( n \geq N \), we have:
+    \[ |a_n b_n| = |a_n| \cdot |b_n| \leq M \cdot |b_n| < M \cdot \frac{\epsilon}{M} = \epsilon \]
+    This shows that for every \( \epsilon > 0 \), there exists a natural number \( N \) such that for all \( n \geq N \), \( |a_n b_n - 0| < \epsilon \). By the definition of limits, we conclude that \( \lim_{n \to \infty} a_n b_n = 0 \).
+\end{proof}
+
+\subsection{Alembert's test}
+\begin{theorem}[Alembert's test]
+    Let \( (a_n) \) be a sequence such that \( a_n \neq 0 \) for all \( n \in \mathbb{N} \) and \( \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L \geq 0 \). Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If \( L < 1 \), then \( \lim_{n \to \infty} a_n = 0 \).
+        \item If \( L > 1 \), then the sequence \( (a_n) \) diverges.
+        \item If \( L = 1 \), the test is inconclusive.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let $L < 1$ Then we have:
+    \[
+        \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L < 1 \implies \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, \left| \frac{a_{n+1}}{a_n} \right| \leq L + \epsilon < 1
+    \]
+    Let $m > N$, we have:
+    \[
+        \underbrace{\left| \frac{a_m}{a_{m -1}} \right|}_{\leq L + \epsilon} \cdot \underbrace{\left| \frac{a_{m - 1}}{a_{m - 2}} \right|}_{\leq L + \epsilon} \cdot \ldots \cdot \underbrace{\left| \frac{a_{N + 1}}{a_N} \right|}_{\leq L + \epsilon} = \left| \frac{a_m}{a_N} \right| \leq (L + \epsilon)^{m - N}
+    \]
+    We then have:
+    \[ 0  \leq |a_m| \leq |a_N| (L + \epsilon)^{m - N} \to 0 \ \text{(Geometric Sequence)}\]
+    By the squeeze theorem, we conclude that:
+    \[ \lim_{m \to \infty} a_m = 0 \]
+    Let $L > 1$. Then we have:
+    \[ \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L > 1 \implies \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, \left| \frac{a_{n+1}}{a_n} \right| \geq L - \epsilon > 1 \]
+    Let $m > N$, we have:
+    \[ \underbrace{\left| \frac{a_m}{a_{m -1}} \right|}_{\geq L - \epsilon} \cdot \underbrace{\left| \frac{a_{m - 1}}{a_{m - 2}} \right|}_{\geq L - \epsilon} \cdot \ldots \cdot \underbrace{\left| \frac{a_{N + 1}}{a_N} \right|}_{\geq L - \epsilon} = \left| \frac{a_m}{a_N} \right| \geq (L - \epsilon)^{m - N}
+    \]
+    We then have:
+    \[ |a_m| \geq |a_N| (L - \epsilon)^{m - N} \to \infty \ \text{(Geometric Sequence)}\]
+    Thus, the sequence diverges.
+\end{proof}
+If $L = 1$ the test is inconclusive.
+\begin{eg}
+    Let $a_n = n$ then we have:
+    \[ \left| \frac{a_{n+1}}{a_n} \right| = \frac{n + 1}{n} = 1 + \frac{1}{n} \to 1 \]
+    The sequence diverges.
+\end{eg}
+\begin{eg}
+    Let's compute $\lim_{n \to \infty} \frac{n^3}{5^n}$. By applying Alembert's test, we have:
+    \[ \left| \frac{a_{n+1}}{a_n} \right| = \frac{(n + 1)^3}{5^{n + 1}} \cdot \frac{5^n}{n^3} = \frac{(n + 1)^3}{5 n^3} = \frac{1}{5} \left(1 + \frac{1}{n}\right)^3 \to \frac{1}{5} < 1 \]
+    By the definition of Alembert's test, we conclude that:
+    \[ \lim_{n \to \infty} \frac{n^3}{5^n} = 0 \]
+\end{eg}
+\begin{eg}
+    Let's compute $\lim_{n \to \infty} \frac{5^n}{n!}$. By applying Alembert's test, we have:
+    \[ \left| \frac{a_{n+1}}{a_n} \right| = \frac{5^{n + 1}}{(n + 1)!} \cdot \frac{n!}{5^n} = \frac{5}{n + 1} \to 0 < 1 \]
+    By the definition of Alembert's test, we conclude that:
+    \[ \lim_{n \to \infty} \frac{5^n}{n!} = 0 \]
+\end{eg}
+Note that $\lim_{n \to \infty} \frac{S^n}{n!} = 0$ since $n!$ grows faster than $S^n$ for any constant $S$.
+
+\section{Infinite Limits}
+\begin{definition}[Infinite limit]
+    A sequence \( (a_n) \) is said to diverge to infinity (or negative infinity) if for every real number \( M > 0 \) (or \( M < 0 \)), there exists a natural number \( N \) such that for all \( n \geq N \), \( a_n > M \) (or \( a_n < M \)). In this case, we write:
+    \[ \lim_{n \to \infty} a_n = +\infty \quad \text{or} \quad \lim_{n \to \infty} a_n = -\infty \]
+\end{definition}
+Note that not all divergent sequences diverge to infinity. For example, the sequence defined by \( a_n = (-1)^n \) oscillates between $-1$ and $1$ and does not diverge to infinity or negative infinity.
+
+\subsection{Properties of infinite limits and indeterminate forms}
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\lim_{n \to \infty} a_n = \infty = \lim_{n \to \infty} b_n \implies \lim_{n \to \infty} (a_n + b_n) = \infty$
+    \item $\lim_{n \to \infty} a_n = \pm \infty$ and $b_n$ is bounded $\implies \lim_{n \to \infty} (a_n + b_n) = \pm \infty$
+    \item $\lim_{n \to \infty} b_n = \infty$ and $a_n \geq b_n \implies \lim_{n \to \infty} a_n = \infty$
+    \item If $a_n$ is bounded and $\lim_{n \to \infty} b_n = \pm \infty$, then $\lim_{n \to \infty} \frac{a_n}{b_n} = 0$
+    %TODO: add last
+\end{itemize}
+Some indeterminate forms are:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\infty - \infty$
+    \item $0 \cdot \infty$
+    \item $\frac{\pm \infty}{\pm \infty}$
+    \item $\frac{0}{0}$
+\end{itemize}
+\begin{eg}
+    Let $a_n = \sqrt{n} - \sqrt{n + 2}$. Since if we take the limit directly we have an indeterminate form of type $\infty - \infty$, we can write:
+    \[ a_n = \frac{(\sqrt{n} - \sqrt{n + 2})(\sqrt{n} + \sqrt{n + 2})}{\sqrt{n} + \sqrt{n + 2}} = \frac{n - (n + 2)}{\sqrt{n} + \sqrt{n + 2}} = \frac{-2}{\sqrt{n} + \sqrt{n + 2}} \]
+    We then have:
+    \[ \lim_{n \to \infty} a_n = \lim_{n \to \infty} \frac{-2}{\sqrt{n} + \sqrt{n + 2}} = \frac{-2}{\infty} = 0 \]
+\end{eg}
+\begin{eg}
+    Let $a_n = n^2 - n$. Since if we take the limit directly we have an indeterminate form of type $\infty - \infty$, we can write:
+    \[ a_n = n^2 - n = n^2 \left(1 - \frac{1}{n}\right) \]
+    We then have:
+    \[ \lim_{n \to \infty} a_n = \lim_{n \to \infty} n^2 \left(1 - \frac{1}{n}\right) = \infty \cdot 1 = \infty \]
+\end{eg}
+\begin{eg}
+    Let's compute $\lim_{n \to \infty} \frac{1 + \cos (n)}{1 + n} \cdot (n + 1)$. Since if we take the limit directly we have an indeterminate form of type $0 \cdot \infty$, we can write:
+    \[ a_n = \frac{1 + \cos (n)}{1 + n} \cdot (n + 1) = 1 + \cos (n) \]
+    We then have:
+    \[ \lim_{n \to \infty} a_n = \lim_{n \to \infty} 1 + \cos (n) \]
+    The sequence does not converge since $\cos(n)$ oscillates between $-1$ and $1$.
+\end{eg}
+Note that $(\cos (n))$ and $(\sin (n))$ are divergent sequences.
+\begin{proof}
+    Let's suppose that $\exists \lim_{n \to \infty} (\cos (n)) = l \in \mathbb{R}$. Then we have:
+    \[ \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, |\cos (n) - l| < \epsilon \]
+    Let $\epsilon = \frac{1}{2}$, then we have:
+    \[ \forall n \geq N, l - \frac{1}{2} < \cos (n) < l + \frac{1}{2} \]
+    We then have:
+    \[ \forall n \geq N, -1 \leq \cos (n) < l + \frac{1}{2} \implies l + \frac{1}{2} > -1 \implies l > -\frac{3}{2} \]
+    and
+    \[ \forall n \geq N, l - \frac{1}{2} < \cos (n) \leq 1 \implies l - \frac{1}{2} < 1 \implies l < \frac{3}{2} \]
+    Thus, we have $-\frac{3}{2} < l < \frac{3}{2}$. \\
+    Let $k \in \mathbb{N}$ such that $k > N$ and $\cos (k) > l$. Such a $k$ exists since $\cos (n)$ oscillates between $-1$ and $1$. Then we have:
+    \[ l < \cos (k) < l + \frac{1}{2} \]
+    Let $m \in \mathbb{N}$ such that $m > k$ and $\cos (m) < l$. Such a $m$ exists since $\cos (n)$ oscillates between $-1$ and $1$. Then we have:
+    \[ l - \frac{1}{2} < \cos (m) < l \]
+    We then have:
+    \[ |\cos (k) - l| < \frac{1}{2} \]
+    and
+    \[ |\cos (m) - l| < \frac{1}{2} \]
+    But we also have:
+    \[ |\cos (k) - \cos (m)| = |\cos (k) - l + l - \cos (m)| \leq |\cos (k) - l| + |l - \cos (m)| < \frac{1}{2} + \frac{1}{2} = 1 \]
+    But we know that $|\cos (k) - \cos (m)|$ can be as large as $2$ since $\cos (n)$ oscillates between $-1$ and $1$. This is a contradiction. Thus, our initial assumption that $\lim_{n \to \infty} (\cos (n)) = l \in \mathbb{R}$ must be false. Therefore, we conclude that the sequence \( (\cos(n)) \) does not converge.
+\end{proof}
