@@ -22,12 +22,13 @@ This is an expansion along the \(i\)-th row. We can also define an expansion alo
 \]
 The determinant can be computed using either row or column expansion, and the result will be the same. However, the choice of row or column can affect the computational efficiency, especially for larger matrices.
 
-\begin{theorem}
-    For a matrix $A \in \mathbb{R}^{n \times n}$, we have:
-    \[
-        \det(A) = \det(A^T)
-    \]
-\end{theorem}
+% Moved to line 430
+% \begin{theorem}
+%     For a matrix $A \in \mathbb{R}^{n \times n}$, we have:
+%     \[
+%         \det(A) = \det(A^T)
+%     \]
+% \end{theorem}
 
 \begin{definition}[Minor and Cofactor]
     The minor \(M_{ij}\) of an element \(a_{ij}\) in a matrix $A$ is the determinant of the submatrix \(A_{ij}\) obtained by removing the \(i\)-th row and \(j\)-th column from $A$. The cofactor \(C_{ij}\) is defined as:
@@ -182,6 +183,7 @@ The determinant can be computed using either row or column expansion, and the re
 \end{eg}
 Remark that in the previous example, we chose to expand along the first column because it contained the most zeros, which simplified our calculations. Choosing a row or column with more zeros can significantly reduce the number of terms we need to compute, making the process more efficient.
 
+\subsection{Determinant of Triangular and Diagonal Matrices}
 \begin{theorem}
     If $A$ is a triangular matrix (upper or lower) or a diagonal matrix, then the determinant of $A$ is the product of its diagonal entries. In other words, if:
     \[
@@ -236,3 +238,273 @@ Remark that in the previous example, we chose to expand along the first column b
     \]
     This completes the inductive step, and hence the proof.
 \end{proof}
+
+\subsection{Elementary Operations and Determinants}
+\begin{theorem}
+    Let $A$ be an \(n \times n\) matrix. The following properties hold for the determinant under elementary row operations:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If a row of $A$ is multiplied by a scalar \(k\), then the determinant of the new matrix is \(k\) times the determinant of $A$. In other words, if \(B\) is obtained from \(A\) by multiplying a row by \(k\), then:
+        \[
+            \det(B) = k \cdot \det(A)
+        \]
+        \item If two rows of $A$ are swapped, then the determinant of the new matrix is the negative of the determinant of $A$. In other words, if \(C\) is obtained from \(A\) by swapping two rows, then:
+        \[
+            \det(C) = -\det(A)
+        \]
+        \item If a multiple of one row is added to another row, then the determinant of the new matrix is the same as the determinant of $A$. In other words, if \(D\) is obtained from \(A\) by adding \(k\) times one row to another row, then:
+        \[
+            \det(D) = \det(A)
+        \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let's prove each property by considering the effect on $2 \times 2$ matrices: \\
+    \textbf{Property 1:} Consider the matrix \(A = \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}\). If we multiply the first row by a scalar \(k\), we get the new matrix \(B = \begin{bmatrix}
+        ka & kb \\
+        c & d
+    \end{bmatrix}\). The determinant of \(B\) is:
+    \[
+        \det(B) = (ka)d - (kb)c = k(ad - bc) = k \cdot \det(A)
+    \]
+    \textbf{Property 2:} Now, consider swapping the two rows of \(A\) to get the new matrix \(C = \begin{bmatrix}
+        c & d \\
+        a & b
+    \end{bmatrix}\). The determinant of \(C\) is:
+    \[
+        \det(C) = cb - da = -(ad - bc) = -\det(A)
+    \]
+    \textbf{Property 3:} Finally, consider adding \(k\) times the first row to the second row of \(A\) to get the new matrix \(D = \begin{bmatrix}
+        a & b \\
+        c + ka & d + kb
+    \end{bmatrix}\). The determinant of \(D\) is:
+    \[
+        \det(D) = a(d + kb) - b(c + ka) = ad + akb - bc - bak = ad - bc = \det(A)
+    \]
+    Therefore, all three properties hold for \(2 \times 2\) matrices. These properties can be extended to \(n \times n\) matrices using similar reasoning and the multilinearity of the determinant function.
+\end{proof}
+This theorem can also be expressed as for a matrix $A$ and an elementary matrix $E$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If \(E\) is obtained by multiplying a row by \(k\), then \(\det(EA) = \det(E) \cdot \det(A) = k \cdot \det(A)\).
+    \item If \(E\) is obtained by swapping two rows, then \(\det(EA) = \det(E) \cdot \det(A) = -\det(A)\).
+    \item If \(E\) is obtained by adding a multiple of one row to another, then \(\det(EA) = \det(E) \cdot \det(A) = \det(A)\).
+\end{itemize}
+
+\begin{eg}
+    Let's compute the determinant of a \(3 \times 3\) matrix using row operations:
+    \[
+        A = \begin{bmatrix}
+            1 & -4 & 2 \\
+            -2 & 8 & -9 \\
+            -1 & 7 & 0
+        \end{bmatrix}
+    \]
+    We can perform row operations to convert \(A\) into an upper triangular matrix. First, we can subtract \(4\) times the first row from the second row:
+    \[
+        R_2 \leftarrow R_2 + 2R_1 \implies \begin{bmatrix}
+            1 & -4 & 2 \\
+            0 & 0 & -5 \\
+            -1 & 7 & 0
+        \end{bmatrix}
+    \]
+    Next, we can add the first row to the third row:
+    \[
+        R_3 \leftarrow R_3 + R_1 \implies \begin{bmatrix}
+            1 & -4 & 2 \\
+            0 & 0 & -5 \\
+            0 & 3 & 2
+        \end{bmatrix}
+    \]
+    Now, we can swap the second and third rows to get an upper triangular matrix:
+    \[
+        R_2 \leftrightarrow R_3 \implies \begin{bmatrix}
+            1 & -4 & 2 \\
+            0 & 3 & 2 \\
+            0 & 0 & -5
+        \end{bmatrix}
+    \]
+    The determinant of the resulting upper triangular matrix is the product of its diagonal entries:
+    \[
+        \det(A) = 1 \cdot 3 \cdot (-5) = -15
+    \]
+    However, we performed one row swap, which changes the sign of the determinant. Therefore, the determinant of the original matrix \(A\) is:
+    \[
+        \det(A) = -(-15) = 15
+    \]
+    Note that the rest of the operations (adding multiples of rows) did not change the determinant. We could express all theses opertaions by matrices:
+    \[
+        E_1 = \begin{bmatrix}
+            1 & 0 & 0 \\
+            2 & 1 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix}, \quad
+        E_2 = \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            1 & 0 & 1
+        \end{bmatrix}, \quad
+        E_3 = \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 0 & 1 \\
+            0 & 1 & 0
+        \end{bmatrix}
+    \]
+    Then:
+    \[
+        \det(A) = \det(E_3 E_2 E_1 A) = \det(E_3) \det(E_2) \det(E_1) \det(A) = -1 \cdot 1 \cdot 1 \cdot \det(A) = -\det(A)
+    \]
+    Thus, \(\det(A) = 15\).
+\end{eg}
+
+\subsection{Determinant and Invertibility}
+\begin{theorem}
+    A square matrix \(A\) is invertible if and only if its determinant is non-zero. In other words:
+    \[
+        A \text{ is invertible } \iff \det(A) \neq 0
+    \]
+\end{theorem}
+\begin{proof}
+    Let $M \in \mathbb{R}^{n \times n}$ the reduce row echelon form of $A$. There exists a sequence of elementary matrices \(E_1, E_2, \ldots, E_k\) such that:
+    \[
+        M = E_k E_{k-1} \cdots E_1 A
+    \]
+    Taking the determinant on both sides, we have:
+    \[
+        \det(M) = \det(E_k) \det(E_{k-1}) \cdots \det(E_1) \det(A)
+    \]
+    Since the elementary matrices have non-zero determinants, we have:
+    \[
+        \det(A) \neq 0 \iff \det(M) \neq 0
+    \]
+    If $A$ is invertible, then $M = I_n$, and thus \(\det(M) = 1 \neq 0\). Conversely, if \(A\) is not invertible, then \(M\) has at least one row of zeros, and thus \(\det(M) = 0\). Therefore, \(A\) is invertible if and only if \(\det(A) \neq 0\).
+\end{proof}
+
+\subsection{Operations on Determinants}
+\begin{theorem}
+    For square matrices \(A\) and \(B\) of the same size, the following properties hold:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The determinant of the product of two matrices is the product of their determinants:
+        \[
+            \det(AB) = \det(A) \cdot \det(B)
+        \]
+        \item The determinant of the inverse of a matrix is the reciprocal of the determinant of the matrix:
+        \[
+            \det(A^{-1}) = \frac{1}{\det(A)} \quad \text{if } A \text{ is invertible}
+        \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let's prove the first property. We have two cases, depending on whether \(A\) is invertible or not. \\
+    \textbf{Case 1:} If \(A\) is not invertible, then \(\det(A) = 0\). Let's now show that $AB$ is also not invertible. Suppose, for the sake of contradiction, that \(AB\) is invertible. Then there exists a matrix \(C\) such that:
+    \[
+        (AB)C = I_n \implies A(BC) = I_n
+    \]
+    This implies that \(A\) is invertible, which contradicts our assumption. Therefore, \(AB\) is not invertible, and thus \(\det(AB) = 0 = \det(A) \cdot \det(B)\). \\
+    \textbf{Case 2:} If \(A\) is invertible, then we can express \(A\) as a product of elementary matrices:
+    \[
+        E_k E_{k-1} \cdots E_1 A = I_n
+    \]
+    where each \(E_i\) is an elementary matrix. We also have:
+    \[
+        A^{-1} = E_k E_{k-1} \cdots E_1 \quad \Leftrightarrow \quad (A^{-1})^{-1} = (E_k E_{k-1} \cdots E_1)^{-1} = E_1^{-1} E_2^{-1} \cdots E_k^{-1}
+    \]
+    Thus:
+    \[
+        \det(AB) = \det(E_1^{-1} E_2^{-1} \cdots E_k^{-1} B) = \det(E_1^{-1}) \det(E_2^{-1}) \cdots \det(E_k^{-1}) \det(B)
+    \]
+    By the properties of determinants of elementary matrices, we have:
+    \[
+        \det(E_1^{-1}) \det(E_2^{-1}) \cdots \det(E_k^{-1}) = \det(E_1)^{-1} \det(E_2)^{-1} \cdots \det(E_{k-1}^{-1} \cdot E_k^{-1}) = \dots = \det(A)
+    \]
+    Therefore:
+    \[
+        \det(AB) = \det(A) \cdot \det(B)
+    \]
+    This completes the proof of the first property. The second can be derived from the first:
+    \[
+        \det(AA^{-1}) = \det(I_n) = 1 \implies \det(A) \cdot \det(A^{-1}) = 1 \implies \det(A^{-1}) = \frac{1}{\det(A)}
+    \]
+\end{proof}
+
+\begin{theorem}
+    For a matrix $A \in \mathbb{R}^{n \times n}$, we have:
+    \[
+        \det(A) = \det(A^T)
+    \]
+\end{theorem}
+
+\section{Interpretation of the Determinant}
+The determinant of a matrix can be interpreted geometrically as a scaling factor for volume (or area in 2D) when the matrix is viewed as a linear transformation.
+
+\begin{theorem}
+    If $A$ is a \(2 \times 2\) matrix, then the absolute value of the determinant of $A$ represents the area scaling factor of the linear transformation defined by $A$. If $A$ is a \(3 \times 3\) matrix, then the absolute value of the determinant represents the volume scaling factor.
+\end{theorem}
+\begin{eg}
+    Let $A$ be a \(2 \times 2\) matrix:
+    \[
+        A = \begin{bmatrix}
+            a_{11} & a_{12} \\
+            a_{21} & a_{22}
+        \end{bmatrix} = \begin{bmatrix}
+            \vec{u} & \vec{v}
+        \end{bmatrix}
+    \]
+    Then the absolute value of the determinant of $A$ is the area of the parallelogram formed by the vectors \(\vec{u}\) and \(\vec{v}\).
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.8,0) -- (1.2,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2) -- (0,1.2) node[above] {$x_2$};
+
+            % Original vectors
+            \draw[thick,->,primary] (0,0) -- (1,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0) -- (-0.6,1) node[midway, left] {$\vec{v}$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0) -- (1,0) -- (0.4,1) -- (-0.6,1) -- cycle;
+            \draw[dashed] (1,0) -- (0.4,1) -- (-0.6,1);
+        \end{tikzpicture}
+    \end{center}
+    $Aire = |\det(A)| = |a_{11}a_{22} - a_{12}a_{21}|$
+\end{eg}
+
+\begin{eg}
+    Similarly, for a \(3 \times 3\) matrix:
+    \[
+        B = \begin{bmatrix}
+            a_{11} & a_{12} & a_{13} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{31} & a_{32} & a_{33}
+        \end{bmatrix} = \begin{bmatrix}
+            \vec{u} & \vec{v} & \vec{w}
+        \end{bmatrix}
+    \]
+    The absolute value of the determinant of $B$ represents the volume of the parallelepiped formed by the vectors \(\vec{u}\), \(\vec{v}\), and \(\vec{w}\).
+    \begin{center}
+        \begin{tikzpicture}[scale=2.5]
+            % Axes
+            \draw[->] (-0.8,0,0) -- (1.2,0,0) node[right] {$x_1$};
+            \draw[->] (0,-0.2,0) -- (0,1.2,0) node[above] {$x_2$};
+            \draw[->] (0,0,0.2) -- (0,0,-1.2) node[below right] {$x_3$};
+
+            % Original vectors
+            \draw[thick,->,primary] (0,0,0) -- (1,0,0) node[midway, below] {$\vec{u}$};
+            \draw[thick,->,primary] (0,0,0) -- (-0.6,1,0) node[midway, left] {$\vec{v}$};
+            \draw[thick,->,primary] (0,0,0) -- (0,0,-1) node[midway, right] {$\vec{w}$};
+
+            % Shaded area
+            \fill[secondary!40,opacity=0.3] (0,0,0) -- (1,0,0) -- (0.4,1,0) -- (-0.6,1,0) -- cycle;
+            \fill[secondary!40,opacity=0.3] (0,0,0) -- (1,0,0) -- (1,0,-1) -- (0,0,-1) -- cycle;
+            \draw[dashed] (1,0,0) -- (1,0,-1) -- (0,0,-1) -- (-0.6,1,-1) -- (-0.6,1,0) -- (0.4,1,0) -- cycle;
+            \draw[dashed] (1,0,-1) -- (0.4,1,-1) -- (-0.6,1,-1);
+            \draw[dashed] (0.4,1,0) -- (0.4,1,-1);
+        \end{tikzpicture}
+    \end{center}
+    $Volume = |\det(B)| = |a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})|$
+\end{eg}
+The determinant assiciated with a transformation $T: \mathbb{R}^2 \to \mathbb{R}^2$ can also be interpreted as the scaling factor of areas under the transformation. If \(T\) is represented by a matrix \(A\), then for any region \(R\) in \(\mathbb{R}^2\), the area of the transformed region \(T(R)\) is given by:
+\[
+    \text{Area}(T(R)) = |\det(A)| \cdot \text{Area}(R)
+\]
