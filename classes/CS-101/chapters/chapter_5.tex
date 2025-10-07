@@ -1,0 +1,151 @@
+\chapter{Relations and Sequences}
+
+\section{Relations}
+\begin{definition}[Binary Relations]
+    A binary relation $R$ from a set $A$ to a set $B$ is a subset of the Cartesian product $A \times B$. In other words, $R$ is a set of ordered pairs $(a, b)$ where $a \in A$ and $b \in B$. We write $a R b$ to indicate that the pair $(a, b)$ is in the relation $R$.
+\end{definition}
+
+\begin{eg}
+    Let $A = \{0,1\}$ and $B = \{a,b,c\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $A \times B = \{(0,a), (0,b), (0,c), (1,a), (1,b), (1,c)\}$
+        \item $R_1 = \{(0,a), (1,b)\}$ is a relation from $A$ to $B$
+        \item $R_2 = \{(0,b), (1,c)\}$ is another relation from $A$ to $B$
+    \end{itemize}
+\end{eg}
+A binary relation $R$ on a set $A$ itself is a subset of $A \times A$. In this case, we say that $R$ is a relation on $A$.
+\begin{eg}
+    Let $A = \{0,1\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $A \times A = \{(0,0), (0,1), (1,0), (1,1)\}$
+        \item $R_1 = \{(0,0), (1,1)\}$ is a relation on $A$
+        \item $R_2 = \{(0,1), (1,0)\}$ is another relation on $A$
+    \end{itemize}
+\end{eg}
+On a set $A$, there can be many relations. In fact:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $A \times A$ has $|A|^2$ elements when $A$ has $|A|$ elements.
+    \item Every subset of $A \times A$ can be a relation.
+    \item Therefore, there are $2^{|A|^2}$ possible relations on a set $A$.
+\end{itemize}
+
+\subsection{Properties of Relations}
+\begin{definition}[Reflexive Relation]
+    A relation $R$ on a set $A$ is called reflexive if for every element $a \in A$, the pair $(a, a)$ is in the relation $R$. In other words, every element is related to itself.
+\end{definition}
+Note that the empty relation on a empty set is reflexive.
+\begin{eg}
+    Let $A = \{0,1\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R_1 = \{(0,0), (1,1)\}$ is reflexive
+        \item $R_2 = \{(0,1), (1,0)\}$ is not reflexive
+        \item $R_3 = \{(0,0), (0,1), (1,0), (1,1)\}$ is reflexive
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Symmetric Relation]
+    A relation $R$ on a set $A$ is called symetric if for every pair $(a, b) \in R$, the pair $(b, a)$ is also in $R$. In other words, if $a$ is related to $b$, then $b$ is also related to $a$.
+\end{definition}
+\begin{eg}
+    Let $A = \{0,1\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R_1 = \{(0,0), (1,1)\}$ is symetric
+        \item $R_2 = \{(0,1), (1,0)\}$ is symetric
+        \item $R_3 = \{(0,0), (0,1), (1,0), (1,1)\}$ is symetric
+        \item $R_4 = \{(0,0), (0,1)\}$ is not symetric
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Antisymmetric Relation]
+    A relation $R$ on a set $A$ is called antisymmetric if and only if $(a,b) \in R$ and $(b,a) \in R$ then $a = b, \ \forall a,b \in A$.
+\end{definition}
+\begin{eg}
+    Let $A = \{0,1\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R_1 = \{(0,0), (1,1)\}$ is antisymmetric
+        \item $R_2 = \{(0,1), (1,0)\}$ is not antisymmetric
+        \item $R_3 = \{(0,0), (0,1), (1,0), (1,1)\}$ is not antisymmetric
+        \item $R_4 = \{(0,0), (0,1)\}$ is antisymmetric
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Transitive Relation]
+    A relation $R$ on a set $A$ is called transitive if for every pair $(a, b) \in R$ and $(b, c) \in R$, the pair $(a, c)$ is also in $R$. In other words, if $a$ is related to $b$ and $b$ is related to $c$, then $a$ is also related to $c$.
+\end{definition}
+\begin{eg}
+    Let $A = \{0,1,2\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R_1 = \{(0,0), (1,1), (2,2)\}$ is transitive
+        \item $R_2 = \{(0,1), (1,0)\}$ is not transitive
+        \item $R_3 = \{(0,0), (0,1), (1,0), (1,1)\}$ is not transitive
+        \item $R_4 = \{(0,0), (0,1), (1,1), (1,2), (0,2)\}$ is transitive
+        \item $R_5 = \{(0,0), (0,1), (1,1), (1,2)\}$ is not transitive
+    \end{itemize}
+\end{eg}
+
+\subsection{Combining Relations}
+\begin{definition}[Combining Relations]
+    Given two relations $R_1$ and $R_2$ on a set $A$, we can combine them using basic operations to form new ones such as:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Union: $R_1 \cup R_2 = \{(a,b) \ | \ (a,b) \in R_1 \text{ or } (a,b) \in R_2\}$
+        \item Intersection: $R_1 \cap R_2 = \{(a,b) \ | \ (a,b) \in R_1 \text{ and } (a,b) \in R_2\}$
+        \item Subtraction: $R_1 - R_2 = \{(a,b) \ | \ (a,b) \in R_1 \text{ and } (a,b) \notin R_2\}$
+        \item Composition: $R_1 \circ R_2 = \{(a,c) \ | \ \exists b \in A, (a,b) \in R_1 \text{ and } (b,c) \in R_2\}$
+    \end{itemize}
+\end{definition}
+\begin{eg}
+    Let $A = \{0,1\}$, $R_1 = \{(0,0), (1,1)\}$ and $R_2 = \{(0,1), (1,0)\}$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R_1 \cup R_2 = \{(0,0), (1,1), (0,1), (1,0)\}$
+        \item $R_1 \cap R_2 = \emptyset$
+        \item $R_1 - R_2 = R_1$
+        \item $R_2 - R_1 = R_2$
+        \item $R_1 \circ R_2 = \{(0,1), (1,0)\} = R_2$
+        \item $R_2 \circ R_1 = \{(0,1), (1,0)\} = R_2$
+    \end{itemize}
+\end{eg}
+
+\subsection{Equivalence Relations and Classes}
+\begin{definition}[Equivalence Relation]
+    A relation $R$ on a set $A$ is called an equivalence relation if it is reflexive, symmetric, and transitive.
+\end{definition}
+Two elements $a$ and $b$ that are related by an equivalence relation are called equivalent. The notation $a \sim b$ is often used to denote that $a$ is equivalent to $b$.
+\begin{eg}
+    Let $A = \{a,b,c\}$, the relation $R = \{(a,a), (b,b), (c,c), (a,b), (b,a)\}$ is an equivalence relation because:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Reflexive: $(a,a), (b,b), (c,c) \in R$
+        \item Symmetric: $(a,b) \in R \Rightarrow (b,a) \in R$
+        \item Transitive: There are no pairs $(a,b)$ and $(b,c)$ in $R$ such that $(a,c)$ is not in $R$
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    Let $R = \{(a,b) \in \mathbb{R} \times \mathbb{R} \mid a -b \in \mathbb{Z}\}$ be an equivalence relation, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Reflexive: $a - a = 0$, $0 \in \mathbb{Z}$
+        \item Symmetric: $a - b \in \mathbb{Z}$, then $b - a \in \mathbb{Z}$
+        \item Transitive: $a - b \in \mathbb{Z}$ and $b - c \in \mathbb{Z}$, then $(a -b) + (b-c) = a - c \in \mathbb{Z}$
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Equivalence Class]
+    Given an equivalence relation $R$ on a set $A$ and an element $a \in A$, the equivalence class of $a$, denoted by $[a]$, is the set of all elements in $A$ that are equivalent to $a$ under the relation $R$. In other words:
+    \[ [a] = \{b \in A \ | \ a R b\} \]
+\end{definition}
+\begin{eg}
+    Let $A = \{a,b,c\}$ and $R = \{(a,a), (b,b), (c,c), (a,b), (b,a)\}$ be an equivalence relation on $A$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The equivalence class of $a$ is $[a] = \{a,b\}$
+        \item The equivalence class of $b$ is $[b] = \{a,b\}$
+        \item The equivalence class of $c$ is $[c] = \{c\}$
+    \end{itemize}
+\end{eg}
+
+\begin{theorem}
+    Let $R$ be an equivalence relation on a set $A$. Then the three following statements for element $a$ and $b$ of $A$ are equivalent:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $(a,b) \in R$
+        \item $[a]_R = [b]_R$
+        \item $[a]_R \cap [b]_R \neq \emptyset$
+    \end{itemize}
+\end{theorem}

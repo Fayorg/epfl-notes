@@ -523,9 +523,92 @@ When the domain of definition is the entire set $A$ ($S = A$), then $f$ is a tot
     \end{itemize}
 \end{eg}
 
-% \subsection{Generating Functions}
+\section{Generating Functions}
 % Notes taken by hand from Prof. on moodle on Intro to generating functions.
 % TODO: Complete and move to right chapter.
+\begin{definition}[Formal Power Sum]
+    A formal power sum (or formal power series) is an infinite series of the form:
+    \[ F(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + \cdots = \sum_{n=0}^{\infty} a_n x^n \]
+    where $a_n$ are coefficients from a given field (e.g., real numbers, complex numbers) and $x$ is an indeterminate. The important part is that this sum is formal, i.e., we are concerned if this infinite sum converges.
+\end{definition}
+To add and multiply formal power sums, we use the following rules:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Addition: If $F(x) = \sum_{n=0}^{\infty} a_n x^n$ and $G(x) = \sum_{n=0}^{\infty} b_n x^n$, then:
+    \[ F(x) + G(x) = \sum_{n=0}^{\infty} (a_n + b_n) x^n \]
+    \item Multiplication: If $F(x) = \sum_{n=0}^{\infty} a_n x^n$ and $G(x) = \sum_{n=0}^{\infty} b_n x^n$, then:
+    \[ F(x) \cdot G(x) = \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} a_k b_{n-k} \right) x^n \]
+\end{itemize}
+These are well defined operations because for a given $n$, there are only a finite number of operations to perform no matter how large $n$ is. Hence the fact that the sums are infinite does not matter. \\
+To divide formal power sums:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Division: If $F(x) = \sum_{n=0}^{\infty} a_n x^n$ and $G(x) = \sum_{n=0}^{\infty} b_n x^n$ with $b_0 \neq 0$, then we can find a formal power sum $H(x) = \sum_{n=0}^{\infty} c_n x^n$ such that:
+    \[ F(x) = G(x) \cdot H(x) \quad \Leftrightarrow \quad H(x) = \frac{F(x)}{G(x)} \]
+    by solving for the coefficients $c_n$ recursively using the relation:
+    \[ c_n = \frac{1}{b_0} \left( a_n - \sum_{k=1}^{n} b_k c_{n-k} \right) \]
+    for all $n \geq 0$ and $b_0 \neq 0$.
+\end{itemize}
+
+\begin{definition}[Generating Function]
+    The generating function of a sequence $\{a_n\}_{n=0}^{\infty}$ is the formal power sum:
+    \[ G(x) = \sum_{n=0}^{\infty} a_n x^n \]
+    where $a_n$ is the $n$-th term of the sequence. Generating functions are used to study and manipulate sequences in combinatorics and other areas of mathematics.
+\end{definition}
+
+\subsection{Solving Recurrence Relations using Generating Functions}
+\begin{eg}
+    Let's solve the reccurence relation $a_n = 3a_{n-1}- 2a_{n-2}$ for $n \geq 2$ with $a_0 = 1$ and $a_1 = 3$ using generating functions. We could solve for a given $n$ using the recurrence relation, but this would be inefficient. Instead, we will use generating functions to find a closed form for $a_n$. \\
+    We start by multiplying both sides of the recurrence relation by $x^n$ and summing over all $n \geq 2$:
+    \[ \sum_{n=2}^{\infty} a_n x^n = \sum_{n=2}^{\infty} 3a_{n-1} x^n - \sum_{n=2}^{\infty} 2a_{n-2} x^n \]
+    By rewriting the sums to have the same index, we get:
+    \[ \sum_{n=2}^{\infty} a_n x^n = 3x \sum_{n=1}^{\infty} a_n x^n - 2x^2 \sum_{n=0}^{\infty} a_n x^n \]
+    Let $G(x) = \sum_{n=0}^{\infty} a_n x^n$ be the generating function for the sequence $\{a_n\}$. Then we can rewrite the equation as:
+    \[ G(x) - a_0 - a_1 x = 3x (G(x) - a_0) - 2x^2 G(x) \]
+    If we group the terms involving $G(x)$ on one side, we get:
+    \[ G(x) - 3x G(x) + 2x^2 G(x) = a_0 + a_1 x - 3x a_0 \]
+    Factoring out $G(x)$, we have:
+    \[ G(x)(1 - 3x + 2x^2) = a_0 + a_1 x - 3x a_0 \]
+    Substituting the initial conditions $a_0 = 1$ and $a_1 = 3$, we get:
+    \[ G(x)(1 - 3x + 2x^2) = 1 + 3x - 3x = 1 \]
+    Since $1 - 3x + 2x^2 \neq 0$, we can solve for $G(x)$:
+    \[ G(x) = \frac{1}{1 - 3x + 2x^2} \]
+    We can factor the denominator:
+    \[ G(x) = \frac{1}{(1 - x)(1 - 2x)} \]
+    Using partial fraction decomposition, we can express $G(x)$ as:
+    \[ G(x) = \frac{A}{1 - x} + \frac{B}{1 - 2x} \]
+    for some constants $A$ and $B$. Multiplying both sides by the denominator, we get:
+    \[ 1 = A(1 - 2x) + B(1 - x) \]
+    Setting $x = 1$ gives $1 = -A$, so $A = -1$. Setting $x = \frac{1}{2}$ gives $1 = \frac{B}{2}$, so $B = 2$. Thus, we have:
+    \[ G(x) = \frac{-1}{1 - x} + \frac{2}{1 - 2x} \]
+    We can now use the geometric series formula to expand each term:
+    \[ G(x) = -\sum_{n=0}^{\infty} x^n + 2\sum_{n=0}^{\infty} (2x)^n = -\sum_{n=0}^{\infty} x^n + 2\sum_{n=0}^{\infty} 2^n x^n \]
+    Combining the sums, we get:
+    \[ G(x) = \sum_{n=0}^{\infty} (-1 + 2^{n+1}) x^n \]
+    Therefore, the closed form for $a_n$ is:
+    \[ a_n = -1 + 2^{n+1} = 2^{n+1} - 1 \]
+    for all $n \geq 0$.
+\end{eg}
+Note that the geometric series formula states that:
+\[ \frac{1}{1 - xr} = 1 + xr + x^2r^2 + x^3r^3 + \ldots = \sum_{n=0}^{\infty} (xr)^n \]
+Let's summarise how to solve recurrence relations using generating functions:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Write down the recurrence relation and initial conditions.
+    \item Multiply both sides of the recurrence relation by $x^n$ and sum over all $n$.
+    \item Rewrite each expression in terms of the generating function $G(x)$.
+    \item Rearrange terms to get to an expression for $G(x)p(x) = q(x)$.
+    \item Divide by $p(x)$ to get $G(x) = \frac{q(x)}{p(x)}$.
+    \item Factorize $p(x)$ as $p(x) = \prod_{i=1} (1 - r_ix)$, where $\frac{1}{r_i}$ are the roots of the polynomial.
+    \item If all roots are distinct, use partial fraction decomposition to express $G(x)$ as a sum of simpler fractions.
+    \item Determine $\beta_i$ by solving a linear system of equations.
+    \item Use the geometric series formula to expand each term and find a closed form for $a_n$.
+    \item Sum up all the terms to get an expression for $a_n$.
+\end{itemize}
+
+\subsection{Partial Fraction Expansion}
+\begin{definition}[Partial Fraction Expansion]
+    Partial fraction expansion is a method used to decompose a rational function (a fraction where both the numerator and denominator are polynomials) into a sum of simpler fractions.
+    \[ \frac{P(x)}{Q(x)} = \sum_{i} \frac{A_i}{(x - r_i)^{k_i}} + \sum_{j} \frac{B_j x + C_j}{(x^2 + px + q)^{m_j}} \]
+    where $P(x)$ and $Q(x)$ are polynomials, $r_i$ are the roots of the polynomial $Q(x)$, and $A_i$, $B_j$, and $C_j$ are constants to be determined.
+\end{definition}
 
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
