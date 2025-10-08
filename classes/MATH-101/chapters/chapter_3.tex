@@ -546,3 +546,177 @@ Note that $(\cos (n))$ and $(\sin (n))$ are divergent sequences.
     \[ |\cos (k) - \cos (m)| = |\cos (k) - l + l - \cos (m)| \leq |\cos (k) - l| + |l - \cos (m)| < \frac{1}{2} + \frac{1}{2} = 1 \]
     But we know that $|\cos (k) - \cos (m)|$ can be as large as $2$ since $\cos (n)$ oscillates between $-1$ and $1$. This is a contradiction. Thus, our initial assumption that $\lim_{n \to \infty} (\cos (n)) = l \in \mathbb{R}$ must be false. Therefore, we conclude that the sequence \( (\cos(n)) \) does not converge.
 \end{proof}
+
+\begin{theorem}
+    For all growing (decreasing) sequences that is upper (lower) bounded converges to a limit $l \in \mathbb{R}$ which is its supremum (infimum). \\
+    For all growing (decreasing) sequences that is not upper (lower) bounded diverges to $+\infty$ (respectively $-\infty$). \\
+    It's denoted by:
+    \[ (a_n) \uparrow \quad \Leftrightarrow \quad (a_n) \text{ is growing } \]
+    \[ (a_n) \downarrow \quad \Leftrightarrow \quad (a_n) \text{ is decreasing } \]
+\end{theorem}
+\begin{proof}
+    Let $(a_n) \uparrow$ and upper bounded. The we have:
+    \[ \exists l = \sup \{a_n, n \in \mathbb{N}\} \]
+    We then have:
+    \[ \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, |a_n - l| < \epsilon \]
+    Since $(a_n)$ is growing, we have:
+    \[ a_n \leq a_{n + 1} \quad \forall n \geq N \quad \Leftrightarrow \quad l \]
+    Thus, we have:
+    % TODO: finish proof
+\end{proof}
+
+\section{The number $e$}
+Let $(x_n)$ : $x_0 = 1$, $x_n = (1 + \frac{1}{n})^n$ for all $n \geq 1$ and let $(y_n)$ : $y_0 = 1$, $y_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!}$ for all $n \geq 1$. We then have:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $x_n \leq y_n$ for all $n \in \mathbb{N}$.
+    \item $y_n \leq 3$ for all $n \in \mathbb{N}$.
+    \item $(y_n) \uparrow$ for all $n \in \mathbb{N}$.
+    \item $(x_n) \uparrow$ for all $n \in \mathbb{N}$.
+\end{itemize}
+\begin{proof}
+    \textbf{1.} Let's prove that \( x_n \leq y_n \) for all \( n \in \mathbb{N} \). We have:
+    \[
+        x_n = (1 + \frac{1}{n})^n = 1 + (\begin{pmatrix}n \\ 1
+        \end{pmatrix} \frac{1}{n}) + (\begin{pmatrix}n \\ 2
+        \end{pmatrix} \frac{1}{n^2}) + \ldots + (\begin{pmatrix}n \\ n
+        \end{pmatrix} \frac{1}{n^n})
+    \]
+    with:
+    \[ \begin{pmatrix}n \\ k
+    \end{pmatrix} \begin{pmatrix}
+        1 \\ n
+    \end{pmatrix}^k = \frac{n!}{k! (n - k)!} \left(\frac{1}{n}\right)^k = \frac{1}{k!} \cdot \underbrace{\frac{n}{n}}_{\leq 1} \cdot \underbrace{\frac{n-1}{n}}_{\leq 1} \cdot \ldots \cdot \underbrace{\frac{n-k+1}{n}}_{\leq 1} \leq \frac{1}{k!} \]
+    Thus, we have:
+    \[
+        x_n = 1 + (\begin{pmatrix}n \\ 1
+        \end{pmatrix} \frac{1}{n}) + (\begin{pmatrix}n \\ 2
+        \end{pmatrix} \frac{1}{n^2}) + \ldots + (\begin{pmatrix}n \\ n
+        \end{pmatrix} \frac{1}{n^n}) \leq 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} = y_n
+    \]
+    for all \( n \geq 1 \). \\
+    \textbf{2.} Let's prove that \( y_n \leq 3 \) for all \( n \in \mathbb{N} \). By recurrence, we have:
+    \[
+        \frac{1}{k!} \leq \frac{1}{2^{k - 1}} \quad \forall k \geq 1
+    \]
+    Initialization: for \( k = 1 \), we have \( 1 \leq 1 \) which is true. \\
+    Heredity: let's suppose that \( \frac{1}{k!} \leq \frac{1}{2^{k - 1}} \) for some \( k \geq 1 \). Then we have:
+    \[ \frac{1}{(k + 1)!} = \frac{1}{(k + 1) k!} \leq \frac{1}{(k + 1) 2^{k - 1}} \leq \frac{1}{2^k} \]
+    Thus, we have:
+    \[ y_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} \leq 1 + 1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^{n - 1}} = 1 + \frac{1- (\frac{1}{2})^n}{1 - \frac{1}{2}} < 1 \frac{1}{1 - \frac{1}{2}} = 1 + 2 = 3 \]
+    for all \( n \geq 1 \). \\
+    \textbf{3.} Let's prove that \( (y_n) \uparrow \) for all \( n \in \mathbb{N} \). We have:
+    \[
+        y_{n + 1} = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} + \frac{1}{(n + 1)!} = y_n + \frac{1}{(n + 1)!} \geq y_n
+    \]
+    for all \( n \geq 1 \). \\
+    \textbf{4.} Let's prove that \( (x_n) \uparrow \) for all \( n \in \mathbb{N} \). We want to show that:
+    \[
+        \left(1 + \frac{1}{n + 1}\right)^{n + 1} \geq \left(1 + \frac{1}{n}\right)^n
+    \]
+    In other words, we want to show that the geometric mean is less than or equal to the arithmetic mean:
+    \[
+        \sqrt[n + 1]{a_0 a_1 \ldots a_n} \leq \frac{a_0 + a_1 + \ldots + a_n}{n + 1}
+    \]
+    Let $a_0 = 1$ and $a_n = \left(1 + \frac{1}{n}\right)$. Then we have:
+    \[
+        \sqrt[n + 1]{1 \cdot \left(1 + \frac{1}{n}\right)^n} \leq \frac{1 + n\left(1 + \frac{1}{n}\right)}{n + 1} = 1 + \frac{1}{n + 1} \quad \leftarrow \quad \left(1 + \frac{1}{n + 1}\right)^{n + 1} \geq \left(1 + \frac{1}{n}\right)^n
+    \]
+    % TODO: complete
+\end{proof}
+
+\begin{definition}[The number \( e \)]
+    The number \( e \) is defined as the limit of the sequence \( (x_n) \) or \( (y_n) \):
+    \[
+        e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = \lim_{n \to \infty} \left(1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!}\right)
+    \]
+    The number \( e \) is an irrational number approximately equal to \( 2.71828 \).
+\end{definition}
+The following limits hold:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\lim_{n \to \infty} \left(1 - \frac{x}{n}\right)^n = e^{-x}, \ \forall x \in \mathbb{R}$
+    % TODO: complete
+\end{itemize}
+
+\section{Sequences defined by recurrence}
+\begin{definition}[Linear recurrence]
+    A linear recurrence relation is an equation that defines a sequence of numbers based on a linear combination of its previous terms. The general form of a linear recurrence relation of order \( k \) can be expressed as:
+    \[
+        a_{n + 1} = q a_n + b
+    \]
+    for \( n \in \mathbb{N} \), \( a_0 \in \mathbb{R} \) and \( q, b \in \mathbb{R} \). We have the following:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $|q| \geq 1$ then the sequence diverges except if $(a_n)$ is a constant sequence.
+        \item If $|q| < 1$ then the sequence converges to $\frac{b}{1 - q}$.
+    \end{itemize}
+\end{definition}
+\begin{proof}
+    \textbf{1.} Let's prove that if $|q| > 1$ then the sequence diverges. \\
+    Let $|q| > 1$ and $a_0 = \frac{b}{1 - q}$. Then we have:
+    \[ a_1 = q a_0 + b = q \cdot \frac{b}{1 - q} + b = \frac{b}{1 - q} (q + 1 - q) = \frac{b}{1 - q} = a_0 \]
+    By recurrence, we conclude that $(a_n)$ is a constant sequence. \\
+    Let $|q| > 1$ and $a_0 \neq \frac{b}{1 - q}$. Then we have:
+    \[
+        |a_{n + 1} - l| = |q|^{n + 1} \cdot |a_0 - l|
+    \]
+    Since $|q| > 1$, we have $|q|^{n + 1} \to \infty$. Thus, the sequence diverges. \\
+    If $q = 1$ then we have:
+    \[ a_{n + 1} = a_n + b \]
+    which is an arithmetic sequence that diverges except if $b = 0$ in which case $(a_n)$ is a constant sequence. \\
+    If $q = -1$ then we have:
+    \[ a_{n + 1} = -a_n + b \]
+    which oscillates between two values. \\
+    \textbf{2.} Let's prove that if $|q| < 1$ then the sequence converges to $\frac{b}{1 - q} = l$. \\
+    Let $|q| < 1$. Then we have for all $n \geq 1$:
+    \[
+        0 \leq |a_{n + 1} - l| = |q a_n + b - l| = |q a_n + b - (q l + b)| = |q| \cdot |a_n - l| = |q|^2 \cdot |a_{n - 1} - l| = \ldots = |q|^{n + 1} \cdot |a_0 - l|
+    \]
+    Since $|q| < 1$, we have $|q|^{n + 1} \to 0$. By the squeeze theorem, we conclude that:
+    \[ \lim_{n \to \infty} a_n = l = \frac{b}{1 - q} \]
+\end{proof}
+% TODO: graph for example with 0 < q < 1 and more
+
+\begin{definition}[Non-linear recurrence]
+    A non-linear recurrence relation is an equation that defines a sequence of numbers based on a non-linear combination of its previous terms. The general form of a non-linear recurrence relation can be expressed as:
+    \[
+        a_{n + 1} = f(a_n)
+    \]
+    for \( n \in \mathbb{N} \), \( a_0 \in \mathbb{R} \) and \( f : E \to E \subset \mathbb{R} \). We have the following:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\exists m, M \in \mathbb{R}$ : $m \leq g(x) \leq M \quad \forall x \in E$
+        \item $g$ is growing : $\forall x_1, x_2 \in E$ : $x_1 \leq x_2 \Rightarrow g(x_1) \leq g(x_2)$
+    \end{itemize}
+    Then the sequence $(a_n)$ is bounded and growing thus it converges to a limit $l \in \mathbb{R}$.
+\end{definition}
+Note that if (2) is replaced by (2') $g$ is decreasing : $\forall x_1, x_2 \in E$ : $x_1 \leq x_2 \Rightarrow g(x_1) \geq g(x_2)$, then the sequence $(a_n)$ is not bounded (but $a_n$ might converge).
+
+\begin{eg}
+    Let $x_{n + 1} = 5 - \frac{6}{x_n}$ and $x_0 = 4$. Then we have for the limit:
+    \[
+        l = 5 - \frac{6}{l} \quad \Leftrightarrow \quad l^2 - 5l + 6 = 0 \quad \Leftrightarrow \quad l_1 = 2, l_2 = 3
+    \]
+    We remark that $g(x) = 5 - \frac{6}{x}$ is a growing function for $x > 0$ then $(x_n)$ is bounded. If we compute the first terms of the sequence, we have:
+    \[ x_0 = 4 \]
+    \[ x_1 = 5 - \frac{6}{4} = \frac{7}{2} = 3.5 < x_0 \]
+    \[ x_2 = 5 - \frac{2}{7} = \frac{23}{7} < x_1 \]
+    Thus $(x_n)$ is a decreasing sequence. We want to find a lower bound. Let $x > 3$ we have:
+    \[ g(x) = 5 - \underbrace{\frac{6}{x}}_{> 3} < 2 \]
+    Thus since $x_0 = 4 > 3$, $x_1 > 3$ and $x_n > 3$ implies that $g(x_n) = x_{n + 1} > 3$. Thus, we have $x_n > 3$ for all $n \in \mathbb{N}$. 
+\end{eg}
+Some recommendations to study sequences defined by recurrence:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Find candidates for the limits by solving the equation $l = f(l)$. If there's no solution, the sequence diverges.
+    \item Study the monotonicity of $f$ (make a graph if possible). \\
+    \textbf{Linear Recurrence}: $x_{n + 1} = qx_n + b$ then:
+    \begin{itemize}[itemsep=1pt]
+        \item If $|q| < 1$ then $(x_n)$ converges to $\frac{b}{1 - q}$.
+        \item If $|q| \geq 1$ then $(x_n)$ diverges except if $(x_0) = \frac{b}{1 - q}$ (constant sequence).
+        \item If $|q| = 1$ then $(x_n)$ diverges except if $(x_n)$ is constant.
+    \end{itemize}
+    \textbf{Non-linear Recurrence}: $x_{n + 1} = f(x_n)$ with $f(x)$ growing implies that $(x_n)$ is bounded.
+    \begin{itemize}
+        \item If $x_0 < x_1$ then $(x_n) \uparrow$, we need to show that $(x_n)$ is upper bounded.
+        \item If $x_0 > x_1$ then $(x_n) \downarrow$, we need to show that $(x_n)$ is lower bounded.
+    \end{itemize}
+    In both cases $(x_n)$ converges to a limit $l \in \mathbb{R}$. \\
+    \textbf{Proposition}: If $(x_n)$ and $(a_n)$ two sequences such that $0 < a_n < 1$ for all $n \in \mathbb{N}$ and $\exists l \in \mathbb{R}$ : $(x_{n + 1} - l) = a_n (x_n - l)$. Then $(x_n)$ converges.
+\end{itemize}
