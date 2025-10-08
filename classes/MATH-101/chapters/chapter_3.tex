@@ -61,7 +61,7 @@ Let be \( (a_n) \) a sequence. We say that \( (a_n) \) is bounded if there exist
         \item A formula that relates each term to one or more preceding terms.
     \end{itemize}
 \end{definition}
-% TODO: complete here
+A recurrence relation can be visualized by dominoes. Each domino represents a term in the sequence. The initial condition is when we push the first domino and the recurrence relation is how each domino knocks over the next one making it fall.
 \begin{eg}
     The Fibonacci sequence is defined by the recurrence relation:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
@@ -383,21 +383,40 @@ But if $b_n \to L \neq 0$ then $a_n$ must converge. \\
         a_n = a_0 \cdot r^{n}
     \]
     for \( n \in \mathbb{N} \), \( a_0 \in \mathbb{R}, \ a_0 \neq 0\) and \( r \in \mathbb{R} \). We analyze the limit of the sequence \( (a_n) \) as \( n \) approaches infinity based on the value of the common ratio \( r \): \\
-    If $r > 1$. Let $r = 1 + h$ with $h > 0$. Then we have:
-    \[ r^n = (1 + h)^n = 1 + \begin{pmatrix}
-n \\ 1
-\end{pmatrix} h + \begin{pmatrix}
-n \\ 2
-\end{pmatrix} h^2 + \ldots + \begin{pmatrix}
-n \\ n
-\end{pmatrix} h^n \geq 1 + \begin{pmatrix}n \\ 1
-    \end{pmatrix} h  = 1 + nh \quad \forall n \geq 0\]
-    Then we have:
-    \[ |a_n| = |a_0| \cdot |r|^n \geq |a_0| (1 + nh) \to \infty \]
-    If $0 < r < 1$. Let $r = 1 - h$ with $h > 0$. Then we have:
-    \[ |a_n| = |a_0| \cdot |r|^n \geq |a_0| (1 - nh) \to 0 \]
-
-% TODO: Complete proof
+    \textbf{1. If $r > 1$}: \\
+    We can rewrite \( r \) as \( r = 1 + x \) where \( x > 0 \). Then we have:
+    \[
+        r^n = (1 + x)^n = 1 + \begin{pmatrix}
+            n \\ 1
+        \end{pmatrix}x + \begin{pmatrix}
+            n \\ 2
+        \end{pmatrix}x^2 + \ldots + \begin{pmatrix}
+            n \\ n
+        \end{pmatrix}x^n \geq 1 + \begin{pmatrix}
+            n \\ 1
+        \end{pmatrix}x = 1 + nx \quad \forall n \geq 1
+    \]
+    Then by the Archimedean property, $\forall M > 0$, $\exists n \in \mathbb{N}$ : $(1 + nx) > M$:
+    \[
+        |a_0r^n| = |a_0(1+x)^n| \geq |a_0||1 + nx| > |a_0|M
+    \]
+    Thus, the sequence is not bounded and diverges. \\
+    \textbf{2. If $0 < r < 1$}: \\
+    We can rewrite as \( q = \frac{1}{r} > 1 \) and we have $\forall M > 0$, $\exists n_0 \in \mathbb{N}$ : $q^n > M$ for all $n \geq n_0$. Let $\epsilon > 0$ and $M = \frac{|a_0|}{\epsilon}$ we then have:
+    \[
+        q^n > \frac{|a_0|}{\epsilon} \implies \frac{1}{q^n} = r^n < \frac{\epsilon}{|a_0|} \quad \forall n \geq n_0
+    \]
+    Thus, we have:
+    \[
+        |a_0 r^n - 0| < \epsilon \quad \forall n \geq n_0
+    \]
+    By the definition of limits, we conclude that:
+    \[ \lim_{n \to \infty} a_n = 0 \]
+    \textbf{3. If $r = 1$}: \\
+    We have $a_0 r^n = a_0$ for all $n \in \mathbb{N}$. Thus, we have:
+    \[
+        \lim_{n \to \infty} a_0 r^n = a_0
+    \]
 \end{proof}
 
 \begin{eg}
@@ -409,9 +428,8 @@ n \\ n
 
 \begin{eg}
     Let $a_n = \sqrt{\frac{2^{2n + 1}}{3^{n + 8}}}$. Then we have:
-    \[ a_n = \sqrt{\frac{2 \cdot 4^n}{3^8 \cdot 3^n}} = \frac{\sqrt{2}}{\sqrt{3^8}} \cdot \left(\frac{4}{3}\right)^{n/2} \]
-    Then $r = \frac{4}{3}$ thus $|r| > 1$. By the definition of geometric sequence, we conclude that the sequence diverges.
-    % TODO: finish example
+    \[ a_n = \sqrt{\frac{2 \cdot 4^n}{3^8 \cdot 3^n}} = \frac{\sqrt{2}}{\sqrt{3^8}} \cdot \left(\frac{4}{3}\right)^{n/2} = \frac{\sqrt{2}}{81} \left(\sqrt{\frac{4}{3}}\right)^n \]
+    Then $r = \sqrt{\frac{4}{3}}$ thus $|r| > 1$. By the definition of geometric sequence, we conclude that the sequence diverges.
 \end{eg}
 
 \subsection{Properties of Limits}
@@ -493,9 +511,9 @@ Note that not all divergent sequences diverge to infinity. For example, the sequ
 \begin{itemize}[itemsep=1pt,label=$\circ$]
     \item $\lim_{n \to \infty} a_n = \infty = \lim_{n \to \infty} b_n \implies \lim_{n \to \infty} (a_n + b_n) = \infty$
     \item $\lim_{n \to \infty} a_n = \pm \infty$ and $b_n$ is bounded $\implies \lim_{n \to \infty} (a_n + b_n) = \pm \infty$
-    \item $\lim_{n \to \infty} b_n = \infty$ and $a_n \geq b_n \implies \lim_{n \to \infty} a_n = \infty$
+    \item $\lim_{n \to \infty} b_n = \infty$ and $a_n \geq b_n \quad (\forall n \geq n_0) \implies \lim_{n \to \infty} a_n = \infty$
     \item If $a_n$ is bounded and $\lim_{n \to \infty} b_n = \pm \infty$, then $\lim_{n \to \infty} \frac{a_n}{b_n} = 0$
-    %TODO: add last
+    \item $\lim_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right| = + \infty$ and $a_n \neq 0 \quad \forall n \implies (a_n)$ does not converge
 \end{itemize}
 Some indeterminate forms are:
 \begin{itemize}[itemsep=1pt,label=$\circ$]
@@ -557,12 +575,19 @@ Note that $(\cos (n))$ and $(\sin (n))$ are divergent sequences.
 \begin{proof}
     Let $(a_n) \uparrow$ and upper bounded. The we have:
     \[ \exists l = \sup \{a_n, n \in \mathbb{N}\} \]
-    We then have:
-    \[ \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, |a_n - l| < \epsilon \]
+    By the definition of supremum, we have:
+    \[ \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, |a_n - l| \leq \epsilon \]
     Since $(a_n)$ is growing, we have:
-    \[ a_n \leq a_{n + 1} \quad \forall n \geq N \quad \Leftrightarrow \quad l \]
+    \[ a_N \leq a_{n} \quad \forall n \geq N \implies l - a_n \leq l - a_N \]
     Thus, we have:
-    % TODO: finish proof
+    \[
+        0 \geq l - a_n \geq \epsilon \implies |l - a_n| \geq \epsilon \implies \lim_{n \to \infty} a_n = l
+    \]
+    Let $(a_n) \uparrow$ not upper bounded. Then we have:
+    \[
+        \forall A > 0, \ \exists a_{n_0} \geq A, \ (a_n) \uparrow \ \forall n \geq n_0 \implies a_n \geq a_{n_0} \geq A \implies \lim_{n \to \infty} a_n = +\infty
+    \] 
+    The proof for decreasing sequences is similar.
 \end{proof}
 
 \section{The number $e$}
@@ -613,15 +638,17 @@ Let $(x_n)$ : $x_0 = 1$, $x_n = (1 + \frac{1}{n})^n$ for all $n \geq 1$ and let 
     \[
         \left(1 + \frac{1}{n + 1}\right)^{n + 1} \geq \left(1 + \frac{1}{n}\right)^n
     \]
-    In other words, we want to show that the geometric mean is less than or equal to the arithmetic mean:
+    In other words, we want to show that the geometric mean ($\sqrt{xy}$) is less than or equal to the arithmetic mean ($\frac{x + y}{2}$). More generally, we want to show that:
     \[
         \sqrt[n + 1]{a_0 a_1 \ldots a_n} \leq \frac{a_0 + a_1 + \ldots + a_n}{n + 1}
     \]
     Let $a_0 = 1$ and $a_n = \left(1 + \frac{1}{n}\right)$. Then we have:
     \[
-        \sqrt[n + 1]{1 \cdot \left(1 + \frac{1}{n}\right)^n} \leq \frac{1 + n\left(1 + \frac{1}{n}\right)}{n + 1} = 1 + \frac{1}{n + 1} \quad \leftarrow \quad \left(1 + \frac{1}{n + 1}\right)^{n + 1} \geq \left(1 + \frac{1}{n}\right)^n
+        \sqrt[n + 1]{\left(1 + \frac{1}{n}\right)^n} \leq \frac{1 + n\left(1 + \frac{1}{n}\right)}{n + 1} \implies \sqrt[n + 1]{\left(1 + \frac{1}{n}\right)^n} \leq \frac{1 + n + 1}{n + 1} = 1 + \frac{1}{n + 1}
     \]
-    % TODO: complete
+    \[
+        \implies \left(1 + \frac{1}{n}\right)^n \leq \left(1 + \frac{1}{n + 1}\right)^{n + 1}
+    \]
 \end{proof}
 
 \begin{definition}[The number \( e \)]
@@ -634,7 +661,9 @@ Let $(x_n)$ : $x_0 = 1$, $x_n = (1 + \frac{1}{n})^n$ for all $n \geq 1$ and let 
 The following limits hold:
 \begin{itemize}[itemsep=1pt,label=$\circ$]
     \item $\lim_{n \to \infty} \left(1 - \frac{x}{n}\right)^n = e^{-x}, \ \forall x \in \mathbb{R}$
-    % TODO: complete
+    \item $\lim_{n \to \infty} \frac{n!}{n^n} = 0$
+    \item $\lim_{n \to \infty} \frac{\sin(\frac{1}{n})}{\frac{1}{n}} = 1$
+    \item $\lim_{n \to \infty} \sin(\frac{1}{n}) = 0$
 \end{itemize}
 
 \section{Sequences defined by recurrence}
