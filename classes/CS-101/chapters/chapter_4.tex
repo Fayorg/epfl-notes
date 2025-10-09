@@ -610,6 +610,22 @@ Let's summarise how to solve recurrence relations using generating functions:
     where $P(x)$ and $Q(x)$ are polynomials, $r_i$ are the roots of the polynomial $Q(x)$, and $A_i$, $B_j$, and $C_j$ are constants to be determined.
 \end{definition}
 
+\subsection{Derivative of a Formal Power Sum}
+\begin{definition}[Derivative of a Formal Power Sum]
+    The derivative of a formal power sum $F(x) = \sum_{n=0}^{\infty} a_n x^n$ is defined as:
+    \[ F'(x) = \sum_{n=1}^{\infty} n a_n x^{n-1} \]
+    This is obtained by differentiating each term of the power sum with respect to $x$.
+\end{definition}
+
+\begin{eg}
+    Let $A(x) = 1 + x + x^2 + \ldots$. This serie can be expressed as:
+    \[ A(x) = \sum_{n=0}^{\infty} x^n = \frac{1}{1 - x} \]
+    The derivative of $A(x)$ is:
+    \[ A'(x) = \sum_{n=1}^{\infty} n x^{n-1} = \frac{1}{(1 - x)^2} \]
+    Or more explicitly:
+    \[ A'(x) = 1 + 2x + 3x^2 + 4x^3 + \ldots \]
+\end{eg}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
