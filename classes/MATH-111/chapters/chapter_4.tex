@@ -1,0 +1,195 @@
+\chapter{Vectorial Spaces and Subspaces}
+With this chapter, we add another abstraction layer to our mathematical framework. We will get new mathematical tools that will allow us to work with more complex objects in a more general way.
+
+\section{Vectorial Spaces}
+\begin{definition}[Vectorial Space]
+    A vectorial space (or vector space) is a set $V$ together with two operations: vector addition and scalar multiplication, satisfying these properties for all $\vec{u}, \vec{v}, \vec{w} \in V$ and $c,d \in \mathbb{R}$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\vec{u} + \vec{v} = \vec{v} + \vec{u}$ (Commutativity of vector addition)
+        \item $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$ (Associativity of vector addition)
+        \item There exists a zero vector $\vec{0} \in \mathbb{R}^n$ such that $\vec{u} + \vec{0} = \vec{u}$ (Existence of additive identity)
+        \item For each $\vec{u} \in \mathbb{R}^n$, there exists an additive inverse $-\vec{u} \in \mathbb{R}^n$ such that $\vec{u} + (-\vec{u}) = \vec{0}$ (Existence of additive inverse)
+        \item $c(\vec{u} + \vec{v}) = c\vec{u} + c\vec{v}$ (Distributivity of scalar multiplication over vector addition)
+        \item $(c + d)\vec{u} = c\vec{u} + d\vec{u}$ (Distributivity of scalar addition over scalar multiplication)
+        \item $c(d\vec{u}) = (cd)\vec{u}$ (Associativity of scalar multiplication)
+        \item $1\vec{u} = \vec{u}$ (Existence of multiplicative identity)
+    \end{itemize}
+\end{definition}
+Instead of working with specific objects like $\mathbb{R}^n$, we can now work with any set $V$ that satisfies the properties of a vectorial space. This abstraction allows us to apply the same mathematical tools and techniques previously seen to a wider variety of objects.
+
+\begin{definition}[Vector]
+    Previously defined vectors in $\mathbb{R}^n$ are now called vectors in a vectorial space $V$. The operations of vector addition and scalar multiplication are defined as per the properties of the vectorial space.
+\end{definition}
+
+\begin{eg}
+    Let $V = \mathbb{R}^n$ with the usual operations of vector addition and scalar multiplication in $\mathbb{R}^n$. 
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{R}^{n \times n}$ with the usual operations of matrix addition and scalar multiplication in $\mathbb{R}^{n \times n}$. \\
+    Note that in this case, the elements of $V$ are matrices but also vectors in the vectorial space $V$.
+\end{eg}
+
+\subsection{Polynomial Spaces}
+\begin{definition}[Polynomial Space]
+    Let $P_n$ be the set of all polynomials of degree less than or equal to $n$. The operations of polynomial addition and scalar multiplication are defined as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Polynomial Addition: For $p(x), q(x) \in P_n$, their sum is defined as $(p + q)(x) = p(x) + q(x)$.
+        \item Scalar Multiplication: For a scalar $c \in \mathbb{R}$ and a polynomial $p(x) \in P_n$, the scalar multiplication is defined as $(cp)(x) = c \cdot p(x)$.
+    \end{itemize}
+    With these operations, we can easily verify that $P_n$ satisfies all the properties of a vectorial space. Thus, $P_n$ is a vectorial space.
+\end{definition}
+\begin{proof}
+    Let's prove that for any two polynomials $p(x), q(x) \in P_n$ and any scalar $c \in \mathbb{R}$, the operations of polynomial are well-defined. We have:
+    \[
+        p(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n \quad \text{and} \quad q(x) = b_0 + b_1 x + b_2 x^2 + ... + b_n x^n
+    \]
+    where $a_0, a_1, ..., a_n, b_0, b_1, ..., b_n \in \mathbb{R}$. \\
+    \textbf{Polynomial Addition:}
+    \[(p + q)(x) = p(x) + q(x) = (a_0 + b_0) + (a_1 + b_1)x + (a_2 + b_2)x^2 + ... + (a_n + b_n)x^n\]
+    The resulting polynomial $(p + q)(x)$ is also of degree less than or equal to $n$, so it belongs to $P_n$. \\
+    \textbf{Scalar Multiplication:}
+    \[(cp)(x) = c \cdot p(x) = c \cdot (a_0 + a_1 x + a_2 x^2 + ... + a_n x^n) = (c a_0) + (c a_1)x + (c a_2)x^2 + ... + (c a_n)x^n\]
+    The resulting polynomial $(cp)(x)$ is also of degree less than or equal to $n$, so it belongs to $P_n$. \\
+    Thus both operations are well-defined, and we can easily verify that $P_n$ satisfies all the properties of a vectorial space.
+\end{proof}
+
+\begin{eg}
+    Let $V$ a vectorial space. Let's show that (1) the zero vector is unique, (2) the additive inverse of each vector is unique and (3) $0 \vec{u} = \vec{0}$ and $c \vec{0} = \vec{0}$ for all $c \in \mathbb{R}$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Let's assume that there are two vectors $\vec{0}$ and $\vec{0'}$ that both satisfy the property of the additive identity. Then, we have:
+        \[\vec{u} + \vec{0} = \vec{u} \quad \text{and} \quad \vec{u} + \vec{0'} = \vec{u}\]
+        By subtracting $\vec{u}$ from both sides of the second equation, we get:
+        \[ \vec{u} + \vec{0} = \vec{u} = \vec{u} + \vec{0'} \implies \vec{0'} = \vec{0}\]
+        Thus, the zero vector is unique.
+        \item Let's assume that there are two vectors $\vec{v}$ and $\vec{v'}$ that both satisfy the property of the additive inverse for a vector $\vec{u}$. Then, we have:
+        \[\vec{u} + \vec{v} = \vec{0} \quad \text{and} \quad \vec{u} + \vec{v'} = \vec{0}\]
+        By subtracting $\vec{u}$ from both sides of the second equation, we get:
+        \[ \vec{u} + \vec{v} = \vec{0} = \vec{u} + \vec{v'} \implies \vec{v'} = \vec{v}\]
+        Thus, the additive inverse of each vector is unique.
+        \item To show that $0 \vec{u} = \vec{0}$, we can use the distributive property of scalar multiplication over scalar addition:
+        \[0 \vec{u} = (0 + 0) \vec{u} = 0 \vec{u} + 0 \vec{u}\]
+        By subtracting $0 \vec{u}$ from both sides, we get:
+        \[0 \vec{u} = \vec{0}\]
+        To show that $c \vec{0} = \vec{0}$ for any scalar $c \in \mathbb{R}$, we can use the distributive property of scalar multiplication over vector addition:
+        \[c \vec{0} = c (\vec{0} + \vec{0}) = c \vec{0} + c \vec{0}\]
+        By subtracting $c \vec{0}$ from both sides, we get:
+        \[c \vec{0} = \vec{0}\]
+        Thus, we have shown that $0 \vec{u} = \vec{0}$ and $c \vec{0} = \vec{0}$ for all $c \in \mathbb{R}$.
+    \end{itemize}
+\end{eg}
+
+\section{Subspaces}
+\begin{definition}[Subspace]
+    A subspace $W$ of a vectorial space $V$ is a subset of $V$ that is itself a vectorial space under the same operations of vector addition and scalar multiplication defined on $V$. In other words, $W$ is a subspace of $V$ if:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector of $V$ is in $W$.
+        \item $W$ is closed under vector addition: For any $\vec{u}, \vec{v} \in W$, the sum $\vec{u} + \vec{v}$ is also in $W$.
+        \item $W$ is closed under scalar multiplication: For any $\vec{u} \in W$ and any scalar $c \in \mathbb{R}$, the product $c\vec{u}$ is also in $W$.
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    Let $V = \mathbb{R}^n$ and $H = \{\vec{x} \in \mathbb{R}^n : x_1 + \ldots + x_n = 0\}$. Let's show that $H$ is a subspace of $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector $\vec{0} = (0, 0, \ldots, 0)$ is in $H$ since $0 + 0 + \ldots + 0 = 0$.
+        \item Let $\vec{u}, \vec{v} \in H$. Then, we have:
+        \[ u_1 + u_2 + \ldots + u_n = 0 \quad \text{and} \quad v_1 + v_2 + \ldots + v_n = 0 \]
+        Adding these two equations, we get:
+        \[(u_1 + v_1) + (u_2 + v_2) + \ldots + (u_n + v_n) = 0 + 0 = 0\]
+        Thus, $\vec{u} + \vec{v} \in H$.
+        \item Let $\vec{u} \in H$ and $c \in \mathbb{R}$. Then, we have:
+        \[u_1 + u_2 + \ldots + u_n = 0\]
+        Multiplying this equation by $c$, we get:
+        \[c u_1 + c u_2 + \ldots + c u_n = c \cdot 0 = 0\]
+        Thus, $c \vec{u} \in H$.
+    \end{itemize}
+    Since $H$ satisfies all three conditions, it is a subspace of $V$
+\end{eg}
+Let's see some examples of sets that are not subspaces:
+\begin{eg}
+    Let $V = \mathbb{R}^n$ and $H = \{\vec{x} \in \mathbb{R}^n : x_1 + \ldots + x_n = 1\}$. Let's show that $H$ is not a subspace of $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector $\vec{0} = (0, 0, \ldots, 0)$ is not in $H$ since $0 + 0 + \ldots + 0 \neq 1$.
+    \end{itemize}
+    Since $H$ does not satisfy the first condition, it is not a subspace of $V$.
+\end{eg}
+\begin{eg}
+    Let $V = \mathbb{R}^n$ and $H = \{\vec{x} \in \mathbb{R}^n : x_1 \geq 0, \ldots, x_n \geq 0\}$. Let's show that $H$ is not a subspace of $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector $\vec{0} = (0, 0, \ldots, 0)$ is in $H$ since $0 \geq 0, \ldots, 0 \geq 0$.
+        \item Let $\vec{u}, \vec{v} \in H$. Then, we have:
+        \[ u_1 \geq 0, \ldots, u_n \geq 0 \quad \text{and} \quad v_1 \geq 0, \ldots, v_n \geq 0 \]
+        Adding these two equations, we get:
+        \[(u_1 + v_1) \geq 0, \ldots, (u_n + v_n) \geq 0\]
+        Thus, $\vec{u} + \vec{v} \in H$.
+        \item Let $\vec{u} \in H$ and $c \in \mathbb{R}$. If $c \geq 0$, then we have:
+        \[u_1 \geq 0, \ldots, u_n \geq 0\]
+        Multiplying this equation by $c$, we get:
+        \[c u_1 \geq 0, \ldots, c u_n \geq 0\]
+        Thus, $c \vec{u} \in H$. However, if $c < 0$, then we have:
+        \[u_1 \geq 0, \ldots, u_n \geq 0\]
+        Multiplying this equation by $c$, we get:
+        \[c u_1 \leq 0, \ldots, c u_n \leq 0\]
+        Thus, $c \vec{u} \notin H$.
+    \end{itemize}
+    Since $H$ does not satisfy the third condition, it is not a subspace of $V$.
+\end{eg}
+\begin{eg}
+    Let $V = \mathbb{R}^{n \times n }$ and $H = \{A \in \mathbb{R}^{n \times n} : A = A^T\}$. Let's show that $H$ is a subspace of $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero matrix $0$ is in $H$ since $0 = 0^T$.
+        \item Let $A, B \in H$. Then, we have:
+        \[ A = A^T \quad \text{and} \quad B = B^T \]
+        Adding these two equations, we get:
+        \[ (A + B)^T = A^T + B^T = A + B \]
+        Thus, $A + B \in H$.
+        \item Let $A \in H$ and $c \in \mathbb{R}$. Then, we have:
+        \[ A = A^T \]
+        Multiplying this equation by $c$, we get:
+        \[ (cA)^T = cA^T = cA \]
+        Thus, $cA \in H$.
+    \end{itemize}
+    Since $H$ satisfies all three conditions, it is a subspace of $V$.
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{P}_5$ and $H = \mathbb{P}_3$. Let's show that $H$ is a subspace of $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero polynomial $0$ is in $H$ since it is a polynomial of degree less than or equal to $3$.
+        \item Let $p(x), q(x) \in H$. Then, we have:
+        \[ \text{deg}(p(x)) \leq 3 \quad \text{and} \quad \text{deg}(q(x)) \leq 3 \]
+        Adding these two polynomials, we get:
+        \[ \text{deg}(p(x) + q(x)) \leq 3 \]
+        Thus, $p(x) + q(x) \in H$.
+        \item Let $p(x) \in H$ and $c \in \mathbb{R}$. Then, we have:
+        \[ \text{deg}(p(x)) \leq 3 \]
+        Multiplying this polynomial by $c$, we get:
+        \[ \text{deg}(cp(x)) \leq 3 \]
+        Thus, $cp(x) \in H$.
+    \end{itemize}
+    Since $H$ satisfies all three conditions, it is a subspace of $V$.
+\end{eg}
+Note that $\mathbb{R}^2$ is not a subspace of $\mathbb{R}^3$ since it is not a subset of $\mathbb{R}^3$.
+\begin{definition}[Null Subspace]
+    The null subspace (or trivial subspace) of a vectorial space $V$ is the set $\{\vec{0}\}$ containing only the zero vector of $V$. It is a subspace of $V$ since it satisfies all three conditions of a subspace.
+\end{definition}
+
+\begin{eg}
+    Let $V$ be a vectorial space. Let $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$ vectors of $V$ and the set $H = Vect\{v_1,v_2,v_3\}$ of all linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$. This set is a subset of $V$. Let's show that $H$ is a subspace of $V$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector $\vec{0}$ is in $H$ since we can write it as a linear combination of $\vec{v_1}, \vec{v_2}, \vec{v_3}$ with all coefficients equal to $0$:
+        \[ \vec{0} = 0\vec{v_1} + 0\vec{v_2} + 0\vec{v_3} \]
+        \item Let $\vec{u}, \vec{w} \in H$. Then, we can write them as linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$:
+        \[ \vec{u} = a_1\vec{v_1} + a_2\vec{v_2} + a_3\vec{v_3} \quad \text{and} \quad \vec{w} = b_1\vec{v_1} + b_2\vec{v_2} + b_3\vec{v_3} \]
+        where $a_1, a_2, a_3, b_1, b_2, b_3 \in \mathbb{R}$. Adding these two equations, we get:
+        \[ \vec{u} + \vec{w} = (a_1 + b_1)\vec{v_1} + (a_2 + b_2)\vec{v_2} + (a_3 + b_3)\vec{v_3} \]
+        Thus, $\vec{u} + \vec{w} \in H$.
+        \item Let $\vec{u} \in H$ and $c \in \mathbb{R}$. Then, we can write $\vec{u}$ as a linear combination of $\vec{v_1}, \vec{v_2}, \vec{v_3}$:
+        \[ \vec{u} = a_1\vec{v_1} + a_2\vec{v_2} + a_3\vec{v_3} \]
+        where $a_1, a_2, a_3 \in \mathbb{R}$. Multiplying this equation by $c$, we get:
+        \[ c\vec{u} = (ca_1)\vec{v_1} + (ca_2)\vec{v_2} + (ca_3)\vec{v_3} \]
+        Thus, $c\vec{u} \in H$.
+    \end{itemize}
+    Since $H$ satisfies all three conditions, it is a subspace of $V$.
+\end{eg}
