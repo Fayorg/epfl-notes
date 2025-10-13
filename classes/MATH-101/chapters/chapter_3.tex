@@ -749,3 +749,100 @@ Some recommendations to study sequences defined by recurrence:
     In both cases $(x_n)$ converges to a limit $l \in \mathbb{R}$. \\
     \textbf{Proposition}: If $(x_n)$ and $(a_n)$ two sequences such that $0 < a_n < 1$ for all $n \in \mathbb{N}$ and $\exists l \in \mathbb{R}$ : $(x_{n + 1} - l) = a_n (x_n - l)$. Then $(x_n)$ converges.
 \end{itemize}
+
+\section{Subsequences}
+\begin{definition}[Subsequence]
+    A subsequence of a sequence \( (a_n) \) is a new sequence formed by selecting specific elements from the original sequence while maintaining their order. Formally, if \( (a_n) \) is a sequence and \( (n_k) \) is a strictly increasing sequence of natural numbers, then the subsequence \( (a_{n_k}) \) is defined as:
+    \[
+        (a_{n_1}, a_{n_2}, a_{n_3}, \ldots)
+    \]
+    where \( n_1 < n_2 < n_3 < \ldots \)
+\end{definition}
+\begin{eg}
+    Let $a_n = (-1)^n$. Then we have two subsequences:
+    \[ a_{2n} = 1 \quad \text{and} \quad a_{2n + 1} = -1 \]
+    We can write that $a_{2n} \subset a_n$ and $a_{2n + 1} \subset a_n$. Both subsequences converge but the original sequence diverges.
+\end{eg}
+
+\begin{theorem}
+    If a sequence $(a_n)$ converges to a limit $l \in \mathbb{R}$ then all its subsequences converge to the same limit $l$.
+\end{theorem}
+\begin{proof}
+    Let $(a_n)$ be a sequence that converges to a limit $l \in \mathbb{R}$ and let $(a_{n_k})$ be a subsequence of $(a_n)$. We have:
+    \[ \forall \epsilon > 0, \ \exists N \in \mathbb{N} : \forall n \geq N, |a_n - l| < \epsilon \]
+    Since $(n_k)$ is a strictly increasing sequence of natural numbers, we have:
+    \[ n_k \geq k \quad \forall k \in \mathbb{N} \]
+    Let $k > N$, then we have:
+    \[ n_k > N \implies |a_{n_k} - l| < \epsilon \]
+    Thus, we conclude that:
+    \[ \lim_{k \to \infty} a_{n_k} = l \]
+\end{proof}
+
+\subsection{Bolzano-Weierstrass Theorem}
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+    Every bounded sequence of real numbers has a convergent subsequence.
+\end{theorem}
+
+\subsection{Cauchy subsequence}
+\begin{definition}[Cauchy subsequence]
+    A subsequence \( (a_{n_k}) \) of a sequence \( (a_n) \) is called a Cauchy subsequence if for every \( \epsilon > 0 \), there exists a natural number \( N \) such that for all \( m, n \geq N \), the following condition holds:
+    \[ |a_{n_m} - a_{n_n}| < \epsilon \]
+\end{definition}
+\begin{theorem}
+    A sequence of real numbers is Cauchy if and only if it converges.
+\end{theorem}
+% TODO: maybe include the idea of the proof or the proof itself
+If we have $\lim_{n \to \infty} (a_{n + k} - a_n) = 0$ for all $k \in \mathbb{N}$, this does not imply that $(a_n)$ is Cauchy.
+\begin{eg}
+    Let $a_n = \sqrt{n}$. Then we have:
+    \[ a_{n + k} - a_n = \sqrt{n + k} - \sqrt{n} = \frac{(\sqrt{n + k} - \sqrt{n})(\sqrt{n + k} + \sqrt{n})}{\sqrt{n + k} + \sqrt{n}} = \frac{k}{\sqrt{n + k} + \sqrt{n}} \to 0 \]
+    But $(a_n)$ is divergent which implies that it is not Cauchy. \\
+    % TODO: copy explaination from notes
+\end{eg}
+
+\section{Upper limit and lower limit of a sequence}
+\begin{definition}[Upper/lower limit]
+    Let \( (a_n) \) be a bounded sequence of real numbers. Two sequence can be defined as follows:
+    \[ y_n = \sup \{a_k : k \geq n\} \]
+    \[ z_n = \inf \{a_k : k \geq n\} \]
+    The sequence \( (y_n) \) is called the sequence of upper bounds, and the sequence \( (z_n) \) is called the sequence of lower bounds. Both sequences are monotonic, with \( (y_n) \) being decreasing and \( (z_n) \) being increasing. Since both sequences are bounded, they converge to limits \( L \) and \( l \) respectively. These limits are called the upper limit (or limit superior) and lower limit (or limit inferior) of the sequence \( (a_n) \):
+    \[ \limsup_{n \to \infty} a_n = L = \lim_{n \to \infty} y_n \]
+    \[ \liminf_{n \to \infty} a_n = l = \lim_{n \to \infty} z_n \]
+    It is always true that \( l \leq L \).
+    If \( l = L \), then the sequence \( (a_n) \) converges to the common limit \( l = L \).
+\end{definition}
+\begin{eg}
+    Let $a_n = (-1)^n \cdot (1 + \frac{1}{n^2})$ for all $n \in \mathbb{N}$. We can easily see that this sequence is bounded since:
+    \[ -2 < a_n < 2 \quad \forall n \in \mathbb{N} \]
+    We then have:
+    \[
+        a_n = (-2, 1 + \frac{1}{4}, -1-\frac{1}{9}, 1 + \frac{1}{16}, -1 - \frac{1}{25}, \ldots)
+    \]
+    for $n = 1, 2, 3, 4, 5, \ldots$. We then have:
+    \[ y_n = (1 + \frac{1}{4}, 1 + \frac{1}{4}, 1 + \frac{1}{16}, 1 + \frac{1}{16}, \ldots, 1 + \frac{1}{(n + \frac{1 + (-1)^{n + 1}{2}}))^2} \quad \text{and} \quad \lim_{n \to \infty} y_n = 1\]
+    \[ z_n = \inf \{a_k : k \geq n\} = -1 - \frac{1}{(n + 1)^2} \]
+    % TODO: complete
+\end{eg}
+If $\lim \sup x_n = l$ and $\lim \inf x_n = l_2$, then there exists two subsequences $(x_{n_k})$ and $(x_{m_k})$ such that:
+\[ \lim_{k \to \infty} x_{n_k} = l_1 \quad \text{and} \quad \lim_{k \to \infty} x_{m_k} = l_2 \]
+If $\lim \sup x_n = \lim \inf x_n = l$ then $\lim x_n = l$. \\
+Remark also that if $\lim x_n = l$ then $\lim \sup x_n = \lim \inf x_n = l$.
+
+\begin{eg}
+    Let $a_n = (-1)^n (1 + \frac{1}{n^2})$. We then have:
+    \[ \lim \sup a_n = 1 \quad \text{and} \quad \lim \inf a_n = -1 \]
+    Thus $(a_n)$ diverges.
+\end{eg}
+\begin{eg}
+    Let $a_n = 1 - \frac{1}{n}$. We then have:
+    \[
+        x_n = (0, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \frac{4}{5}, \ldots)
+    \] 
+    We then have:
+    \[
+        y_n = \sup \{a_k : k \geq n\} = 1 - \frac{1}{n} \quad \text{and} \quad \lim_{n \to \infty} y_n = 1
+    \]
+    Thus: 
+    \[ \lim \sup a_n = 1 \quad \text{and} \quad \lim \inf a_n = 1 \]
+    Thus $(a_n)$ converges to $1$.
+\end{eg}

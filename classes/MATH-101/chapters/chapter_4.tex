@@ -1,0 +1,56 @@
+\chapter{Numerical Series}
+
+\begin{definition}[Series]
+    Let $(a_n)_{n\geq 0}$ be a sequence of real numbers. The series with general term $a_n$ is the sequence defined by:
+    \[
+        S_n = \sum_{k=0}^n a_k
+    \]
+    The sequence $(S_n)_{n\geq 0}$ is called the sequence of partial sums of the series.
+\end{definition}
+
+\begin{definition}[Convergence of a Series]
+    A series $\sum_{n=0}^{\infty} a_n$ is said to converge if the sequence of its partial sums $(S_n)_{n\geq 0}$ converges. In this case, we denote its limit by:
+    \[
+        S = \sum_{n=0}^{\infty} a_n = \lim_{n \to \infty} S_n
+    \]
+    If the series does not converge, it is said to diverge.
+\end{definition}
+
+\begin{eg}
+    Let $\sum_{n = 0}^{\infty} n$. Then the sequence of partial sums is given by:
+    \[
+        S_n = \sum_{k=0}^n k = 0 + 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}
+    \]
+    As $n \to \infty$, $S_n \to \infty$. Therefore, the series $\sum_{n=0}^{\infty} n$ diverges.
+\end{eg}
+\begin{eg}
+    Let $\sum_{k = 0}^{\infty} \frac{1}{2^k}$ be a geometric series with first term $a = 1$ and common ratio $r = \frac{1}{2}$. Then the sequence of partial sums is given by:
+    \[
+        S_n = \sum_{k=0}^n \frac{1}{2^k} = 1 + \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^n} = \frac{1 - \left(\frac{1}{2}\right)^{n+1}}{1 - \frac{1}{2}} = 2\left(1 - \frac{1}{2^{n+1}}\right)
+    \]
+    As $n \to \infty$, $S_n \to 2$. Therefore, the series $\sum_{k = 0}^{\infty} \frac{1}{2^k}$ converges to $2$.
+\end{eg}
+Similarly, the series $\sum_{k = 0}^{\infty} r^k = \frac{1}{1 - r}$ for $|r| < 1$.
+\begin{eg}
+    Let $\sum_{k = 1}^{\infty} \frac{1}{k} = 1 + \frac{1}{2} + \frac{1}{3} + \ldots$ be the harmonic series. The sequence of partial sums is given by:
+    \[
+        S_n = \sum_{k=1}^n \frac{1}{k}
+    \]
+    Let's show that $S_n$ diverges as $n \to \infty$. By contradiction, assume that $S_n$ converges to some limit $L$. Then we have:
+    \[
+        S_{2n} = 1 + \frac{1}{2} + \ldots + \frac{1}{2n} = S_n + \left(\frac{1}{n+1} + \frac{1}{n+2} + \ldots + \frac{1}{2n}\right)
+    \]
+    Note that:
+    \[
+        \frac{1}{n+1} + \frac{1}{n+2} + \ldots + \frac{1}{2n} \geq n \cdot \frac{1}{2n} = \frac{1}{2}
+    \]
+    Thus, we have:
+    \[
+        S_{2n} \geq S_n + \frac{1}{2}
+    \]
+    Taking the limit as $n \to \infty$, we get:
+    \[
+        L \geq L + \frac{1}{2}
+    \]
+    which is a contradiction. Therefore, the harmonic series diverges.
+\end{eg}
