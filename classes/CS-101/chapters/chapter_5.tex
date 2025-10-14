@@ -408,4 +408,48 @@ Note that its not necessary that every pair of elements in a poset are comparabl
     Strings with lexicographic ordering are well-ordered sets.
 \end{eg}
 
+\subsection{Important Summation Formulas}
+The following are some important summation and their closed forms that are useful in various mathematical contexts:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\sum_{k = 0}^{n} ar^k = \frac{ar^{n + 1} - a}{r - 1} \quad (r \notin \{0, 1\})$
+    \item $\sum_{k = 1}^{n} k = \frac{n(n + 1)}{2}$
+    \item $\sum_{k = 1}^{n} k^2 = \frac{n (n + 1)(2n + 1)}{6}$
+    \item $\sum_{k = 1}^{n} k^3 = \left(\frac{n(n + 1)}{2}\right)^2$
+    \item $\sum_{k = 0}^{\infty} x^k = \frac{1}{1 - x} \quad (|x| < 1)$
+    \item $\sum_{k = 0}^{\infty} kx^{k - 1} = \frac{1}{(1 - x)^2} \quad (|x| < 1)$
+\end{itemize}
+\begin{eg}
+    Let's take an example if we wanted to find the formula for $\sum_{k = 1}^{n} k$, without using the formula directly. We can do this by using formal power series:
+    \[
+        A(x) = 1 + x + x^2 + \ldots = \sum_{n = 0}^{\infty} x^n = \frac{1}{1 -x}
+    \]
+    Now, we can differentiate both sides with respect to $x$:
+    \[
+        A'(x) = 0 + 1 + 2x + 3x^2 + \ldots = \sum_{n = 1}^{\infty} nx^{n - 1} = \frac{1}{(1 - x)^2}
+    \]
+    Multiplying both sides by $x$ gives:
+    \[
+        xA'(x) = 0 + 1x + 2x^2 + 3x^3 + \ldots = \sum_{n = 1}^{\infty} nx^n = \frac{x}{(1 - x)^2}
+    \]
+    Now, if we realize that for any $B(x)$:
+    \begin{align*}
+        B(x) \frac{1}{1 - x} &= (b_0 + b_1x + b_2 x^2 + \ldots)(1 + x + x^2 + \ldots) \\
+        &= b_0 + (b_0 + b_1)x + (b_0 + b_1 + b_2)x^2 + \ldots \\
+        &= \sum_{n = 0}^{\infty} \left(\sum_{k = 0}^{n} b_k\right)x^n
+    \end{align*}
+    Then we can take $B(x) = xA'(x)$ and we have:
+    \[
+        \frac{x}{(1 - x)^3} = \sum_{n = 0}^{\infty} \left(\sum_{k = 1}^{n} k\right)x^n
+    \]
+    We realize that:
+    \begin{align*}
+        xA'(x) \frac{1}{1 - x} &= \frac{1}{2}x A''(x) = \frac{1}{2}x \left( \sum_{n = 0}^{\infty} x^n\right)'' = \frac{1}{2}x \left( \sum_{n = 1}^{\infty} nx^{n-1} \right)' \\
+        &= \frac{1}{2}x \left( \sum_{n = 2}^{\infty} n (n - 1) x^{n - 2} \right) = \frac{1}{2} \left( \sum_{n = 2}^{\infty} n (n - 1) x^{n - 1} \right) \\
+        &= \sum_{n = 1}^{\infty} \left(\frac{n(n + 1)}{2}\right)x^n \\
+    \end{align*}
+    Therefore, we have:
+    \[
+        \sum_{k = 0}^{n} k = \frac{n(n + 1)}{2}
+    \]
+\end{eg}
 % Check the slide that he went over quickly to put the def

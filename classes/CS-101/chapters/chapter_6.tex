@@ -1,0 +1,237 @@
+\chapter{Summation and Algorithms}
+
+\section{Algorithms}
+\begin{definition}[Algorithm]
+    An algorithm is a finite sequence of well-defined instructions, typically used to solve a specific task:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item to perform a computation
+        \item to solve a certain problem
+        \item to reach a certain destination
+    \end{itemize}
+    In the context of computing the instructions are carried out by a computer.
+\end{definition}
+
+\begin{eg}
+    Let's find the maximum of a list of numbers:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with the first number as the current maximum.
+        \item Compare the current maximum with the next number in the list.
+        \item If the next number is greater than the current maximum, update the current maximum to this next number.
+        \item Repeat the comparison and update process until all numbers in the list have been checked.
+        \item The current maximum at the end of the process is the maximum number in the list.
+    \end{itemize}
+\end{eg}
+Algorithms can be expressed in various ways, including natural language, pseudocode, or programming languages.
+
+\begin{definition}[Pseudocode]
+    Pseudocode is a high-level description of an algorithm that uses the structural conventions of programming languages but is intended for human reading rather than machine reading. It combines natural language and programming language elements to outline the logic and steps of an algorithm without adhering to the strict syntax of a specific programming language.
+\end{definition}
+
+% TODO: better layout for pseudocode
+\begin{eg}
+    Here is a pseudocode example for finding the maximum of a list of numbers:
+    \begin{algorithmic}
+        \Function{max\_finder}{$a_1, a_2, \ldots, a_n$: integers}
+            \State $max \gets a_1$
+            \For{$i \gets 2$ to $n$}
+                \If{$a_i > max$}
+                    \State $max \gets a_i$
+                \EndIf
+            \EndFor
+            \State \Return $max$
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
+Typically algorithms solve problems such as:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item \textbf{Searching Problems} - Finding the position of a particular element in a list
+    \item \textbf{Sorting Problems} - Arranging the elements of a list in a certain order (e.g., ascending or descending)
+    \item \textbf{Optimization Problems} - Determining the optimal value (maximum or minimum) of a particular quantity over all possible inputs
+\end{itemize}
+
+\subsection{Search Algorithms}
+\begin{definition}[Search Algorithm]
+    A search algorithm is a method used to locate a specific item or group of items within a larger collection of data. The goal of a search algorithm is to efficiently find the desired item(s) while minimizing the time and resources required for the search process.
+\end{definition}
+
+\begin{definition}[Linear Search]
+    Linear search, also known as sequential search, is a simple search algorithm that checks each element in a list one by one until the desired element is found or the end of the list is reached.
+\end{definition}
+\begin{eg}
+    A linear search algorithm would typically look like this:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item First compare $x$ with the first element of the list.
+        \item If they are equal, return the index of the first element.
+        \item If not, compare $x$ with the second element of the list.
+        \item Repeat this process until either $x$ is found or the end of the list is reached.
+        \item If the end of the list is reached without finding $x$, return -1.
+    \end{itemize}
+    In pseudocode:
+    \begin{algorithmic}
+        \Function{linear\_search}{$a_1, a_2, \ldots, a_n$: distinct integers, $x$: integer}
+            \For{$i \gets 1$ to $n$}
+                \If{$a_i = x$}
+                    \State \Return $i$
+                \EndIf
+            \EndFor
+            \State \Return $-1$
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
+\begin{eg}
+    Consider the list $L = (3, 2, -5, 7, 9, 14, 18)$ and $x = 7$. To find the index of $x$ in $L$ using linear search we will need to check $4$ elements: $3, 2, -5, 7$. Let's now compute the average number of comparisons needed to find an element in this list. \\
+    Since the list has $7$ elements, the average number of comparisons is:
+    \[\frac{1 + 2 + 3 + 4 + 5 + 6 + 7}{7} = \frac{28}{7} = 4\]
+    Therefore, on average, we need to check $4$ elements to find an element in the list using linear search. More generally, for a list of size $n$, the average number of comparisons needed to find an element using linear search is:
+    \[\frac{1 + 2 + 3 + \ldots + n}{n} = \frac{\frac{n(n+1)}{2}}{n} = \frac{n+1}{2}\]
+    Thus, the average number of comparisons needed to find an element in a list of size $n$ using linear search is $\frac{n+1}{2}$.
+\end{eg}
+
+\begin{definition}[Binary Search]
+    Binary search is an efficient algorithm for finding a specific item in a sorted list. It works by repeatedly dividing the search interval in half, eliminating half of the remaining elements from consideration at each step.
+\end{definition}
+\begin{eg}
+    A binary search algorithm would typically look like this:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with two pointers, one at the beginning of the list (low) and one at the end of the list (high).
+        \item Calculate the middle index of the current search interval: $mid = \lfloor (low + high) / 2 \rfloor$.
+        \item Compare the middle element with the target value $x$.
+        \item If the middle element is equal to $x$, return the index of the middle element.
+        \item If $x$ is less than the middle element, update the high pointer to $mid - 1$ to search in the left half of the list.
+        \item If $x$ is greater than the middle element, update the low pointer to $mid + 1$ to search in the right half of the list.
+        \item Repeat steps 2-6 until either $x$ is found or the low pointer exceeds the high pointer (indicating that $x$ is not in the list).
+        \item If $x$ is not found, return -1.
+    \end{itemize}
+    In pseudocode:
+    \begin{algorithmic}
+        \Function{binary\_search}{$a_1, a_2, \ldots, a_n$: distinct integers (sorted), $x$: integer}
+            \State $low \gets 1$
+            \State $high \gets n$
+            \While{$low < high$}
+                \State $mid \gets \lfloor (low + high) / 2 \rfloor$ \Comment{$\lfloor \cdot \rfloor$ is rounding down}
+                \If{$a_{mid} = x$}
+                    \State \Return $mid$
+                \ElsIf{$a_{mid} \leq x$}
+                    \State $low \gets mid + 1$
+                \Else
+                    \State $high \gets mid - 1$
+                \EndIf
+            \EndWhile
+            \State \Return $-1$
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
+\begin{eg}
+    Consider the sorted list $L = (2, 3, 5, 7, 9, 14, 18)$ and $x = 5$. To find the index of $x$ in $L$ using binary search we will need to check $3$ elements: $7, 3, 9$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item First iteration: $low = 1$, $high = 7$, $mid = \lfloor (1 + 7) / 2 \rfloor = 4$. Compare $a_4 = 7$ with $x = 5$. Since $7 > 5$, we update $high = mid - 1 = 3$.
+        \item Second iteration: $low = 1$, $high = 3$, $mid = \lfloor (1 + 3) / 2 \rfloor = 2$. Compare $a_2 = 3$ with $x = 5$. Since $3 < 5$, we update $low = mid + 1 = 3$.
+        \item Third iteration: $low = 3$, $high = 3$, $mid = \lfloor (3 + 3) / 2 \rfloor = 3$. Compare $a_3 = 5$ with $x = 5$. They are equal, so we return the index $3$.
+    \end{itemize}
+    Therefore, the index of $x = 5$ in the list $L$ is $3$.
+\end{eg}
+
+% \begin{eg}
+%     Consider the sorted list $L = (2, 3, 5, 7, 9, 14, 18)$ and $x = 7$. To find the index of $x$ in $L$ using binary search we will need to check $3$ elements: $7, 3, 9$. Let's now compute the average number of comparisons needed to find an element in this list. \\
+%     Since the list has $7$ elements, the average number of comparisons is:
+%     \[\frac{1 + 2 + 3}{7} = \frac{6}{7} \approx 0.857\]
+%     Therefore, on average, we need to check approximately $0.857$ elements to find an element in the list using binary search. More generally, for a list of size $n$, the average number of comparisons needed to find an element using binary search is:
+%     \[\log_2(n)\]
+%     Thus, the average number of comparisons needed to find an element in a list of size $n$ using binary search is $\log_2(n)$.
+% \end{eg}
+
+\subsection{Sort Algorithms}
+\begin{definition}[Sorting Algorithm]
+    A sorting algorithm is a method used to arrange the elements of a list or array in a specific order, typically in ascending or descending order. The goal of a sorting algorithm is to efficiently organize the data while minimizing the time and resources required for the sorting process.
+\end{definition}
+
+\begin{definition}[Selection Sort]
+    Selection sort is a simple sorting algorithm that divides the input list into two parts: a sorted sublist and an unsorted sublist. The algorithm repeatedly selects the smallest (or largest, depending on the desired order) element from the unsorted sublist and moves it to the end of the sorted sublist until the entire list is sorted.
+\end{definition}
+\begin{eg}
+    A selection sort algorithm would typically look like this:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with the first element of the list as the current minimum.
+        \item Compare the current minimum with the next element in the list.
+        \item If the next element is smaller than the current minimum, update the current minimum to this next element.
+        \item Repeat the comparison and update process until all elements in the unsorted sublist have been checked.
+        \item Swap the current minimum with the first element of the unsorted sublist.
+        \item Move the boundary between the sorted and unsorted sublists one position to the right.
+        \item Repeat steps 1-6 until the entire list is sorted.
+    \end{itemize}
+    In pseudocode:
+    \begin{algorithmic}
+        \Function{selection\_sort}{$a_1, a_2, \ldots, a_n$: integers}
+            \For{$i \gets 1$ to $n-1$}
+                \State $min\_index \gets i$
+                \For{$j \gets i+1$ to $n$}
+                    \If{$a_j < a_{min\_index}$}
+                        \State $min\_index \gets j$
+                    \EndIf
+                \EndFor
+                \State swap($a_i$, $a_{min\_index}$)
+            \EndFor
+            \State \Return $a_1, a_2, \ldots, a_n$
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
+\begin{eg}
+    Consider the list $L = (29, 10, 14, 37, 13)$. To sort this list using selection sort we will need to perform the following steps:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item First pass: Find the minimum element in the entire list, which is $10$, and swap it with the first element. The list becomes $(10, 29, 14, 37, 13)$.
+        \item Second pass: Find the minimum element in the remaining unsorted sublist $(29, 14, 37, 13)$, which is $13$, and swap it with the second element. The list becomes $(10, 13, 14, 37, 29)$.
+        \item Third pass: Find the minimum element in the remaining unsorted sublist $(14, 37, 29)$, which is $14$, and swap it with the third element. The list remains $(10, 13, 14, 37, 29)$.
+        \item Fourth pass: Find the minimum element in the remaining unsorted sublist $(37, 29)$, which is $29$, and swap it with the fourth element. The list becomes $(10, 13, 14, 29, 37)$.
+        \item The list is now sorted.
+    \end{itemize}
+    Therefore, after performing selection sort on the list $L = (29, 10, 14, 37, 13)$ we obtain the sorted list $(10, 13, 14, 29, 37)$.
+\end{eg}
+
+\begin{eg}
+    Let's analyze the number of comparisons made by the selection sort algorithm on a list of size $n$. In the first pass, we compare the first element with the remaining $n-1$ elements, resulting in $n-1$ comparisons. In the second pass, we compare the second element with the remaining $n-2$ elements, resulting in $n-2$ comparisons. This process continues until the second-to-last pass, where we compare the second-to-last element with the last element, resulting in $1$ comparison. The total number of comparisons made by the selection sort algorithm can be calculated as follows:
+    \[(n-1) + (n-2) + (n-3) + \ldots + 2 + 1 = \frac{(n-1)n}{2} = \frac{n^2 - n}{2}\]
+    Therefore, the selection sort algorithm makes a total of $\frac{n^2 - n}{2}$ comparisons to sort a list of size $n$.
+\end{eg}
+
+\begin{definition}[Bubble Sort]
+    Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The process is repeated until the list is sorted.
+\end{definition}
+\begin{eg}
+    A bubble sort algorithm would typically look like this:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start at the beginning of the list.
+        \item Compare the first two adjacent elements.
+        \item If the first element is greater than the second element, swap them.
+        \item Move to the next pair of adjacent elements and repeat steps 2-3 until the end of the list is reached.
+        \item After each pass through the list, the largest unsorted element will have "bubbled up" to its correct position at the end of the list.
+        \item Repeat steps 1-5 for the remaining unsorted portion of the list until no swaps are needed, indicating that the list is sorted.
+    \end{itemize}
+    In pseudocode:
+    \begin{algorithmic}
+        \Function{bubble\_sort}{$a_1, a_2, \ldots, a_n$: integers}
+            \For{$i \gets 1$ to $n-1$}
+                \For{$j \gets 1$ to $n-i$}
+                    \If{$a_j > a_{j+1}$}
+                        \State swap($a_j$, $a_{j+1}$)
+                    \EndIf
+                \EndFor
+            \EndFor
+            \State \Return $a_1, a_2, \ldots, a_n$
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
+\begin{eg}
+    Consider the list $L = (5, 1, 4, 2, 8)$. To sort this list using bubble sort we will need to perform the following steps:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item First pass: Compare $5$ and $1$, swap them. List becomes $(1, 5, 4, 2, 8)$. Compare $5$ and $4$, swap them. List becomes $(1, 4, 5, 2, 8)$. Compare $5$ and $2$, swap them. List becomes $(1, 4, 2, 5, 8)$. Compare $5$ and $8$, no swap needed. End of first pass.
+        \item Second pass: Compare $1$ and $4$, no swap needed. Compare $4$ and $2$, swap them. List becomes $(1, 2, 4, 5, 8)$. Compare $4$ and $5$, no swap needed. End of second pass.
+        \item Third pass: Compare $1$ and $2$, no swap needed. Compare $2$ and $4$, no swap needed. End of third pass.
+        \item The list is now sorted.
+    \end{itemize}
+    Therefore, after performing bubble sort on the list $L = (5, 1, 4, 2, 8)$ we obtain the sorted list $(1, 2, 4, 5, 8)$.
+\end{eg}
+\begin{eg}
+    Let's analyze the number of comparisons made by the bubble sort algorithm on a list of size $n$. In the first pass, we compare the first element with the second element, then the second element with the third element, and so on, until we compare the $(n-1)$-th element with the $n$-th element. This results in $n-1$ comparisons. In the second pass, we again compare adjacent elements, but this time we only need to compare up to the $(n-2)$-th element, resulting in $n-2$ comparisons. This process continues until the second-to-last pass, where we compare only the first two elements, resulting in $1$ comparison. The total number of comparisons made by the bubble sort algorithm can be calculated as follows:
+    \[(n-1) + (n-2) + (n-3) + \ldots + 2 + 1 = \frac{(n-1)n}{2} = \frac{n^2 - n}{2}\]
+    Therefore, the bubble sort algorithm makes a total of $\frac{n^2 - n}{2}$ comparisons to sort a list of size $n$.
+\end{eg}
