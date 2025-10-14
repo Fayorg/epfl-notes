@@ -63,3 +63,29 @@
 % 	\end{mdframed}
 % }
 % \makeatother
+
+% +++++ EXERCISES +++++
+\declaretheoremstyle[
+	headfont=\bfseries\sffamily\color{exercise-header-text}, bodyfont=\normalfont,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=Dandelion, backgroundcolor=exercise-background, fontcolor=exercise-body-text,
+			nobreak=false
+		}
+]{thmorangebox}
+\declaretheorem[style=thmorangebox, name=Exercise, numberwithin=section]{exercisebase}
+\NewDocumentEnvironment{exercise}{o o} % This is a wrapper to get new line when a name is provided
+{
+    \IfNoValueTF{#2}{
+        \begin{exercisebase}[\textit{#1}]$\newline$
+    }{
+        \begin{exercisebase}[#2, \textit{#1}]$\newline$
+    }
+    \newcommand{\Answer}{
+        \vspace{\baselineskip} $\newline$ \textcolor{exercise-header-text}{\textbf{Answer:}} $\newline$
+    }
+}
+{
+  \end{exercisebase}
+}
