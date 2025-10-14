@@ -1161,5 +1161,160 @@ For all the examples below, the starting graph would be a unit square defined by
     ($\Rightarrow$) Suppose $T$ is surjective. This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. This implies that the range of $A$ is $\mathbb{R}^m$, which means that the columns of $A$ span $\mathbb{R}^m$. Therefore, $A$ has a pivot in every row. \\
     ($\Leftarrow$) Suppose the columns of $A$ span $\mathbb{R}^m$ (i.e., $A$ has a pivot in every row). This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $A \cdot \vec{x} = \vec{y}$. This implies that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. Therefore, $T$ is surjective.
 \end{proof}
+
 \section{Exercises}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 % maybe exercise at the end of w3c1 classe
+\begin{exercise}[Assignments Week 1, Exercise 2]
+    Let's consider the following equation:
+    \[
+        \alpha x_1 + \beta x_2 = 1
+    \]
+    where $\alpha, \beta \in \mathbb{R}$. For what values of $\alpha$ and $\beta$ does the line defined by the equation above is parallel to the line defined by the equation $-x_1 + x_2 = -1$?
+    \Answer
+    Both line are parallel if their normal vectors ($(\alpha, \beta)$ and $(-1, 1)$) are scalar multiples of each other. Thus, we have:
+    \[
+        (\alpha, \beta) = k \cdot (-1, 1)
+    \]
+    for some scalar $k \in \mathbb{R}$. Therefore, $\alpha = -k$ and $\beta = k$ for some $k \in \mathbb{R}$.
+\end{exercise}
+
+\begin{exercise}[Assignments Week 1, Exercise 2]
+    Let's find the value of $\alpha$ and $\beta$ such that the following system of equations:
+    \[
+        \begin{cases}
+            -x_1 + x_2 =  -1 \\
+            \alpha x_1 + \beta x_2 = 1 \\
+            (\alpha -1)x_1 + (\beta + 1)x_2 = 0
+        \end{cases}
+    \]
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item has an infinite number of solutions;
+        \item has no solution;
+        \item has a unique solution.
+    \end{itemize}
+    \Answer
+    Let's write the system in matrix form:
+    \[
+        \begin{bmatrix}
+            -1 & 1 \\
+            \alpha & \beta \\
+            \alpha - 1 & \beta + 1
+        \end{bmatrix}
+        \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+        =
+        \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}
+    \]
+    We can create the augmented matrix and row reduce it:
+    \[
+        \left[\begin{array}{cc|c}
+            -1 & 1 & -1 \\
+            \alpha & \beta & 1 \\
+            \alpha - 1 & \beta + 1 & 0
+        \end{array}\right]
+        \sim
+        \left[\begin{array}{cc|c}
+            1 & -1 & 1 \\
+            0 & \beta + \alpha & 1 - \alpha \\
+            0 & \beta + \alpha & 1 - \alpha
+        \end{array}\right]
+        \sim
+        \left[\begin{array}{cc|c}
+            1 & -1 & 1 \\
+            0 & \beta + \alpha & 1 - \alpha \\
+            0 & 0 & 0
+        \end{array}\right]
+    \]
+    We have that if $\alpha + \beta \neq 0$, the system has a unique solution. If $\alpha + \beta = 0$ the system is degenerate. In this case, if $-\alpha + 1 \neq 0$ the system has no solution, and if $-\alpha + 1 = 0$ (i.e. $\alpha = 1$ and $\beta = -1$) the system has an infinite number of solutions.
+\end{exercise}
+
+\begin{exercise}[Assignments Week 2, Exercise 5]
+    Let's determine if the following homogeneous system of equations has a non-trivial solution:
+    \[
+        \begin{cases}
+            -7x_1 + 37x_2 + 119x_3 = 0 \\
+            5x_1 + 19x_2 + 57x_3 = 0
+        \end{cases}
+    \]
+    \Answer
+    We easily see that the system has less equations (two) than unknowns (three). Thus, the system has an infinite number of solutions, including non-trivial ones.
+\end{exercise}
+
+\begin{exercise}[Assignments Week 2, Exercise 13]
+    Let $A$ be a matrix of size $m \times n$. Show that the columns of $A$ span $\mathbb{R}^m$ if and only if the echelon form of $A$ has a pivot in every row.
+    \Answer
+    Let's prove both directions of the equivalence:
+    \begin{align*}
+        &\text{The columns of $A$ span $\mathbb{R}^m$} \\
+        \iff \quad &\text{For all vectors $\vec{b} \in \mathbb{R}^m$, the equation $A \vec{x} = \vec{b}$ has at least one solution $\vec{x} \in \mathbb{R}^n$} \\
+        &\text{(i.e. $\vec{b}$ is a linear combination of the columns of $A$)} \\
+        \iff \quad &\text{The row echelon form of the augmented matrix has no line of the form $\left[\ 0 \ \ldots \ c \ \right]$} \\
+        &\text{with $c$ non-zero ; and $A$ has no free variables (i.e. no line of the form $\left[\ 0 \ \ldots \ 0 \ \right]$)} \\
+        \iff \quad &\text{Each row has a pivot}
+    \end{align*}
+\end{exercise}
+
+\begin{exercise}[Assignments Week 3, Exercise 3]
+    Describe the row echelon form of a matrix $A$ of size $4 \times 2$, $A = \left[\ \vec{a_1} \ \vec{a_2} \ \right]$ and $\vec{a_2}$ is not multiple of $\vec{a_1}$.
+    \Answer
+    If $\vec{a_1} \neq \vec{0}$, then since $\vec{a_2}$ is not a multiple of $\vec{a_1}$, the row echelon form of $A$ is:
+    \[
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & 1 \\
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}
+    \]
+    Otherwise, if $\vec{a_1} = \vec{0}$ then $\vec{a_2} \neq \vec{0}$, then the row echelon form of $A$ is:
+    \[
+        \begin{bmatrix}
+            0 & 1 \\
+            0 & 0 \\
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}
+    \]
+\end{exercise}
+
+\begin{exercise}[Assignments Week 3, Exercise 8]
+    For each of the following cases, determine if the transformation is injective, surjective or both:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $T: \mathbb{R}^2 \to \mathbb{R}^3$, $\begin{bmatrix}x_1 \\ x_2\end{bmatrix} \to \begin{bmatrix}4x_1 + 3x_2 \\ x_1 \\ x_2\end{bmatrix}$
+        \item $T: \mathbb{R}^3 \to \mathbb{R}$, $\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix} \to x_1 + x_2 + x_3$
+        \item $T: \mathbb{R}^3 \to \mathbb{R}^3$, $\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix} \to \begin{bmatrix}x_3 \\ x_2 \\ x_1\end{bmatrix}$
+        \item $T: \mathbb{R}^2 \to \mathbb{R}^2$, $\begin{bmatrix}x_1 \\ x_2\end{bmatrix} \to \begin{bmatrix}x_1 + x_2 \\ x_1 + x_2\end{bmatrix}$
+        \item $T: \mathbb{R}^2 \to \mathbb{R}^2$, $\begin{bmatrix}x_1 \\ x_2\end{bmatrix} \to \begin{bmatrix}x_1 + x_2 \\ x_1 - x_2\end{bmatrix}$
+        \item $T: \mathbb{R}^2 \to \mathbb{R}^2$, $\begin{bmatrix}x_1 \\ x_2\end{bmatrix} \to \begin{bmatrix}(x_1)^2 + (x_2)^2 \\ x_1\end{bmatrix}$
+    \end{itemize}
+    \Answer
+    Let's analyze each transformation using its associated matrix:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The associated matrix is:
+        \[
+            A = \begin{bmatrix} 4 & 3 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}
+        \]
+        Since $A$ has a pivot in every column but not in every row, $T$ is injective but not surjective.
+        \item The associated matrix is:
+        \[
+            A = \begin{bmatrix} 1 & 1 & 1 \end{bmatrix}
+        \]
+        Since $A$ has a pivot in every row but not in every column, $T$ is surjective but not injective.
+        \item The associated matrix is:
+        \[
+            A = \begin{bmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{bmatrix}
+        \]
+        Since $A$ has a pivot in every row and every column, $T$ is both injective and surjective (bijective).
+        \item The associated matrix is:
+        \[
+            A = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}
+        \]
+        Since $A$ has neither a pivot in every row nor in every column, $T$ is neither injective nor surjective.
+        \item The associated matrix is:
+        \[
+            A = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+        \]
+        Since $A$ has a pivot in every row and every column, $T$ is both injective and surjective (bijective).
+        \item The transformation is not linear (due to the square term), so we cannot determine injectivity or surjectivity using the associated matrix method.
+    \end{itemize}
+\end{exercise}
