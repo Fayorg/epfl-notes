@@ -176,7 +176,7 @@ Note that $\mathbb{R}^2$ is not a subspace of $\mathbb{R}^3$ since it is not a s
 \end{definition}
 
 \begin{eg}
-    Let $V$ be a vectorial space. Let $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$ vectors of $V$ and the set $H = Vect\{v_1,v_2,v_3\}$ of all linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$. This set is a subset of $V$. Let's show that $H$ is a subspace of $V$:
+    Let $V$ be a vectorial space. Let $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$ vectors of $V$ and the set $H = Span\{v_1,v_2,v_3\}$ of all linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$. This set is a subset of $V$. Let's show that $H$ is a subspace of $V$:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item The zero vector $\vec{0}$ is in $H$ since we can write it as a linear combination of $\vec{v_1}, \vec{v_2}, \vec{v_3}$ with all coefficients equal to $0$:
         \[ \vec{0} = 0\vec{v_1} + 0\vec{v_2} + 0\vec{v_3} \]
@@ -192,4 +192,253 @@ Note that $\mathbb{R}^2$ is not a subspace of $\mathbb{R}^3$ since it is not a s
         Thus, $c\vec{u} \in H$.
     \end{itemize}
     Since $H$ satisfies all three conditions, it is a subspace of $V$.
+\end{eg}
+
+\begin{theorem}
+    Let $\vec{v_1}, v_2, \ldots, v_p$ be vectors in a vector space $V$. Then, the set $H = Span\{v_1, v_2, \ldots, v_p\}$ is a subspace of $V$.
+\end{theorem}
+
+\begin{eg}
+    Let $V = \mathbb{R}^3$ and $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$. We have:
+    \begin{itemize}
+        \item The origin $\{(0,0,0)\}$ is a subspace of $V$.
+        \item Any line through the origin ($Span(\vec{v_1}), \vec{v_1} \neq \vec{0}$) is a subspace of $V$.
+        \item Any plane through the origin ($Span(\vec{v_1}, \vec{v_2})$ and $\vec{v_1}, \vec{v_2}$ linearly independent) is a subspace of $V$.
+        \item The whole space $V$ is a subspace of $V$ ($Span(\vec{v_1}, \vec{v_2}, \vec{v_3})$ and $\vec{v_1}, \vec{v_2}, \vec{v_3}$ linearly independent).
+    \end{itemize}
+\end{eg}
+
+\begin{theorem}
+    The set of solutions $H$ of a homogeneous system of linear equations $A\vec{x} = \vec{0}$ (with $A \in \mathbb{R}^{m \times n}$) is a subspace of $\mathbb{R}^n$.
+\end{theorem}
+\begin{proof}
+    Let's show that $H$ satisfies the three conditions of a subspace:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The zero vector $\vec{0}$ is in $H$ since $A\vec{0} = \vec{0}$.
+        \item Let $\vec{u}, \vec{v} \in H$. Then, we have:
+        \[ A\vec{u} = \vec{0} \quad \text{and} \quad A\vec{v} = \vec{0} \]
+        Adding these two equations, we get:
+        \[ A(\vec{u} + \vec{v}) = A\vec{u} + A\vec{v} = \vec{0} + \vec{0} = \vec{0} \]
+        Thus, $\vec{u} + \vec{v} \in H$.
+        \item Let $\vec{u} \in H$ and $c \in \mathbb{R}$. Then, we have:
+        \[ A\vec{u} = \vec{0} \]
+        Multiplying this equation by $c$, we get:
+        \[ A(c\vec{u}) = cA\vec{u} = c\cdot\vec{0} = \vec{0} \]
+        Thus, $c\vec{u} \in H$.
+    \end{itemize}
+    Since $H$ satisfies all three conditions, it is a subspace of $\mathbb{R}^n$.
+\end{proof}
+
+\section{Kernel and Images}
+Let $A \in \mathbb{R}^{m \times n}$.
+\begin{definition}[Kernel]
+    The kernel (or null space) of $A$ is the set of all vectors $\vec{x} \in \mathbb{R}^n$ such that $A\vec{x} = \vec{0}$, i.e.,
+    \[ \text{Ker}(A) = \{ \vec{x} \in \mathbb{R}^n \mid A\vec{x} = \vec{0} \} \]
+    The kernel is a subspace of $\mathbb{R}^n$.
+\end{definition}
+
+\begin{definition}[Image]
+    The image of $A$ is the set of all vectors $\vec{y} \in \mathbb{R}^m$ such that there exists a vector $\vec{x} \in \mathbb{R}^n$ with $A\vec{x} = \vec{y}$, i.e.,
+    \[ \text{Im}(A) = \{ \vec{y} \in \mathbb{R}^m \mid \exists \vec{x} \in \mathbb{R}^n, A\vec{x} = \vec{y} \} \]
+    The image is a subspace of $\mathbb{R}^m$.
+\end{definition}
+The Image of $T$ is also called the column space of $A$ since it is spanned by the columns of $A$.
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        -3 & 6 & -1 & 1 & -7 \\
+        1 & -2 & 2 & 3 & -1 \\
+        2 & -4 & 5 & 8 & -4
+    \end{bmatrix}$. Let's find a basis for the kernel and the image of the linear transformation $T: \mathbb{R}^5 \to \mathbb{R}^3$ defined by $T(\vec{x}) = A\vec{x}$. We need to solve the homogeneous system $A\vec{x} = \vec{0}$:
+    \[ \begin{bmatrix}
+        -3 & 6 & -1 & 1 & -7 \\
+        1 & -2 & 2 & 3 & -1 \\
+        2 & -4 & 5 & 8 & -4
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -2 & 0 & -1 & 3 \\
+        0 & 0 & 1 & 2 & -2 \\
+        0 & 0 & 0 & 0 & 0
+    \end{bmatrix} \]
+    From the reduced row echelon form, we can write the system of equations:
+    \[
+        \begin{cases}
+            x_1 - 2x_2 - x_4 + 3x_5 = 0 \\
+            x_3 + 2x_4 - 2x_5 = 0
+        \end{cases} \iff \begin{cases}
+            x_1 = 2x_2 + x_4 - 3x_5 \\
+            x_3 = -2x_4 + 2x_5
+        \end{cases}
+    \]
+    We can express the solution in terms of the free variables $x_2, x_4, x_5$:
+    \[ \vec{x} = \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+    \end{bmatrix} = x_2 \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ 0 \\ 0
+    \end{bmatrix} + x_4 \begin{bmatrix}
+        1 \\ 0 \\ -2 \\ 1 \\ 0
+    \end{bmatrix} + x_5 \begin{bmatrix}
+        -3 \\ 0 \\ 2 \\ 0 \\ 1
+    \end{bmatrix} \]
+    Thus, a basis for the kernel of $T$ is given by:
+    \[ \left\{ \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ 0 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        1 \\ 0 \\ -2 \\ 1 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        -3 \\ 0 \\ 2 \\ 0 \\ 1
+    \end{bmatrix} \right\} \]
+    To find a basis for the image of $T$, we can look at the pivot columns of the original matrix $A$. The pivot columns are the first and third columns. Thus, a basis for the image of $T$ is given by:
+    \[ \left\{ \begin{bmatrix}
+        -3 \\ 1 \\ 2
+    \end{bmatrix}, \begin{bmatrix}
+        -1 \\ 2 \\ 5
+    \end{bmatrix} \right\} \]
+\end{eg}
+
+\subsection{Differences between the Kernel and the Image}
+We can denote these differences as follows:
+\vskip0.3cm
+\begin{center}
+    \begin{tabular}{p{0.45\textwidth} | p{0.45\textwidth}}
+        \\ {\centering \textbf{Kernel} \par} & {\centering \textbf{Image} \par} \\ \\ \hline \\
+        The kernel is a subspace of $\mathbb{R}^n$ & The image is a subspace of $\mathbb{R}^m$ \\ \\
+        $\text{Ker} A$ is defined implicitly by the equation $A\vec{x} = \vec{0}$ & $\text{Im} A$ is defined explicitly as the span of the columns of $A$ \\ \\
+        Finding the $\text{Ker} A$ takes time by solving a homogeneous system of linear equations & Finding the $\text{Im} A$ is easy. The columns of $A$ form a basis for the image. \\ \\
+        No simple relation between $\text{Ker} A$ and the coefficients of $A$ & Simple relation between $\text{Im} A$ and the coefficients of $A$, since each column of $A$ is contained $\text{Im} A$ \\ \\
+        A vector $\vec{v}$ in $\text{Ker} A$ is characterized by $A\vec{v} = \vec{0}$ & A vector $\vec{v}$ in $\text{Im} A$ is characterized by the existence of a vector $\vec{u}$ such that $A\vec{u} = \vec{v}$ \\ \\
+        Given a vector $\vec{v}$, it is easy to check if $\vec{v} \in \text{Ker} A$ by computing $A\vec{v}$ & Given a vector $\vec{v}$, the system $\begin{bmatrix}
+            A & \vec{v}
+        \end{bmatrix}$ must be solved to check if $\vec{v} \in \text{Im} A$ \\ \\
+        $\text{Ker} A = \{\vec{0}\}$ if and only if the equation $A\vec{x} = \vec{0}$ has only the trivial solution & $\text{Im} A = \mathbb{R}^m$ if and only if the equation $A\vec{x} = \vec{b}$ has a solution for every $\vec{b} \in \mathbb{R}^m$ \\ \\
+        $\text{Ker} A = \{\vec{0}\}$ if and only if the transformation $T(\vec{x}) = A\vec{x}$ is one-to-one (injective) & $\text{Im} A = \mathbb{R}^m$ if and only if the transformation $T(\vec{x}) = A\vec{x}$ is onto (surjective) \\ \\
+    \end{tabular}
+\end{center}
+
+\subsection{Kernel and Images of Linear Transformations}
+\begin{definition}[Linear Transformation]
+    A linear transformation is a function $T: V \to W$ that satisfies the following properties for all vectors $\vec{u}, \vec{v} \in V$ and any scalar $c \in \mathbb{R}$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $T(\vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v})$ (Additivity)
+        \item $T(c\vec{u}) = cT(\vec{u})$ (Homogeneity)
+    \end{itemize}
+\end{definition}
+Again we can define the kernel and the image of a linear transformation.
+\begin{definition}[Kernel of a Linear Transformation]
+    The kernel (or null space) of a linear transformation $T: V \to W$ is the set of all vectors $\vec{v} \in V$ such that $T(\vec{v}) = \vec{0}$, i.e.,
+    \[ \text{Ker}(T) = \{ \vec{v} \in V \mid T(\vec{v}) = \vec{0} \} \]
+    The kernel is a subspace of $V$.
+\end{definition}
+\begin{definition}[Image of a Linear Transformation]
+    The image (or range) of a linear transformation $T: V \to W$ is the set of all vectors $\vec{w} \in W$ such that there exists a vector $\vec{v} \in V$ with $T(\vec{v}) = \vec{w}$, i.e.,
+    \[ \text{Im}(T) = \{ \vec{w} \in W \mid \exists \vec{v} \in V, T(\vec{v}) = \vec{w} \} \]
+    The image is a subspace of $W$.
+\end{definition}
+
+\begin{eg}
+    Let $V = \mathbb{P}_3$ and $W = \mathbb{P}_2$. Consider the linear transformation $T: V \to W$ defined by $T(p(x)) = p'(x)$, where $p'(x)$ is the derivative of the polynomial $p(x)$:
+    \[ p(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 \quad \text{and} \quad p \in \mathbb{P}_3 \]
+    where $a_0, a_1, a_2, a_3 \in \mathbb{R}$. The derivative of $p(x)$ is given by:
+    \[ p'(x) = a_1 + 2a_2 x + 3a_3 x^2 \quad \text{and} \quad p' \in \mathbb{P}_2 \]
+    Let's check that $T$ is a linear transformation:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Let $p(x), q(x) \in V$. Then, we have:
+        \[ T(p(x) + q(x)) = (p(x) + q(x))' = p'(x) + q'(x) = T(p(x)) + T(q(x)) \]
+        Thus, $T$ satisfies the additivity property.
+        \item Let $p(x) \in V$ and $c \in \mathbb{R}$. Then, we have:
+        \[ T(cp(x)) = (cp(x))' = c p'(x) = c T(p(x)) \]
+        Thus, $T$ satisfies the homogeneity property.
+    \end{itemize}
+    Since $T$ satisfies both properties, it is a linear transformation. Now, let's find the kernel of $T$:
+    \[ \text{Ker}(T) = \{ p(x) \in V \mid T(p(x)) = p'(x) = 0 \} \]
+    The only polynomial in $\mathbb{P}_3$ whose derivative is $0$ is the constant polynomial. Thus, we have:
+    \[ \text{Ker}(T) = \{ p(x) = a_0 \mid a_0 \in \mathbb{R} \} \]
+    Now, let's find the image of $T$:
+    \[ \text{Im}(T) = \{ p'(x) \in W \mid p(x) \in V \} \]
+    The derivative of any polynomial in $\mathbb{P}_3$ is a polynomial in $\mathbb{P}_2$. Thus, we have:
+    \[ \text{Im}(T) = W = \mathbb{P}_2 \]
+    Thus $T$ is onto (surjective) but not one-to-one (injective) since $\text{Ker}(T) \neq \{\vec{0}\}$.
+\end{eg}
+
+\section{Independent Sets and Bases}
+\subsection{Independent Sets}
+\begin{definition}[Independent Set]
+    A set of vectors $\{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_p}\}$ in a vector space $V$ is said to be linearly independent if the only solution to the equation:
+    \[ c_1 \vec{v_1} + c_2 \vec{v_2} + \ldots + c_p \vec{v_p} = \vec{0} \]
+    is the trivial solution $c_1 = c_2 = \ldots = c_p = 0$. If there exists a non-trivial solution (i.e., at least one $c_i \neq 0$), then the set is said to be linearly dependent.
+\end{definition}
+\begin{theorem}
+    A set of vectors $\{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_p}\}$ of at least two vectors (where $\vec{v_1} \neq \vec{0}$) is linearly dependent if and only if at least one of the vectors can be expressed as a linear combination of the others.
+\end{theorem}
+
+\begin{eg}
+    Let $V = \mathbb{P}_2$. Let's consider the set of polynomials $\{p_1(x), p_2(x), p_3(x)\}$ where:
+    \[ p_1(x) = 1, \quad p_2(x) = x, \quad p_3(x) = 4 - x \]
+    We want to determine if this set is linearly independent or dependent. We need to solve the equation:
+    \[
+        c_1 p_1(x) + c_2 p_2(x) + c_3 p_3(x) = 0 \implies c_1 (1) + c_2 (x) + c_3 (4 - x) = 0
+    \]
+    This simplifies to:
+    \[ (c_1 + 4c_3) + (c_2 - c_3)x = 0 \]
+    For this equation to hold for all $x$, the coefficients of both the constant term and the coefficient of $x$ must be zero. This gives us the system:
+    \[ \begin{cases}
+        c_1 + 4c_3 = 0 \\
+        c_2 - c_3 = 0
+    \end{cases} \]
+    Solving this system, we find:
+    \[ c_1 = -4c_3, \quad c_2 = c_3 \]
+    This means that there are infinitely many solutions depending on the value of $c_3$. For example, if we choose $c_3 = 1$, we get:
+    \[ c_1 = -4, \quad c_2 = 1, \quad c_3 = 1 \]
+    Thus, we have a non-trivial solution:
+    \[ -4p_1(x) + 1p_2(x) + 1p_3(x) = 0 \]
+    Therefore, the set $\{p_1(x), p_2(x), p_3(x)\}$ is linearly dependent.
+\end{eg}
+
+\subsection{Bases}
+\begin{definition}[Basis]
+    A basis for a vector space $V$ is a set of vectors $\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_n}\}$ in $V$ that is both linearly independent and spans the entire space $V$. This means that any vector $\vec{v} \in V$ can be expressed as a linear combination of the basis vectors:
+    \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
+    where $c_1, c_2, \ldots, c_n \in \mathbb{R}$.
+\end{definition}
+Remark that:
+\begin{itemize}
+    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ are linearly independent then they form a basis for $Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
+    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ form a basis for $H \subseteq V$, then $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}$ are in $H$ because $H = Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
+\end{itemize}
+
+\begin{eg}
+    Let $V = \mathbb{R}^2$ and $\vec{b_1} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \vec{b_2} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$. We claim that $(\vec{b_1}, \vec{b_2})$ is a basis for $V$.
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{R}^3$ and $\vec{b_1} = \begin{pmatrix}
+        1 \\ 1 \\ 0
+    \end{pmatrix}, \vec{b_2} = \begin{pmatrix}
+        1 \\ -1 \\ 0
+    \end{pmatrix}$. We claim that $(\vec{b_1}, \vec{b_2})$ is a basis for the subspace $H = \{\vec{x} \in \mathbb{R}^3 : x_3 = 0\} = Span\{\vec{b_1}, \vec{b_2}\}$ which is a plane in $\mathbb{R}^3$.
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{R}^2$ and $\vec{b_1} = \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}, \vec{b_2} = \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}, \vec{b_3} = \begin{pmatrix}
+        0 \\ -1
+    \end{pmatrix}$. We claim that $(\vec{b_1}, \vec{b_2}, \vec{b_3})$ is not a basis for $V$ since the set is linearly dependent (because $\vec{b_3} = -\vec{b_2}$).
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{P}_2$ and $\vec{b_1}(t) = 1$, $\vec{b_2}(t) = t$, $\vec{b_3}(t) = t^2$. We claim that $(\vec{b_1}, \vec{b_2}, \vec{b_3})$ is a basis for $V$.
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{P}_3$ and $\vec{b_1}(t) = 1$, $\vec{b_2}(t) = t$, $\vec{b_3}(t) = t^2$. We claim that $(\vec{b_1}, \vec{b_2}, \vec{b_3})$ is not a basis for $V$ since it does not span $V$ (for example, the polynomial $t^3$ cannot be expressed as a linear combination of $\vec{b_1}, \vec{b_2}, \vec{b_3}$).
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        | & & | \\
+        \vec{a_1} & \ldots & \vec{a_n} \\
+        | & & |
+    \end{bmatrix} \in \mathbb{R}^{n \times n}$ be an invertible matrix. We claim that $(\vec{a_1}, \ldots, \vec{a_n})$ is a basis for $\mathbb{R}^n$ since the columns of $A$ are linearly independent and span $\mathbb{R}^n$.
 \end{eg}
