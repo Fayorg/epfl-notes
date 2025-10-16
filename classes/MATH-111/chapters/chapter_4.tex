@@ -279,20 +279,20 @@ The Image of $T$ is also called the column space of $A$ since it is spanned by t
     \end{bmatrix} + x_5 \begin{bmatrix}
         -3 \\ 0 \\ 2 \\ 0 \\ 1
     \end{bmatrix} \]
-    Thus, a basis for the kernel of $T$ is given by:
-    \[ \left\{ \begin{bmatrix}
-        2 \\ 1 \\ 0 \\ 0 \\ 0
-    \end{bmatrix}, \begin{bmatrix}
-        1 \\ 0 \\ -2 \\ 1 \\ 0
-    \end{bmatrix}, \begin{bmatrix}
-        -3 \\ 0 \\ 2 \\ 0 \\ 1
-    \end{bmatrix} \right\} \]
-    To find a basis for the image of $T$, we can look at the pivot columns of the original matrix $A$. The pivot columns are the first and third columns. Thus, a basis for the image of $T$ is given by:
-    \[ \left\{ \begin{bmatrix}
-        -3 \\ 1 \\ 2
-    \end{bmatrix}, \begin{bmatrix}
-        -1 \\ 2 \\ 5
-    \end{bmatrix} \right\} \]
+    % Thus, a basis for the kernel of $T$ is given by:
+    % \[ \left\{ \begin{bmatrix}
+    %     2 \\ 1 \\ 0 \\ 0 \\ 0
+    % \end{bmatrix}, \begin{bmatrix}
+    %     1 \\ 0 \\ -2 \\ 1 \\ 0
+    % \end{bmatrix}, \begin{bmatrix}
+    %     -3 \\ 0 \\ 2 \\ 0 \\ 1
+    % \end{bmatrix} \right\} \]
+    % To find a basis for the image of $T$, we can look at the pivot columns of the original matrix $A$. The pivot columns are the first and third columns. Thus, a basis for the image of $T$ is given by:
+    % \[ \left\{ \begin{bmatrix}
+    %     -3 \\ 1 \\ 2
+    % \end{bmatrix}, \begin{bmatrix}
+    %     -1 \\ 2 \\ 5
+    % \end{bmatrix} \right\} \]
 \end{eg}
 
 \subsection{Differences between the Kernel and the Image}
@@ -442,3 +442,205 @@ Remark that:
         | & & |
     \end{bmatrix} \in \mathbb{R}^{n \times n}$ be an invertible matrix. We claim that $(\vec{a_1}, \ldots, \vec{a_n})$ is a basis for $\mathbb{R}^n$ since the columns of $A$ are linearly independent and span $\mathbb{R}^n$.
 \end{eg}
+Note that if $A$ is not invertible, then the columns of $A$ do not form a basis for $\mathbb{R}^n$ since they are linearly dependent.
+\begin{eg}
+    The columns of $I_n$ form the standard basis for $\mathbb{R}^n$ which is given by:
+    \[ \left\{ \begin{pmatrix}
+        1 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 \\ 1 \\ \vdots \\ 0
+    \end{pmatrix}, \ldots, \begin{pmatrix}
+        0 \\ 0 \\ \vdots \\ 1
+    \end{pmatrix} \right\} = \{ \vec{e_1}, \ldots, \vec{e_n} \} \]
+\end{eg}
+
+\subsection{Finding a Basis with a Dependent Set}
+\begin{eg}
+    Let $\vec{v_1} = \begin{pmatrix}
+        1 \\ 1
+    \end{pmatrix}$ and $\vec{v_2} = \begin{pmatrix}
+        -2 \\ -2
+    \end{pmatrix}$. We want to find a basis for $H = Span\{\vec{v_1}, \vec{v_2}\}$. Since $\vec{v_2} = -2\vec{v_1}$, the set $\{\vec{v_1}, \vec{v_2}\}$ is linearly dependent. Thus, we can remove $\vec{v_2}$ and keep only $\vec{v_1}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}\}$ (or another basis could be $\{\vec{v_2}\}$).
+\end{eg}
+
+\begin{eg}
+    Let $\vec{v_1} = \begin{pmatrix}
+        0 \\ 2 \\ -1
+    \end{pmatrix}, \vec{v_2} = \begin{pmatrix}
+        2 \\ 2 \\ 0
+    \end{pmatrix}$ and $\vec{v_3} = \begin{pmatrix}
+        6 \\ 16 \\ -5
+    \end{pmatrix}$ be linearly dependent vectors in $\mathbb{R}^3$ since:
+    \[ 5\vec{v_1} + 3\vec{v_2} = \vec{v_3} \]
+    For any $\vec{v}$ that is in $H = Span\{\vec{v_1}, \vec{v_2}, \vec{v_3}\}$, we can write:
+    \[ \vec{v} = c_1 \vec{v_1} + c_2 \vec{v_2} + c_3 \vec{v_3} \]
+    Substituting $\vec{v_3}$, we get:
+    \[ \vec{v} = c_1 \vec{v_1} + c_2 \vec{v_2} + c_3 (5\vec{v_1} + 3\vec{v_2}) = (c_1 + 5c_3)\vec{v_1} + (c_2 + 3c_3)\vec{v_2} \]
+    Thus, we can express $\vec{v}$ as a linear combination of only $\vec{v_1}$ and $\vec{v_2}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}, \vec{v_2}\}$ and thus $Span\{\vec{v_1}, \vec{v_2}, \vec{v_3}\} = Span\{\vec{v_1}, \vec{v_2}\} = H$.
+\end{eg}
+
+\begin{theorem}
+    Let $F = (\vec{v_1, \ldots, \vec{v_p}})$ be a set of vectors in a vector space $V$ and $H = Span\{\vec{v_1}, \ldots, \vec{v_p}\}$. We have:
+    \begin{itemize}
+        \item If any vector $\vec{v_k} \in F$ is a linear combination of the other vectors in $F$, then we can remove $\vec{v_k}$ from $F$ without changing the span of $H$.
+        \item If $H \neq \{\vec{0}\}$, then we can remove vectors from $F$ until we obtain a basis for $H$.
+    \end{itemize}
+\end{theorem}
+
+\subsection{Basis of Kernel and Image}
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        -3 & 6 & -1 & 1 & -7 \\
+        1 & -2 & 2 & 3 & -1 \\
+        2 & -4 & 5 & 8 & -4
+    \end{bmatrix}$ the same matrix as in another example. We had found that the kernel of $A$ is given by:
+    \[ \text{Ker}(A) = Span\left\{ \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ 0 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        1 \\ 0 \\ -2 \\ 1 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        -3 \\ 0 \\ 2 \\ 0 \\ 1
+    \end{bmatrix} \right\} \]
+    We know that a basis for $\text{Im} A$ can be extracted from the columns of $A$. To find which columns to take, we look at the vectors that form the kernel of $A$. We can rewrite the kernel as:
+    \[
+        \begin{cases}
+            2\vec{a_1} + \vec{a_2} = \vec{0} \\
+            \vec{a_1} - 2\vec{a_3} + \vec{a_4} = \vec{0} \\
+            -3\vec{a_1} + 2\vec{a_3} + \vec{a_5} = \vec{0}
+        \end{cases}
+    \]
+    where $\vec{a_1}, \vec{a_2}, \vec{a_3}, \vec{a_4}, \vec{a_5}$ are the columns of $A$. We can rewrite this system in terms of $\vec{a_1}$ and $\vec{a_3}$:
+    \[ \begin{cases}
+        \vec{a_2} = -2\vec{a_1} \\
+        \vec{a_4} = -\vec{a_1} + 2\vec{a_3} \\
+        \vec{a_5} = 3\vec{a_1} - 2\vec{a_3}
+    \end{cases} \]
+    Thus, we can express $\vec{a_2}, \vec{a_4}, \vec{a_5}$ as linear combinations of $\vec{a_1}$ and $\vec{a_3}$. Therefore, a basis for the image of $A$ is given by the columns $\vec{a_1}$ and $\vec{a_3}$:
+    \[ \left\{ \begin{bmatrix}
+        -3 \\ 1 \\ 2
+    \end{bmatrix}, \begin{bmatrix}
+        -1 \\ 2 \\ 5
+    \end{bmatrix} \right\} \]
+\end{eg}
+
+\begin{theorem}
+    The pivot columns of a matrix form a basis for the image of the matrix.
+\end{theorem}
+
+\subsection{System of Coordinates}
+\begin{theorem}
+    Let $B = (\vec{b_1}, \vec{b_2}, \ldots, \vec{b_n})$ be a basis for a vector space $V$. Then, for each vector $\vec{v} \in V$, there exists a unique set of scalars $c_1, c_2, \ldots, c_n$ such that:
+    \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
+    % The scalars $c_1, c_2, \ldots, c_n$ are called the coordinates of $\vec{v}$ relative to the basis $B$. The vector of coordinates is denoted by:
+    % \[ [\vec{v}]_B = \begin{pmatrix}
+    %     c_1 \\ c_2 \\ \vdots \\ c_n
+    % \end{pmatrix} \]
+\end{theorem}
+\begin{proof}
+    Let's prove that the representation exists and is unique. \\
+    \textbf{Existence:} Since $B$ is a basis for $V$, it spans $V$. Therefore, for any vector $\vec{v} \in V$, there exist scalars $c_1, c_2, \ldots, c_n$ such that:
+    \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
+    \textbf{Uniqueness:} Suppose there are two different representations of $\vec{v}$:
+    \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
+    and
+    \[ \vec{v} = d_1 \vec{b_1} + d_2 \vec{b_2} + \ldots + d_n \vec{b_n} \]
+    where $c_i \neq d_i$ for at least one $i$. Subtracting these two equations, we get:
+    \[ \vec{0} = (c_1 - d_1) \vec{b_1} + (c_2 - d_2) \vec{b_2} + \ldots + (c_n - d_n) \vec{b_n} \]
+    Since $B$ is a basis, the vectors $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_n}$ are linearly independent. Therefore, the only solution to the above equation is:
+    \[ c_1 - d_1 = 0, c_2 - d_2 = 0, \ldots, c_n - d_n = 0 \]
+    which implies that $c_i = d_i$ for all $i$. This contradicts our assumption that there exists at least one $i$ such that $c_i \neq d_i$. Hence, the representation is unique.
+\end{proof}
+
+\begin{definition}[Coordinates Relative to a Basis]
+    The scalars $c_1, c_2, \ldots, c_n$ are called the coordinates of $\vec{v}$ relative to the basis $B$. The vector of coordinates is denoted by:
+    \[ [\vec{v}]_B = \begin{bmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_n
+    \end{bmatrix} \]
+\end{definition}
+
+\begin{eg}
+    Let $\mathcal{E} = (\vec{e_1}, \vec{e_2})$ be the standard basis for $\mathbb{R}^2$ and let $\vec{v} = \begin{bmatrix}
+        5 \\ 3
+    \end{bmatrix}$. We want to find the coordinates of $\vec{v}$ relative to the basis $\mathcal{E}$. We can express $\vec{v}$ as a linear combination of the basis vectors:
+    \[ \vec{v} = 5\vec{e_1} + 3\vec{e_2} \]
+    Thus, the coordinates of $\vec{v}$ relative to the basis $\mathcal{E}$ are:
+    \[ [\vec{v}]_{\mathcal{E}} = \begin{bmatrix}
+        5 \\ 3
+    \end{bmatrix} \]
+\end{eg}
+More generally, if $V = \mathbb{R}^n$ and $\mathcal{E} = (\vec{e_1}, \vec{e_2}, \ldots, \vec{e_n})$ is the standard basis for $\mathbb{R}^n$, then for any vector $[\vec{v}]_{\mathcal{E}} = \vec{v}$
+
+\begin{eg}
+    Let $\mathcal{B} = (\vec{b_1}, \vec{b_2})$ with $\vec{b_1} = \begin{bmatrix}1 \\ 0\end{bmatrix}$ and $\vec{b_2} = \begin{bmatrix}1 \\ 2\end{bmatrix}$ be a basis for $\mathbb{R}^2$ and let [$\vec{v}]_{\mathcal{B}} = \begin{bmatrix}
+        3 \\ 1
+    \end{bmatrix}$. We want to find the coordinates of $\vec{v}$ in the standard basis $\mathcal{E}$. We can express $\vec{v}$ as a linear combination of the basis vectors:
+    \[ \vec{v} = 3\vec{b_1} + 1\vec{b_2} = 3\begin{bmatrix}1 \\ 0\end{bmatrix} + 1\begin{bmatrix}1 \\ 2\end{bmatrix} = \begin{bmatrix}
+        3 + 1 \\ 0 + 2
+    \end{bmatrix} = \begin{bmatrix}
+        4 \\ 2
+    \end{bmatrix} \]
+    Thus, the coordinates of $\vec{v}$ in the standard basis $\mathcal{E}$ are:
+    \[ [\vec{v}]_{\mathcal{E}} = \begin{bmatrix}
+        4 \\ 2
+    \end{bmatrix} \]
+    Now let $[\vec{u}]_{\mathcal{E}} = \begin{bmatrix}
+        u_1 \\ u_2
+    \end{bmatrix}$. We want to find the coordinates of $\vec{u}$ relative to the basis $\mathcal{B}$. We need to solve the equation:
+    \[ \vec{u} = c_1 \vec{b_1} + c_2 \vec{b_2} \iff  \begin{bmatrix}
+        1 & 1 \\
+        0 & 2
+    \end{bmatrix} \begin{bmatrix}
+        c_1 \\ c_2
+    \end{bmatrix} = \begin{bmatrix}
+        u_1 \\ u_2
+    \end{bmatrix} \]
+    We can solve this system using the inverse of the matrix:
+    \[ \begin{bmatrix}
+        c_1 \\ c_2
+    \end{bmatrix} = \begin{bmatrix}
+        1 & 1 \\
+        0 & 2
+    \end{bmatrix}^{-1} \begin{bmatrix}
+        u_1 \\ u_2
+    \end{bmatrix} = \begin{bmatrix}
+        1 & -\frac{1}{2} \\
+        0 & \frac{1}{2}
+    \end{bmatrix} \begin{bmatrix}
+        u_1 \\ u_2
+    \end{bmatrix} = \begin{bmatrix}
+        u_1 - \frac{u_2}{2} \\ \frac{u_2}{2}
+    \end{bmatrix} \]
+    Thus, the coordinates of $\vec{u}$ relative to the basis $\mathcal{B}$ are:
+    \[ [\vec{u}]_{\mathcal{B}} = \begin{bmatrix}
+        u_1 - \frac{u_2}{2} \\ \frac{u_2}{2}
+    \end{bmatrix} \]
+    Let's take $[\vec{u}]_{\mathcal{E}} = \begin{bmatrix}
+        7 \\ 4
+    \end{bmatrix}$. Then, we have:
+    \[ [\vec{u}]_{\mathcal{B}} = \begin{bmatrix}
+        7 - \frac{4}{2} \\ \frac{4}{2}
+    \end{bmatrix} = \begin{bmatrix}
+        5 \\ 2
+    \end{bmatrix} \]
+\end{eg}
+More generally, if $\mathcal{B} = (\vec{b_1}, \ldots, \vec{b_n})$ is a basis of $\mathbb{R}^n$, we define the matrix:
+\[ P_{\mathcal{B}} = \begin{bmatrix}
+    | & & | \\
+    \vec{b_1} & \ldots & \vec{b_n} \\
+    | & & |
+\end{bmatrix} \in \mathbb{R}^{n \times n} \]
+Then, for any vector $[\vec{v}]_{\mathcal{B}} = \begin{bmatrix}
+    c_1 \\ c_2 \\ \vdots \\ c_n
+\end{bmatrix}$, we have:
+\[ \vec{v} = [\vec{v}]_{\mathcal{E}} = P_{\mathcal{B}} [\vec{v}]_{\mathcal{B}} \]
+And for any vector $[\vec{u}]_{\mathcal{E}} = \begin{bmatrix}
+    u_1 \\ u_2 \\ \vdots \\ u_n
+\end{bmatrix}$, we have:
+\[ [\vec{u}]_{\mathcal{B}} = P_{\mathcal{B}}^{-1} [\vec{u}]_{\mathcal{E}} \]
+\begin{definition}[Change of Basis Matrix]
+    The matrix $P_{\mathcal{B}}$ is called the change of basis matrix from the basis $\mathcal{B}$ to the standard basis $\mathcal{E}$. And the matrix $P_{\mathcal{B}}^{-1}$ represents a transformation that maps coordinates from the standard basis $\mathcal{E}$ to the basis $\mathcal{B}$.
+\end{definition}
+
+\begin{theorem}
+    Let $B$ be a basis for a vector space $V$. Then, the transformation that maps each vector $\vec{v} \in V$ to its coordinate vector $[\vec{v}]_B$ is a linear transformation from $V$ to $\mathbb{R}^n$ that is one-to-one and onto (thus bijective).
+\end{theorem}
