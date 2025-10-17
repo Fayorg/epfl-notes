@@ -1,4 +1,4 @@
-\chapter{Summation and Algorithms}
+\chapter{Algorithms}
 
 \section{Algorithms}
 \begin{definition}[Algorithm]
@@ -235,3 +235,266 @@ Typically algorithms solve problems such as:
     \[(n-1) + (n-2) + (n-3) + \ldots + 2 + 1 = \frac{(n-1)n}{2} = \frac{n^2 - n}{2}\]
     Therefore, the bubble sort algorithm makes a total of $\frac{n^2 - n}{2}$ comparisons to sort a list of size $n$.
 \end{eg}
+
+\subsection{Greedy Algorithms}
+\begin{definition}[Greedy Algorithm]
+    A greedy algorithm is an algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most immediate benefit or the most optimal choice at that moment. The idea is to make a series of choices, each of which looks best at the time, with the hope that these local optimum choices will lead to a global optimum solution.
+\end{definition}
+
+\begin{eg}
+    Let the graph below represent cities (nodes) connected by roads (edges) with weights representing distances between cities. We want to find the shortest path from city A to city F.
+    \begin{center}
+        \begin{tikzpicture}
+            % Nodes
+            \node[circle, draw] (A) at (0, 0) {A};
+            \node[circle, draw] (B) at (2, 2) {B};
+            \node[circle, draw] (C) at (2.3, 0) {C};
+            \node[circle, draw] (D) at (2, -2) {D};
+            \node[circle, draw] (F) at (4, 1) {F};
+            \node[circle, draw] (E) at (4, -1) {E};
+
+            % Edges with weights
+            \draw (A) -- (B) node[midway, above] {9};
+            \draw (A) -- (C) node[midway, above] {9};
+            \draw (A) -- (D) node[midway, below left] {7};
+            \draw (B) -- (C) node[midway, right] {2};
+            \draw (C) -- (D) node[midway, left] {1};
+            \draw (B) -- (F) node[midway, above] {9};
+            \draw (C) -- (E) node[midway, below left] {11};
+            \draw (D) -- (E) node[midway, below right] {15};
+            \draw (E) -- (F) node[midway, right] {6};
+
+            % Highlight the shortest path
+            \draw[thick, primary] (A) -- (D);
+            \draw[thick, primary] (D) -- (C);
+            \draw[thick, primary] (C) -- (B);
+            \draw[thick, primary] (B) -- (F);
+        \end{tikzpicture}
+    \end{center}
+    Following the approach of a Greedy algorithm we get:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item From A, the closest city is D (distance 7).
+        \item From D, the closest city is C (distance 1).
+        \item From C, the closest city is B (distance 2).
+        \item From B, the closest city is F (distance 9).
+    \end{itemize}
+    The path taken is A → D → C → B → F with a total distance of 7 + 1 + 2 + 9 = 19. \\
+    Note that this greedy approach does not always yield the optimal solution for all graphs, like in this case where the optimal path A → B → F has a total distance of 18.
+\end{eg}
+
+\begin{eg}[Cashier's Algorithm]
+    Find for an amount of any $n$ cents the least total number of coins using the following coins: quarters (25 cents), dimes (10 cents), nickels (5 cents), and pennies (1 cent). A greedy algorithm for this problem would look like this:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with the total amount of cents, $n$.
+        \item While $n$ is greater than 0:
+        \begin{itemize}[itemsep=1pt,label=$\circ$]
+            \item If $n$ is greater than or equal to 25, subtract 25 from $n$ and add a quarter to the coin count.
+            \item Else if $n$ is greater than or equal to 10, subtract 10 from $n$ and add a dime to the coin count.
+            \item Else if $n$ is greater than or equal to 5, subtract 5 from $n$ and add a nickel to the coin count.
+            \item Else, subtract 1 from $n$ and add a penny to the coin count.
+        \end{itemize}
+        \item Return the total coin count.
+    \end{itemize}
+    In pseudocode:
+    \begin{algorithmic}
+        \Function{cashier\_algorithm}{$n$: integer (amount in cents)}
+            \State $coin\_count \gets 0$
+            \While{$n > 0$}
+                \If{$n \geq 25$}
+                    \State $n \gets n - 25$
+                    \State $coin\_count \gets coin\_count + 1$
+                \ElsIf{$n \geq 10$}
+                    \State $n \gets n - 10$
+                    \State $coin\_count \gets coin\_count + 1$
+                \ElsIf{$n \geq 5$}
+                    \State $n \gets n - 5$
+                    \State $coin\_count \gets coin\_count + 1$
+                \Else
+                    \State $n \gets n - 1$
+                    \State $coin\_count \gets coin\_count + 1$
+                \EndIf
+            \EndWhile
+            \State \Return $coin\_count$
+        \EndFunction
+    \end{algorithmic}
+    For example, if we want to make change for 63 cents, the algorithm would proceed as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with $n = 63$.
+        \item Subtract 25 (quarter), $n = 38$, coin count = 1.
+        \item Subtract 25 (quarter), $n = 13$, coin count = 2.
+        \item Subtract 10 (dime), $n = 3$, coin count = 3.
+        \item Subtract 1 (penny), $n = 2$, coin count = 4.
+        \item Subtract 1 (penny), $n = 1$, coin count = 5.
+        \item Subtract 1 (penny), $n = 0$, coin count = 6.
+    \end{itemize}
+    The total number of coins used is 6 (2 quarters, 1 dime, and 3 pennies).
+\end{eg}
+
+\begin{theorem}
+    The cashier's algorithm always produces the optimal solution when the coin denominations are 25 cents, 10 cents, 5 cents, and 1 cent (USA).
+\end{theorem}
+\begin{proof}
+    Let's prove that the cashier's algorithm always produces the optimal solution for any amount of cents $n$ using the denominations of 25 cents (quarters), 10 cents (dimes), 5 cents (nickels), and 1 cent (pennies). Let $q$ be the number of quarters, $d$ be the number of dimes, $n$ be the number of nickels, and $c$ be the number of cents. Let $(\hat{q}, \hat{d}, \hat{n}, \hat{c})$ be the solution produced by the cashier's algorithm and $(q, d, n, c)$ be the optimal solution. For any amount of cents $s$, we have:
+    \[25\hat{q} + 10\hat{d} + 5\hat{n} + \hat{c} = s = 25q + 10d + 5n + c\]
+    For any solution to be optimal, it must satisfy the following conditions:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\hat{c} < 5$ (otherwise we could replace 5 cents with a nickel)
+        \item $\hat{n} < 2$ (otherwise we could replace 2 nickels with a dime)
+        \item $\hat{d} < 3$ (otherwise we could replace 3 dimes with a quarter)
+    \end{itemize}
+    Otherwise we could always reduce the number of coins used by replacing 5 cents with a nickel, 2 nickels with a dime, or 3 dimes with a quarter:
+    \[
+        (q, d, n, c) \ \text{where } n \geq 2 \implies (q, d + 1, n - 2, c) \ \text{a better solution}
+    \]
+    \[
+        (q, d, n, c) \ \text{where } c \geq 5 \implies (q, d, n + 1, c - 5) \ \text{a better solution}
+    \]
+    \[
+        (q, d, n, c) \ \text{where } d \geq 3 \implies (q + 1, d - 3, n, c) \ \text{a better solution}
+    \]
+    And we know that the greedy solution $(\hat{q}, \hat{d}, \hat{n}, \hat{c})$ satisfies these conditions. We now have:
+    \[q \leq \hat{q}\]
+    Let's consider the case where $q = \hat{q} - 1$. Then we have:
+    \[10d + 5n + c = 25 + 10\hat{d} + 5\hat{n} + \hat{c}\]
+    Since $c < 5$, $\hat{c} < 5$, $n < 2$, and $\hat{n} < 2$, we must have $d \geq \hat{d} + 3$, which contradicts the optimality of $(q, d, n, c)$. Therefore, we must have $q = \hat{q}$. Similarly, we can show that $d = \hat{d}$, $n = \hat{n}$, and $c = \hat{c}$. Thus, the solution produced by the cashier's algorithm is indeed optimal for any amount of cents $n$ using the denominations of 25 cents, 10 cents, 5 cents, and 1 cent.
+    % \[10\hat{d} + 5\hat{n} + \hat{c} = s = 10d + 5n + c\]
+    % For any solution to be optimal, it must satisfy the following conditions:
+    % \begin{itemize}[itemsep=1pt,label=$\circ$]
+    %     \item $\hat{c} < 5$ (otherwise we could replace 5 cents with a nickel)
+    %     \item $\hat{n} < 2$ (otherwise we could replace 2 nickels with a dime)
+    % \end{itemize}
+    % Otherwise we could always reduce the number of coins used by replacing 5 cents with a nickel or 2 nickels with a dime:
+    % \[
+    %     (d, n, c) \ \text{where } n \geq 2 \implies (d + 1, n - 2, c) \ \text{a better solution}
+    % \]
+    % \[
+    %     (d, n, c) \ \text{where } c \geq 5 \implies (d, n + 1, c - 5) \ \text{a better solution}
+    % \]
+    % And we know that the greedy solution $(\hat{d}, \hat{n}, \hat{c})$ satisfies these conditions. We now have:
+    % \[
+    %     d \leq \hat{d}
+    % \]
+    % Let's consider the case where $d = \hat{d} - 1$. Then we have:
+    % \[5n + c = 10 + 5\hat{n} + \hat{c}\]
+    % Since $c < 5$ and $\hat{c} < 5$, we must have $n \geq \hat{n} + 2$, which contradictss the optimality of $(d, n, c)$. Therefore, we must have $d = \hat{d}$. Similarly, we can show that $n = \hat{n}$ and $c = \hat{c}$. Thus, the solution produced by the cashier's algorithm is indeed optimal for any amount of cents $n$ using the denominations of 10 cents, 5 cents, and 1 cent.
+\end{proof}
+
+\begin{eg}
+    If you apply Cashier's algorithm to make change for 31 cents with only quarters (25 cents), dimes (10 cents), and pennies (1 cent), the algorithm would proceed as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Start with $n = 31$.
+        \item Subtract 25 (quarter), $n = 6$, coin count = 1.
+        \item Subtract 1 (penny) 6 times, $n = 0$, coin count = 7.
+    \end{itemize}
+    The total number of coins used is 7 (1 quarter and 6 pennies). However, the optimal solution would be to use 3 dimes and 1 penny, which totals to 4 coins. This example illustrates that Cashier's algorithm does not always yield the optimal solution when the coin denominations changes.
+\end{eg}
+There is no simple formula for assessing, whether for a given set of coin denominations, Cashier's algorithm always produces an optimal solution.
+
+\subsection{Matching Algorithm}
+\begin{definition}[Matchings]
+    Given a finite set $A$, a matching of $A$ is a set of (unordered) pairs of distinct elements of $A$ where any element occurs in at most one pair (such pairs are called independent).    
+\end{definition}
+
+\begin{definition}[Maximum Matching]
+    A maximum matching is a matching that contains the largest possible number of independent pairs.
+\end{definition}
+
+\begin{eg}
+    Let $A = \{\text{Lou}, \text{Glenn}, \text{Bobbie}, \text{Jenny}, \text{Tyler}\}$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\{(\text{Lou}, \text{Glenn})\}$ is a matching of $A$.
+        \item $\{(\text{Lou}, \text{Lou})\}$ is not a matching of $A$.
+        \item $\{(\text{Lou}, \text{Glenn}), (\text{Lou}, \text{Tyler})\}$ is not a matching of $A$.
+        \item $\{(\text{Lou}, \text{Glenn}), (\text{Bobbie}, \text{Jenny})\}$ is a matching of $A$.
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Preference List]
+    A preference list $L_x$ defines for every element $x \in A$ the order in which the element prefers to be paired with another element. $x$ prefers $y$ over $z$ if $y$ precedes $z$ on $L_x$.
+\end{definition}
+\begin{eg}
+    Let $A = \{\text{Lou}, \text{Glenn}, \text{Bobbie}, \text{Tyler}\}$ with the following preference lists:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $L_{\text{Lou}} = [\text{Glenn}, \text{Bobbie}, \text{Tyler}]$
+        \item $L_{\text{Glenn}} = [\text{Bobbie}, \text{Lou}, \text{Tyler}]$
+        \item $L_{\text{Bobbie}} = [\text{Lou}, \text{Glenn}, \text{Tyler}]$
+        \item $L_{\text{Tyler}} = [\text{Lou}, \text{Glenn}, \text{Bobbie}]$
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Stable Matching]
+    A matching is stable if there are no two elements $x$ and $y$ that are not paired with each other but prefer each other over their current partners.
+\end{definition}
+
+\begin{eg}
+    Let $A = \{\text{Lou}, \text{Glenn}, \text{Bobbie}, \text{Tyler}\}$ with the following preference lists:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $L_{\text{Lou}} = [\text{Glenn}, \text{Bobbie}, \text{Tyler}]$
+        \item $L_{\text{Glenn}} = [\text{Bobbie}, \text{Lou}, \text{Tyler}]$
+        \item $L_{\text{Bobbie}} = [\text{Lou}, \text{Glenn}, \text{Tyler}]$
+        \item $L_{\text{Tyler}} = [\text{Lou}, \text{Glenn}, \text{Bobbie}]$
+    \end{itemize}
+    Consider the matchings:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $M_1 = \{(\text{Lou}, \text{Tyler}), (\text{Glenn}, \text{Bobbie})\}$ is an unstable matching because Lou prefers Bobbie over Tyler, and Bobbie prefers Lou over Glenn.
+        \item $M_2 = \{(\text{Lou}, \text{Bobbie}), (\text{Glenn}, \text{Tyler})\}$ is a stable matching because there are no two elements that prefer each other over their current partners.
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Matching Function]
+    Given a set with even cardinality, partition $A$ into two disjoint subsets $A_1$ and $A_2$, with $A_1 \cup A_2 = A$ and $|A_1| = |A_2|$. A matching is a bijection from the elements of one set to the elements of the other set. That means, that pairs can only consist of one element of $A_1$ and one element of $A_2$.
+\end{definition}
+
+\begin{definition}[Marriage Problem]
+    The marriage problem is to find a stable matching for a given set $A$ with even cardinality and preference lists for each element in $A$.
+\end{definition}
+
+\begin{eg}
+    Let $A_1 = \{\text{Lou}, \text{Glenn}\}$ and $A_2 = \{\text{Jenny}, \text{Tyler}\}$. Then the preference lists are:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $L_{\text{Lou}} = [\text{Jenny}, \text{Tyler}]$
+        \item $L_{\text{Glenn}} = [\text{Jenny}, \text{Tyler}]$
+        \item $L_{\text{Jenny}} = [\text{Lou}, \text{Glenn}]$
+        \item $L_{\text{Tyler}} = [\text{Lou}, \text{Glenn}]$
+    \end{itemize}
+    We can make a graph to represent matchings possibility:
+    \begin{center}
+        \begin{tikzpicture}
+            % Nodes
+            \node[circle, fill, inner sep=1.5pt] (Lou) at (0, 1) {};
+            \node[circle, fill, inner sep=1.5pt] (Glenn) at (0, 0) {};
+            \node[circle, fill, inner sep=1.5pt] (Jenny) at (2, 1) {};
+            \node[circle, fill, inner sep=1.5pt] (Tyler) at (2, 0) {};
+
+            % Labels
+            \node at (Lou) [left=5pt] {Lou};
+            \node at (Glenn) [left=5pt] {Glenn};
+            \node at (Jenny) [right=5pt] {Jenny};
+            \node at (Tyler) [right=5pt] {Tyler};
+
+            % Edges
+            \draw[thick,primary] (Lou) -- (Jenny);
+            \draw[thick,secondary] (Lou) -- (Tyler);
+            \draw[thick,secondary] (Glenn) -- (Jenny);
+            \draw[thick,primary] (Glenn) -- (Tyler);
+        \end{tikzpicture}
+    \end{center}
+    The edges in the \textcolor{primary}{primary} color represent the pairs in the stable matching while the edges in the \textcolor{secondary}{secondary} color represent the pairs not in the stable matching.
+\end{eg}
+
+\begin{definition}[Gale-Shapley Algorithm]
+    The Gale-Shapley algorithm is a method for finding a stable matching in the marriage problem. The algorithm works as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Proposals:} Each man proposes to women in order of their preferences.
+        \item \textbf{Acceptance and Rejection:}
+        \begin{itemize}[itemsep=1pt,label=$\circ$]
+            \item If a woman is free, she provisionally accepts the proposal.
+            \item If she is already engaged, she compares the new proposal with her current engagement. 
+            \item If she prefers the new proposal, she accepts it and rejects her current engagement. 
+            \item Otherwise, she rejects the new proposal.
+        \end{itemize}
+        \item \textbf{Continue the Process:} Any man who is rejected proposes to the next woman on his list.
+        \item \textbf{Termination:} The process continues until every man is engaged.
+    \end{itemize}
+    The algorithm guarantees that the resulting matching is stable, the result is optimal for the side that proposes and the algorithm is deterministic (always produces the same output for the same input).
+\end{definition}
