@@ -8,11 +8,11 @@
 \begin{eg}
     Here are some examples of propositions and non-propositions:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
-        \item "It is raining." - This is a proposition because it can be either true or false.
-        \item "2 + 2 = 4." - This is a proposition because it is always true.
-        \item "The sky is blue." - This is a proposition because it can be either true or false depending on the time of day and weather conditions.
-        \item "x + 2 = 5." - This is not a proposition because it contains a variable (x) and its truth value depends on the value of x.
-        \item "Close the door!" - This is not a proposition because it is an imperative sentence and does not have a truth value.
+        \item "It is raining." This is a proposition because it can be either true or false.
+        \item "2 + 2 = 4." This is a proposition because it is always true.
+        \item "The sky is blue." This is a proposition because it can be either true or false depending on the time of day and weather conditions.
+        \item "x + 2 = 5." This is not a proposition because it contains a variable (x) and its truth value depends on the value of x.
+        \item "Close the door!" This is not a proposition because it is an imperative sentence and does not have a truth value.
     \end{itemize}
 \end{eg}
 
@@ -147,7 +147,7 @@ In propositional logic, we always use the inclusive or.
     \]
     In plain English, $p \to q$ can be expressed as "If $p$ is true, then $q$ must also be true".
 \end{definition}
-Implication does not require any connection between the premise and the conclusion.\\
+An implication does not require any connection between the premise and the conclusion.\\
 A common error is to think that $p \to q$ is the same as $q \to p$. This is not true in general.
 
 \begin{eg}
@@ -218,7 +218,7 @@ In natural language the biconditional is often implicit in statements like "You 
 \end{eg}
 \begin{eg}
     Let \(p\) be the proposition "you drive over 50 km/h in Lausanne." and \(q\) be the proposition "you get a speeding ticket.", to express "You drive over 50 km/h in Lausanne despite not getting a speeding ticket." in propositional logic, we can write:
-    \[ \neg p \land q \]
+    \[ p \land \neg q \]
 \end{eg}
 
 \section{Classification, Satisfiability and Equivalence of Propositions}
@@ -296,8 +296,7 @@ In natural language the biconditional is often implicit in statements like "You 
             F & F & F & T & T & T & T
         \end{array}
     \]
-    Since there are assignments that make the proposition true (for example, \(p = T, \ q = T, \ r = T\)), the proposition is satisfiable.
-    $$$$
+    Since there are assignments that make the proposition true (for example, \(p = T, \ q = T, \ r = T\)), the proposition is satisfiable. \\
     Another easier way to determine satisfiability is to manually try to find an assignment that makes the proposition true. For example, we can set \(p = T\), \(q = T\), and \(r = T\) to make the proposition true avoiding the construction of a truth table which can be cumbersome for propositions with many variables ($2^n$ rows for \(n\) variables).
 \end{eg}
 
@@ -387,7 +386,7 @@ To prove that $A \equiv B$, we use a sequence of logical equivalences starting f
 \end{eg}
 
 \subsection{Methods to Prove Tautology, Contingency or Contradiction}
-How to prove that an expression is a tautology, contigency or contradiction:
+To prove that an expression is a tautology, contingency or contradiction we can use one of the following methods:
 \begin{itemize}[itemsep=1pt,label=$\circ$]
     \item Truth Table (most straightforward but can be cumbersome for many variables).
     \item Equivalence Proof (shorter but requires knowledge of equivalence laws and intuition).
@@ -408,12 +407,13 @@ How to prove that an expression is a tautology, contigency or contradiction:
     Therefore, we can express any compound proposition using only negation and conjunction.
 \end{eg}
 
-\section{Disjunctive Normal Form and Conjunctive Normal Form}
+\section{Normal Forms}
 \begin{definition}[Normal Form]
     A normal form is a standardized way of expressing a compound proposition that can be used in automated proofing of theorems.
 \end{definition}
 The two most common normal forms are the disjunctive normal form (DNF) and the conjunctive normal form (CNF).
 
+\subsection{Disjunctive Normal Form}
 \begin{definition}[Disjunctive Normal Form]
     A compound proposition is in disjunctive normal form (DNF) if it is a disjunction of one or more conjunctions of one or more midterms (or literals). A midterm is either an atomic proposition or its negation.
 \end{definition}
@@ -446,6 +446,7 @@ To find the DNF of a proposition, we can use a truth table to identify the rows 
     \[ (p \land q \land \neg r) \lor (p \land \neg q \land \neg r) \lor (\neg p \land q \land \neg r) \lor (\neg p \land \neg q \land r) \lor (\neg p \land \neg q \land \neg r) \]
 \end{eg}
 
+\subsection{Conjunctive Normal Form}
 \begin{definition}[Conjunctive Normal Form]
     A compound proposition is in conjunctive normal form (CNF) if it is a conjunction of one or more disjunctions of one or more clauses (or literals). A clause is either an atomic proposition or its negation.
 \end{definition}
@@ -477,6 +478,8 @@ To find the CNF of a proposition, we can use a truth table to identify the rows 
     The proposition is false for the rows 1, 3, and 5. Therefore, the CNF is:
     \[ ( \neg p \lor \neg q \lor \neg r) \land ( \neg p \lor q \lor \neg r) \land (p \lor \neg q \lor \neg r) \]
 \end{eg}
+
+\subsection{Relation between DNF and CNF}
 Let now take the same example that will show the link between DNF and CNF.
 \begin{eg}
     If we take the DNF of the same proposition that was used above but we negate it, it becomes $\neg ((p \lor q) \to \neg r)$ and the truth table is:
@@ -498,7 +501,7 @@ Let now take the same example that will show the link between DNF and CNF.
     \[ (p \land q \land r) \lor (p \land \neg q \land r) \lor (\neg p \land q \land r) \]
     If we now negate this DNF, we get back to the CNF of the original proposition:
     \[ \neg ((p \land q \land r) \lor (p \land \neg q \land r) \lor (\neg p \land q \land r)) \equiv (\neg p \lor \neg q \lor \neg r) \land (\neg p \lor q \lor \neg r) \land (p \lor \neg q \lor \neg r) \]
-    This shows the link between DNF and CNF: the negation of the DNF of a proposition is equivalent to the CNF of the negation of that proposition.
+    This demonstrates the connection between DNF and CNF, as the negation of a proposition’s DNF corresponds to the CNF of its negation.
 \end{eg}
 
 \subsection{Finding DNF and CNF without Truth Table}

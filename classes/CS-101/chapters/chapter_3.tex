@@ -38,7 +38,7 @@
 
 \section{Inference Rules}
 \begin{definition}[Inference Rule]
-    An inference rule is a valid argument form that can be used to derive a conclusion from a set of premises. Some common inference rules are:
+    An inference rule is a valid argument form that can be used to derive a conclusion from a set of premises.
 \end{definition}
 
 \subsection{Rules of Inference for Propositions}
@@ -175,7 +175,7 @@
 \end{eg}
 
 \begin{eg}
-    In the sentence "If it rains today, the we will not have a barbecue today. If we do not have a barbecue today, then we will have a barbecue tomorrow", let $p =$ "It rains today", $q =$ "We will have a barbecue today" and $r =$ "We will have a barbecue tomorrow". We can represent the argument as follows:
+    In the sentence "If it rains today, we will not have a barbecue today. If we do not have a barbecue today, then we will have a barbecue tomorrow", let $p =$ "It rains today", $q =$ "We will have a barbecue today" and $r =$ "We will have a barbecue tomorrow". We can represent the argument as follows:
     \[
         \begin{array}{rl}
             & p \to \neg q \\
@@ -419,7 +419,7 @@ we can use the following strategy:
     \]
     This type of proof works because:
     \[
-        (P \land \neg Q) \to \text{False} \equiv \neg (P \land \neg Q) \equiv \neg P \lor Q \equiv P \to Q
+        (P \land \neg Q) \to \text{False} \equiv \neg (P \land \neg Q) \lor \text{False} \equiv \neg (P \land \neg Q) \equiv \neg P \lor Q \equiv P \to Q
     \]
 \end{definition}
 
@@ -430,7 +430,7 @@ we can use the following strategy:
     \[
         n^2 = (2k)^2 = 4k^2 = 2(2k^2)
     \]
-    Since $2k^2$ is an integer, we can conclude that $n^2$ is also an even integer by definition of even integers. However, this contradicts our assumption that $n^2$ is an odd integer. Therefore, we have shown that if $n^2$ is an odd integer, then $n$ is also an odd integer by a proof by contradiction.
+    Since $2k^2$ is an integer, we can conclude that $n^2$ is an even integer by definition. However, this contradicts our assumption that $n^2$ is an odd integer. Therefore, we have shown that if $n^2$ is an odd integer, then $n$ is also an odd integer by a proof by contradiction.
 \end{eg}
 
 \begin{eg}

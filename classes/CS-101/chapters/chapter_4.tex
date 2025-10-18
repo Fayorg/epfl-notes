@@ -66,9 +66,9 @@ Note that the empty set $\emptyset$ is different from the singleton set $\{\empt
 \begin{eg}
     Here is a simple Venn diagram representing the set $V$ of vowel letters in the English alphabet:
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
-            \draw[primary] (-1,-.3) circle (2) node[above=2cm] {$V$};
+            \draw[primary] (-1,-.3) circle (2) node[right=1.8cm] {$V$};
             \node[primary] at (-1.3,0.8) {a};
             \node[primary] at (0.1,0.6) {e};
             \node[primary] at (-1.6,-0.5) {i};
@@ -80,8 +80,13 @@ Note that the empty set $\emptyset$ is different from the singleton set $\{\empt
 
 \subsection{Subsets}
 \begin{definition}[Subset]
-    A set $A$ is a subset of a set $B$ (or $B$ is a superset of $A$), denoted by $A \subseteq B$, if every element of $A$ is also an element of $B$. If $A$ is a subset of $B$ but $A \neq B$, then we say that $A$ is a proper subset of $B$, denoted by $A \subset B$.
+    A set $A$ is a subset of a set $B$ (or $B$ is a superset of $A$), denoted by $A \subseteq B$, if every element of $A$ is also an element of $B$.
 \end{definition}
+\begin{definition}[Proper Subset]
+    A set $A$ is a proper subset of a set $B$, denoted by $A \subset B$, if $A \subseteq B$ and there exists at least one element in $B$ that is not in $A$. We can write this as:
+    \[ \forall x(x \in A \to x \in B) \land \exists y(y \in B \land y \notin A) \]
+\end{definition}
+
 \begin{eg}
     Some examples of subsets:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
@@ -99,11 +104,6 @@ To show that $A \subseteq B$, we need to prove that if $x \in A$, then $x \in B$
     To show that $\emptyset \subseteq A$, we need to prove that if $x \in \emptyset$, then $x \in A$. Since there are no elements in the empty set, the statement is vacuously true. Therefore, $\emptyset \subseteq A$ for any set $A$. \\
     To show that $A \subseteq A$, we need to prove that if $x \in A$, then $x \in A$. This is trivially true since every element of $A$ is also an element of $A$. Therefore, $A \subseteq A$.
 \end{proof}
-
-\begin{definition}[Proper Subset]
-    A set $A$ is a proper subset of a set $B$, denoted by $A \subset B$, if $A \subseteq B$ and there exists at least one element in $B$ that is not in $A$. We can write this as:
-    \[ \forall x(x \in A \to x \in B) \land \exists y(y \in B \land y \notin A) \]
-\end{definition}
 
 \begin{definition}[Set Equality]
     Two sets $A$ and $B$ are equal, denoted by $A = B$, if they contain exactly the same elements. This means that $A \subseteq B$ and $B \subseteq A$. We can write this as:
@@ -167,13 +167,14 @@ Note that $A \times B \neq B \times A$ in general.
         \item The set of real numbers $\mathbb{R}$ is uncountably infinite, and its cardinality is denoted by $2^{\aleph_0}$ (the cardinality of the continuum).
     \end{itemize}
 \end{eg}
+Note that the two last are only added as examples, they will not be covered in this course.
 
 \subsection{Set Operations}
 \begin{definition}[Union]
     The union of two sets $A$ and $B$, denoted by $A \cup B$, is the set of all elements that are in $A$, in $B$, or in both. Formally,
     \[ A \cup B = \{x \mid x \in A \text{ or } x \in B\} \]
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
             \path[fill=secondary!40,opacity=.3, even odd rule]
                 (-1,-.3) circle (2)
@@ -200,7 +201,7 @@ Note that $A \times B \neq B \times A$ in general.
     The intersection of two sets $A$ and $B$, denoted by $A \cap B$, is the set of all elements that are in both $A$ and $B$. Formally,
     \[ A \cap B = \{x \mid x \in A \text{ and } x \in B\} \]
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
 
             \begin{scope}
@@ -227,7 +228,7 @@ Note that $A \times B \neq B \times A$ in general.
     The difference of two sets $A$ and $B$, denoted by $A - B$ or $A \setminus B$, is the set of all elements that are in $A$ but not in $B$. Formally,
     \[ A - B = \{x \mid x \in A \text{ and } x \notin B\} \]
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
 
             \begin{scope}
@@ -253,7 +254,7 @@ Note that $A \times B \neq B \times A$ in general.
     The complement of a set $A$ with respect to a universal set $U$, denoted by $A^c$ or $\overline{A}$, is the set of all elements in $U$ that are not in $A$. Formally,
     \[ A^c = \{x \in U \mid x \notin A\} \]
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
 
             \path[fill=secondary!40,opacity=.3, even odd rule]
@@ -277,7 +278,7 @@ Note that the complement of the complement of $A$ is $A$ itself, i.e., $(A^c)^c 
     The symmetric difference of two sets $A$ and $B$, denoted by $A \oplus B$ or $A \Delta B$, is the set of elements that are in either $A$ or $B$ but not in both. Formally,
     \[ A \oplus B = (A - B) \cup (B - A) = (A \cup B) - (A \cap B) \]
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
             \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
             \path[fill=secondary!40,opacity=.3, even odd rule]
                 (-1,-.3) circle (2)
@@ -390,10 +391,10 @@ To prove set identities, we can use various methods such as:
 
 \section{Functions}
 \begin{definition}[Function]
-    Let $A$ and $B$ be two non-empty sets. A function (or mapping, transformation) $f$ from $A$ to $B$, denoted by $f: A \to B$, is an assignment of exactly one element of $B$ to each element of $A$.
+    Let $A$ and $B$ be two non-empty sets. A function (or mapping, transformation) $f$ from $A$ to $B$, denoted by $f: A \to B$, is a rule that assigns to every element $a \in A$ exactly one element $b \in B$. This is written as $f(a) = b$.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Domain, Codomain, Image, Preimage and Range]
     Given a function $f: A \to B$:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item The set $A$ is called the domain of $f$.
@@ -609,6 +610,23 @@ Let's summarise how to solve recurrence relations using generating functions:
     \[ \frac{P(x)}{Q(x)} = \sum_{i} \frac{A_i}{(x - r_i)^{k_i}} + \sum_{j} \frac{B_j x + C_j}{(x^2 + px + q)^{m_j}} \]
     where $P(x)$ and $Q(x)$ are polynomials, $r_i$ are the roots of the polynomial $Q(x)$, and $A_i$, $B_j$, and $C_j$ are constants to be determined.
 \end{definition}
+\begin{eg}
+    Let's perform a partial fraction expansion of the rational function:
+    \[ \frac{2x + 3}{(x - 1)(x + 2)} \]
+    We can express this as:
+    \[ \frac{2x + 3}{(x - 1)(x + 2)} = \frac{A}{x - 1} + \frac{B}{x + 2} \]
+    for some constants $A$ and $B$. Multiplying both sides by the denominator $(x - 1)(x + 2)$, we get:
+    \[ 2x + 3 = A(x + 2) + B(x - 1) \]
+    Expanding the right side, we have:
+    \[ 2x + 3 = (A + B)x + (2A - B) \]
+    Equating coefficients, we get the system of equations:
+    \begin{align*}
+        A + B &= 2 \\
+        2A - B &= 3
+    \end{align*}
+    Solving this system, we find $A = 1$ and $B = 1$. Thus, the partial fraction expansion is:
+    \[ \frac{2x + 3}{(x - 1)(x + 2)} = \frac{1}{x - 1} + \frac{1}{x + 2} \]
+\end{eg}
 
 \subsection{Derivative of a Formal Power Sum}
 \begin{definition}[Derivative of a Formal Power Sum]
@@ -629,18 +647,18 @@ Let's summarise how to solve recurrence relations using generating functions:
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
-\begin{eg}
+\begin{exercise}[Explique AI]
     How many elements does each of the following sets have where $a$ and $b$ are distinct elements?
     \begin{enumerate}[label=(\alph*),itemsep=1pt]
         \item $\mathcal{P}(\{a, b, \{a, b\}\})$
         \item $\mathcal{P}(\{\emptyset, a, \{a\}, \{\{a\}\}\})$
         \item $\mathcal{P}(\mathcal{P}(\emptyset))$
     \end{enumerate}
-    $\newline$
-    Answer:
+    \Answer
+    The number of elements in the power set $\mathcal{P}(S)$ of a set $S$ with $n$ elements is given by $2^n$. Therefore:
     \begin{enumerate}[label=(\alph*),itemsep=1pt]
         \item The set $\{a, b, \{a, b\}\}$ has 3 elements, so its power set has $2^3 = 8$ elements.
         \item The set $\{\emptyset, a, \{a\}, \{\{a\}\}\}$ has 4 elements, so its power set has $2^4 = 16$ elements.
         \item The set $\mathcal{P}(\emptyset)$ is the power set of the empty set, which has 1 element (the empty set itself). Therefore, $\mathcal{P}(\mathcal{P}(\emptyset))$ has $2^1 = 2$ elements.
     \end{enumerate}
-\end{eg}
+\end{exercise}
