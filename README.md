@@ -7,9 +7,6 @@ They are also available on my portfolio, in a nicely formatted and automatically
 
 ## Contents
 
--   **PHYS-101: Physics I**  
-    [TEX](/classes/PHYS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15445)
-
 -   **MATH-101: Analysis I**  
     PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101-dark.pdf)) • [TEX](/classes/MATH-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14840)
 
