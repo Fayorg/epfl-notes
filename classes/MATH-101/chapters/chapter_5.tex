@@ -1,0 +1,227 @@
+\chapter{Function of Real Numbers}
+
+\section{Functions}
+\begin{definition}[Real Function]
+    A function $f : E \to F$, where $E$ and $F$ are subsets of $\mathbb{R}$, is a rule that assigns to each element $x \in E$ a unique element $f(x) \in F$. The set $E = \text{D}(f)$ is called the domain of the function, and the set $F$ is called the codomain.
+\end{definition}
+
+\begin{definition}[Graph of a Function]
+    The graph of a function $f : E \to F$ is the set of points in the Cartesian plane defined by:
+    \[
+        G(f) = \{(x, f(x)) \mid x \in E\}
+    \]
+\end{definition}
+
+\subsection{Properties of Functions}
+\begin{definition}[Growing Function]
+    A function $f : E \to \mathbb{R}$ is said to be increasing ($f(x) \uparrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+    \[
+        f(x_1) \leq f(x_2)
+    \]
+    If the inequality is strict, i.e., $f(x_1) < f(x_2)$, then $f$ is said to be strictly increasing on $I$.
+\end{definition}
+
+\begin{definition}[Decreasing Function]
+    A function $f : E \to \mathbb{R}$ is said to be decreasing ($f(x) \downarrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+    \[
+        f(x_1) \geq f(x_2)
+    \]
+    If the inequality is strict, i.e., $f(x_1) > f(x_2)$, then $f$ is said to be strictly decreasing on $I$.
+\end{definition}
+
+\begin{definition}[Bounded Function]
+    A function $f : E \to \mathbb{R}$ is said to be bounded above on a set $A \subseteq E$ if there exists a real number $M$ such that for all $x \in A$, we have:
+    \[
+        f(x) \leq M
+    \]
+    Similarly, $f$ is said to be bounded below on $A$ if there exists a real number $m$ such that for all $x \in A$, we have:
+    \[
+        f(x) \geq m
+    \]
+    If $f$ is both bounded above and bounded below on $A$, then it is said to be bounded on $A$.
+\end{definition}
+
+\begin{definition}[Even and Odd Functions]
+    A function $f : E \to \mathbb{R}$ is said to be even if for all $x \in E$, we have:
+    \[
+        f(-x) = f(x)
+    \]
+    A function $f : E \to \mathbb{R}$ is said to be odd if for all $x \in E$, we have:
+    \[
+        f(-x) = -f(x)
+    \]
+    % TODO: Add graphs for examples of even and odd functions
+\end{definition}
+
+\begin{definition}[Periodic Function]
+    A function $f : E \to \mathbb{R}$ is said to be periodic with period $T > 0$ if for all $x \in E$ such that $x \pm T \in E$, we have:
+    \[
+        f(x \pm T) = f(x)
+    \]
+\end{definition}
+\begin{eg}
+    The function $f(x) = \sin(x)^2$ is periodic with period $2\pi$, since we have:
+    \[
+        \sin(x)^2 = \left(\frac{e^{ix} - e^{-ix}}{2i}\right)^2 = \frac{e^{2ix} - 2 + e^{-2ix}}{-4} = \frac{1}{2} - \frac{1}{2}\cos(2x)
+    \]
+    Since $\cos(x)$ is periodic with period $2\pi$, we have that $\sin(x)^2$ is also periodic with period $\pi$.
+    We also see this properties with the graph of the function.
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-0.5, 2) -- (5.5, 2) node[right] {$x$};
+            \draw[->] (0, 1.5) -- (0, 3.5) node[above] {$y$};
+            \draw[thick, primary, domain=0:5, samples=100] plot (\x, {2 + sin(deg(2 * \x))^2});
+            % \draw[secondary, dashed] (0, 3) -- (5, 3) node[right] {$L$};
+            % \draw[secondary, dashed] (1, 2) -- (1, 3.5);
+            % \draw[secondary, dashed] (0, 2.5) -- (5, 2.5);
+            % \draw[secondary, dashed] (0, 3.5) -- (5, 3.5);
+            % \node[secondary] at (2.5, 2.75) {$\epsilon$};
+            % \node[secondary] at (2.5, 3.25) {$\epsilon$};
+            % \node[secondary] at (1, 1.7) {$N$};
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+\begin{eg}
+    Some functions can be periodic but it's impossible to find the smallest period. For example, the function:
+    \[
+        f(x) = \begin{cases}
+            0 & \text{if } x \in \mathbb{Q} \\
+            1 & \text{if } x \notin \mathbb{Q}
+        \end{cases}
+    \]
+    In other words:
+    \[
+        \begin{cases}
+            \text{rational} + P = \text{rational} \\
+            \text{irrational} + P = \text{irrational}
+        \end{cases}
+    \]
+    for any rational number $P$. Thus, $f(x + P) = f(x)$ for any rational number $P$, making $f$ a periodic function without a smallest period.
+\end{eg}
+
+% BEGIN TODO
+\begin{definition}[Bounded Above and Below Function]
+    A function $f : E \to \mathbb{R}$ is said to be bounded above if there exists a real number $M$ such that for all $x \in E$, we have:
+    \[
+        f(x) \leq M
+    \]
+    Similarly, $f$ is said to be bounded below if there exists a real number $m$ such that for all $x \in E$, we have:
+    \[
+        f(x) \geq m
+    \]
+\end{definition}
+% TODO: correct
+\begin{definition}[Sup and Inf]
+    Let $f : E \to \mathbb{R}$ be a function and let $A \subseteq E$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The supremum (least upper bound) of $f$ on $A$, denoted by $\sup_{x \in A} f(x)$, is the smallest real number $M$ such that for all $x \in A$, we have:
+        \[
+            f(x) \leq M
+        \]
+        \item The infimum (greatest lower bound) of $f$ on $A$, denoted by $\inf_{x \in A} f(x)$, is the largest real number $m$ such that for all $x \in A$, we have:
+        \[
+            f(x) \geq m
+        \]
+    \end{itemize}
+\end{definition}
+% END TODO
+
+\begin{definition}[Local Maximum and Minimum]
+    Let $f : E \to \mathbb{R}$ be a function and let $x_0 \in E$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The function $f$ has a local maximum at $x_0$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+        \[
+            f(x) \leq f(x_0)
+        \]
+        \item The function $f$ has a local minimum at $x_0$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+        \[
+            f(x) \geq f(x_0)
+        \]
+    \end{itemize}
+    % TODO: add graphs + check english terms with ChatGPT
+\end{definition}
+
+\begin{definition}[Global Maximum and Minimum]
+    Let $f : E \to \mathbb{R}$ be a function.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The function $f$ has a global maximum on $E$ if there exists $x_0 \in E$ such that for all $x \in E$, we have:
+        \[
+            f(x) \leq f(x_0)
+        \]
+        \item The function $f$ has a global minimum on $E$ if there exists $x_0 \in E$ such that for all $x \in E$, we have:
+        \[
+            f(x) \geq f(x_0)
+        \]
+    \end{itemize}
+\end{definition}
+If the $\max_{x \in E} f(x)$ (or $\min_{x \in E} f(x)$) exists, then $f$ is bounded above (or below) on $E$ and $\sup_{x \in E} f(x) = \max_{x \in E} f(x)$ (or $\inf_{x \in E} f(x) = \min_{x \in E} f(x)$). \\
+A bounded function on $E$ does not necessarily reach its bounds, i.e., the maximum or minimum may not exist.
+\begin{eg}
+    Let $f(x) = x^2 + 3$ on $E = (0, 1)$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $f$ is bounded below on $E$ since for all $x \in (0, 1)$, we have $f(x) \geq 3$. Thus, $\inf_{x \in E} f(x) = 3$ but $\min_{x \in E} f(x)$ does not exist since $f(x) > 3$ for all $x \in (0, 1)$.
+        \item $f$ is bounded above on $E$ since for all $x \in (0, 1)$, we have $f(x) < 4$. Thus, $\sup_{x \in E} f(x) = 4$ but $\max_{x \in E} f(x)$ does not exist since $f(x) < 4$ for all $x \in (0, 1)$.
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Surjectivity]
+    A function $f : E \to F$ is said to be surjective (onto) if for every $y \in F$, there exists at least one $x \in E$ such that $f(x) = y$.
+\end{definition}
+\begin{definition}[Injectivity]
+    A function $f : E \to F$ is said to be injective (one-to-one) if for every $x_1, x_2 \in E$, whenever $f(x_1) = f(x_2)$, it follows that $x_1 = x_2$ (i.e. there exists at most one $x \in E$ for each $y \in F$ such that $f(x) = y$).
+\end{definition}
+If $f: E \to F$ is not injective, it can be made injective by restricting its domain $E$ and if $f$ is not surjective, it can be made surjective by adjusting its codomain $F$.
+
+\begin{definition}[Bijectivity]
+    A function $f : E \to F$ is said to be bijective if it is both injective and surjective. In this case, for every $y \in F$, there exists a unique $x \in E$ such that $f(x) = y$.
+\end{definition}
+
+\begin{definition}[Inverse Function]
+    Let $f : E \to F$ be a bijective function. The inverse function of $f$, denoted by $f^{-1} : F \to E$, is defined by:
+    \[
+        f^{-1}(y) = x \quad \text{where} \quad f(x) = y
+    \]
+    for every $y \in F$.
+\end{definition}
+By convention, for the trigonometric functions, the inverse sine, cosine, and tangent functions are defined on restricted domains to ensure bijectivity:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\sin : \left[-\frac{\pi}{2}, \frac{\pi}{2}\right] \to [-1, 1]$, reciprocally $\arcsin : [-1, 1] \to \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$
+    \item $\cos : [0, \pi] \to [-1, 1]$, reciprocally $\arccos : [-1, 1] \to [0, \pi]$
+    \item $\tan : \left(-\frac{\pi}{2}, \frac{\pi}{2}\right) \to \mathbb{R}$, reciprocally $\arctan : \mathbb{R} \to \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$
+    \item $\cot : (0, \pi) \to \mathbb{R}$, reciprocally $\text{arccot} : \mathbb{R} \to (0, \pi)$
+\end{itemize}
+% TODO: add graphs of inverse functions to show the relations
+
+\begin{definition}[Composite Function]
+    Let $f : E \to F$ and $g : F \to G$ be two functions. The composite function of $f$ and $g$, denoted by $g \circ f : E \to G$, is defined by:
+    \[
+        (g \circ f)(x) = g(f(x))
+    \]
+    for every $x \in E$.
+\end{definition}
+\begin{eg}
+    Let $f : \mathbb{R} \to \mathbb{R}$ be defined by $f(x) = 2x + 3$ and let $g : \mathbb{R} \to \mathbb{R}$ be defined by $g(x) = x^2$. Then, the composite function $g \circ f : \mathbb{R} \to \mathbb{R}$ is given by:
+    \[
+        (g \circ f)(x) = g(f(x)) = g(2x + 3) = (2x + 3)^2 = 4x^2 + 12x + 9
+    \]
+    Note that the order of composition matters, as $f \circ g$ would yield a different result:
+    \[
+        (f \circ g)(x) = f(g(x)) = f(x^2) = 2x^2 + 3
+    \]
+\end{eg}
+\begin{eg}
+    Let $f: E \to F$ be a bijective function with inverse $f^{-1} : F \to E$. Then, the composite functions $f \circ f^{-1} : F \to F$ and $f^{-1} \circ f : E \to E$ are given by:
+    \[
+        (f \circ f^{-1})(y) = f(f^{-1}(y)) = y \quad \forall y \in F
+    \]
+    and
+    \[
+        (f^{-1} \circ f)(x) = f^{-1}(f(x)) = x \quad \forall x \in E
+    \]
+    Thus, composing a function with its inverse yields the identity function on the respective domains.
+\end{eg}
+
+\begin{eg}
+    Let $f = \frac{1}{\cos(x)^2 + 1}$ defined on $\mathbb{R}$. Let's find the biggest interval containing $x= 1$ where $f$ is bijective and then we'll find the inverse function $f^{-1}$ on this interval. \\
+    We remark that $f$ is periodic with period $\pi$ since $\cos(x)$ is periodic with period $2\pi$ and $\cos(x)^2$ has period $\pi$. \\
+\end{eg}
