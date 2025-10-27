@@ -11,35 +11,51 @@
         G(f) = \{(x, f(x)) \mid x \in E\}
     \]
 \end{definition}
+\begin{eg}
+    The graph of the function $f(x) = x^2$ is the set of points:
+    \[
+        G(f) = \{(x, x^2) \mid x \in \mathbb{R}\}
+    \]
+    Thus:
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+            \draw[->] (0, -0.5) -- (0, 2.75) node[above] {$y$};
+            \draw[thick, primary, domain=-1.5:1.5, samples=50] plot (\x, {(\x)^2});
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
 
 \subsection{Properties of Functions}
-\begin{definition}[Growing Function]
-    A function $f : E \to \mathbb{R}$ is said to be increasing ($f(x) \uparrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+% \begin{definition}[Growing Function]
+%     A function $f : E \to \mathbb{R}$ is said to be increasing ($f(x) \uparrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+%     \[
+%         f(x_1) \leq f(x_2)
+%     \]
+%     If the inequality is strict, i.e., $f(x_1) < f(x_2)$, then $f$ is said to be strictly increasing on $I$.
+% \end{definition}
+
+% \begin{definition}[Decreasing Function]
+%     A function $f : E \to \mathbb{R}$ is said to be decreasing ($f(x) \downarrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+%     \[
+%         f(x_1) \geq f(x_2)
+%     \]
+%     If the inequality is strict, i.e., $f(x_1) > f(x_2)$, then $f$ is said to be strictly decreasing on $I$.
+% \end{definition}
+
+\begin{definition}[Increasing and Decreasing Functions]
+    A function $f : E \to \mathbb{R}$ is said to be increasing on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
     \[
         f(x_1) \leq f(x_2)
     \]
-    If the inequality is strict, i.e., $f(x_1) < f(x_2)$, then $f$ is said to be strictly increasing on $I$.
-\end{definition}
-
-\begin{definition}[Decreasing Function]
-    A function $f : E \to \mathbb{R}$ is said to be decreasing ($f(x) \downarrow$) on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
+    If the inequality is strict, i.e., $f(x_1) < f(x_2)$, then $f$ is said to be strictly increasing on $I$. \\
+    Similarly, a function $f : E \to \mathbb{R}$ is said to be decreasing on an interval $I \subseteq E$ if for all $x_1, x_2 \in I$ such that $x_1 < x_2$, we have:
     \[
         f(x_1) \geq f(x_2)
     \]
     If the inequality is strict, i.e., $f(x_1) > f(x_2)$, then $f$ is said to be strictly decreasing on $I$.
 \end{definition}
-
-\begin{definition}[Bounded Function]
-    A function $f : E \to \mathbb{R}$ is said to be bounded above on a set $A \subseteq E$ if there exists a real number $M$ such that for all $x \in A$, we have:
-    \[
-        f(x) \leq M
-    \]
-    Similarly, $f$ is said to be bounded below on $A$ if there exists a real number $m$ such that for all $x \in A$, we have:
-    \[
-        f(x) \geq m
-    \]
-    If $f$ is both bounded above and bounded below on $A$, then it is said to be bounded on $A$.
-\end{definition}
+Note that a function (strictly) increasing or (strictly) decreasing on an interval $I$ is also called (strictly) monotonic on $I$.
 
 \begin{definition}[Even and Odd Functions]
     A function $f : E \to \mathbb{R}$ is said to be even if for all $x \in E$, we have:
@@ -52,6 +68,33 @@
     \]
     % TODO: Add graphs for examples of even and odd functions
 \end{definition}
+\begin{eg}
+    The function $f(x) = x^2$ is even since for all $x \in \mathbb{R}$, we have:
+    \[
+        f(-x) = (-x)^2 = x^2 = f(x)
+    \]
+    Graphically, even functions are symmetric with respect to the y-axis.
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+            \draw[->, secondary, thick] (0, -0.5) -- (0, 2.75) node[above] {$y$};
+            \draw[thick, primary, domain=-1.5:1.5, samples=50] plot (\x, {(\x)^2});
+        \end{tikzpicture}
+    \end{center}
+    The function $g(x) = x^3$ is odd since for all $x \in \mathbb{R}$, we have:
+    \[
+        g(-x) = (-x)^3 = -x^3 = -g(x)
+    \]
+    Graphically, odd functions are symmetric with respect to the origin.
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+            \draw[->] (0, -2) -- (0, 2) node[above] {$y$};
+            \draw[thick, primary, domain=-1.2:1.2, samples=50] plot (\x, {(\x)^3});
+            \draw[secondary, thick, domain=-1.7:1.7, samples=2] plot (\x, {\x});
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
 
 \begin{definition}[Periodic Function]
     A function $f : E \to \mathbb{R}$ is said to be periodic with period $T > 0$ if for all $x \in E$ such that $x \pm T \in E$, we have:
@@ -64,106 +107,124 @@
     \[
         \sin(x)^2 = \left(\frac{e^{ix} - e^{-ix}}{2i}\right)^2 = \frac{e^{2ix} - 2 + e^{-2ix}}{-4} = \frac{1}{2} - \frac{1}{2}\cos(2x)
     \]
-    Since $\cos(x)$ is periodic with period $2\pi$, we have that $\sin(x)^2$ is also periodic with period $\pi$.
-    We also see this properties with the graph of the function.
+    Since $\cos(x)$ is periodic with period $2\pi$, we have that $\sin(x)^2$ is also periodic with a period of $\pi$ (or $\sin(x)^2$ is $\pi$-periodic).
+    Graphically, we have:
     \begin{center}
         \begin{tikzpicture}[scale=1.5]
-            \draw[->] (-0.5, 2) -- (5.5, 2) node[right] {$x$};
-            \draw[->] (0, 1.5) -- (0, 3.5) node[above] {$y$};
-            \draw[thick, primary, domain=0:5, samples=100] plot (\x, {2 + sin(deg(2 * \x))^2});
-            % \draw[secondary, dashed] (0, 3) -- (5, 3) node[right] {$L$};
-            % \draw[secondary, dashed] (1, 2) -- (1, 3.5);
-            % \draw[secondary, dashed] (0, 2.5) -- (5, 2.5);
-            % \draw[secondary, dashed] (0, 3.5) -- (5, 3.5);
-            % \node[secondary] at (2.5, 2.75) {$\epsilon$};
-            % \node[secondary] at (2.5, 3.25) {$\epsilon$};
-            % \node[secondary] at (1, 1.7) {$N$};
+            \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+            \draw[->] (0, -0.5) -- (0, 1.5) node[above] {$y$};
+            \draw[thick, primary, domain=-1.5:1.5, samples=150] plot (\x, {sin(deg(\x * 4))^2});
+
+            \draw[<->, secondary, thick] (-0.8, -0.1) -- (0, -0.1) node[midway, below] {$\pi$};
+            \draw[<->, secondary, thick] (0.8, -0.1) -- (0, -0.1) node[midway, below] {$\pi$};
         \end{tikzpicture}
     \end{center}
 \end{eg}
 \begin{eg}
-    Some functions can be periodic but it's impossible to find the smallest period. For example, the function:
+    Some functions are periodic but it's impossible to find the smallest period. For example, the function:
     \[
         f(x) = \begin{cases}
             0 & \text{if } x \in \mathbb{Q} \\
             1 & \text{if } x \notin \mathbb{Q}
         \end{cases}
     \]
-    In other words:
+    In other words, for any rational number $P$:
     \[
         \begin{cases}
             \text{rational} + P = \text{rational} \\
             \text{irrational} + P = \text{irrational}
         \end{cases}
     \]
-    for any rational number $P$. Thus, $f(x + P) = f(x)$ for any rational number $P$, making $f$ a periodic function without a smallest period.
+    Thus, $f(x + P) = f(x)$ for any rational number $P$, making $f$ a periodic function without a smallest period.
 \end{eg}
 
-% BEGIN TODO
-\begin{definition}[Bounded Above and Below Function]
-    A function $f : E \to \mathbb{R}$ is said to be bounded above if there exists a real number $M$ such that for all $x \in E$, we have:
+\subsection{Boundedness and Extrema of Functions}
+\begin{definition}[Bounded Function]
+    A function $f : E \to \mathbb{R}$ is said to be bounded above on a set $A \subseteq E$ if the set $f(A) \subset \mathbb{R}$ is bounded above, i.e., there exists a real number $M$ such that for all $x \in A$, we have:
     \[
         f(x) \leq M
     \]
-    Similarly, $f$ is said to be bounded below if there exists a real number $m$ such that for all $x \in E$, we have:
+    Similarly, $f$ is said to be bounded below on $A$ if the set $f(A) \subset \mathbb{R}$ is bounded below, i.e., there exists a real number $m$ such that for all $x \in A$, we have:
     \[
         f(x) \geq m
     \]
+    If $f$ is both bounded above and bounded below on $A$, then it is said to be bounded on $A$.
 \end{definition}
-% TODO: correct
-\begin{definition}[Sup and Inf]
-    Let $f : E \to \mathbb{R}$ be a function and let $A \subseteq E$.
-    \begin{itemize}[itemsep=1pt,label=$\circ$]
-        \item The supremum (least upper bound) of $f$ on $A$, denoted by $\sup_{x \in A} f(x)$, is the smallest real number $M$ such that for all $x \in A$, we have:
-        \[
-            f(x) \leq M
-        \]
-        \item The infimum (greatest lower bound) of $f$ on $A$, denoted by $\inf_{x \in A} f(x)$, is the largest real number $m$ such that for all $x \in A$, we have:
-        \[
-            f(x) \geq m
-        \]
-    \end{itemize}
+
+\begin{definition}[Supremum and Infimum]
+    A function $f : E \to \mathbb{R}$ has a supremum (least upper bound) on a set $A \subseteq E$, denoted by $\sup_{x \in A} f(x)$, if the set $f(A) \subset \mathbb{R}$ has a supremum. This means that:
+    \[
+        \sup_{x \in A} f(x) = \sup \{f(x), x \in A\}
+    \]
+    Similarly, $f$ has an infimum (greatest lower bound) on $A$, denoted by $\inf_{x \in A} f(x)$, if the set $f(A) \subset \mathbb{R}$ has an infimum. This means that:
+    \[
+        \inf_{x \in A} f(x) = \inf \{f(x), x \in A\}
+    \]
 \end{definition}
-% END TODO
+\begin{eg}
+    Let $f: (0,1) \to \mathbb{R}$ defined by $f(x) = x^2 + 3$ be bounded on $A = (0,1)$. Then:
+    \[
+        \sup_{x \in A} f(x) = \sup \{x^2 + 3, x \in A\} = 4 \notin f(A)
+    \]
+    Similarly:
+    \[
+        \inf_{x \in A} f(x) = \inf \{x^2 + 3, x \in A\} = 3 \notin f(A)
+    \]
+\end{eg}
 
 \begin{definition}[Local Maximum and Minimum]
-    Let $f : E \to \mathbb{R}$ be a function and let $x_0 \in E$.
-    \begin{itemize}[itemsep=1pt,label=$\circ$]
-        \item The function $f$ has a local maximum at $x_0$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
-        \[
-            f(x) \leq f(x_0)
-        \]
-        \item The function $f$ has a local minimum at $x_0$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
-        \[
-            f(x) \geq f(x_0)
-        \]
-    \end{itemize}
-    % TODO: add graphs + check english terms with ChatGPT
+    A function $f: E \to \mathbb{R}$ has a local maximum at a point $x_0 \in E$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+    \[
+        f(x) \leq f(x_0)
+    \]
+    Similarly, $f$ has a local minimum at a point $x_0 \in E$ if there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+    \[
+        f(x) \geq f(x_0)
+    \]
 \end{definition}
 
 \begin{definition}[Global Maximum and Minimum]
-    Let $f : E \to \mathbb{R}$ be a function.
-    \begin{itemize}[itemsep=1pt,label=$\circ$]
-        \item The function $f$ has a global maximum on $E$ if there exists $x_0 \in E$ such that for all $x \in E$, we have:
-        \[
-            f(x) \leq f(x_0)
-        \]
-        \item The function $f$ has a global minimum on $E$ if there exists $x_0 \in E$ such that for all $x \in E$, we have:
-        \[
-            f(x) \geq f(x_0)
-        \]
-    \end{itemize}
+    A function $f: E \to \mathbb{R}$ has a global maximum at a point $x_0 \in E$ if for all $x \in E$, we have:
+    \[
+        f(x) \leq f(x_0)
+    \]
+    Similarly, $f$ has a global minimum at a point $x_0 \in E$ if for all $x \in E$, we have:
+    \[
+        f(x) \geq f(x_0)
+    \]
 \end{definition}
+\begin{eg}
+    Let's show the difference between local and global extrema graphically:
+    \begin{center}
+        \begin{tikzpicture}[scale=1.3]
+            \draw[->] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+            \draw[->] (0, -0.5) -- (0, 2.5) node[above] {$y$};
+            \draw[thick, primary, domain=0:2.5, samples=100] plot (\x, {-(\x - 1)^2 + 2});
+
+            \filldraw[secondary, thick] (1, 2) circle (1.5pt) node[above right] {Global Max};
+            \filldraw[secondary, thick] (0, 1) circle (1.5pt) node[above left] {Local Min};
+            \filldraw[secondary, thick] (2.49, -0.2) circle (1.5pt) node[below right] {Global Min};
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
 If the $\max_{x \in E} f(x)$ (or $\min_{x \in E} f(x)$) exists, then $f$ is bounded above (or below) on $E$ and $\sup_{x \in E} f(x) = \max_{x \in E} f(x)$ (or $\inf_{x \in E} f(x) = \min_{x \in E} f(x)$). \\
 A bounded function on $E$ does not necessarily reach its bounds, i.e., the maximum or minimum may not exist.
 \begin{eg}
-    Let $f(x) = x^2 + 3$ on $E = (0, 1)$. Then:
-    \begin{itemize}[itemsep=1pt,label=$\circ$]
-        \item $f$ is bounded below on $E$ since for all $x \in (0, 1)$, we have $f(x) \geq 3$. Thus, $\inf_{x \in E} f(x) = 3$ but $\min_{x \in E} f(x)$ does not exist since $f(x) > 3$ for all $x \in (0, 1)$.
-        \item $f$ is bounded above on $E$ since for all $x \in (0, 1)$, we have $f(x) < 4$. Thus, $\sup_{x \in E} f(x) = 4$ but $\max_{x \in E} f(x)$ does not exist since $f(x) < 4$ for all $x \in (0, 1)$.
-    \end{itemize}
+    Let $f: [0, 1) \to \mathbb{R}$ defined by $f(x) = x^2 + 3$. We clearly see that $f$ is bounded but:
+    \[
+        \max_{x \in [0, 1)} f(x) = 4 \notin f([0, 1))
+    \]
+    i.e. $f$ does not reach its upper bound and:
+    \[
+        \min_{x \in [0, 1)} f(x) = 3 \in f([0, 1))
+    \]
+    i.e. $f$ reaches its lower bound at $x = 0$:
+    \[
+        f(0) = 3 = \min_{x \in [0, 1)} f = \inf_{x \in [0, 1)} f
+    \]
 \end{eg}
 
+\subsection{Types of Functions}
 \begin{definition}[Surjectivity]
     A function $f : E \to F$ is said to be surjective (onto) if for every $y \in F$, there exists at least one $x \in E$ such that $f(x) = y$.
 \end{definition}
@@ -190,8 +251,43 @@ By convention, for the trigonometric functions, the inverse sine, cosine, and ta
     \item $\tan : \left(-\frac{\pi}{2}, \frac{\pi}{2}\right) \to \mathbb{R}$, reciprocally $\arctan : \mathbb{R} \to \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$
     \item $\cot : (0, \pi) \to \mathbb{R}$, reciprocally $\text{arccot} : \mathbb{R} \to (0, \pi)$
 \end{itemize}
-% TODO: add graphs of inverse functions to show the relations
+\begin{eg}
+    Graphically, the inverse function $f^{-1}$ of a bijective function $f$ can be obtained by reflecting the graph of $f$ across the line $y = x$:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+            \draw[->] (0, -0.5) -- (0, 3.5) node[above] {$y$};
+            \draw[thick, primary, domain=0:2.5, samples=100] plot (\x, {0.5 * (\x)^2}) node[above] {$f$};
+            \draw[thick, secondary, domain=0:3, samples=100] plot (\x, {sqrt(2 * \x)}) node[right] {$f^{-1}$};
+            \draw[dashed] (0, 0) -- (3.5, 3.5) node[above right] {$y = x$};
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+\begin{eg}
+    Let $f = \frac{1}{\cos(x)^2 + 1}$ defined on $\mathbb{R}$. Let's find the biggest interval containing $x= 1$ where $f$ is bijective. \\
+    We have:
+    \[
+        \frac{1}{y + 1} \quad \text{is injective} \quad \forall y \in [0, +\infty)
+    \]
+    and 
+    \[
+        \cos(x)^2 \quad \text{is injective} \quad  \forall x \in [0, \frac{\pi}{2}]
+    \]
+    Since $1 \in [0, \frac{\pi}{2}]$, thus $f$ is injective on the interval $\left[0, \frac{\pi}{2}\right]$. We also have:
+    \[
+        f(x) = \frac{1}{\cos(x)^2 + 1} \quad x \in \left[0, \frac{\pi}{2}\right]
+    \]
+    is increasing since $\cos(x)^2$ is decreasing on $\left[0, \frac{\pi}{2}\right]$ and thus:
+    \[        
+        \inf_{x \in \left[0, \frac{\pi}{2}\right]} f(x) = f\left(\frac{\pi}{2}\right) = \frac{1}{2} \quad \text{and} \quad \sup_{x \in \left[0, \frac{\pi}{2}\right]} f(x) = f(0) = 1
+    \]
+    Therefore, $f : \left[0, \frac{\pi}{2}\right] \to \left[\frac{1}{2}, 1\right]$ is bijective and its inverse function is given by:
+    \[
+        f^{-1}(y) = \arccos\left(\sqrt{\frac{1}{y} - 1}\right) \quad y \in \left[\frac{1}{2}, 1\right]
+    \]
+\end{eg}
 
+\subsection{Composite Functions}
 \begin{definition}[Composite Function]
     Let $f : E \to F$ and $g : F \to G$ be two functions. The composite function of $f$ and $g$, denoted by $g \circ f : E \to G$, is defined by:
     \[
@@ -221,7 +317,34 @@ By convention, for the trigonometric functions, the inverse sine, cosine, and ta
     Thus, composing a function with its inverse yields the identity function on the respective domains.
 \end{eg}
 
-\begin{eg}
-    Let $f = \frac{1}{\cos(x)^2 + 1}$ defined on $\mathbb{R}$. Let's find the biggest interval containing $x= 1$ where $f$ is bijective and then we'll find the inverse function $f^{-1}$ on this interval. \\
-    We remark that $f$ is periodic with period $\pi$ since $\cos(x)$ is periodic with period $2\pi$ and $\cos(x)^2$ has period $\pi$. \\
-\end{eg}
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+\begin{exercise}[Quizz of Lecture 12]
+    Let $f(x) = 2 \sin(1 - x^2)$ on the biggest interval where it is bijective and containing $x= 1$. Then the set of the definition of $f^{-1}$ and its image is:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $f^{-1}: \left[-2 \sin(1), 2 \sin(1)\right] \to \left[\sqrt{1 - \frac{\pi}{2}}, \sqrt{1 + \frac{\pi}{2}}\right]$
+        \item $f^{-1}: \left[0, 2 \sin(1)\right] \to \left[0, \sqrt{1 + \pi}\right]$
+        \item $f^{-1}: \left[-2, 2 \sin(1)\right] \to \left[0, \sqrt{1 + \frac{\pi}{2}}\right]$
+        \item $f^{-1}: \left[-2, 2 \sin(1)\right] \to \left[-\sqrt{1 + \frac{\pi}{2}}, \sqrt{1 + \frac{\pi}{2}}\right]$
+        \item $f^{-1}: \left[-2 \sin(1), 0\right] \to \left[0, \sqrt{1 + \pi}\right]$
+    \end{itemize}
+    \Answer
+    The correct answer is the 3rd proposition because we have:
+    \[
+        f(x) = 2 \sin(1 - x^2) \quad \implies \quad - \frac{\pi}{2} + 2k\pi \leq 1 - x^2 \leq \frac{\pi}{2} + 2k\pi
+    \]
+    for $k = 0$ since $x = 1$ is in the interval. Thus:
+    \[
+        1 - \frac{\pi}{2} \leq x^2 \leq 1 + \frac{\pi}{2} \quad \iff \quad 0 \leq x^2 \leq 1 + \frac{\pi}{2}
+    \]
+    since $1 - \frac{\pi}{2} < 0$ and $x^2 \geq 0$. Therefore:
+    \[
+        0 \leq x \leq \sqrt{1 + \frac{\pi}{2}}
+    \]
+    Thus the domain of $f(x)$ is $\left[0, \sqrt{1 + \frac{\pi}{2}}\right] = E$ for it to be bijective and containing $x = 1$. Furthermore, we see that $f$ is decreasing on $E$ thus:
+    \[
+        \inf_{x \in E} f(x) = f\left(\sqrt{1 + \frac{\pi}{2}}\right) = -2 \quad \text{and} \quad \sup_{x \in E} f(x) = f(0) = 2 \sin(1)
+    \]
+    Therefore, the image of $f$ is $\left[-2, 2 \sin(1)\right]$.
+\end{exercise}
