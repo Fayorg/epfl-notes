@@ -496,5 +496,149 @@ There is no simple formula for assessing, whether for a given set of coin denomi
         \item \textbf{Continue the Process:} Any man who is rejected proposes to the next woman on his list.
         \item \textbf{Termination:} The process continues until every man is engaged.
     \end{itemize}
-    The algorithm guarantees that the resulting matching is stable, the result is optimal for the side that proposes and the algorithm is deterministic (always produces the same output for the same input).
+    The algorithm guarantees that the resulting matching is stable, the result is optimal for the side that proposes (in this case man-optimal since men are proposing) and the algorithm is deterministic (always produces the same output for the same input).
 \end{definition}
+\begin{proof}
+    Let's prove that this algorithm produce a stable outcome. Assume for the sake of contradiction that there exists a pair (m, w) and (m', w') in the matching such that m prefers w' over w and w' prefers m over m'. Since m prefers w' over w, he must have proposed to w' before proposing to w. When m proposed to w', there are two possibilities:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item w' was free and accepted m's proposal. In this case, w's current partner is m, which contradicts the assumption that w' prefers m over m'.
+        \item w' was already engaged to m'. Since w' prefers m over m', she would have accepted m's proposal and rejected m'. This contradicts the assumption that m' is w's current partner.
+    \end{itemize}
+    In both cases, we reach a contradiction. Therefore, our initial assumption must be false, and the matching produced by the Gale-Shapley algorithm is stable.
+\end{proof}
+
+\subsection{Unsolvable Problems}
+Turing proved in 1936 that there are problems that no algorithm can solve. One of the most famous examples of such a problem is the halting problem.
+\begin{definition}[Halting Problem]
+    The halting problem is a decision problem that asks whether a given computer program will eventually halt (stop running) or continue to run indefinitely for a given input.
+\end{definition}
+
+\section{Efficiency of Algorithms}
+\begin{definition}[Asymptotic Analysis]
+    Asymptotic analysis is a method used to describe the behavior of functions as the input size approaches infinity. It focuses on the dominant terms of a function, which have the most significant impact on its growth rate, while ignoring lower-order terms and constant factors. This allows us to compare the efficiency of algorithms based on their growth rates rather than their exact performance for specific input sizes.
+\end{definition}
+\begin{eg}
+    Let $f(n) = 1.5n^2 + 200n + 1000$ be a function to estimate the time to solve a problem of size $n$. We can decompose $f(n)$ into its dominant term and lower-order terms:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The constant term: $t(n) = 1000$ which will dominate for small values of $n$.
+        \item The linear term: $s(n) = 200n$ which will dominate for moderate values of $n$.
+        \item The quadratic term: $r(n) = 1.5n^2$ which will dominate for large values of $n$.
+    \end{itemize}
+    As $n$ becomes very large, the dominant term $r(n)$ will have the most significant impact on the growth of $f(n)$. Therefore, we can say that $f(n)$ is asymptotically equivalent to $r(n)$ as $n$ approaches infinity.
+\end{eg}
+
+\subsection{Big-O Notation}
+\begin{definition}[Big-O Notation]
+    A function $f(n)$ is said to be $O(g(n))$ if there exist positive constants $c$ and $n_0$ such that for all $n \geq n_0$, the following inequality holds:
+    \[f(n) \leq c \cdot g(n)\]
+    It is used to describe an upper bound on the growth rate of a function, indicating that $f(n)$ does not grow faster than a constant multiple of $g(n)$ for sufficiently large values of $n$.
+    % In this context, $g(n)$ is called the asymptotic upper bound of $f(n)$, and it represents the growth rate of the function as $n$ approaches infinity.
+\end{definition}
+\begin{eg}
+    Let's show that $f(x) = x^2 + 2x + 1$ is $O(x^2)$. We need to find constants $c$ and $x_0$ such that for all $x \geq x_0$, the inequality $f(x) \leq c \cdot x^2$ holds. We can rewrite the inequality as:
+    \[x^2 + 2x + 1 \leq c \cdot x^2\]
+    Rearranging the terms, we get:
+    \[2x + 1 \leq (c - 1) \cdot x^2\]
+    To satisfy this inequality for sufficiently large $x$, we can choose $c = 4$ and $x_0 = 1$. For all $x \geq 1$, we have:
+    \[2x + 1 \leq 3x^2\]
+    Thus, we have shown that $f(x) = x^2 + 2x + 1$ is $O(x^2)$ with constants $c = 4$ and $x_0 = 1$. We can show to graphically:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-0.5, 0) -- (6, 0) node[right] {};
+            \draw[->] (0, -0.5) -- (0, 5) node[above] {};
+
+            \draw (2.5, 0.1) -- (2.5, -0.1) node[below] {$1$};
+
+            \draw[domain=0:1.2, thick, smooth, variable=\x, primary] plot ({2.5*\x}, {\x*\x + 2*\x + 1});
+            \draw[domain=0:1.1, thick, dashed, smooth, variable=\x] plot ({2.5*\x}, {4*\x*\x}) node[left] {$4x^2$};
+            \draw[domain=0:2.2, thick, dashed, smooth, variable=\x] plot ({2.5*\x}, {\x*\x}) node[right] {$x^2$};
+            
+            \draw[domain=1:1.2, thick, smooth, variable=\x, secondary] plot ({2.5*\x}, {\x*\x + 2*\x + 1}) node[right] {$x^2 + 2x + 1$};
+        \end{tikzpicture}
+    \end{center}
+    where the part of the graph in the \textcolor{secondary}{secondary} color shows that $f(x) < 4x^2$.
+\end{eg}
+\begin{eg}
+    Let's determine for the following functions if they are $O(x)$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $f(x) = 10$: Yes, with $c = 10$ and $x_0 = 1$.
+        \item $f(x) = 3x + 7$: Yes, with $c = 4$ and $x_0 = 7$.
+        \item $f(x) = x^2 + x + 1$: No, because the quadratic term $x^2$ grows faster than the linear term $x$ as $x$ approaches infinity.
+    \end{itemize}
+\end{eg}
+Remark that for any constant $k$, $f(n) = k$ is $O(1)$ since we can choose $c = k$ and $n_0 = 1$ but $1$ is also $O(k)$ since we can choose $c = 1$ and $n_0 = 1$ (the notation $O(1)$ is generally preferred).
+
+\begin{theorem}[Big-O Estimate for Polynomials]
+    Let $f(n) = a_k n^k + a_{k-1} n^{k-1} + \ldots + a_1 n + a_0$ be a polynomial of degree $k$ with leading coefficient $a_k \neq 0$. Then, $f(n)$ is $O(n^k)$. In other words, the leading term of the polynomial determines its asymptotic growth rate.
+\end{theorem}
+\begin{proof}
+    To prove that $f(n) = a_k n^k + a_{k-1} n^{k-1} + \ldots + a_1 n + a_0$ is $O(n^k)$, we need to find constants $c > 0$ and $n_0 > 0$ such that for all $n \geq n_0$, the following inequality holds:
+    \[f(n) \leq c \cdot n^k\]
+    We can rewrite the inequality as:
+    \[a_k n^k + a_{k-1} n^{k-1} + \ldots + a_1 n + a_0 \leq c \cdot n^k\]
+    Rearranging the terms, we get:
+    \[(c - a_k) n^k - a_{k-1} n^{k-1} - \ldots - a_1 n - a_0 \geq 0\]
+    To satisfy this inequality for sufficiently large $n$, we can choose $c = |a_k| + |a_{k-1}| + \ldots + |a_1| + |a_0| + 1$ and $n_0 = 1$. For all $n \geq 1$, we have:
+    \[(c - a_k) n^k - a_{k-1} n^{k-1} - \ldots - a_1 n - a_0 \geq 0\]
+    Thus, we have shown that $f(n)$ is $O(n^k)$ with constants $c = |a_k| + |a_{k-1}| + \ldots + |a_1| + |a_0| + 1$ and $n_0 = 1$.
+\end{proof}
+
+\begin{theorem}[Sum and Product Rules for Big-O Notation]
+    Let $f(n)$ and $g(n)$ be functions such that $f(n)$ is $O(h(n))$ and $g(n)$ is $O(k(n))$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item (Sum Rule) The sum $f(n) + g(n)$ is $O(\max(|h(n)|, |k(n)|))$.
+        \item (Product Rule) The product $f(n) \cdot g(n)$ is $O(h(n) \cdot k(n))$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    \textbf{Sum Rule:} Since $f(n)$ is $O(h(n))$, there exist constants $c_1 > 0$ and $n_1 > 0$ such that for all $n \geq n_1$:
+    \[|f(n)| \leq c_1 \cdot |h(n)|\]
+    Similarly, since $g(n)$ is $O(k(n))$, there exist constants $c_2 > 0$ and $n_2 > 0$ such that for all $n \geq n_2$:
+    \[|g(n)| \leq c_2 \cdot |k(n)|\]
+    Let $n_0 = \max(n_1, n_2)$ and $c = c_1 + c_2$. For all $n \geq n_0$, we have:
+    \[|f(n) + g(n)| \leq |f(n)| + |g(n)| \leq c_1 \cdot |h(n)| + c_2 \cdot |k(n)|\]
+    Since $\max(|h(n)|, |k(n)|) \geq |h(n)|$ and $\max(|h(n)|, |k(n)|) \geq |k(n)|$, we can write:
+    \[|f(n) + g(n)| \leq (c_1 + c_2) \cdot \max(|h(n)|, |k(n)|) = c \cdot \max(|h(n)|, |k(n)|)\]
+    Thus, $f(n) + g(n)$ is $O(\max(|h(n)|, |k(n)|))$. \\
+    \textbf{Product Rule:} Using the same constants as above, for all $n \geq n_0$, we have:
+    \[|f(n) \cdot g(n)| = |f(n)| \cdot |g(n)| \leq (c_1 \cdot |h(n)|) \cdot (c_2 \cdot |k(n)|) = (c_1 c_2) \cdot |h(n)| \cdot |k(n)|\]
+    Letting $c' = c_1 c_2$, we have:
+    \[|f(n) \cdot g(n)| \leq c' \cdot |h(n)| \cdot |k(n)|\]
+    Thus, $f(n) \cdot g(n)$ is $O(h(n) \cdot k(n))$.
+\end{proof}
+Remark that if $f_1(n)$ and $f_2(n)$ are both $O(h(n))$, then their sum is also $O(h(n))$.
+
+\begin{theorem}[Transitivity of Big-O Notation]
+    If $f(n)$ is $O(g(n))$ and $g(n)$ is $O(h(n))$, then $f(n)$ is $O(h(n))$.
+\end{theorem}
+\begin{proof}
+    Since $f(n)$ is $O(g(n))$, there exist constants $c_1 > 0$ and $n_1 > 0$ such that for all $n \geq n_1$:
+    \[|f(n)| \leq c_1 \cdot |g(n)|\]
+    Similarly, since $g(n)$ is $O(h(n))$, there exist constants $c_2 > 0$ and $n_2 > 0$ such that for all $n \geq n_2$:
+    \[|g(n)| \leq c_2 \cdot |h(n)|\]
+    Let $n_0 = \max(n_1, n_2)$ and $c = c_1 \cdot c_2$. For all $n \geq n_0$, we have:
+    \[|f(n)| \leq c_1 \cdot |g(n)| \leq c_1 \cdot (c_2 \cdot |h(n)|) = c \cdot |h(n)|\]
+    Thus, $f(n)$ is $O(h(n))$.
+\end{proof}
+
+\begin{eg}
+    Let's determine the Big-O notation of $f(n) = (n^2 + 8) \cdot (n + 1)$. We can use the product rule to evaluate each term of the product separately:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $n^2 + 8$ is $O(n^2)$ (by the Big-O estimate for polynomials).
+        \item $n + 1$ is $O(n)$ (by the Big-O estimate for polynomials).
+    \end{itemize}
+    Using the product rule, we have:
+    \[f(n) = (n^2 + 8) \cdot (n + 1) \text{ is } O(n^2) \cdot O(n) = O(n^3)\]
+    We can also verify this by expanding $f(n)$:
+    \[f(n) = n^3 + n^2 + 8n + 8\]
+    By the Big-O estimate for polynomials, we can see that $f(n)$ is indeed $O(n^3)$.
+\end{eg}
+
+\begin{eg}
+    Let's determine the Big-O notation of $f(n) = n! = n \cdot (n - 1) \cdot (n - 2) \cdot \ldots \cdot 2 \cdot 1$. We can use the product rule to evaluate each term of the product separately:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Each term $k$ (where $1 \leq k \leq n$) is $O(n)$.
+    \end{itemize}
+    Using the product rule, we have:
+    \[\underbrace{O(n) \cdot O(n) \cdot O(n) \cdot \ldots \cdot O(n)}_{n \text{ times}} = O(n^n)\]
+\end{eg}
