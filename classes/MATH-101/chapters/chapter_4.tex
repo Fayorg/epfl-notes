@@ -54,3 +54,170 @@ Similarly, the series $\sum_{k = 0}^{\infty} r^k = \frac{1}{1 - r}$ for $|r| < 1
     \]
     which is a contradiction. Therefore, the harmonic series diverges.
 \end{eg}
+
+\begin{eg}
+    The series $\sum_{n = 1}^{\infty} \frac{1}{n^2}$ converges. We can show that with:
+    \[
+        S_n = \sum_{k=1}^n \frac{1}{k^2} = 1 + \underbrace{\left(\frac{1}{2^2} + \frac{1}{3^2}\right)}_{< 2 \cdot \frac{1}{2^2}} + \underbrace{\left(\frac{1}{4^2} + \frac{1}{5^2}\right)}_{< 2 \cdot \frac{1}{4^2}} + \underbrace{\left(\frac{1}{6^2} + \frac{1}{7^2}\right)}_{< 2 \cdot \frac{1}{6^2}} + \ldots + \frac{1}{n^2}
+    \]
+    We then have:
+    \[
+        S_n < 1 + 2 \sum_{k = 1}^{n} \frac{1}{(2k)^2} = 1 + 2 \sum_{k = 1}^{n} \frac{1}{4} \cdot \frac{1}{k^2} = 1 + \frac{1}{2} \underbrace{\sum_{k = 1}^{n} \frac{1}{k^2}}_{= S_n}
+    \]
+    Thus, we get:
+    \[
+        S_n < 1 + \frac{1}{2} S_n \implies \frac{1}{2} S_n < 1 \implies S_n < 2
+    \]
+    Therefore, the sequence of partial sums $(S_n)_{n\geq 1}$ is bounded above by $2$, we can also show that it is increasing:
+    \[
+        S_{n+1} = S_n + \frac{1}{(n+1)^2} > S_n
+    \]
+    making $(S_n)_{n\geq 1}$ a monotone increasing and bounded sequence thus it converges. Hence, the series $\sum_{n = 1}^{\infty} \frac{1}{n^2}$ converges.
+\end{eg}
+Remark that the series $\sum_{n = 1}^{\infty} \frac{1}{n^p}$ converges for all $p > 1$.
+% TODO: read "zeta.pdf" on moodle, and add here if there is something interesting.
+\begin{definition}[Absolute Convergence]
+    A series $\sum_{n=0}^{\infty} a_n$ is said to converge absolutely if the series of absolute values $\sum_{n=0}^{\infty} |a_n|$ converges.
+\end{definition}
+\begin{theorem}
+    If a series $\sum_{n=0}^{\infty} a_n$ converges absolutely, then it converges.
+\end{theorem}
+
+\begin{definition}[Necessary Condition for Convergence]
+    If a series $\sum_{n=0}^{\infty} a_n$ converges, then the general term $a_n$ tends to $0$ as $n$ tends to infinity:
+    \[
+        \lim_{n \to \infty} a_n = 0
+    \]
+\end{definition}
+\begin{proof}
+    Let $S_n = \sum_{k=0}^n a_k$ be the sequence of partial sums of the series and it is Cauchy since it converges. Thus, for every $\varepsilon > 0$, there exists $N \in \mathbb{N}$ such that for all $m, n \geq N$:
+    \[
+        |S_m - S_n| < \varepsilon
+    \]
+    Without loss of generality, assume $m > n$. Then we have:
+    \[
+        |a_{n+1} + a_{n+2} + \ldots + a_m| < \varepsilon
+    \]
+    In particular, for $m = n + 1$, we get:
+    \[
+        |a_{n+1}| < \varepsilon
+    \]
+    Thus, as $n \to \infty$, $a_n \to 0$.
+\end{proof}
+\begin{eg}
+    Let $\sum_{n = 0}^{\infty} \frac{(-1)^n}{2}$ be a series. The general term $\frac{(-1)^n}{2}$ does not tends to $0$ as $n$ tends to infinity. Therefore, by the necessary condition for convergence, the series diverges.
+\end{eg}
+Remark that the necessary condition for convergence is not sufficient. For example, the harmonic series $\sum_{n = 1}^{\infty} \frac{1}{n}$ has general term tending to $0$ but diverges.
+
+\section{Tests for Convergence}
+
+\subsection{Leibniz Test for Alternating Series}
+\begin{theorem}[Leibniz Test]
+    Let $\sum_{n=0}^{\infty} a_n$ be a series such that:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item there exists $p \in \mathbb{N}: \forall n \geq p \implies |a_{n + 1}| \leq |a_n|$,
+        \item there exists $q \in \mathbb{N}: \forall n \geq q \implies a_{n + 1} \cdot a_n \leq 0$ (the terms alternate in sign),
+        \item $\lim_{n \to \infty} a_n = 0$,
+    \end{itemize}
+    Then the series $\sum_{n=0}^{\infty} a_n$ converges.
+\end{theorem}
+\begin{eg}
+    Let $\sum_{n = 1}^{\infty} (-1)^n \frac{1}{n}$ be the alternating harmonic series. We have:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item for all $n \geq 1$, $|a_{n + 1}| = \frac{1}{n + 1} \leq \frac{1}{n} = |a_n|$,
+        \item for all $n \geq 1$, $a_{n + 1} \cdot a_n = (-1)^{n + 1} \frac{1}{n + 1} \cdot (-1)^n \frac{1}{n} = -\frac{1}{n(n + 1)} \leq 0$,
+        \item $\lim_{n \to \infty} a_n = \lim_{n \to \infty} (-1)^n \frac{1}{n} = 0$,
+    \end{itemize}
+    Therefore, by the Leibniz test, the series $\sum_{n = 1}^{\infty} (-1)^n \frac{1}{n}$ converges.
+\end{eg}
+
+\subsection{Comparison Test}
+\begin{theorem}[Comparison Test]
+    Let $\sum_{n=0}^{\infty} a_n$ and $\sum_{n=0}^{\infty} b_n$ be two series with non-negative terms such that there exists $N \in \mathbb{N}$ such that for all $n \geq N$, $a_n \leq b_n$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item if $\sum_{n=0}^{\infty} b_n$ converges, then $\sum_{n=0}^{\infty} a_n$ converges,
+        \item if $\sum_{n=0}^{\infty} a_n$ diverges, then $\sum_{n=0}^{\infty} b_n$ diverges.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Assume that $\sum_{n=0}^{\infty} b_n$ converges. Let $S_n^a = \sum_{k=0}^n a_k$ and $S_n^b = \sum_{k=0}^n b_k$ be the sequences of partial sums of the series $\sum_{n=0}^{\infty} a_n$ and $\sum_{n=0}^{\infty} b_n$, respectively. Since $a_n \leq b_n$ for all $n \geq N$, we have:
+    \[
+        S_n^a = \sum_{k=0}^n a_k \leq \sum_{k=0}^n b_k = S_n^b
+    \]
+    for all $n \geq N$. Since $\sum_{n=0}^{\infty} b_n$ converges, the sequence $(S_n^b)_{n\geq 0}$ is bounded. Therefore, the sequence $(S_n^a)_{n\geq 0}$ is also bounded. Moreover, since $a_n \geq 0$, the sequence $(S_n^a)_{n\geq 0}$ is increasing. Thus, by the Monotone Convergence Theorem, the sequence $(S_n^a)_{n\geq 0}$ converges, and hence the series $\sum_{n=0}^{\infty} a_n$ converges. \\
+    The second part of the theorem follows similarly by contraposition.
+\end{proof}
+\begin{eg}
+    Let $\sum_{n = 0}^{\infty} \frac{\cos{n!}}{(n + 1)^2}$ be a series. Let's consider the absolute convergence of this series. We have:
+    \[
+        \left|\frac{\cos{n!}}{(n + 1)^2}\right| \leq \frac{1}{(n + 1)^2}
+    \]
+    for all $n \geq 0$. Since the series $\sum_{n = 0}^{\infty} \frac{1}{(n + 1)^2}$ converges, by the Comparison Test, the series $\sum_{n = 0}^{\infty} \left|\frac{\cos{n!}}{(n + 1)^2}\right|$ converges. Therefore, the series $\sum_{n = 0}^{\infty} \frac{\cos{n!}}{(n + 1)^2}$ converges absolutely, and hence it converges.
+\end{eg}
+Remark that if $\sum_{n = 0}^{\infty} a_n$ has only positive (negative) terms, and the sequence of the partial sums $(S_n)_{n\geq 0}$ is bounded above (below), then the series converges.
+
+\subsection{Alembert's Ratio Test}
+\begin{theorem}[Alembert's Ratio Test]
+    Let $\sum_{n=0}^{\infty} a_n$ be a series with positive terms. Suppose that the limit:
+    \[
+        L = \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
+    \]
+    exists. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item if $L < 1$, the series $\sum_{n=0}^{\infty} a_n$ converges,
+        \item if $L > 1$, the series $\sum_{n=0}^{\infty} a_n$ diverges,
+        \item if $L = 1$, the test is inconclusive.
+    \end{itemize}
+\end{theorem}
+
+\subsection{Cauchy's Root Test}
+\begin{theorem}[Cauchy's Root Test]
+    Let $a_n$ be a sequence and there exists the limit:
+    \[
+        \lim_{n \to \infty} \sqrt[n]{|a_n|} = L \in \mathbb{R}
+    \]
+    or more generally:
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|a_n|} = L \in \mathbb{R}
+    \]
+    Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item if $L < 1$, the series $\sum_{n=0}^{\infty} a_n$ converges absolutely,
+        \item if $L > 1$, the series $\sum_{n=0}^{\infty} a_n$ diverges,
+        \item if $L = 1$, the test is inconclusive.
+    \end{itemize}
+\end{theorem}
+The proof of this test involves using geometric series since we compare $|a_n|$ with $L^n$ for large $n$. \\
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item if $\lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| = r$ and $\lim_{n \to \infty} \left|a_n\right|^{\frac{1}{n}} = l$, then $r = l$,
+    \item sometimes $\lim_{n \to \infty} \left|a_n\right|^{\frac{1}{n}}$ exists while $\lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right|$ does not exist (and vice versa),
+    \item if both limits are inconclusive (equal to $1$), then no conclusion can be drawn about the series' convergence.
+\end{itemize}
+
+\begin{eg}
+    Let $\sum_{n = 1}^{\infty} n = \infty$ be a divergent series but:
+    \[
+        \lim_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right| = \lim_{n \to \infty} \frac{n + 1}{n} = 1
+    \]
+    and the series $\sum_{n = 1}^{\infty} \frac{1}{n^2}$ is convergent but:
+    \[
+        \lim_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right| = \lim_{n \to \infty} \frac{\frac{1}{(n + 1)^2}}{\frac{1}{n^2}} = \lim_{n \to \infty} \left(\frac{n}{n + 1}\right)^2 = 1
+    \]
+\end{eg}
+
+\begin{eg}
+    Let $\sum_{n = 1}^{\infty} \frac{10^n \cdot n!}{(2n)!}$ be a series. We have:
+    \[
+        \lim_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right| = \lim_{n \to \infty} \frac{10^{n + 1} \cdot (n + 1)!}{(2(n + 1))!} \cdot \frac{(2n)!}{10^n \cdot n!} = \lim_{n \to \infty} \frac{10(n + 1)}{(2n + 2)(2n + 1)} = \lim_{n \to \infty} \frac{10}{4n + 2} = 0
+    \]
+    Since $0 < 1$, by Alembert's Ratio Test, the series $\sum_{n = 1}^{\infty} \frac{10^n \cdot n!}{(2n)!}$ converges.
+\end{eg}
+
+\begin{eg}
+    Let $\sum_{k = 0}^{\infty} \frac{x^k}{k!}$ be a series. We have:
+    \[
+        \lim_{k \to \infty} \left|\frac{a_{k + 1}}{a_k}\right| = \lim_{k \to \infty} \frac{\frac{|x|^{k + 1}}{(k + 1)!}}{\frac{|x|^k}{k!}} = \lim_{k \to \infty} \frac{|x|}{k + 1} = 0
+    \]
+    Since $0 < 1$, by Alembert's Ratio Test, the series $\sum_{k = 0}^{\infty} \frac{x^k}{k!}$ converges for all $x \in \mathbb{R}$. Note that this series defines the exponential function $e^x$ for all $x \in \mathbb{R}$.
+\end{eg}
