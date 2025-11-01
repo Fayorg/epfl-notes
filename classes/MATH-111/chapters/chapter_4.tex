@@ -400,7 +400,7 @@ Again we can define the kernel and the image of a linear transformation.
     where $c_1, c_2, \ldots, c_n \in \mathbb{R}$.
 \end{definition}
 Remark that:
-\begin{itemize}
+\begin{itemize}[itemsep=1pt,label=$\circ$]
     \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ are linearly independent then they form a basis for $Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
     \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ form a basis for $H \subseteq V$, then $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}$ are in $H$ because $H = Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
 \end{itemize}
@@ -644,3 +644,206 @@ And for any vector $[\vec{u}]_{\mathcal{E}} = \begin{bmatrix}
 \begin{theorem}
     Let $B$ be a basis for a vector space $V$. Then, the transformation that maps each vector $\vec{v} \in V$ to its coordinate vector $[\vec{v}]_B$ is a linear transformation from $V$ to $\mathbb{R}^n$ that is one-to-one and onto (thus bijective).
 \end{theorem}
+
+\begin{eg}
+    Let the canonical basis of $\mathbb{P}_3$ is given by $\mathcal{B} = (1, t, t^2, t^3)$. Consider the polynomial $p(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3$. The coordinates of $p(t)$ relative to the basis $\mathcal{B}$ are given by:
+    \[ [p(t)]_{\mathcal{B}} = \begin{bmatrix}
+        a_0 \\ a_1 \\ a_2 \\ a_3
+    \end{bmatrix} \]
+    Thus $\mathbb{P}_3$ is isomorphic to $\mathbb{R}^4$.
+\end{eg}
+
+\begin{eg}
+    Let $V = \mathbb{R}^{2 \times 3}$ be the vector space of all $2 \times 3$ matrices. It's canonical basis is given by:
+    \[ \mathcal{B} = \left( E_{11}, E_{12}, E_{13}, E_{21}, E_{22}, E_{23} \right) \]
+    where $E_{ij}$ is the matrix with a $1$ in the $(i,j)$ position and $0$ elsewhere. Consider the matrix:
+    \[ M = \begin{bmatrix}
+        m_{11} & m_{12} & m_{13} \\
+        m_{21} & m_{22} & m_{23}
+    \end{bmatrix} \]
+    The coordinates of $M$ relative to the basis $\mathcal{B}$ are given by:
+    \[ [M]_{\mathcal{B}} = \begin{bmatrix}
+        m_{11} \\ m_{12} \\ m_{13} \\ m_{21} \\ m_{22} \\ m_{23}
+    \end{bmatrix} \]
+    Thus $V$ is isomorphic to $\mathbb{R}^6$.
+\end{eg}
+
+\begin{eg}
+    We want to find a basis for all symetrical matrices in $\mathbb{R}^{2 \times 2}$. Let:
+    \[ M = \begin{bmatrix}
+        a & b \\
+        b & c
+    \end{bmatrix} \]
+    We can express $M$ as a linear combination of the following matrices:
+    \[ M = a \begin{bmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{bmatrix} + b \begin{bmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{bmatrix} + c \begin{bmatrix}
+        0 & 0 \\
+        0 & 1
+    \end{bmatrix} \]
+    Thus, a basis for the space of all symetrical matrices in $\mathbb{R}^{2 \times 2}$ is given by:
+    \[ \left\{ \begin{bmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 0 \\
+        0 & 1
+    \end{bmatrix} \right\} \]
+    Thus, the space of all symetrical matrices in $\mathbb{R}^{2 \times 2}$ is isomorphic to $\mathbb{R}^3$.
+\end{eg}
+
+\section{Dimension of a Vector Space}
+\begin{definition}[Dimension]
+    The dimension of a vector space $V$, denoted by $\text{dim}(V)$, is defined as the number of vectors in any basis for $V$. If $V$ has no finite basis, then we say that $V$ is infinite-dimensional.
+\end{definition}
+By convention, we define the dimension of the zero vector space $\{\vec{0}\}$ to be $0$ since the empty set is a basis for $\{\vec{0}\}$.
+
+\begin{eg}
+    Let $V = \mathbb{P}_3$. A basis for $V$ is given by $\{1, t, t^2, t^3\}$. Thus, the dimension of $V$ is:
+    \[ \text{dim}(V) = 4 \]
+    Similarly, for $V = \mathbb{R}^{n \times m}$ the dimension is given by:
+    \[ \text{dim}(V) = nm \]
+\end{eg}
+All subspace of $\mathbb{R}^n$ have a finite dimension less than or equal to $n$.
+
+\begin{theorem}
+    All bases of a finite-dimensional vector space have the same number of vectors.
+\end{theorem}
+Let $H$ be a subspace of $V$ (dim$(V) = p$). Some remarks:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item All free sets of vectors in $H$ can be extended to form a basis for $H$.
+    \item dim$(H) \leq$ dim$(V)$.
+\end{itemize}
+
+\begin{theorem}
+    Let $V$ be a vector space of dimension $n$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Any set of more than $n$ vectors in $V$ is linearly dependent.
+        \item Any set of fewer than $n$ vectors in $V$ does not span $V$.
+        \item Any linearly independent set of exactly $n$ vectors in $V$ is a basis for $V$.
+        \item Any set of exactly $n$ vectors that spans $V$ is a basis for $V$.
+    \end{itemize}
+\end{theorem}
+
+\subsection{Dimension of Kernel and Image}
+\begin{theorem}
+    The dimension of Ker$(A)$ is equal to the number of free variables in the homogeneous system $A\vec{x} = \vec{0}$ and the dimension of Im$(A)$ is equal to the number of pivot columns in $A$.
+\end{theorem}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        -3 & 6 & -1 & 1 & -7 \\
+        1 & -2 & 2 & 3 & -1 \\
+        2 & -4 & 5 & 8 & -4
+    \end{bmatrix}$ the same matrix as a previous example. In reduce row echelon form, we had:
+    \[ \begin{bmatrix}
+        1 & -2 & 0 & -1 & 3 \\
+        0 & 0 & 1 & 2 & -2 \\
+        0 & 0 & 0 & 0 & 0
+    \end{bmatrix} \]
+    We had found that the kernel of $A$ is given by:
+    \[ \text{Ker}(A) = Span\left\{ \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ 0 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        1 \\ 0 \\ -2 \\ 1 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        -3 \\ 0 \\ 2 \\ 0 \\ 1
+    \end{bmatrix} \right\} \]
+    And a basis for the image of $A$ is given by the columns $\vec{a_1}$ and $\vec{a_3}$:
+    \[ \text{Im}(A) = Span\left\{ \begin{bmatrix}
+        -3 \\ 1 \\ 2
+    \end{bmatrix}, \begin{bmatrix}
+        -1 \\ 2 \\ 5
+    \end{bmatrix} \right\} \]
+    Thus, we have:
+    \[ \text{dim}(\text{Ker}(A)) = 3 \quad \text{and} \quad \text{dim}(\text{Im}(A)) = 2 \]
+    Note that the number of free variables in the homogeneous system $A\vec{x} = \vec{0}$ is $3$ (corresponding to $x_2, x_4, x_5$) and the number of pivot columns in $A$ is $2$ (corresponding to columns $1$ and $3$).
+\end{eg}
+
+\begin{definition}[Rank]
+    The rank of a matrix $A$, denoted by $\text{rank}(A)$, is defined as the dimension of its image:
+    \[ \text{rank}(A) = \text{dim}(\text{Im}(A)) \]
+\end{definition}
+Note that for any matrix $A \in \mathbb{R}^{m \times n}$, the following holds:
+\[ \text{rank}(A) \leq \min(m, n) \]
+and:
+\[ \text{dim}(\text{Ker}(A)) \leq n \]
+
+\begin{theorem}[Rank-Nullity Theorem]
+    For any matrix $A$ with $n$ columns:
+    \[ \text{dim}(\text{Ker}(A)) + \text{dim}(\text{Im}(A)) = n \]
+\end{theorem}
+
+\subsection{Row Space}
+\begin{definition}[Row Space]
+    The row space of a matrix $A$, denoted by Row$(A)$, is the subspace of $\mathbb{R}^n$ spanned by the row vectors of $A$.
+    \[
+        \text{Row}(A) = \text{Im}(A^T) = Span\{\text{row}_1(A), \text{row}_2(A), \ldots, \text{row}_m(A)\}
+    \]
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6
+    \end{bmatrix}$. The row space of $A$ is given by:
+    \[ \text{Row}(A) = Span\left\{ \begin{bmatrix}
+        1 & 2 & 3
+    \end{bmatrix}, \begin{bmatrix}
+        4 & 5 & 6
+    \end{bmatrix} \right\} \]
+    A basis for Row$(A)$ is given by the two row vectors since they are linearly independent. Thus, dim(Row$(A)$) = 2.
+\end{eg}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item dim(Row$(A)$) $\leq n$, because Row$(A) \subseteq \mathbb{R}^n$.
+    \item dim(Row$(A)$) $\leq m$, because Row$(A)$ is spanned by $m$ vectors.
+\end{itemize}
+Let $A$ be a matrix and $B$ be an invertible matrix of appropriate size, then:
+\[ \text{Im}(B A) = \text{Im}(A) \]
+\begin{proof}
+    Let $\vec{y} \in \text{Im}(B A)$. Then, there exists a vector $\vec{x}$ such that:
+    \[ \vec{y} = B A \vec{x} \]
+    Since $B$ is invertible (and thus a bijection), we can multiply both sides by $B^{-1}$:
+    \[ B^{-1} \vec{y} = A \vec{x} \]
+    This shows that $B^{-1} \vec{y} \in \text{Im}(A)$, and thus $\vec{y} \in \text{Im}(A)$. Therefore, we have:
+    \[ \text{Im}(B A) \subseteq \text{Im}(A) \]
+    Conversely, let $\vec{z} \in \text{Im}(A)$. Then, there exists a vector $\vec{x}$ such that:
+    \[ \vec{z} = A \vec{x} \]
+    Multiplying both sides by $B$ (since $B$ is invertible), we get:
+    \[ B \vec{z} = B A \vec{x} \]
+    This shows that $B \vec{z} \in \text{Im}(B A)$, and thus $\vec{z} \in \text{Im}(B A)$. Therefore, we have:
+    \[ \text{Im}(A) \subseteq \text{Im}(B A) \]
+    Combining both inclusions, we conclude that:
+    \[ \text{Im}(B A) = \text{Im}(A) \]
+\end{proof}
+
+\begin{theorem}
+    For any matrix $A$, the following holds:
+    \[
+        \text{rank}(A) = \text{rank}(A^T)
+    \]
+    i.e.:
+    \[
+        \text{dim(Im}(A)) = \text{dim(Row}(A))
+    \]
+\end{theorem}
+\begin{proof}
+    Let $A$ be an $m \times n$ matrix. We can perform a series of elementary row operations on $A$ to obtain its row echelon form $R$. These row operations can be represented by multiplying $A$ by an invertible matrix $B$ from the left:
+    \[ R = B A \]
+    Since $B$ is invertible, we have:
+    \[ \text{Im}(R) = \text{Im}(B A) = \text{Im}(A) \]
+    The rank of $R$ is equal to the number of non-zero rows in $R$, which is also equal to the rank of $A$. Now, consider the transpose of $R$:
+    \[ R^T = (B A)^T = A^T B^T \]
+    Since $B^T$ is also invertible, we have:
+    \[ \text{Im}(R^T) = \text{Im}(A^T B^T) = \text{Im}(A^T) \]
+    The rank of $R^T$ is equal to the number of non-zero columns in $R$, which is equal to the rank of $A$. Therefore, we conclude that:
+    \[ \text{rank}(A) = \text{rank}(R) = \text{rank}(R^T) = \text{rank}(A^T) \]
+\end{proof}
