@@ -642,3 +642,151 @@ Remark that if $f_1(n)$ and $f_2(n)$ are both $O(h(n))$, then their sum is also 
     Using the product rule, we have:
     \[\underbrace{O(n) \cdot O(n) \cdot O(n) \cdot \ldots \cdot O(n)}_{n \text{ times}} = O(n^n)\]
 \end{eg}
+% Functions in general are not comparable, good exam question (Prof)
+Since $n$ is $O(2^n)$ holds (witnesses $k = C = 1$), we have:
+\[
+    n \leq 2^n \implies \log_2 n \leq \log_2 2^n = n \cdot \log_2 2 = n
+\]
+Thus, $\log_2 n$ is $O(n)$ (witnesses $k = C = 1$). Furthermore, we have:
+\[
+    \frac{\log_2 n}{\log_2 b} = \log_b n \leq \log_2 n \leq n
+\]
+since $\log_2 b$ is a constant for any base $b > 1$. Therefore, $\log_b n$ is also $O(n)$ (witnesses $k = C = 1/\log_2 b$). \\
+Some useful Big-O estimates:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $n^c$ is $O(n^d)$, but $n^d$ is not $O(n^c)$, for $d > c > 1$
+    \item $(\log_b n)^c$ is $O(n^d)$, but $n^d$ is not $O((\log_b n)^c)$, for $b > 1, c, d > 0$
+    \item $n^d$ is $O(b^n)$, but $b^n$ is not $O(n^d)$, for $b > 1, d > 0$
+    \item $b^n$ is $O(c^n)$, but $c^n$ is not $O(b^n)$, for $c > b > 1$
+    \item $c^n$ is $O(n!)$, but $n!$ is not $O(c^n)$, for $c > 1$
+\end{itemize}
+% \begin{proof}
+%     Let's prove some of these estimates: \\
+%     \textbf{Estimate 1.} To show that $n^c$ is $O(n^d)$ for $d > c > 1$, we can choose $k = 1$ and $C = 1$. For all $n \geq 1$, we have:
+%     \[n^c \leq n^d\]
+%     since $d > c$. Thus, $n^c$ is $O(n^d)$. \\
+%     To show that $n^d$ is not $O(n^c)$ for $d > c > 1$, we can use a proof by contradiction. Assume that $n^d$ is $O(n^c)$. Then there exist constants $k > 0$ and $C > 0$ such that for all $n \geq k$, we have:
+%     \[n^d \leq C \cdot n^c\]
+%     Dividing both sides by $n^c$, we get:
+%     \[n^{d - c} \leq C\]
+%     Since $d - c > 0$, as $n$ approaches infinity, $n^{d - c}$ also approaches infinity, which contradicts the inequality above. Therefore, our assumption must be false, and $n^d$ is not $O(n^c)$. \\
+%     \textbf{Estimate 2.} To show that $(\log_b n)^c$ is $O(n^d)$ for $b > 1, c, d > 0$, we can choose $k = 1$ and $C = 1$. For all $n \geq 1$, we have:
+%     \[(\log_b n)^c \leqq n^d\]
+%     since logarithmic functions grow slower than polynomial functions. Thus, $(\log_b n)^c$ is $O(n^d)$. \\
+%     To show that $n^d$ is not $O((\log_b n)^c)$ for $b > 1, c, d > 0$, we can use a proof by contradiction. Assume that $n^d$ is $O((\log_b n)^c)$. Then there exist constants $k > 0$ and $C > 0$ such that for all $n \geq k$, we have:
+%     \[n^d \leq C \cdot (\log_b n)^c\]
+%     As $n$ approaches infinity, the left side $n^d$ grows much faster than the right side $C \cdot (\log_b n)^c$, which contradicts the inequality above. Therefore, our assumption must be false, and $n^d$ is not $O((\log_b n)^c)$. \\
+% \end{proof}
+All of the estimates can be represented in the following graph:
+% TODO: make graph
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel=$n$ (Input Size),
+            ylabel=$T(n)$ (Time Complexity),
+            xmin=2, xmax=8,
+            ymode=log,
+            ymin=0, ymax=5000,
+            xtick={1, 2, 3, 4, 5, 6, 7, 8},
+            ytick={1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096},
+            yticklabels={1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096},
+            domain=2:8,
+            samples=200,
+            clip=false,
+        ]
+
+        % O(1) - Constant
+        \addplot[color=primary, very thick, dashed] {1} node[right] {$O(1)$};
+
+        % O(log n) - Logarithmic
+        \addplot[color=secondary, very thick] {ln(x)/ln(2)} node[right] {$O(\log n)$};
+
+        % O(n) - Linear
+        \addplot[color=primary, very thick] {x} node[right] {$O(n)$};
+
+        % O(n log n) - Linearithmic
+        \addplot[color=secondary, very thick] {x * ln(x)/ln(2)} node[right] {$O(n \log n)$};
+
+        % O(n^2) - Quadratic
+        \addplot[color=primary, very thick] {x^2} node[right] {$O(n^2)$};
+
+        % O(2^n) - Exponential
+        \addplot[color=secondary, very thick] {2^x} node[right] {$O(2^n)$};
+
+        \addplot[very thick,primary,domain=2:7] {sqrt(2*pi*x) * (x/e)^x} node[above] {$O(n!)$}; % ~ n!
+
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+Note that often instead of writing $f(x)$ is $O(g(x))$, it is written $f(x) = O(g(x))$ which is a abuse of the equality sign but widely accepted in computer science. In addition, it can be expressed as $f(x) \in O(g(x))$ which is more precise since $O(g(x))$ is a set of functions.
+
+\subsection{Big-Omega Notation}
+\begin{definition}[Big-Omega Notation]
+    A function $f(n)$ is said to be $\Omega(g(n))$ if there exist positive constants $c$ and $n_0$ such that for all $n \geq n_0$, the following inequality holds:
+    \[|f(n)| \geq c \cdot |g(n)|\]
+    It is used to describe a lower bound on the growth rate of a function, indicating that $f(n)$ does not grow slower than a constant multiple of $g(n)$ for sufficiently large values of $n$.
+\end{definition}
+
+\begin{eg}
+    Let's show that $f(x) = 8x^3 + 5x^2 + 7$ is $\Omega(x^3)$. We need to find constants $c$ and $x_0$ such that for all $x \geq x_0$, the inequality $f(x) \geq c \cdot x^3$ holds. We can rewrite the inequality as:
+    \[8x^3 + 5x^2 + 7 \geq c \cdot x^3\]
+    Rearranging the terms, we get:
+    \[(8 - c) x^3 + 5x^2 + 7 \geq 0\]
+    To satisfy this inequality for sufficiently large $x$, we can choose $c = 7$ and $x_0 = 1$. For all $x \geq 1$, we have:
+    \[x^3 + 5x^2 + 7 \geq 0\]
+    Thus, we have shown that $f(x) = 8x^3 + 5x^2 + 7$ is $\Omega(x^3)$ with constants $c = 7$ and $x_0 = 1$.
+\end{eg}
+Remark that if $f(n)$ is $O(g(n))$, then $g(n)$ is $\Omega(f(n))$.
+\begin{proof}
+    Since $f(n)$ is $O(g(n))$, there exist constants $c > 0$ and $n_0 > 0$ such that for all $n \geq n_0$, the following inequality holds:
+    \[|f(n)| \leq c \cdot |g(n)|\]
+    Rearranging the inequality, we get:
+    \[|g(n)| \geq \frac{1}{c} \cdot |f(n)|\]
+    Letting $c' = \frac{1}{c}$, we have:
+    \[|g(n)| \geq c' \cdot |f(n)|\]
+    Thus, $g(n)$ is $\Omega(f(n))$.
+\end{proof}
+
+\subsection{Big-Theta Notation}
+\begin{definition}[Big-Theta Notation]
+    A function $f(n)$ is said to be $\Theta(g(n))$ if there exist positive constants $c_1$, $c_2$, and $n_0$ such that for all $n \geq n_0$, the following inequalities hold:
+    \[c_1 \cdot |g(n)| \leq |f(n)| \leq c_2 \cdot |g(n)|\]
+    It is used to describe a tight bound on the growth rate of a function, indicating that $f(n)$ grows at the same rate as $g(n)$ for sufficiently large values of $n$.
+\end{definition}
+It is essentially a combination of both Big-O and Big-Omega notations. If $f(n)$ is both $O(g(n))$ and $\Omega(g(n))$, then it is $\Theta(g(n))$.
+
+\begin{eg}
+    Let's show that $f(x) = 3x^2 + 8x \log x$ is $\Theta(x^2)$. We need to find constants $c_1$, $c_2$, and $x_0$ such that for all $x \geq x_0$, the following inequalities hold:
+    \[c_1 \cdot x^2 \leq 3x^2 + 8x \log x \leq c_2 \cdot x^2\]
+    For the upper bound, we can choose $c_2 = 4$ and $x_0 = 1$. For all $x \geq 1$, we have:
+    \[3x^2 + 8x \log x \leq 4x^2\]
+    since $8x \log x$ grows slower than $x^2$ as $x$ approaches infinity. \\
+    For the lower bound, we can choose $c_1 = 3$ and $x_0 = 1$. For all $x \geq 1$, we have:
+    \[3x^2 + 8x \log x \geq 3x^2\]
+    Thus, we have shown that $f(x) = 3x^2 + 8x \log x$ is $\Theta(x^2)$ with constants $c_1 = 3$, $c_2 = 4$, and $x_0 = 1$.
+\end{eg}
+Note that if $f(n)$ is $\Theta(g(n))$, then also $g(n)$ is $\Theta(f(n))$.
+
+\begin{theorem}[Estimates for Polynomials]
+    Let $f(n) = a_k n^k + a_{k-1} n^{k-1} + \ldots + a_1 n + a_0$ be a polynomial of degree $k$ with leading coefficient $a_k \neq 0$. Then, $f(n)$ is $\Theta(n^k)$.
+\end{theorem}
+
+\subsection{Little-o Notation}
+\begin{definition}[Little-o Notation]
+    A function $f(n)$ is said to be $o(g(n))$ if for every positive constant $\varepsilon > 0$, there exists a constant $n_0$ such that for all $n \geq n_0$, the following inequality holds:
+    \[
+        |f(n)| < \epsilon \cdot |g(n)| \quad \iff \quad \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0
+    \]
+    It is used to describe a function that grows strictly slower than another function as the input size approaches infinity.
+\end{definition}
+\begin{eg}
+    Let's show that $f(x) = x$ is $o(x^2)$. We need to show that for every positive constant $\varepsilon > 0$, there exists a constant $x_0$ such that for all $x \geq x_0$, the following inequality holds:
+    \[|f(x)| < \varepsilon \cdot |x^2|\]
+    We can rewrite the inequality as:
+    \[x < \varepsilon \cdot x^2\]
+    Dividing both sides by $x$ (assuming $x > 0$), we get:
+    \[1 < \varepsilon \cdot x\]
+    To satisfy this inequality, we can choose $x_0 = \frac{1}{\varepsilon}$. For all $x \geq x_0$, we have:
+    \[1 < \varepsilon \cdot x\]
+    Thus, we have shown that $f(x) = x$ is $o(x^2)$.
+\end{eg}
