@@ -676,6 +676,321 @@ From the example above, we can also visualize the functions:
     \end{minipage}
 \end{figure}
 
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\sin x}{x}
+    \]
+    For $x$ close to $0$ ($x \neq 0$ thus $\sin x \neq 0$), we can bound $\sin x$ by:
+    \[
+        |\sin x| \leq |x| \leq |\tan x|
+    \]
+    Since $\sin x \neq 0$, we can divide the inequalities by $|\sin x|$:
+    \[
+        1 \leq \left|\frac{x}{\sin x}\right| \leq \left|\frac{1}{\cos x}\right| \quad \iff \quad 1 \leq \frac{x}{\sin x} \leq \frac{1}{\cos x}
+    \]
+    We have:
+    \[
+        \cos 2\alpha = (\cos \alpha)^2 - (\sin \alpha)^2 = 1 - 2(\sin \alpha)^2 \quad \implies \quad 1 - \cos 2\alpha = 2 (\sin \alpha)^2
+    \]
+    and:
+    \[
+        |1 - \cos x| = 2 \left|\left(\sin \frac{x}{2}\right)^2\right| = \left(\sin \frac{x}{2}\right)^2 \leq 2 \left|\frac{x}{2}\right|^2 = \frac{x^2}{2} \quad \implies \quad |\cos x - 1| \leq \frac{x^2}{2}
+    \]
+    By the Squeeze Theorem, we have:
+    \[
+        0 \leq |1 - \cos x| \leq \frac{x^2}{2} \quad \implies \quad \lim_{x \to 0} |1 - \cos x| = 0 \quad \implies \quad \lim_{x \to 0} \cos x = 1
+    \]
+    and:
+    \[
+        \lim_{x \to 0} \frac{1}{\cos x} = 1
+    \]
+    Finally, by the Squeeze Theorem, we conclude that:
+    \[
+        1 \leq \frac{x}{\sin x} \leq \underbrace{\frac{1}{\cos x}}_{= 1} \quad \implies \quad \lim_{x \to 0} \frac{x}{\sin x} = 1 \quad \implies \quad \lim_{x \to 0} \frac{\sin x}{x} = 1
+    \]
+\end{eg}
+
+\subsection{Limits of Composite Functions}
+\begin{theorem}[Limits of Composite Functions]
+    Let $f: E \to F$ and $g: F \to G$ be two functions such that $\lim_{x \to x_0} f(x) = y_0$ and $\lim_{y \to y_0} g(y) = L$. If there exists $\alpha > 0$ such that for all $x \in \left\{y \in E: 0 < |y - x_0| < \alpha\right\}$, we have $f(x) \neq y_0$, then:
+    \[
+        \lim_{x \to x_0} g(f(x)) = L
+    \]
+\end{theorem}
+Remark that the condition $f(x) \neq y_0$ is necessary because $g(y_0)$ might not be defined and thus we cannot have $f(x)$ approaching $y_0$ directly.
+\begin{proof}
+    Let $\lim_{y \to y_0} g(y) = L$, we have for a given $\epsilon > 0$, there exists $\delta_1 > 0$ such that for all $y \in F$ with $0 < |y - y_0| < \delta_1$, we have:
+    \[
+        |g(y) - L| < \epsilon
+    \]
+    Since $\lim_{x \to x_0} f(x) = y_0$, there exists $\delta_2 > 0$ such that for all $x \in E$ with $0 < |x - x_0| < \delta_2$, we have:
+    \[
+        |f(x) - y_0| < \delta_1
+    \]
+    Let $\delta = \min(\alpha, \delta_2)$, then for all $x \in E$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        |f(x) - y_0| < \delta_1
+    \]
+    and since $f(x) \neq y_0$, we can apply the first inequality:
+    \[
+        |g(f(x)) - L| < \epsilon
+    \]
+    Therefore, we conclude that:
+    \[
+        \lim_{x \to x_0} g(f(x)) = L
+    \]
+\end{proof}
+This theorem allows to change the variable in a limit computation.
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\cos(4x) - \cos(2x)}{x^2}
+    \]
+    If we compute the limit directly, we get the indeterminate form $\frac{0}{0}$. To resolve this, we can use the trigonometric identity ($\cos (2\alpha) = 1 - 2 (\sin \alpha)^2$), we get:
+    \[
+        \lim_{x \to 0} \frac{1 - (\sin(2x))^2 - 1 + 2(\sin x)^2}{x^2} = \lim_{x \to 0} 2 \cdot \frac{(\sin x)^2 - (\sin(2x))^2}{x^2}
+    \]
+    Thus, we can rewrite the limit as:
+    \[
+        \lim_{x \to 0} 2\left(\underbrace{\left(\frac{\sin x}{x}\right)^2}_{\to 1^2} - \underbrace{\left(\frac{\sin(2x)}{2x}\right)^2}_{\to 1^2} \cdot 4\right) = 2(1-4) = -6
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 2} \frac{\sqrt{x + 2} - \sqrt{2x}}{\sqrt{x -1} -1}
+    \]
+    Again, if we compute the limit directly, we get the indeterminate form $\frac{0}{0}$. To resolve this, we can multiply the numerator and denominator by the conjugate of each:
+    \[
+        \lim_{x \to 2} \frac{(\sqrt{x + 2} - \sqrt{2x})(\sqrt{x + 2} + \sqrt{2x})}{(\sqrt{x -1} -1)(\sqrt{x -1} +1)} = \lim_{x \to 2} \frac{(x + 2) - 2x}{(x -1) - 1} \cdot \frac{\sqrt{x -1} +1}{\sqrt{x + 2} + \sqrt{2x}}
+    \]
+    Thus, we can rewrite the limit as:
+    \[
+        \lim_{x \to 2} \frac{2 - x}{x - 2} \cdot \lim_{x \to 2} \frac{\sqrt{x -1} +1}{\sqrt{x + 2} + \sqrt{2x}} = -1 \cdot \frac{\sqrt{2 -1} +1}{\sqrt{2 + 2} + \sqrt{4}} = -\frac{1 + 1}{2 + 2} = -\frac{1}{2}
+    \]
+\end{eg}
+Remark that by the theorem above, $\lim_{x \to 0} \frac{\sin (t(x))}{t(x)} = 1$ if $\lim_{x \to 0} t(x) = 0$ and $t(x) \neq 0$ for $x \neq 0$ close to $0$.
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 3} \frac{\sin(\sqrt{x + 1} - 2)}{x -3}
+    \]
+    Since $\lim_{x \to 3} \sqrt{x + 1} - 2 = 0$, we can rewrite the limit as:
+    \[
+        \lim_{x \to 3} \underbrace{\frac{\sin(\sqrt{x + 1} -2)}{\sqrt{x + 1} -2}}_{\to 1} \cdot \frac{\sqrt{x + 1} -2}{x -3} = \lim_{x \to 3} \frac{\sin(\sqrt{x + 1} -2)}{\sqrt{x + 1} -2} \cdot \frac{x + 1 - 4}{\sqrt{x + 1} + 2} \cdot \frac{1}{x-3}
+    \]
+    Thus, we can rewrite the limit as:
+    \[
+        \lim_{x \to 3} \frac{\sin(\sqrt{x + 1} -2)}{\sqrt{x + 1} -2} \cdot \frac{x -3}{x -3 } \cdot \frac{1}{\sqrt{x + 1} + 2} = 1 \cdot 1 \cdot \frac{1}{\sqrt{4} + 2} = \frac{1}{4}
+    \]
+\end{eg}
+Remark that the $\sin$ simplification would not be valid, for example, if $t(x) = x^2 \cos(\frac{1}{x})$ because the function $t(x)$ is not defined in the neighborhood of $0$.
+
+\begin{eg}
+    Let's prove that the limit $\lim_{x \to 0} \sin(\frac{1}{x})$ does not exists. To show this, we can consider two sequences $(a_n)$ and $(b_n)$ defined by:
+    \[
+        a_n = \frac{1}{\pi n} \quad \text{and} \quad b_n = \frac{1}{\frac{\pi}{2} + 2\pi n}
+    \]
+    for all $n \in \mathbb{N}^*$. We have:
+    \[
+        \lim_{n \to +\infty} a_n = \lim_{n \to +\infty} b_n = 0
+    \]
+    However, we have:
+    \[
+        \lim_{n \to +\infty} \sin\left(\frac{1}{a_n}\right) = \lim_{n \to +\infty} \sin(\pi n) = 0
+    \]
+    and:
+    \[
+        \lim_{n \to +\infty} \sin\left(\frac{1}{b_n}\right) = \lim_{n \to +\infty} \sin\left(\frac{\pi}{2} + 2\pi n\right) = 1
+    \]
+    Since the two sequences $(\sin(\frac{1}{a_n}))$ and $(\sin(\frac{1}{b_n}))$ converge to different limits, by the caracterization of limits by sequences, we conclude that the limit $\lim_{x \to 0} \sin(\frac{1}{x})$ does not exists.
+\end{eg}
+In general, to prove that a limit does not exits, two sequences converging to the same point can be used to show that the function values converge to different limits.
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} x \cdot \sin\left(\frac{1}{x}\right) \quad \text{where} \quad D(f) = \mathbb{R} - \left\{0\right\}
+    \]
+    By using the Squeeze Theorem, we have:
+    \[
+        -1 \leq \sin \frac{1}{x} \leq 1 \quad \iff \quad 0 \leq \left|\sin \frac{1}{x}\right| \leq 1
+    \]
+    Multplying by $|x|$ (which is positive when $x \to 0$), we get:
+    \[
+        0 \leq \left|x \cdot \sin\frac{1}{x}\right| \leq \underbrace{|x|}_{\to 0}
+    \]
+    Thus, by the Squeeze Theorem, we conclude that:
+    \[
+        \lim_{x \to 0} x \cdot \sin\left(\frac{1}{x}\right) = 0
+    \]
+\end{eg}
+
+\subsection{Limits at Infinity and Infinite Limits}
+\begin{definition}[Neighborhoods of Infinity]
+    Let $f: E \to F$ is defined on a neighborhood of $+\infty$ (resp. $-\infty$) if there exists $\alpha \in \mathbb{R}: (\alpha, +\infty) \subset E$ (resp. $(-\infty, \alpha) \subset E$).
+\end{definition}
+
+\begin{definition}[Limit at Infinity] 
+    Let $f: E \to F$ be a function defined on a neighborhood of $+\infty$ (resp. $-\infty$). It is said that the limit of $f(x)$ as $x$ approaches $+\infty$ (resp. $-\infty$) is equal to $L \in F$ if for every $\epsilon > 0$, there exists $M > 0$ such that for all $x \in E$ with $x > M$ (resp. $x < -M$), we have:
+    \[
+        |f(x) - L| < \epsilon
+    \]
+    This is denoted by:
+    \[
+        \lim_{x \to +\infty} f(x) = L \quad \left(\text{resp. } \lim_{x \to -\infty} f(x) = L\right)
+    \]
+    In this case, it is said that the function $f$ has a horizontal asymptote $y = L$ at $+\infty$ (resp. $-\infty$).
+\end{definition}
+% TODO: add graph
+
+\begin{eg}
+    Let's prove that the limit:
+    \[
+        \lim_{x \to \infty} \frac{1}{x^2} = 0
+    \]
+    To show this, let $\epsilon > 0$ be given. We need to find $M > 0$ such that for all $x > M$, we have:
+    \[
+        \left|\frac{1}{x^2} - 0\right| < \epsilon
+    \]
+    We have:
+    \[
+        \left|\frac{1}{x^2} - 0\right| = \frac{1}{x^2} < \epsilon \quad \iff \quad x^2 > \frac{1}{\epsilon} \quad \iff \quad x > \frac{1}{\sqrt{\epsilon}}
+    \]
+    Thus, we can choose $M = \frac{1}{\sqrt{\epsilon}}$. Therefore, for all $x > M$, we have:
+    \[
+        \left|\frac{1}{x^2} - 0\right| < \epsilon
+    \]
+    Thus, we conclude that:
+    \[
+        \lim_{x \to \infty} \frac{1}{x^2} = 0
+    \]
+\end{eg}
+
+\begin{definition}[Infinite Limits]
+    Let $f: E \to F$ be a function defined on a neighborhood of $x_0 \in E$. It is said that the limit of $f(x)$ as $x$ approaches $x_0$ is equal to $+\infty$ (resp. $-\infty$) if for every $M > 0$, there exists $\delta > 0$ such that for all $x \in E$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        f(x) > M \quad (\text{resp. } f(x) < -M)
+    \]
+    This is denoted by:
+    \[
+        \lim_{x \to x_0} f(x) = +\infty \quad (\text{resp. } \lim_{x \to x_0} f(x) = -\infty)
+    \]
+    In this case, it is said that the function $f$ has a vertical asymptote $x = x_0$.
+\end{definition}
+
+\begin{eg}
+    Let's prove the following limit:
+    \[
+        \lim_{x \to 0} \frac{1}{x^2} = +\infty
+    \]
+    To show this, let $M > 0$ be given. We need to find $\delta > 0$ such that for all $x \in E$ with $0 < |x - 0| < \delta$, we have:
+    \[
+        \frac{1}{x^2} > M
+    \]
+    We have:
+    \[
+        \frac{1}{x^2} > M \quad \iff \quad |x| < \frac{1}{\sqrt{M}}
+    \]
+    Thus, we can choose $\delta = \frac{1}{\sqrt{M}}$. Therefore, for all $x \in E$ with $0 < |x| < \delta$, we have:
+    \[
+        \frac{1}{x^2} > M
+    \]
+    Thus, we conclude that:
+    \[
+        \lim_{x \to 0} \frac{1}{x^2} = +\infty
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's show that the following limit does not exist:
+    \[
+        \lim_{x \to 0} \frac{1}{x}
+    \]
+    To show this, we can consider two sequences $(a_n)$ and $(b_n)$ defined by:
+    \[
+        a_n = \frac{1}{n} \quad \text{and} \quad b_n = -\frac{1}{n}
+    \]
+    for all $n \in \mathbb{N}^*$. We have:
+    \[
+        \lim_{n \to +\infty} a_n = \lim_{n \to +\infty} b_n = 0
+    \]
+    However, we have:
+    \[
+        \lim_{n \to +\infty} \frac{1}{a_n} = \lim_{n \to +\infty} n = +\infty
+    \]
+    and:
+    \[
+        \lim_{n \to +\infty} \frac{1}{b_n} = \lim_{n \to +\infty} -n = -\infty
+    \]
+    Since the two sequences $(\frac{1}{a_n})$ and $(\frac{1}{b_n})$ converge to different limits, by the caracterization of limits by sequences, we conclude that the limit $\lim_{x \to 0} \frac{1}{x}$ does not exist.
+\end{eg}
+
+\begin{definition}[Infite Limits at Infinity]
+    Let $f: E \to F$ be a function defined on a neighborhood of $+\infty$ (resp. $-\infty$). It is said that the limit of $f(x)$ as $x$ approaches $+\infty$ (resp. $-\infty$) is equal to $+\infty$ (resp. $-\infty$) if for every $M > 0$, there exists $X > 0$ such that for all $x \in E$ with $x > X$ (resp. $x < -X$), we have:
+    \[
+        f(x) > M \quad (\text{resp. } f(x) < -M)
+    \]
+    This is denoted by:
+    \[
+        \lim_{x \to +\infty} f(x) = +\infty \quad (\text{resp. } \lim_{x \to -\infty} f(x) = -\infty)
+    \]
+\end{definition}
+Note that all results shown for limits at finite points can be adapted to limits at infinity and vice versa.
+
+\begin{eg}
+    Some examples of infinite limits at infinity are:
+    \[
+        \lim_{x \to +\infty} x = +\infty, \quad \lim_{x \to -\infty} x = -\infty, \quad \lim_{x \to +\infty} e^x = +\infty, \quad \lim_{x \to -\infty} e^x = 0
+    \]
+\end{eg}
+
+\subsection{Indeterminate Forms}
+When computing limits, we can encounter some indeterminate forms such as:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\frac{0}{0}$
+    \item $\frac{\infty}{\infty}$
+    \item $0 \cdot \infty$
+    \item $\infty - \infty$
+    \item $0^0$ (will be seen later)
+    \item $1^\infty$ (will be seen later)
+    \item $\infty^0$ (will be seen later)
+\end{itemize}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to \infty} (\sqrt{x^2 + 2x} - x)
+    \]
+    If we compute the limit directly, we get the indeterminate form $\infty - \infty$. To resolve this, we can multiply the expression by its conjugate:
+    \[
+        \lim_{x \to \infty} (\sqrt{x^2 + 2x} - x) \cdot \frac{\sqrt{x^2 + 2x} + x}{\sqrt{x^2 + 2x} + x} = \lim_{x \to \infty} \frac{(x^2 + 2x) - x^2}{\sqrt{x^2 + 2x} + x} = \lim_{x \to \infty} \frac{2x}{\sqrt{x^2 + 2x} + x}
+    \]
+    Thus, we can rewrite the limit as:
+    \[
+        \lim_{x \to \infty} \frac{2}{\sqrt{1 + \frac{2}{x}} + 1} = \frac{2}{\sqrt{1 + 0} + 1} = \frac{2}{2} = 1
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to - \infty} (\sqrt{x^2 + 2x} + x)
+    \]
+    If we compute the limit directly, we get the indeterminate form $\infty - \infty$. To resolve this, we can multiply the expression by its conjugate:
+    \[
+        \lim_{x \to -\infty} (\sqrt{x^2 + 2x} + x) \cdot \frac{\sqrt{x^2 + 2x} - x}{\sqrt{x^2 + 2x} - x} = \lim_{x \to -\infty} \frac{(x^2 + 2x) - x^2}{\sqrt{x^2 + 2x} - x} = \lim_{x \to -\infty} \frac{2x}{\sqrt{x^2 + 2x} - x}
+    \]
+    Thus, we can rewrite the limit as:
+    \[
+        \lim_{x \to -\infty} \frac{2x}{\underbrace{\sqrt{x^2}}_{|x| = -x \ (x \to - \infty)} \sqrt{1 + \frac{1}{2}} - x} = = \lim_{x \to - \infty} \frac{2x}{-x \left(\sqrt{1 + \frac{2}{x}} + 1\right)} = -1
+    \]
+\end{eg}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
