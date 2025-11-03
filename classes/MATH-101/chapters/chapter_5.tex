@@ -317,10 +317,369 @@ By convention, for the trigonometric functions, the inverse sine, cosine, and ta
     Thus, composing a function with its inverse yields the identity function on the respective domains.
 \end{eg}
 
+\section{Limits of Functions}
+\begin{definition}[Neighborhood]
+    A function $f: E \to F$ is defined on a neighborhood of a point $x_0 \in E$ if there exists $\delta > 0$ such that:
+    \[
+        \left\{x \in E : 0 < |x - x_0| < \delta\right\} \subseteq E
+    \]
+\end{definition}
+Remark that the function does not need to be defined at $x_0$ itself, only in its vicinity.
+
+\begin{eg}
+    Let $f = \frac{\sin (x)}{x}$ is defined on a neighborhood of $x_0 = 0$ but not at $x_0 = 0$ itself since $f(0)$ is undefined.
+\end{eg}
+
+\begin{definition}[Limit of a Function at a Point]
+    Let $f: E \to F$ be a function defined on a neighborhood of a point $x_0 \in E$. It is said that the limit of $f(x)$ as $x$ approaches $x_0$ is equal to $L \in F$, denoted by:
+    \[
+        \lim_{x \to x_0} f(x) = L
+    \]
+    if for every $\epsilon > 0$, there exists a $\delta > 0$ such that for all $x \in E$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        |f(x) - L| < \epsilon
+    \]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+            \draw[->] (0, -0.5) -- (0, 3.5) node[above] {$y$};
+            \draw[thick, primary, domain=0:3, samples=100] plot (\x, {sqrt(2 * \x)}) node[right] {$f$};
+
+            \draw[dashed] (2, 2) -- (2, 0) node[below] {$x_0$};
+            \draw[dashed] (2.8, 2.36) -- (2.8, 0) node[below] {$x_0 + \delta$};
+            \draw[dashed] (1.2, 1.54) -- (1.2, 0) node[below] {$x_0 - \delta$};
+            \draw[<->, secondary, thick] (1.2, 0.5) -- (2.8, 0.5) node[midway, below left] {$\delta$};
+
+            \draw[dashed] (2, 2) -- (0, 2) node[left] {$L$};
+            \draw[dashed] (1.2, 1.54) -- (0, 1.54) node[left] {$L - \epsilon$};
+            \draw[dashed] (2.8, 2.36) -- (0, 2.36) node[left] {$L + \epsilon$};
+            \draw[<->, secondary, thick] (0.5, 1.54) -- (0.5, 2.36) node[midway, below left] {$\epsilon$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+\begin{eg}
+    Let $f(x) = 3x - 1$ and $x_0 = 1$. Then:
+    \[
+        \lim_{x \to 1} f(x) = \lim_{x \to 1} (3x - 1) = 2
+    \]
+    To show this using the $\epsilon$-$\delta$ definition, let $\epsilon > 0$. We need to find $\delta > 0$ such that for all $x$ with $0 < |x - 1| < \delta$, we have:
+    \[
+        |f(x) - 2| < \epsilon
+    \]
+    We have:
+    \[
+        |f(x) - 2| = |3x - 1 - 2| = |3x - 3| = 3|x - 1|
+    \]
+    Thus, we want:
+    \[
+        3|x - 1| < \epsilon \quad \implies \quad |x - 1| < \frac{\epsilon}{3}
+    \]
+    Therefore, we can choose $\delta = \frac{\epsilon}{3}$. Hence, for all $x$ with $0 < |x - 1| < \delta$, we have:
+    \[
+        |f(x) - 2| < \epsilon
+    \]
+    This confirms that:
+    \[
+        \lim_{x \to 1} f(x) = 2
+    \]
+\end{eg}
+
+\begin{eg}
+    Let $f(x) = \sqrt{x} = \sqrt{x_0}, \forall x_0 > 0$. Then:
+    \[
+        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} \sqrt{x} = \sqrt{x_0}
+    \]
+    To show this using the $\epsilon$-$\delta$ definition, let $\epsilon > 0$. We need to find $\delta > 0$ such that for all $x$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        |\sqrt{x} - \sqrt{x_0}| < \epsilon
+    \]
+    We have:
+    \[
+        |\sqrt{x} - \sqrt{x_0}| = \frac{|\sqrt{x} - \sqrt{x_0}| \cdot |\sqrt{x} + \sqrt{x_0}|}{|\sqrt{x} + \sqrt{x_0}|} = \frac{|x - x_0|}{|\sqrt{x} + \sqrt{x_0}|}
+    \]
+    To ensure that $|\sqrt{x} - \sqrt{x_0}| < \epsilon$, we need:
+    \[
+        \frac{|x - x_0|}{|\sqrt{x} + \sqrt{x_0}|} < \epsilon \quad \implies \quad |x - x_0| < \epsilon |\sqrt{x} + \sqrt{x_0}|
+    \]
+    Since we are considering $x$ in a neighborhood of $x_0$, we can assume that $x$ is close to $x_0$. Thus, we can find a lower bound for $|\sqrt{x} + \sqrt{x_0}|$. For instance, if we restrict $x$ to be in the interval $\left[x_0 - 1, x_0 + 1\right]$ (assuming $x_0 > 1$ for simplicity), we have:
+    \[
+        |\sqrt{x} + \sqrt{x_0}| \geq \sqrt{x_0} \quad \text{for all } x \in \left[x_0 - 1, x_0 + 1\right]
+    \]
+    Therefore, we can choose $\delta = \epsilon \sqrt{x_0}$. Hence, for all $x$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        |\sqrt{x} - \sqrt{x_0}| < \epsilon
+    \]
+    This confirms that:
+    \[
+        \lim_{x \to x_0} f(x) = \sqrt{x_0}
+    \]
+\end{eg}
+
+\subsection{Caracterization of Limits by Sequences}
+\begin{theorem}[Caracterization of Limits by Sequences]
+    Let $f: E \to F$ be a function defined on a neighborhood of a point $x_0 \in E$. Then, the limit of $f(x)$ as $x$ approaches $x_0$ is equal to $L \in F$, i.e.:
+    \[
+        \lim_{x \to x_0} f(x) = L
+    \]
+    if and only if for every sequence $(x_n)$ in $E$ such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$, we have:
+    \[
+        \lim_{n \to +\infty} f(x_n) = L
+    \]
+\end{theorem}
+\begin{proof}
+    \textbf{($\Rightarrow$)} Assume that $\lim_{x \to x_0} f(x) = L$. Let $(x_n)$ be a sequence in $E$ such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$. For every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in E$ with $0 < |x - x_0| < \delta$, we have:
+    \[
+        |f(x) - L| < \epsilon
+    \]
+    Since $\lim_{n \to +\infty} x_n = x_0$, there exists $N \in \mathbb{N}$ such that for all $n \geq N$, we have:
+    \[
+        |x_n - x_0| < \delta
+    \]
+    Therefore, for all $n \geq N$, we have:
+    \[
+        |f(x_n) - L| < \epsilon
+    \]
+    This shows that $\lim_{n \to +\infty} f(x_n) = L$. \\
+    \textbf{($\Leftarrow$)} By contraposition, assume that $\lim_{x \to x_0} f(x) \neq L$. Then, there exists $\epsilon_0 > 0$ such that for every $\delta > 0$, there exists $x \in E$ with $0 < |x - x_0| < \delta$ such that:
+    \[
+        |f(x) - L| \geq \epsilon_0
+    \]
+    For each $n \in \mathbb{N}$, let $\delta = \frac{1}{n}$. Then, there exists $x_n \in E$ with $0 < |x_n - x_0| < \frac{1}{n}$ such that:
+    \[
+        |f(x_n) - L| \geq \epsilon_0
+    \]
+    This defines a sequence $(x_n)$ in $E$ such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$. However, we have:
+    \[
+        |f(x_n) - L| \geq \epsilon_0
+    \]
+    for all $n$, which implies that $\lim_{n \to +\infty} f(x_n) \neq L$. This completes the proof.
+\end{proof}
+Remark that the property needs to be true for every sequence converging to $x_0$ and not just for some particular sequences.
+\begin{eg}
+    Let $f$ be defined by:
+    \[
+        f(x) = \begin{cases}
+            1 & x = \frac{1}{n}, n \in \mathbb{N}^* \\
+            0 & \text{otherwise}
+        \end{cases}
+    \]
+    We clearly see that $\lim_{x \to 0} f(x)$ does not exist but for the sequence $x_n = \frac{1}{n}$, we have:
+    \[
+        \lim_{n \to +\infty} f(x_n) = 1
+    \]
+    Showing the importance of the "for every sequence" condition in the theorem.
+\end{eg}
+Let $f : E \to F$ defined on a neighborhood of $x_0$. Let's suppose that for all sequences $(x_n)$ in $E$ such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$, we have:
+\[
+    (f(x_n)) \text{ is convergent} \implies \lim_{x \to x_0} f(x) \text{ exists.}
+\]
+\begin{proof}
+    Let's prove this by contradiction. Assume that $\lim_{x \to x_0} f(x)$ does not exist. Then, there exist two sequences $(x_n)$ and $(y_n)$ in $E$ such that $\lim_{n \to +\infty} x_n = x_0$, $\lim_{n \to +\infty} y_n = x_0$, and:
+    \[
+        \lim_{n \to +\infty} f(x_n) = L_1 \quad \text{and} \quad \lim_{n \to +\infty} f(y_n) = L_2
+    \]
+    with $L_1 \neq L_2$. Now, we can construct a new sequence $(z_n)$ by interleaving the terms of $(x_n)$ and $(y_n)$:
+    \[
+        z_{2n} = x_n \quad \text{and} \quad z_{2n+1} = y_n
+    \]
+    for all $n \in \mathbb{N}$. This new sequence $(z_n)$ also converges to $x_0$ since both $(x_n)$ and $(y_n)$ converge to $x_0$. However, the sequence $(f(z_n))$ does not converge because:
+    \[
+        \lim_{n \to +\infty} f(z_{2n}) = L_1 \quad \text{and} \quad \lim_{n \to +\infty} f(z_{2n+1}) = L_2
+    \]
+    with $L_1 \neq L_2$. This contradicts our assumption that for all sequences converging to $x_0$, the sequence $(f(x_n))$ is convergent. Therefore, our initial assumption that $\lim_{x \to x_0} f(x)$ does not exist must be false. Hence, we conclude that $\lim_{x \to x_0} f(x)$ exists.
+\end{proof}
+
+\begin{eg}
+    Let $f(x) = x^p, p \in \mathbb{N}^*$. Then, we have:
+    \[
+        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} x^p = x_0^p
+    \]
+    To show this using the caracterization by sequences, let $(x_n)$ be an arbitrary sequence such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$. Additionally, let $a_n = x_n - x_0$ for all $n \in \mathbb{N}$ such that $\lim_{n \to +\infty} a_n = 0$. We have:
+    \[
+        f(x_n) = (x_0 + a_n)^p = \sum_{k=0}^{p} \binom{p}{k} x_0^{p-k} a_n^k
+    \]
+    Since $\lim_{n \to +\infty} a_n = 0$, we have:
+    \[
+        \lim_{n \to +\infty} f(x_n) = \sum_{k=0}^{p} \binom{p}{k} x_0^{p-k} \cdot 0^k = x_0^p
+    \]
+    Therefore, by the caracterization of limits by sequences, we conclude that:
+    \[
+        \lim_{x \to x_0} f(x) = x_0^p
+    \]
+\end{eg}
+
+\begin{definition}[Uniqueness of Limits]
+    Let $f: E \to F$ be a function defined on a neighborhood of a point $x_0 \in E$. If the limit of $f(x)$ as $x$ approaches $x_0$ exists, then it is unique. In other words, if:
+    \[
+        \lim_{x \to x_0} f(x) = L_1 \quad \text{and} \quad \lim_{x \to x_0} f(x) = L_2
+    \]
+    then $L_1 = L_2$.
+\end{definition}
+\begin{proof}
+    Assume that $\lim_{x \to x_0} f(x) = L_1$ and $\lim_{x \to x_0} f(x) = L_2$. Let $(x_n)$ be an arbitrary sequence such that $\lim_{n \to +\infty} x_n = x_0$ and $x_n \neq x_0$ for all $n$. By the caracterization of limits by sequences, we have:
+    \[
+        \lim_{n \to +\infty} f(x_n) = L_1 \quad \text{and} \quad \lim_{n \to +\infty} f(x_n) = L_2
+    \]
+    Since the limit of a sequence is unique, we conclude that $L_1 = L_2$. Therefore, the limit of $f(x)$ as $x$ approaches $x_0$ is unique.
+\end{proof}
+
+\begin{theorem}[Cauchy Criterion for Limits of Functions]
+    Let $f: E \to F$ be a function defined on a neighborhood of a point $x_0 \in E$. Then, the limit of $f(x)$ as $x$ approaches $x_0$ exists if and only if for every $\epsilon > 0$, there exists a $\delta > 0$ such that for all $x, y \in E$ with $0 < |x - x_0| < \delta$ and $0 < |y - x_0| < \delta$, we have:
+    \[
+        |f(x) - f(y)| < \epsilon
+    \]
+\end{theorem}
+
+\subsection{Operations on Limits}
+\begin{definition}
+    Let $f: E \to F$ and $g: E \to F$ be two functions defined on a neighborhood of a point $x_0 \in E$ such that the limits $\lim_{x \to x_0} f(x) = l_1$ and $\lim_{x \to x_0} g(x) = l_2$, then we can define the following operations on their limits:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Sum: $\lim_{x \to x_0} (\alpha f(x) + \beta g(x)) = \alpha l_1 + \beta l_2$
+        \item Product: $\lim_{x \to x_0} (f(x) \cdot g(x)) = l_1 \cdot l_2$
+        \item Quotient: If $l_2 \neq 0$, then $\lim_{x \to x_0} \left(\frac{f(x)}{g(x)}\right) = \frac{l_1}{l_2}$
+    \end{itemize}
+\end{definition}
+For all polynomial function $P$ and rational function $R = \frac{P_1}{P_2}$ (with $P_2 \neq 0$) defined for all $x_0 \in \mathbb{R}$ except the roots of $P_2$, we have:
+\[
+    \lim_{x \to x_0} P(x) = P(x_0) \quad \text{and} \quad \lim_{x \to x_0} R(x) = R(x_0)
+\]
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 1} \frac{2x^5 - 3x^3 + 2x + 1}{x^4 + 2x^2 - 6x}
+    \]
+    We have:
+    \[
+        \lim_{x \to 1} (2x^5 - 3x^3 + 2x + 1) = 2(1)^5 - 3(1)^3 + 2(1) + 1 = 2 - 3 + 2 + 1 = 2
+    \]
+    and:
+    \[
+        \lim_{x \to 1} (x^4 + 2x^2 - 6x) = (1)^4 + 2(1)^2 - 6(1) = 1 + 2 - 6 = -3
+    \]
+    Therefore, we can apply the quotient rule:
+    \[
+        \lim_{x \to 1} \frac{2x^5 - 3x^3 + 2x + 1}{x^4 + 2x^2 - 6x} = \frac{2}{-3} = -\frac{2}{3}
+    \]
+\end{eg}
+
+\begin{theorem}[Sandwich Theorem for Functions]
+    Let $f, g, h: E \to F$ be three functions defined on a neighborhood of a point $x_0 \in E$. If there exists $\alpha > 0$ such that for all $x \in \left\{x\in E: 0 < |x-x_0| \leq \alpha\right\}$, we have:
+    \[
+        f(x) \leq g(x) \leq h(x)
+    \]
+    and if:
+    \[
+        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = L
+    \]
+    then:
+    \[
+        \lim_{x \to x_0} g(x) = L
+    \]
+\end{theorem}
+\begin{proof}
+    Let $(a_n) \in \left\{x \in E - \left\{x_0\right\}\right\}$ be a sequence such that $\lim_{n \to +\infty} a_n = x_0$. There exists $m \in \mathbb{N}: \forall n \geq m$ we have:
+    \[
+        0 < |a_n - x_0| < \alpha
+    \]
+    Thus, for all $n \geq m$, we have:
+    \[
+        f(a_n) \leq g(a_n) \leq h(a_n)
+    \]
+    Since $\lim_{x \to x_0} f(x) = L$ and $\lim_{x \to x_0} h(x) = L$, by the caracterization of limits by sequences, we have:
+    \[
+        \lim_{n \to +\infty} f(a_n) = L \quad \text{and} \quad \lim_{n \to +\infty} h(a_n) = L
+    \]
+    Therefore, by the Sandwich Theorem for Sequences, we conclude that:
+    \[
+        \lim_{n \to +\infty} g(a_n) = L
+    \]
+    Since the sequence $(a_n)$ was arbitrary, by the caracterization of limits by sequences, we conclude that:
+    \[
+        \lim_{x \to x_0} g(x) = L
+    \]
+\end{proof}
+
+\begin{eg}
+    Let $g: \mathbb{R} \to \mathbb{R}$ a function such that $\lim_{x \to 0} g(x) = 0$, then:
+    \[
+        \lim_{x \to 0} \sqrt{1 + g(x)} = 1
+    \]
+    To show this, we can use the Sandwich Theorem. We know that:
+    \[
+        1 - |t| \leq \sqrt{1 + t} \leq \left|1 + \frac{1}{2}t\right|, \forall t \geq -1
+    \]
+    Since:
+    \[
+        \sqrt{1 + t} \leq \sqrt{1 + t + \frac{t^2}{4}} = \sqrt{\left(1 + \frac{t}{2}\right)^2} = \left|1 + \frac{1}{2}t\right|, \forall t \in \mathbb{R}
+    \]
+    and:
+    \[
+        t \geq 0 \implies 1 - |t| = 1 - t \leq 1 \leq \sqrt{1 + t} \quad \text{and} \quad -1 < t < 0 \implies 1 - |t| = 1 + t \leq \sqrt{1 + t}
+    \]
+    Thus, since $\lim_{x \to 0} g(x) = 0$, there exists $\delta > 0$ such that if $|x| < \delta$, we have:
+    \[
+        |g(x)| \leq 1 \quad \text{and} \quad g(x) \geq -1
+    \]
+    Therefore, we have:
+    \[
+        \underbrace{1 - |g(x)|}_{\to 1 \ (x \to 0)} \leq \sqrt{1 + g(x)} \leq \underbrace{\left|1 + \frac{1}{2}g(x)\right|}_{\to 1 \ (x \to 0)}
+    \]
+    By the Sandwich Theorem, we conclude that:
+    \[
+        \lim_{x \to 0} \sqrt{1 + g(x)} = 1
+    \]
+\end{eg}
+
+\begin{eg}
+    Let $f(x) = x^2 \cdot \cos\left(\frac{1}{x}\right)$ be a function not defined in $x = 0$. We want to compute:
+    \[
+        \lim_{x \to 0} f(x)
+    \]
+    We have:
+    \[
+        -1 \leq \cos\left(\frac{1}{x}\right) \leq 1 \quad \underbrace{\implies}_{x^2 \geq 0} \quad -x^2 \leq x^2 \cdot \cos\left(\frac{1}{x}\right) \leq x^2
+    \]
+    Since:
+    \[
+        \lim_{x \to 0} -x^2 = 0 \quad \text{and} \quad \lim_{x \to 0} x^2 = 0
+    \]
+    By the Sandwich Theorem, we conclude that:
+    \[
+        \lim_{x \to 0} x^2 \cdot \cos\left(\frac{1}{x}\right) = 0
+    \]
+\end{eg}
+From the example above, we can also visualize the functions:
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=1.5]
+                \draw[->] (-1.75, 0) -- (1.75, 0) node[right] {$x$};
+                \draw[->] (0, -1.25) -- (0, 1.25) node[above] {$y$};
+                \draw[thick, primary, domain=-1.5:1.5, samples=300] plot (\x, {cos(deg(1 / \x))});
+            \end{tikzpicture}
+        \end{center}
+        \caption*{Graph of $\cos\left(\frac{1}{x}\right)$}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=2.35]
+                \draw[->] (-1.2, 0) -- (1.2, 0) node[right] {$x$};
+                \draw[->] (0, -0.3) -- (0, 1.25) node[above] {$y$};
+                \draw[thick, primary, domain=-1.05:1.05, samples=200] plot (\x, {cos(deg(1 / \x)) * (\x * \x)});
+            \end{tikzpicture}
+        \end{center}
+        \caption*{Graph of $x^2 \cdot \cos\left(\frac{1}{x}\right)$}
+    \end{minipage}
+\end{figure}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
-\begin{exercise}[Quizz of Lecture 12]
+\begin{exercise}[Quizz of Lecture 13]
     Let $f(x) = 2 \sin(1 - x^2)$ on the biggest interval where it is bijective and containing $x= 1$. Then the set of the definition of $f^{-1}$ and its image is:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item $f^{-1}: \left[-2 \sin(1), 2 \sin(1)\right] \to \left[\sqrt{1 - \frac{\pi}{2}}, \sqrt{1 + \frac{\pi}{2}}\right]$
@@ -347,4 +706,35 @@ This section gathers a selection of exercises related to Chapter \thechapter, ta
         \inf_{x \in E} f(x) = f\left(\sqrt{1 + \frac{\pi}{2}}\right) = -2 \quad \text{and} \quad \sup_{x \in E} f(x) = f(0) = 2 \sin(1)
     \]
     Therefore, the image of $f$ is $\left[-2, 2 \sin(1)\right]$.
+\end{exercise}
+
+\begin{exercise}[Quizz of Lecture 14]
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\sqrt{1 + x^2}}{\sqrt{1 + \left(\sin\frac{1}{x}\right)^2} + \sqrt{1 - \left(\sin\frac{1}{x}\right)^2}}
+    \]
+    \Answer
+    Since $x^2 \geq 0$, we have:
+    \[
+        1 \leq \sqrt{1 + x^2} \leq \underbrace{1 + \frac{1}{2}x^2}_{\to 1 \ (x \to 0)}
+    \]
+    Thus by the Sandwich Theorem, we conclude that $\lim_{x \to 0} \sqrt{1 + x^2} = 1$. Let's take two sequences $(a_k) = \frac{1}{\pi k}$ and $(b_k) = \frac{1}{\frac{\pi}{2} + 2\pi k}$ such that $\lim_{k \to \infty} a_k = b_k = 0$. We have:
+    \[
+        \lim_{k \to \infty} \left(\sqrt{1 + \left(\sin \frac{1}{a_k}\right)^2} + \sqrt{1 - \left(\sin \frac{1}{a_k}\right)^2}\right) = \lim_{k \to \infty} \left(\sqrt{1 + \underbrace{(\sin a_k)^2}_{= 0}} + \sqrt{1 - \underbrace{(\sin a_k)^2}_{= 0}}\right)
+    \]
+    \[
+        \lim_{k \to \infty} (1 + 1) = 2
+    \]
+    and:
+    \[
+        \lim_{k \to \infty} \left(\sqrt{1 + \left(\sin \frac{1}{b_k}\right)^2} + \sqrt{1 - \left(\sin \frac{1}{b_k}\right)^2}\right) = \lim_{k \to \infty} \left(\sqrt{1 + \underbrace{(\sin b_k)^2}_{= 1}} + \sqrt{1 - \underbrace{(\sin b_k)^2}_{= 1}}\right)
+    \]
+    \[
+        \lim_{k \to \infty} (\sqrt{2} + 0) = \sqrt{2}
+    \]
+    Thus:
+    \[
+        \lim_{k \to \infty} f(a_k) = \frac{1}{2} \quad \text{and} \quad \lim_{k \to \infty} f(b_k) = \frac{1}{\sqrt{2}}
+    \]
+    Since the two limits are different, we conclude that the limit $\lim_{x \to 0} f(x)$ does not exist.
 \end{exercise}
