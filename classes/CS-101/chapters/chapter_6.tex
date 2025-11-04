@@ -677,8 +677,31 @@ Some useful Big-O estimates:
 %     \[n^d \leq C \cdot (\log_b n)^c\]
 %     As $n$ approaches infinity, the left side $n^d$ grows much faster than the right side $C \cdot (\log_b n)^c$, which contradicts the inequality above. Therefore, our assumption must be false, and $n^d$ is not $O((\log_b n)^c)$. \\
 % \end{proof}
+\begin{eg}
+    Let's show that if $\lim_{x \to 0} \frac{f(x)}{g(x)} = c$ then $f(x)$ is $O(g(x))$. By the definition of the limit, if we choose $\epsilon = 1$, we then have:
+    \[
+        \left|\frac{f(x)}{g(x)} - c\right| \leq 1 \quad \forall x \geq x(\epsilon)
+    \]
+    Which can be rewritten as:
+    \[
+        \left|f(x) - c g(x)\right| \leq \left|g(x)\right|
+    \]
+    Thus, we have:
+    \[|f(x)| \leq |c g(x)| + |g(x)| = (|c| + 1) \cdot |g(x)|\]
+    Therefore, we can choose $n_0 = x(\epsilon)$ and $c' = |c| + 1$ to show that $f(x)$ is $O(g(x))$.
+\end{eg}
+\begin{eg}
+    Let's prove that $(\log x)^m$ is $O(x)$ (thus proving that it is also $O(x^c)$ for any $c > 0$). Let's take the limit:
+    \[
+        \lim_{x \to 0} \frac{(\log x)^m}{x}
+    \]
+    By using L'Hôpital's rule $m$ times, we get:
+    \[
+        \lim_{x \to 0} \frac{(\log x)^m}{x} = \lim_{x \to 0} \frac{m (\log x)^{m -1}}{x} = \ldots = \lim_{x \to 0} \frac{m!}{x} = 0
+    \]
+    Thus, by the previous example, we have shown that $(\log x)^m$ is $O(x)$ (and also little-o $o(x)$).
+\end{eg}
 All of the estimates can be represented in the following graph:
-% TODO: make graph
 \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
@@ -790,3 +813,90 @@ Note that if $f(n)$ is $\Theta(g(n))$, then also $g(n)$ is $\Theta(f(n))$.
     \[1 < \varepsilon \cdot x\]
     Thus, we have shown that $f(x) = x$ is $o(x^2)$.
 \end{eg}
+
+\subsection{Examples of Algorithm Analysis}
+Note that is this section only the worst-case time complexity is analyzed even if in daily practice the average-case time complexity is often more relevant.
+\begin{eg}
+    Let's analyze the time complexity of the algorithm to find the maximum element in an array of size $n$:
+    \begin{algorithmic}
+        \Function{max\_finder}{$a_1, a_2, \ldots, a_n$: integers}
+            \State $max \gets a_1$
+            \For{\textcolor{primary}{$i \gets 2$ to $n$}}
+                \If{\textcolor{primary}{$a_i > max$}}
+                    \State $max \gets a_i$
+                \EndIf
+            \EndFor
+            \State \Return $max$
+        \EndFunction
+    \end{algorithmic}
+    The comparaison operations are colored in \textcolor{primary}{primary} color. Then, for each element in the array, we have to perform two comparaisons since we started at index $2$ (starting index at $1$) we only go over $n -1$ elements, so we have to perform $2(n - 1)$ comparaisons. We also have to add one comparaison, which is the last one that fails when $i = n + 1$. Thus, the total number of comparaisons is:
+    \[T(n) = 2(n - 1) + 1 = 2n - 1\]
+    Therefore, the time complexity of the algorithm is $O(n)$.
+\end{eg}
+
+\begin{eg}
+    Let's analyze the time complexity of the Binary Search algorithm to find an element in a sorted array of size $n = 2^k$ where $k = \log n$:
+    \begin{algorithmic}
+        \Function{binary\_search}{$a_1, a_2, \ldots, a_n$: distinct integers (sorted), $x$: integer}
+            \State $low \gets 1$
+            \State $high \gets n$
+            \While{\textcolor{primary}{$low < high$}}
+                \State $mid \gets \lfloor (low + high) / 2 \rfloor$ \Comment{$\lfloor \cdot \rfloor$ is rounding down}
+                \If{\textcolor{primary}{$a_{mid} = x$}}
+                    \State \Return $mid$
+                \ElsIf{\textcolor{primary}{$a_{mid} \leq x$}}
+                    \State $low \gets mid + 1$
+                \Else
+                    \State $high \gets mid - 1$
+                \EndIf
+            \EndWhile
+            \State \Return $-1$
+        \EndFunction
+    \end{algorithmic}
+    We clearly see that we use two comparaisons to reduce the list size from $2^k$ to $2^{k-1}$. Thus, we can write the recurrence relation:
+    \[T(2^k) = T(2^{k-1}) + 2\]
+    with the base case $T(1) = 1$ (one comparaison to check if the only element is equal to $x$). Unrolling the recurrence relation, we get:
+    \begin{align*}
+        T(2^k) &= T(2^{k-1}) + 2 \\
+               &= T(2^{k-2}) + 2 + 2 \\
+               &= T(2^{k-3}) + 2 + 2 + 2 \\
+               &\vdots \\
+               &= T(2^0) + 2k \\
+               &= 1 + 2k
+    \end{align*}
+    Since $k = \log n$, we have:
+    \[T(n) = 1 + 2 \log n\]
+    Therefore, the time complexity of the algorithm is $O(\log n)$.
+\end{eg}
+In general for the following known agorithms:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Linear Search: $\Theta(n)$
+    \item Binary Search: $\Theta(\log n)$
+    \item Bubble Sort: $\Theta(n^2)$
+    \item Insertion Sort: $\Theta(n^2)$
+    \item Selection Sort: $\Theta(n^2)$
+\end{itemize}
+
+\section{P and NP Classes}
+\begin{definition}[Tractable Problem]
+    A problem is said to be tractable if there exists an algorithm that can solve the problem in polynomial time, i.e., the time complexity of the algorithm is $O(n^k)$ for some constant $k$, where $n$ is the size of the input.
+\end{definition}
+If such an algorithm does not exist, the problem is said to be intractable.
+
+\begin{definition}[Class P]
+    The class P (Polynomial time) is the set of decision problems (problems with a yes/no answer) that can be solved by a deterministic Turing machine in polynomial time. In other words, a problem is in class P if there exists an algorithm that can solve the problem in time $O(n^k)$ for some constant $k$, where $n$ is the size of the input.
+\end{definition}
+
+\begin{definition}[Class NP]
+    The class NP (Nondeterministic Polynomial time) is the set of decision problems for which a given solution can be verified in polynomial time by a deterministic Turing machine. In other words, a problem is in class NP if, given a candidate solution, there exists an algorithm that can verify whether the solution is correct in time $O(n^k)$ for some constant $k$, where $n$ is the size of the input.
+\end{definition}
+
+\begin{eg}[Knapsack Problem]
+    The Knapsack Problem is a classic example of a problem in class NP. Given a set $S$ of $n$ items, each with a weight $w_i$ and a value $v_i$, and a maximum weight capacity $W$, the goal is to determine whether there exists a subset of items from $S$ such that the total weight does not exceed $W$ and the total value is at least a given threshold $V$.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item No polynomial alogrithm is known
+        \item Exponential time algorithm exists (try all subsets)
+    \end{itemize}
+    If a candidate subset of items is provided, we can verify in polynomial time whether the total weight is less than or equal to $W$ and whether the total value is at least $V$ by summing the weights and values of the items in the subset. Thus, the Knapsack Problem is in class NP.
+\end{eg}
+Note that there exists problems that are not in NP, but they are not commonly encountered in practice.
