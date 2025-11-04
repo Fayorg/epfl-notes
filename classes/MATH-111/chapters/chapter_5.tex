@@ -1,0 +1,349 @@
+\chapter{Eigenvalues and Eigenvectors}
+Some vectors have the special property that when a linear transformation is applied to them, the resulting vector is simply a scalar multiple of the original vector i.e. $A \vec{x} = \lambda \vec{x}$.
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        3 & -2 \\
+        1 & 0
+    \end{bmatrix}$ and two vectors $\vec{u} = \begin{bmatrix}
+        2 \\ 1
+    \end{bmatrix}$ and $\vec{v} = \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$. We can compute:
+    \[A \vec{u} = \begin{bmatrix}
+        3 & -2 \
+        1 & 0
+    \end{bmatrix} \begin{bmatrix}
+        2 \\ 1
+    \end{bmatrix} = \begin{bmatrix}
+        4 \\ 2
+    \end{bmatrix} = 2 \begin{bmatrix}
+        2 \\ 1
+    \end{bmatrix} = 2 \vec{u}\]
+    and
+    \[A \vec{v} = \begin{bmatrix}
+        3 & -2 \\
+        1 & 0
+    \end{bmatrix} \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix} = \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix} = 1 \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix} = 1 \vec{v}\]
+    Thus:
+    \[
+        A^k \vec{u} = 2^k \vec{u} \quad \text{and} \quad A^k \vec{v} = 1^k \vec{v} = \vec{v}
+    \]
+\end{eg}
+
+\begin{definition}[Eigenvalues and Eigenvectors]
+    Let $A$ be an $n \times n$ matrix. A non-zero vector $\vec{x} \in \mathbb{R}^n$ is called an eigenvector of $A$ if there exists a scalar $\lambda \in \mathbb{R}$ such that:
+    \[
+        A \vec{x} = \lambda \vec{x}
+    \]
+    The scalar $\lambda$ is called the eigenvalue corresponding to the eigenvector $\vec{x}$.
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix}$. Are $\vec{x} = \begin{bmatrix}
+        6 \\ -5
+    \end{bmatrix}$ and $\vec{y} = \begin{bmatrix}
+        3 \\ -2
+    \end{bmatrix}$ an eigenvector of $A$? If so, find the corresponding eigenvalue. We compute:
+    \[A \vec{x} = \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix} \begin{bmatrix}
+        6 \\ -5
+    \end{bmatrix} = \begin{bmatrix}
+        -24 \\ 20
+    \end{bmatrix} = -4 \begin{bmatrix}
+        6 \\ -5
+    \end{bmatrix} = -4 \vec{x}\]
+    and
+    \[A \vec{y} = \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix} \begin{bmatrix}
+        3 \\ -2
+    \end{bmatrix} = \begin{bmatrix}
+        -9 \\ 11
+    \end{bmatrix}\]
+    Since $A \vec{x} = -4 \vec{x}$, $\vec{x}$ is an eigenvector of $A$ with corresponding eigenvalue $-4$. However, since $A \vec{y} \neq \lambda \vec{y}$ for any scalar $\lambda$, $\vec{y}$ is not an eigenvector of $A$.
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix}$. Is $7$ an eigenvalue of $A$? If so, find a corresponding eigenvector. We compute:
+    \[A \vec{v} = 7 \vec{v} \quad \implies \quad \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix} \vec{v} = 7 \vec{v} \quad \implies \quad \begin{bmatrix}
+        1 - 7 & 6 \\ 5 & 2 - 7
+    \end{bmatrix} \vec{v} = \begin{bmatrix}
+        -6 & 6 \\ 5 & -5
+    \end{bmatrix} \vec{v} = \vec{0}\]
+    We can row reduce the matrix (because we want to find the kernel of the matrix):
+    \[\begin{bmatrix}
+        -6 & 6 \\ 5 & -5
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -1 \\ 0 & 0
+    \end{bmatrix}\]
+    Thus, we have the equation $x_1 - x_2 = 0 \implies x_1 = x_2$. Therefore, any non-zero scalar multiple of the vector $\begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $7$.
+\end{eg}
+More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions below are equivalent:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\lambda$ is an eigenvalue of $A$.
+    \item $A \vec{x} = \lambda \vec{x}$ has a non-trivial solution.
+    \item $(A - \lambda I_n) \vec{x} = \vec{0}$ has a non-trivial solution.
+    \item $A - \lambda I_n$ is not invertible.
+    \item $\det(A - \lambda I_n) = 0$
+\end{itemize}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 6 \\ 5 & 2
+    \end{bmatrix}$. Let's find all eigenvalues of $A$. We compute:
+    \[\det(A - \lambda I_2) = \det\begin{bmatrix}
+        1 - \lambda & 6 \\ 5 & 2 - \lambda
+    \end{bmatrix} = (1 - \lambda)(2 - \lambda) - 30 = \lambda^2 - 3 \lambda - 28\]
+    Setting this equal to zero, we have:
+    \[\lambda^2 - 3 \lambda - 28 = 0 \quad \implies \quad (\lambda - 7)(\lambda + 4) = 0\]
+    Thus, the eigenvalues of $A$ are $7$ and $-4$. We can find the eigenvectors corresponding to each eigenvalue as follows: \\
+    \textbf{For $\lambda = 7$:}
+    \[\begin{bmatrix}
+        1 - 7 & 6 \\ 5 & 2 - 7
+    \end{bmatrix} = \begin{bmatrix}
+        -6 & 6 \\ 5 & -5
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -1 \\ 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $7$. \\
+    \textbf{For $\lambda = -4$:}
+    \[\begin{bmatrix}
+        1 + 4 & 6 \\ 5 & 2 + 4
+    \end{bmatrix} = \begin{bmatrix}
+        5 & 6 \\ 5 & 6
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & \frac{6}{5} \\ 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        6 \\ -5
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $-4$.
+\end{eg}
+\begin{definition}[Eigenspace]
+    Let $A$ be an $n \times n$ matrix and let $\lambda$ be an eigenvalue of $A$. The eigenspace of $A$ corresponding to the eigenvalue $\lambda$ is defined as:
+    \[
+        E_\lambda = \{\vec{x} \in \mathbb{R}^n : A \vec{x} = \lambda \vec{x}\}
+    \]
+    Equivalently, the eigenspace can be expressed as the kernel of the matrix $A - \lambda I_n$:
+    \[
+        E_\lambda = \text{ker}(A - \lambda I_n)
+    \]
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        4 & -1 & 6 \\
+        2 & 1 & 6 \\
+        2 & -1 & 8
+    \end{bmatrix}$. Find the eigenvalues of $A$. We compute:
+    \[\det(A - \lambda I_3) = \det\begin{bmatrix}
+        4 - \lambda & -1 & 6 \\
+        2 & 1 - \lambda & 6 \\
+        2 & -1 & 8 - \lambda
+    \end{bmatrix}\]
+    Expanding along the first row, we have:
+    \begin{align*}
+        \det(A - \lambda I_3) &= (4 - \lambda)(1 - \lambda)(2 - \lambda) - 24  + 6(4 - \lambda) + 2 (8-\lambda) - 12 (1 - \lambda) \\
+        &= -\lambda^3 + 13 \lambda^2 - 40 \lambda + 36 \\
+        &= -(\lambda - 9)(\lambda - 2)^2
+    \end{align*}
+    Thus, the eigenvalues of $A$ are $9$ and $2$ (with a multiplicity of $2$). Let's find the eigenspaces corresponding to each eigenvalue: \\
+    \textbf{For $\lambda = 9$:}
+    \[\begin{bmatrix}
+        4 - 9 & -1 & 6 \\
+        2 & 1 - 9 & 6 \\
+        2 & -1 & 8 - 9
+    \end{bmatrix} = \begin{bmatrix}
+        -5 & -1 & 6 \\
+        2 & -8 & 6 \\
+        2 & -1 & -1
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & 0 & -1 \\
+        0 & 1 & -1 \\
+        0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ 1 \\ 1
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $9$. \\
+    \textbf{For $\lambda = 2$:}
+    \[\begin{bmatrix}
+        4 - 2 & -1 & 6 \\
+        2 & 1 - 2 & 6 \\
+        2 & -1 & 8 - 2
+    \end{bmatrix} = \begin{bmatrix}
+        2 & -1 & 6 \\
+        2 & -1 & 6 \\
+        2 & -1 & 6
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -\frac{1}{2} & 3 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ 2 \\ 0
+    \end{bmatrix}$ and $\begin{bmatrix}
+        3 \\ 0 \\ -1
+    \end{bmatrix}$ are eigenvectors corresponding to the eigenvalue $2$.
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 4 & 6 \\ 0 & 3 & 9 \\ 0 & 0 & 8
+    \end{bmatrix}$. Find the eigenvalues of $A$. We compute:
+    \[\det(A - \lambda I_3) = \det\begin{bmatrix}
+        1 - \lambda & 4 & 6 \\ 0 & 3 - \lambda & 9 \\ 0 & 0 & 8 - \lambda
+    \end{bmatrix} = (1 - \lambda)(3 - \lambda)(8 - \lambda)\]
+    Thus, the eigenvalues of $A$ are $1$, $3$, and $8$. Since $A$ is an upper triangular matrix, the eigenvalues are simply the entries on the main diagonal.
+\end{eg}
+
+\begin{theorem}
+    Let $A$ be an $n \times n$ upper or lower triangular matrix. The eigenvalues of $A$ are the entries on the main diagonal of $A$.
+\end{theorem}
+
+\begin{eg}[Fibonacci Sequence]
+    The Fibonacci sequence is defined as follows:
+    \[
+        F_0 = 1, \quad F_1 = 1, \quad F_n = F_{n-1} + F_{n-2} \text{ for } n \geq 2
+    \]
+    We can express this recurrence relation in matrix form:
+    \[
+        \begin{bmatrix}
+            F_1 \\ F_2
+        \end{bmatrix} = \begin{bmatrix}
+            F_1 \\ F_0 + F_1
+        \end{bmatrix} = \begin{bmatrix}
+            0 & 1 \\ 1 & 1
+        \end{bmatrix} \begin{bmatrix}
+            F_0 \\ F_1
+        \end{bmatrix}
+    \]
+    and:
+    \[
+        \begin{bmatrix}
+            F_2 \\ F_3
+        \end{bmatrix} = \begin{bmatrix}
+            F_2 \\ F_1 + F_2
+        \end{bmatrix} = \begin{bmatrix}
+            0 & 1 \\ 1 & 1
+        \end{bmatrix} \begin{bmatrix}
+            F_1 \\ F_2
+        \end{bmatrix} = \begin{bmatrix}
+            0 & 1 \\ 1 & 1
+        \end{bmatrix}^2 \begin{bmatrix}
+            F_0 \\ F_1
+        \end{bmatrix}
+    \]
+    More generally, we have:
+    \[\begin{bmatrix}
+        F_n \\ F_{n+1}
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 1 \\ 1 & 1
+    \end{bmatrix}^n \begin{bmatrix}
+        F_0 \\ F_1
+    \end{bmatrix}\]
+    Thus we want to compute powers of the matrix $A = \begin{bmatrix}
+        0 & 1 \\ 1 & 1
+    \end{bmatrix}$. Let's find the eigenvalues of $A$:
+    \[\det(A - \lambda I_2) = \det\begin{bmatrix}
+        -\lambda & 1 \\ 1 & 1 - \lambda
+    \end{bmatrix} = \lambda^2 - \lambda - 1 = 0 \quad \implies \quad (\lambda - \frac{1 + \sqrt{5}}{2})(\lambda - \frac{1 - \sqrt{5}}{2}) = 0\]
+    Thus, the eigenvalues of $A$ are $\lambda_1 = \frac{1 + \sqrt{5}}{2} = \phi$ and $\lambda_2 = \frac{1 - \sqrt{5}}{2} = \bar{\phi}$, where $\phi$ is the golden ratio, $\phi = \frac{1 + \sqrt{5}}{2} \approx 1.618$. Let's find the eigenvectors corresponding to each eigenvalue: \\
+    \textbf{For $\lambda_1 = \frac{1 + \sqrt{5}}{2}$:}
+    \[\begin{bmatrix}
+        -\frac{1 + \sqrt{5}}{2} & 1 \\ 1 & 1 - \frac{1 + \sqrt{5}}{2}
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -\frac{1 + \sqrt{5}}{2} \\ 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ \frac{1 + \sqrt{5}}{2}
+    \end{bmatrix} = \begin{bmatrix}
+        1 \\ \phi
+    \end{bmatrix} = \vec{v_1}$ is an eigenvector corresponding to the eigenvalue $\frac{1 + \sqrt{5}}{2}$. \\
+    \textbf{For $\lambda_2 = \frac{1 - \sqrt{5}}{2}$:}
+    \[\begin{bmatrix}
+        -\frac{1 - \sqrt{5}}{2} & 1 \\ 1 & 1 - \frac{1 - \sqrt{5}}{2}
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & -\frac{1 - \sqrt{5}}{2} \\ 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ \frac{1 - \sqrt{5}}{2}
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $\frac{1 - \sqrt{5}}{2}$. 
+    To see the equivalence with $\begin{bmatrix} -\phi \\ 1 \end{bmatrix}$, note that:
+    \[
+        \begin{bmatrix}
+            1 \\ \frac{1 - \sqrt{5}}{2}
+        \end{bmatrix}
+        = \frac{1}{-\phi} \begin{bmatrix}
+            -\phi \\ 1
+        \end{bmatrix}
+    \]
+    where $\phi = \frac{1 + \sqrt{5}}{2}$.
+    Therefore, $\vec{v_2} = \begin{bmatrix} -\phi \\ 1 \end{bmatrix}$ is also an eigenvector corresponding to the eigenvalue $\frac{1 - \sqrt{5}}{2}$. \\
+    We remark that the eigenvalues are distinct, so the eigenvectors form a basis of $\mathbb{R}^2$. We want to write the initial vector $\begin{bmatrix}
+        F_0 \\ F_1
+    \end{bmatrix} = \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$ as a linear combination of the eigenvectors:
+    \[
+        c_1 \vec{v_1} + c_2 \vec{v_2} = \begin{bmatrix}
+            1 \\ 1
+        \end{bmatrix} \quad \iff \quad \begin{bmatrix}
+            1 & -\phi \\ \phi & 1
+        \end{bmatrix} \begin{bmatrix}
+            c_1 \\ c_2
+        \end{bmatrix} = \begin{bmatrix}
+            1 \\ 1
+        \end{bmatrix}
+    \]
+    We can solve this system to find $c_1$ and $c_2$:
+    \[
+        c_1 = \frac{1 + \phi}{1 + \phi^2}, \quad c_2 = \frac{1 - \phi}{1 + \phi^2}
+    \]
+    Thus we have:
+    \[
+        \begin{bmatrix}
+            F_n \\ F_{n+1}
+        \end{bmatrix} = \begin{bmatrix}
+            0 & 1 \\ 1 & 1
+        \end{bmatrix}^n \begin{bmatrix}
+            F_0 \\ F_1
+        \end{bmatrix} = A^n (c_1 \vec{v_1} + c_2 \vec{v_2}) = c_1 A^n \vec{v_1} + c_2 A^n \vec{v_2}
+    \]
+    Since:
+    \[
+        A^n \vec{v_1} = \lambda_1^n \vec{v_1} = \phi^n \begin{bmatrix}
+            1 \\ \phi
+        \end{bmatrix} \quad \text{and} \quad A^n \vec{v_2} = \lambda_2^n \vec{v_2} = \left(\frac{-1}{\phi}\right)^n \begin{bmatrix}
+            -\phi \\ 1
+        \end{bmatrix}
+    \]
+    Therefore, we have:
+    \[        \begin{bmatrix}
+            F_n \\ F_{n+1}
+        \end{bmatrix} = c_1 \phi^n \begin{bmatrix}
+            1 \\ \phi
+        \end{bmatrix} + c_2 \left(\frac{-1}{\phi}\right)^n \begin{bmatrix}
+            -\phi \\ 1
+        \end{bmatrix}\]
+    From this, we can extract an explicit formula for the $n$-th Fibonacci number:
+    \[
+        F_n = c_1 \phi^n + c_2 (-\phi) \left(\frac{-1}{\phi}\right)^n = \frac{1 + \phi}{1 + \phi^2} \phi^n + \frac{1}{1 + \phi^2} \left(\frac{-1}{\phi}\right)^n
+    \]
+\end{eg}
