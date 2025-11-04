@@ -847,3 +847,170 @@ Let $A$ be a matrix and $B$ be an invertible matrix of appropriate size, then:
     The rank of $R^T$ is equal to the number of non-zero columns in $R$, which is equal to the rank of $A$. Therefore, we conclude that:
     \[ \text{rank}(A) = \text{rank}(R) = \text{rank}(R^T) = \text{rank}(A^T) \]
 \end{proof}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6
+    \end{bmatrix}$. We have:
+    \[ A^T = \begin{bmatrix}
+        1 & 4 \\
+        2 & 5 \\
+        3 & 6
+    \end{bmatrix} \]
+    The row space of $A$ is given by:
+    \[ \text{Row}(A) = Span\left\{ \begin{bmatrix}
+        1 & 2 & 3
+    \end{bmatrix}, \begin{bmatrix}
+        4 & 5 & 6
+    \end{bmatrix} \right\} \]
+    A basis for Row$(A)$ is given by the two row vectors since they are linearly independent. Thus, dim(Row$(A)$) = 2. \\
+    The image of $A^T$ is given by:
+    \[ \text{Im}(A^T) = Span\left\{ \begin{bmatrix}
+        1 \\ 4
+    \end{bmatrix}, \begin{bmatrix}
+        2 \\ 5
+    \end{bmatrix}, \begin{bmatrix}
+        3 \\ 6
+    \end{bmatrix} \right\} \]
+    We can see that the third vector is a linear combination of the first two:
+    \[ 3\begin{bmatrix}
+        1 \\ 4
+    \end{bmatrix} - 2\begin{bmatrix}
+        2 \\ 5
+    \end{bmatrix} = \begin{bmatrix}
+        3 - 4 \\ 12 - 10
+    \end{bmatrix} = \begin{bmatrix}
+        -1 \\ 2
+    \end{bmatrix} \]
+    Thus, a basis for Im$(A^T)$ is given by the first two vectors. Therefore, dim(Im$(A^T)$) = 2. \\
+    We conclude that:
+    \[ \text{dim(Row}(A)) = \text{dim(Im}(A^T)) = 2 \]
+\end{eg}
+For a given matrix $A \in \mathbb{R}^{m \times n}$ there is 4 fundamental subspaces associated to it:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The column space (image) of $A$: Im$(A) \subseteq \mathbb{R}^m$.
+    \item The null space (kernel) of $A$: Ker$(A) \subseteq \mathbb{R}^n$.
+    \item The row space of $A$: Row$(A) = \text{Im}(A^T) \subseteq \mathbb{R}^n$.
+    \item The left null space of $A$: Ker$(A^T) \subseteq \mathbb{R}^m$.
+\end{itemize}
+These subspaces have the following properties:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item dim(Im$(A)$) = dim(Row$(A)$) = rank$(A)$.
+    \item dim(Ker$(A^T)$) + dim(Im$(A)$) = $m$ (number of rows of $A$).
+    \item dim(Ker$(A)$) + dim(Im$(A^T)$) = $n$ (number of columns of $A$).
+\end{itemize}
+
+\section{Change of Basis}
+In the a previous section, the change of basis matrix $P_{\mathcal{B}}$ was used to convert coordinates from a basis $\mathcal{B}$ to the standard basis $\mathcal{E}$. In this section, it will be generalized to convert coordinates between any two bases.
+
+\begin{eg}
+    Let $V$ be a vector space and let $\mathcal{B} = (\vec{b_1}, \vec{b_2})$ and $\mathcal{C} = (\vec{c_1}, \vec{c_2})$ be two bases for $V$. Let $\vec{x} \in V$ be a vector. If we have the coordinates of $\vec{x}$ relative to the basis $\mathcal{B}$, denoted by $[\vec{x}]_{\mathcal{B}}$, we want to find the coordinates of $\vec{x}$ relative to the basis $\mathcal{C}$, denoted by $[\vec{x}]_{\mathcal{C}}$. We have:
+    \[
+        [\vec{x}]_\mathcal{B} = \begin{bmatrix}
+            3 \\ 1
+        \end{bmatrix} = 3\vec{b_1} + 1\vec{b_2} \quad \text{and} \quad [\vec{x}]_\mathcal{C} = \begin{bmatrix}
+            6 \\ 4
+        \end{bmatrix} = 6\vec{c_1} + 4\vec{c_2}
+    \]
+    We want to find the link between $[\vec{x}]_\mathcal{B}$ and $[\vec{x}]_\mathcal{C}$. We have:
+    \[
+        [\vec{x}]_\mathcal{C} = [3\vec{b_1} + 1\vec{b_2}]_\mathcal{C} = 3[\vec{b_1}]_\mathcal{C} + 1[\vec{b_2}]_\mathcal{C}
+    \]
+    We can put this expression in matrix form:
+    \[
+        [\vec{x}]_\mathcal{C} = \begin{bmatrix}
+            | & | \\
+            [\vec{b_1}]_\mathcal{C} & [\vec{b_2}]_\mathcal{C} \\
+            | & |
+        \end{bmatrix} [\vec{x}]_\mathcal{B}
+    \]
+    If we want to do the opposite, i.e. find $[\vec{x}]_\mathcal{B}$ given $[\vec{x}]_\mathcal{C}$, we need to invert the matrix:
+    \[
+        [\vec{x}]_\mathcal{B} = \begin{bmatrix}
+            | & | \\
+            [\vec{b_1}]_\mathcal{C} & [\vec{b_2}]_\mathcal{C} \\
+            | & |
+        \end{bmatrix}^{-1} [\vec{x}]_\mathcal{C}
+    \]
+    The proof that this matrix is always invertible will be given later.
+\end{eg}
+% More generally, the change of basis matrix $$P_{\mathcal{C} \leftarrow \mathcal{B}} = [I_n]^{\mathcal{C}}_{\mathcal{B}}$$ from the basis $\mathcal{B} = (\vec{b_1}, \ldots, \vec{b_n})$ to the basis $\mathcal{C} = (\vec{c_1}, \ldots, \vec{c_n})$ is defined as:
+% \[
+%     P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix}
+%         | & & | \\
+%         [\vec{b_1}]_\mathcal{C} & \ldots & [\vec{b_n}]_\mathcal{C} \\
+%         | & & |
+%     \end{bmatrix} \in \mathbb{R}^{n \times n}
+% \]
+
+\begin{theorem}
+    The change of basis matrix $$P_{\mathcal{C} \leftarrow \mathcal{B}} = [I_n]^{\mathcal{C}}_{\mathcal{B}}$$ from the basis $\mathcal{B} = (\vec{b_1}, \ldots, \vec{b_n})$ to the basis $\mathcal{C} = (\vec{c_1}, \ldots, \vec{c_n})$ is defined as:
+    \[
+        P_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{bmatrix}
+            | & & | \\
+            [\vec{b_1}]_\mathcal{C} & \ldots & [\vec{b_n}]_\mathcal{C} \\
+            | & & |
+        \end{bmatrix} \in \mathbb{R}^{n \times n}
+    \]
+    Then, for any vector $\vec{x} \in V$, the following holds:
+    \[
+        [\vec{x}]_\mathcal{C} = P_{\mathcal{C} \leftarrow \mathcal{B}} [\vec{x}]_\mathcal{B}
+    \]
+    and:
+    \[
+        [\vec{x}]_\mathcal{B} = P_{\mathcal{C} \leftarrow \mathcal{B}}^{-1} [\vec{x}]_\mathcal{C} \quad \text{where} \quad P_{\mathcal{C} \leftarrow \mathcal{B}}^{-1} = P_{\mathcal{B} \leftarrow \mathcal{C}}
+    \]
+\end{theorem}
+Remark that a quick "proof" to show that $P_{\mathcal{C} \leftarrow \mathcal{B}}$ is invertible is to compute the following:
+\[ P_{\mathcal{B} \leftarrow \mathcal{C}} P_{\mathcal{C} \leftarrow \mathcal{B}} = I_n \]
+Which makes sense since:
+\[ [\vec{x}]_\mathcal{B} = P_{\mathcal{B} \leftarrow \mathcal{C}} [\vec{x}]_\mathcal{C} = P_{\mathcal{B} \leftarrow \mathcal{C}} P_{\mathcal{C} \leftarrow \mathcal{B}} [\vec{x}]_\mathcal{B} \]
+
+\subsection{Express a Linear Transformation Relative to Different Bases}
+\begin{eg}
+    Let $T: V \to W$ a linear transformation, $\mathcal{V} = (\vec{v_1}, \ldots, \vec{v_n})$ a basis of $V$ and $\mathcal{W} = (\vec{w_1}, \ldots, \vec{w_m})$ a basis of $W$. We then have that any vector $\vec{x} \in V$ has a unique representation:
+    \[ \vec{x} = c_1 \vec{v_1} + c_2 \vec{v_2} + \ldots + c_n \vec{v_n} \]
+    with coordinates:
+    \[ [\vec{x}]_{\mathcal{V}} = \begin{bmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_n
+    \end{bmatrix} \]
+    Computing $T(\vec{x})$ gives (using linearity of $T$):
+    \begin{align*}
+        T(\vec{x}) &= T(c_1 \vec{v_1} + c_2 \vec{v_2} + \ldots + c_n \vec{v_n}) \\
+        &= c_1 T(\vec{v_1}) + c_2 T(\vec{v_2}) + \ldots + c_n T(\vec{v_n})
+    \end{align*}
+    Thus each vector $T(\vec{v_i})$ can be expressed in terms of the basis $\mathcal{W}$:
+    \begin{align*}
+        [T(\vec{x})]_{\mathcal{W}} &= [c_1 T(\vec{v_1}) + \ldots + c_n T(\vec{v_n})]_{\mathcal{W}} \\
+        &= c_1 [T(\vec{v_1})]_{\mathcal{W}} + \ldots + c_n [T(\vec{v_n})]_{\mathcal{W}} \\
+        &= \underbrace{\begin{bmatrix}
+            | & & | \\
+            [T(\vec{v_1})]_{\mathcal{W}} & \ldots & [T(\vec{v_n})]_{\mathcal{W}} \\
+            | & & |
+        \end{bmatrix}}_{\text{matrix of size } m \times n} \underbrace{\begin{bmatrix}
+            c_1 \\ c_2 \\ \vdots \\ c_n
+        \end{bmatrix}}_{[\vec{x}]_{\mathcal{V}}}
+    \end{align*}
+\end{eg}
+
+\begin{theorem}
+    Let $T: V \to W$ be a linear transformation, $\mathcal{V} = (\vec{v_1}, \ldots, \vec{v_n})$ a basis of $V$ and $\mathcal{W} = (\vec{w_1}, \ldots, \vec{w_m})$ a basis of $W$. Then, for any vector $\vec{x} \in V$, the following holds:
+    \[
+        [T(\vec{x})]_{\mathcal{W}} = [T]^{\mathcal{W}}_{\mathcal{V}} [\vec{x}]_{\mathcal{V}}
+    \]
+    where the matrix $[T]^{\mathcal{W}}_{\mathcal{V}}$ is defined as:
+    \[
+        [T]^{\mathcal{W}}_{\mathcal{V}} = \begin{bmatrix}
+            | & & | \\
+            [T(\vec{v_1})]_{\mathcal{W}} & \ldots & [T(\vec{v_n})]_{\mathcal{W}} \\
+            | & & |
+        \end{bmatrix} \in \mathbb{R}^{m \times n}
+    \]
+\end{theorem}
+Remark that if $T$ is the identity transformation $I_V: V \to V$, then the matrix $[I_V]^{\mathcal{W}}_{\mathcal{V}}$ is exactly the change of basis matrix from $\mathcal{V}$ to $\mathcal{W}$. And since it was shown that any linear transformation $T: V \to W$ can be represented by a matrix, the same theorems/definitions from the previous section still apply. In particular
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\text{rang}(T) + \text{dim}(\text{Ker}(T)) = \text{dim}(V)$ (Rank-Nullity Theorem)
+    \item $\text{rank}(T) \leq \text{dim}(T)$ and $\text{rank}(T) \leq \text{dim}(W)$
+    \item If $\text{dim}(V) = \text{dim}(W)$, then $T$ is invertible if and only if $\text{Im}(T) = W$ and $\text{Ker}(T) = \{\vec{0}\}$
+\end{itemize}
