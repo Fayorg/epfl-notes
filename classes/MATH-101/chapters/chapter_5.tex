@@ -991,6 +991,226 @@ When computing limits, we can encounter some indeterminate forms such as:
     \]
 \end{eg}
 
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 1} \frac{\sin\left(\frac{\pi x}{2}\right) + x^2 - 2x}{(x -1)^2}
+    \]
+    If we compute the limit directly, we get the indeterminate form $\frac{0}{0}$. To resolve this, we can make a change of variable $t = x -1$:
+    \[
+        \lim_{t \to 0} \frac{\sin\left(\frac{\pi (t + 1)}{2}\right) + (t + 1)^2 - 2(t + 1)}{t^2} = \lim_{t \to 0} \frac{\sin\left(\frac{\pi t}{2} + \frac{\pi}{2}\right) + t^2 + 2t + 1 - 2t - 2}{t^2}
+    \]
+    By using the trigonometric identity $\sin(\alpha + \frac{\pi}{2}) = \cos \alpha$, we get:
+    \[
+        = \lim_{t \to 0} \frac{\cos\left(\frac{\pi t}{2}\right) + t^2 -1}{t^2}
+    \]
+    Again, by using the trigonometric identity $\cos \alpha = 1 - 2(\sin \frac{\alpha}{2})^2$, we get:
+    \[
+        = \lim_{t \to 0} \frac{-2\left(\sin\frac{\pi t}{4}\right)^2 + t^2}{t^2} = \lim_{t \to 0} \left(1 - 2\underbrace{\frac{\left(\sin(\frac{\pi t}{4})\right)^2}{\left(\frac{\pi t}{4}\right)^2}}_{\to 1} \frac{\left(\frac{\pi t}{4}\right)^2}{t^2}\right) = 1 - \frac{\pi^2}{8}
+    \]
+\end{eg}
+
+\subsection{Properties of Infinite Limits}
+The properties of limits shown previously can be adapted to infinite limits. Here are some examples:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If $\lim_{x \to x_0} f(x) = \pm\infty$ and $\lim_{x \to x_0} g(x) = \pm \infty$, then $\lim_{x \to x_0} (f(x) + g(x)) = \pm\infty$
+    \item If $\lim_{x \to x_0} f(x) = +\infty$ and $\lim_{x \to x_0} g(x) = L \in \mathbb{R}^*$, then $\lim_{x \to x_0} (f(x) \cdot g(x)) = +\infty$ if $L > 0$ and $-\infty$ if $L < 0$
+    \item If $\lim_{x \to x_0} f(x) = \pm\infty$ and $g(x)$ is bounded in a neighborhood of $x_0$, then $\lim_{x \to x_0} (f(x) \pm g(x)) = \pm\infty$
+    \item If $\lim_{x \to x_0} f(x) = \pm \infty$, then $\lim_{x \to x_0} \frac{1}{f(x)} = 0$
+    \item If $\lim_{x \to x_0} f(x) = 0$ and $f(x) \neq 0$ in a neighborhood of $x_0$, then $\lim_{x \to x_0} \frac{1}{f(x)} = + \infty$ if $f(x) > 0$ in a neighborhood of $x_0$, $-\infty$ if $f(x) < 0$ in a neighborhood of $x_0$ and does not exist otherwise
+    \item If $\lim_{x \to x_0} = + \infty \ (- \infty)$ and $g(x) \geq f(x)$ ($g(x) \leq f(x)$) for all $x$ in a neighborhood of $x_0$, then $\lim_{x \to x_0} g(x) = + \infty$ ($- \infty$) (Squeeze Theorem)
+\end{itemize}
+Note that these properties are aslo valid for limits at infinity.
+
+\subsection{Right and Left Limits}
+\begin{definition}[Right and Left Limits]
+    Let $f: E \to F$ be a function and $x_0 \in \mathbb{R}$ be an accumulation point of $E$. \\
+    It is said that the \textbf{right limit} of $f(x)$ as $x$ approaches $x_0$ is equal to $L \in F$ if for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in E$ with $x_0 < x < x_0 + \delta$, we have:
+    \[
+        |f(x) - L| < \epsilon
+    \]
+    This is denoted by:
+    \[
+        \lim_{x \to x_0^+} f(x) = L
+    \]
+    It is said that the \textbf{left limit} of $f(x)$ as $x$ approaches $x_0$ is equal to $L \in F$ if for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in E$ with $x_0 - \delta < x < x_0$, we have:
+    \[
+        |f(x) - L| < \epsilon
+    \]
+    This is denoted by:
+    \[
+        \lim_{x \to x_0^-} f(x) = L
+    \]
+\end{definition}
+Remark that a limit $\lim_{x \to x_0} f(x) = L$ exists if and only if both right and left limits exist and are equal:
+\[
+    \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = L
+\]
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \begin{cases}
+            1, & x \geq 0 \\
+            -1, & x < 0
+        \end{cases}
+    \]
+    Graphically, this function looks like:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+            \draw[thick,primary] (0,1) -- (2.5,1) node[right] {$f(x)$};
+            \draw[thick,primary] (-2.5,-1) -- (0,-1);
+        \end{tikzpicture}
+    \end{center}
+    We have:
+    \[
+        \lim_{x \to 0^+} f(x) = 1 \quad \text{and} \quad \lim_{x \to 0^-} f(x) = -1
+    \]
+    Thus, the limit $\lim_{x \to 0} f(x)$ does not exist.
+\end{eg}
+
+\begin{eg}
+    Let consider the function $f(x) = \frac{1}{x}$. We have:
+    \[
+        \lim_{x \to 0^+} f(x) = +\infty \quad \text{and} \quad \lim_{x \to 0^-} f(x) = -\infty
+    \]
+    Graphically, this function looks like:
+    \begin{center}
+        \begin{tikzpicture}[scale=.8]
+            \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[->] (0,-3) -- (0,3) node[above] {$y$};
+            
+            \draw[thick,primary,domain=0.37:2.5,smooth,variable=\x] plot ({\x},{1/\x}) node[right] {$f(x)$};
+            \draw[thick,primary,domain=-2.5:-0.37,smooth,variable=\x] plot ({\x},{1/\x});
+        \end{tikzpicture}
+    \end{center}
+    Thus, the limit $\lim_{x \to 0} f(x)$ does not exist.
+\end{eg}
+
+\section{Exponential and Logarithmic Functions}
+\begin{definition}[$e$]
+    The number $e$ is defined as the unique positive number such that:
+    \[
+        \sum_{n = 0}^{+\infty} \frac{x^n}{n!} = e^x
+    \]
+    Which converges for all $x \in \mathbb{R}$ (D'Alembert's ratio test).
+\end{definition}
+By convention, we define $0! = 1$ and $0^0 = 1$. The following properties hold:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $e^{x + y} = e^x \cdot e^y$ for all $x, y \in \mathbb{R}$
+    \item $e^{-x} = \frac{1}{e^x}$ for all $x \in \mathbb{R}$
+    \item $e^x > 0$ for all $x \in \mathbb{R}$
+\end{itemize}
+\begin{proof}
+    \textbf{1. Property}:
+    \[
+        e^x \cdot e^y = \left(\sum_{n = 0}^{+\infty} \frac{x^n}{n!}\right) \cdot \left(\sum_{m = 0}^{+\infty} \frac{y^m}{m!}\right) = \sum_{n = 0}^{+\infty} \sum_{m = 0}^{+\infty} \frac{x^n y^m}{n! m!}    
+    \]
+    By rearranging the terms, we get:
+    \[
+        = \sum_{k = 0}^{+\infty} \sum_{n = 0}^{k} \frac{x^n y^{k - n}}{n! (k - n)!} = \sum_{k = 0}^{+\infty} \frac{1}{k!} \sum_{n = 0}^{k} \binom{k}{n} x^n y^{k - n}
+    \]
+    By using the binomial theorem, we have:
+    \[
+        = \sum_{k = 0}^{+\infty} \frac{(x + y)^k}{k!} = e^{x + y}
+    \]
+    \textbf{2. Property}:
+    \[
+        e^x \cdot e^{-x} = e^{x - x} = e^0 = 1 \quad \implies \quad e^{-x} = \frac{1}{e^x}
+    \]
+    \textbf{3. Property}: Since all terms of the series defining $e^x$ are positive, we have:
+    \[
+        e^x = e^{\frac{x}{2}} \cdot e^{\frac{x}{2}} = \left(e^{\frac{x}{2}}\right)^2 > 0
+    \]
+\end{proof}
+
+\subsection{Properties of Exponential Function}
+These properties can be proved using the definition of $e^x$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\lim_{x \to \infty} e^x = \lim_{x \to \infty} \sum_{k = 0}^{\infty} \frac{x^k}{k!} \geq \lim_{x \to \infty} (1 + x) = + \infty$
+    \item $\lim_{x \to -\infty} e^x = \lim_{y \to \infty} e^{-y} = \lim_{y \to \infty} \frac{1}{e^y} = 0$
+    \item $e^x$ is strictly increasing on $\mathbb{R}$. Let $x_1, x_2 \in \mathbb{R}$ such that $x_1 < x_2$. We have:
+    \[
+        e^{x_2} - e^{x_1} = e^{x_1} (e^{x_2 - x_1} - 1) > 0
+    \]
+\end{itemize}    
+
+\begin{eg}
+    Let's prove the following limit:
+    \[
+        \lim_{x \to 0} \frac{e^x -1}{x} = 1
+    \]
+    To prove this, we can use the definition of $e^x$:
+    \begin{align*}
+        \left|\frac{e^x -1}{x} - 1\right|
+        &= \left|\frac{\sum_{k = 0}^{\infty} \frac{x^k}{k!} - 1}{x} - 1\right| = \left|\frac{\sum_{k = 1}^{\infty} \frac{x^k}{k!}}{x} - 1\right| = \left|\sum_{k = 1}^{\infty} \frac{x^{k-1}}{k!} - 1\right|\\
+        &= \left|\sum_{k = 2}^{\infty} \frac{x^{k-1}}{k!}\right| \\
+        &\le \sum_{k = 2}^{\infty} \frac{|x|^{k-1}}{k!} = |x| \sum_{k = 2}^{\infty} \frac{|x|^{k-2}}{k!} \\
+        &\le |x| \sum_{k = 2}^{\infty} \frac{|x|^{k-2}}{(k-2)!} = |x| \sum_{m = 0}^{\infty} \frac{|x|^{m}}{m!} = |x| e^{|x|}\\
+    \end{align*}
+    By the Squeeze Theorem, we conclude that:
+    \[
+        0 < \left|\frac{e^x -1}{x} -1\right| < \underbrace{|x| e^{|x|}}_{ \to 0} \quad \implies \quad \lim_{x \to 0} \frac{e^x -1}{x} = 1
+    \]
+\end{eg}
+Remark that this limit $\lim_{x \to a} \frac{e^{g(x)} -1}{g(x)}$ also converges to $1$ for any function $g(x)$ such that $\lim_{x \to a} g(x) = 0$ and $g(x) \neq 0$ in the neighborhood of $x = a$.
+
+\subsection{Logarithmic Function}
+\begin{definition}[Natural Logarithm]
+    The natural logarithm function $\ln: (0, +\infty) \to \mathbb{R}$ is defined as the inverse function of the exponential function $e^x: \mathbb{R} \to (0, +\infty)$.
+\end{definition}
+
+\subsection{Properties of Logarithmic Function}
+These properties can be proved using the definition of $\ln x$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $e^{\ln x} = x$ for all $x > 0$, $\ln(e^x) = x$ for all $x \in \mathbb{R}$
+    \item $\ln(xy) = \ln x + \ln y$ for all $x, y > 0$
+    \item $\ln\left(\frac{x}{y}\right) = \ln x - \ln y$ for all $x, y > 0$
+    \item $\ln(x^r) = r \ln x$ for all $r \in \mathbb{R}$
+    \item $\ln(1) = 0$, $\ln(e) = 1$
+\end{itemize}
+
+\section{List of Important Limits}
+Here is a list of some important limits related to exponential and logarithmic functions:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\lim_{x \to 0} \frac{e^x -1 }{x} = 1$
+    \item $\lim_{x \to 0} \frac{\ln(1 + x)}{x} = 1$
+    \item $\lim_{x \to 0} \left(1 + x\right)^{\frac{1}{x}} = e$
+    \item $\lim_{x \to a} \frac{e^{t(x)} -1}{t(x)} = 1$ if $\lim_{x \to a} t(x) = 0$ and $t(x) \neq 0$ in a neighborhood of $x = a$
+    \item $\lim_{x \to a} \frac{\ln(1 + t(x))}{t(x)} = 1$ if $\lim_{x \to a} t(x) = 0$ and $t(x) \neq 0$ in a neighborhood of $x = a$
+    \item $\lim_{x \to a} \left(1 + t(x)\right)^{\frac{1}{t(x)}} = e$ if $\lim_{x \to a} t(x) = 0$ and $t(x) \neq 0$ in a neighborhood of $x = a$
+\end{itemize} 
+
+\section{Continuity}
+\begin{definition}[Continuity at a Point]
+    Let $f: E \to F$ be a function and $x_0 \in E$. The function $f$ is said to be continuous at point $x_0$ if:
+    \[
+        \lim_{x \to x_0} f(x) = f(x_0)
+    \]
+    % That is, for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+    % \[
+    %     |f(x) - f(x_0)| < \epsilon
+    % \]
+\end{definition}
+Remark that this condition could be spit into three parts:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $f(x_0)$ is defined (i.e., $x_0 \in E$)
+    \item $\lim_{x \to x_0} f(x)$ exists
+    \item $\lim_{x \to x_0} f(x) = f(x_0)$
+\end{itemize}
+\begin{eg}
+    The following examples illustrate the concept of continuity at a point:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $f(x) = x^p, p \in \mathbb{N}$ is continous at every point $x_0 \in \mathbb{R}$, since $\lim_{x \to a} x^p = a^p$ for all $a \in \mathbb{R}$.
+        \item All polynomial functions are continuous at every point $x_0 \in \mathbb{R}$.
+        \item Any rational function $\frac{P(x)}{Q(x)}$ is continuous at every point $x_0 \in \mathbb{R}$ such that $Q(x_0) \neq 0$.
+        \item $f(x) = \sqrt[p]{x}$ is continuous at every point $x_0 \in (0, +\infty)$ for all $p \in \mathbb{N}^*$.
+        \item $f(x) = \sin(x)$ and $g(x) = \cos(x)$ are continuous at every point $x_0 \in \mathbb{R}$.
+    \end{itemize}
+\end{eg}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 
