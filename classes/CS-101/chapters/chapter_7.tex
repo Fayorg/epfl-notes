@@ -1,0 +1,292 @@
+\chapter{Induction and Recursion}
+
+\begin{definition}[Induction vs Recursion]
+    Induction and recursion are different approches to proving results (induction) and solving problems (recursion). They both:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Rely on the ability to achieve the desired result for the smallest possible version of the problem.
+        \item Induction extends this ability to problems of arbitrary size.
+        \item Recursion breaks down larger problems into smaller subproblems.
+    \end{itemize}
+\end{definition}
+
+\section{Mathematical Induction}
+\begin{definition}[Mathematical Induction]
+    Mathematical induction is a proof technique used to establish the truth of a statement for all natural numbers. It consists of two main steps:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} Prove that the statement holds for the initial value (usually $n=0$ or $n=1$ but can be any natural number).
+        \item \textbf{Inductive Step:} Assume the statement holds for some arbitrary natural number $k$ (inductive hypothesis), and then prove that it also holds for $k+1$.
+    \end{itemize}
+\end{definition}
+The definition above can be expressed as rules of inference:
+\[
+    (P(1) \land \forall k(P(k) \implies P(k + 1))) \implies \forall n P(n)
+\]
+where the domain is the set of positive integers.
+
+\begin{eg}
+    Let's prove the following theorem using mathematical induction:
+    \[
+        n < 2^n \quad \text{for all } n \geq 1
+    \]
+    \textbf{Base Case:} For $n=1$:
+    \[
+        1 < 2^1 \implies 1 < 2 \quad \text{(True)}
+    \]
+    \textbf{Inductive Step:} Assume the statement holds for some arbitrary $k \geq 1$, i.e., assume:
+    \[
+        k < 2^k
+    \]
+    We need to show that it holds for $k+1$:
+    \[
+        k+1 < 2^{k+1}
+    \]
+    Starting from the inductive hypothesis:
+    \[
+        k < 2^k
+    \]
+    Adding 1 to both sides gives:
+    \[
+        k + 1 < 2^k + 1
+    \]
+    Since $2^k \geq 2$ for all $k \geq 1$, we have:
+    \[
+        2^k + 1 \leq 2^k + 2^k = 2 \cdot 2^k = 2^{k+1}
+    \]
+    Therefore:
+    \[
+        k + 1 < 2^{k+1}
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the statement holds for all $n \geq 1$.
+\end{eg}
+
+\subsection{Validity of Mathematical Induction}
+Mathematical induction is valid because of the well-ordering property (previously defined axiom) i.e. every non-empty set of positive integers has a least element.
+\begin{proof}
+    Let's make a proof by contradiction to prove the validity of mathematical induction. Assume there exists a property $P(n)$ such that:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $P(1)$ is true.
+        \item For every $k \geq 1$, if $P(k)$ is true, then $P(k+1)$ is also true.
+        \item However, there exists some $m \geq 1$ such that $P(m)$ is false.
+        \item Let $S$ be the set of all such $m$ where $P(m)$ is false. By our assumption, $S$ is non-empty.
+        \item By the well-ordering property, $S$ has a least element, say $m_0$.
+        \item Since $m_0$ is the least element in $S$ and $m_0 \geq 1$, it follows that $m_0 - 1$ is not in $S$, which means $P(m_0 - 1)$ is true.
+        \item By the inductive step, since $P(m_0 - 1)$ is true, it follows that $P(m_0)$ must also be true.
+        \item This contradicts our assumption that $P(m_0)$ is false. Therefore, our initial assumption must be incorrect, and there cannot exist such an $m$ where $P(m)$ is false.
+        \item Hence, by mathematical induction, $P(n)$ is true for all $n \geq 1$.
+    \end{itemize}
+\end{proof}
+
+\begin{eg}
+    Let's prove the formula for the sum of the first $n$ natural numbers using mathematical induction:
+    \[
+        S(n) = 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}
+    \]
+    \textbf{Base Case:} For $n=1$:
+    \[
+        S(1) = 1 = \frac{1(1+1)}{2} = 1 \quad \text{(True)}
+    \]
+    \textbf{Inductive Step:} Assume the formula holds for some arbitrary $k \geq 1$, i.e., assume:
+    \[
+        S(k) = \frac{k(k+1)}{2}
+    \]
+    We need to show that it holds for $k+1$:
+    \[
+        S(k+1) = S(k) + (k+1)
+    \]
+    Using the inductive hypothesis:
+    \[
+        S(k+1) = \frac{k(k+1)}{2} + (k+1)
+    \]
+    Simplifying the right-hand side:
+    \[
+        S(k+1) = \frac{k(k+1) + 2(k+1)}{2} = \frac{(k+1)(k+2)}{2}
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the formula holds for all $n \geq 1$.
+\end{eg}
+Note that induction is not a method to discover formulas, but rather a method to prove them once they are known.
+
+\begin{eg}
+    Let's prove that for any $n \geq 4$ we have:
+    \[
+        2^n < n!
+    \]
+    \textbf{Base Case:} For $n=4$:
+    \[
+        2^4 = 16 < 24 = 4! \quad \text{(True)}
+    \]
+    \textbf{Inductive Step:} Assume the statement holds for some arbitrary $k \geq 4$, i.e., assume:
+    \[
+        2^k < k!
+    \]
+    We need to show that it holds for $k+1$:
+    \[
+        2^{k+1} < (k+1)!
+    \]
+    Starting from the inductive hypothesis:
+    \[
+        2^k < k!
+    \]
+    Multiplying both sides by 2 gives:
+    \[
+        2^{k+1} < 2 \cdot k!
+    \]
+    Since $k \geq 4$, we have $2 \cdot k! \leq (k+1) \cdot k! = (k+1)!$. Therefore:
+    \[
+        2^{k+1} < (k+1)!
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the statement holds for all $n \geq 4$.
+\end{eg}
+
+\begin{eg}
+    Let's prove the following theorem. If $S$ is a finite set with $n$ elements, where $n$ is a nonnegative integer, then $S$ has $2^n$ subsets. \\
+    \textbf{Base Case:} For $n=0$, the empty set has exactly one subset (itself), and $2^0 = 1$. Thus, the base case holds. \\
+    \textbf{Inductive Step:} Assume the statement holds for some arbitrary $k \geq 0$, i.e., assume that any set with $k$ elements has $2^k$ subsets.
+    We need to show that it holds for $k+1$:
+    \[
+        \text{A set with } k+1 \text{ elements has } 2^{k+1} \text{ subsets.}
+    \]
+    Let $S$ be a set with $k+1$ elements. We can write $S$ as:
+    \[
+        S = T \cup \{a\}
+    \]
+    where $T$ is a subset of $S$ with $k$ elements and $a$ is an element not in $T$.
+    By the inductive hypothesis, $T$ has $2^k$ subsets. Each subset of $T$ can either include the element $a$ or not. Therefore, for each of the $2^k$ subsets of $T$, there are two corresponding subsets of $S$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The subset that does not include $a$ (which is just the subset of $T$).
+        \item The subset that includes $a$ (which is the subset of $T$ plus the element $a$).
+    \end{itemize}
+    Thus, the total number of subsets of $S$ is:
+    \[
+        2^k + 2^k = 2 \cdot 2^k = 2^{k+1}
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the statement holds for all nonnegative integers $n$.
+\end{eg}
+
+\subsection{Strong Induction}
+\begin{definition}[Strong Induction]
+    Strong induction is a variation of mathematical induction where the inductive step assumes that the statement holds for all values less than or equal to $k$, rather than just for $k$ itself. The steps are as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} Prove that the statement holds for the initial value (usually $n=0$ or $n=1$).
+        \item \textbf{Inductive Step:} Assume the statement holds for all natural numbers up to $k$ (inductive hypothesis), and then prove that it also holds for $k+1$.
+    \end{itemize}
+\end{definition}
+This can be expressed as rules of inference:
+\[
+    (P(1) \land \forall k((P(1) \land P(2) \land \ldots \land P(k)) \implies P(k + 1))) \implies \forall n P(n)
+\]
+Note that strong induction is sometimes called the second principle of mathematical induction or complete induction. It is logically equivalent to regular mathematical induction, meaning that any statement that can be proven using one method can also be proven using the other.
+
+\begin{eg}
+    Let's prove that every positive integer $n$ can be written as a sum of distinct powers of $2$, that is, there exists a set of integers $S = \left\{k_1, \ldots, k_m\right\}$ such that:
+    \[
+        n = \sum_{j = 1}^{m} 2^{k_j}
+    \]
+    \textbf{Base Case:} For $n=1$:
+    \[
+        1 = 2^0
+    \]
+    Thus, the base case holds. \\
+    \textbf{Inductive Step:} Assume the statement holds for all positive integers up to $k$, i.e., assume that for every integer $m$ such that $1 \leq m \leq k$, there exists a set of integers $S_m = \left\{k_1, \ldots, k_{m'}\right\}$ such that:
+    \[
+        m = \sum_{j = 1}^{m'} 2^{k_j}
+    \]
+    We need to show that it holds for $k+1$. There are two cases to consider:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $k+1$ is even, then we can write:
+        \[
+            k+1 = 2 \cdot \frac{k+1}{2}
+        \]
+        By the inductive hypothesis, since $\frac{k+1}{2} \leq k$, there exists a set of integers $S_{\frac{k+1}{2}}$ such that:
+        \[
+            \frac{k+1}{2} = \sum_{j = 1}^{m'} 2^{k_j}
+        \]
+        Therefore:
+        \[
+            k+1 = 2 \cdot \sum_{j = 1}^{m'} 2^{k_j} = \sum_{j = 1}^{m'} 2^{k_j + 1}
+        \]
+        \item If $k+1$ is odd, then we can write:
+        \[
+            k+1 = 1 + k
+        \]
+        By the inductive hypothesis, since $k \leq k$, there exists a set of integers $S_k$ such that:
+        \[
+            k = \sum_{j = 1}^{m'} 2^{k_j}
+        \]
+        Therefore:
+        \[
+            k+1 = 1 + \sum_{j = 1}^{m'} 2^{k_j} = 2^0 + \sum_{j = 1}^{m'} 2^{k_j}
+        \]
+    \end{itemize}
+    In both cases, we have expressed $k+1$ as a sum of distinct powers of $2$. This completes the inductive step. By the principle of strong induction, the statement holds for all positive integers $n$.
+\end{eg}
+
+\subsection{Inductively Defined Sets and Structures}
+\begin{definition}[Inductively Defined Sets]
+    An inductively defined set is a set that is defined by specifying a base case (or cases) and one or more rules for generating new elements from existing ones. The process of defining such sets typically involves:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} Identify one or more initial elements that belong to the set.
+        \item \textbf{Inductive Step:} Define rules that allow the construction of new elements from those already in the set.
+    \end{itemize}
+    The set is then the smallest set that contains the base case elements and is closed under the inductive rules.
+\end{definition}
+Remark that only elements generated by the base case and the inductive step belong to the set.
+
+\begin{eg}
+    We can defined the set of natural numbers $\mathbb{N}$ inductively as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} $0 \in \mathbb{N}$
+        \item \textbf{Inductive Step:} If $n \in \mathbb{N}$, then $n+1 \in \mathbb{N}$
+    \end{itemize}
+    Thus, the set $\mathbb{N}$ is the smallest set containing $0$ and closed under the operation of adding $1$.
+\end{eg}
+
+\begin{eg}
+    A subset $S$ of the set of integers inductively defined as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} $3 \in S$
+        \item \textbf{Inductive Step:} If $x \in S$ and $y \in S$, then $x+y \in S$
+    \end{itemize}
+    Thus, the set $S$ contains all integers that can be expressed as sums of the number $3$. Therefore, $S = \{3, 6, 9, 12, \ldots\}$, which is the set of all positive multiples of $3$.
+\end{eg}
+
+\begin{definition}[Strings]
+    A string is a finite sequence of characters from a given alphabet. Formally, if $\Sigma$ is an alphabet (a finite set of symbols), then a string over $\Sigma$ is a function $s: \{1, 2, \ldots, n\} \to \Sigma$ for some $n \geq 0$. The set of all strings over $\Sigma$ is denoted by $\Sigma^*$.
+\end{definition}
+Remark that strings can be defined inductively as follows:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item \textbf{Base Case:} The empty string $\lambda$ is in $\Sigma^*$.
+    \item \textbf{Inductive Step:} If $s \in \Sigma^*$ and $a \in \Sigma$, then the concatenation of $s$ and $a$, denoted by $sa$, is also in $\Sigma^*$.
+\end{itemize}
+
+\begin{eg}
+    Let $\Sigma = \{a, b\}$. Then the strings over $\Sigma$ include $\lambda$, $a$, $b$, $aa$, $ab$, $ba$, $bb$, $aaa$, and so on. In fact, every finite sequence of $a$'s and $b$'s is a string in $\Sigma^*$.
+\end{eg}
+
+\begin{definition}[Balanced Strings]
+    A balanced string of parentheses is a string that is defined inductively as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} The empty string $\lambda$ is a balanced string.
+        \item \textbf{Inductive Step:} If $s$ is a balanced string, then the string $(s)$ is also a balanced string. Additionally, if $s_1$ and $s_2$ are balanced strings, then their concatenation $s_1 s_2$ is also a balanced string.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    Every balanced string has an even number of characters.
+\end{theorem}
+\begin{proof}
+    We will prove this theorem using mathematical induction on the length of the balanced string. \\
+    \textbf{Base Case:} The empty string $\lambda$ has $0$ characters, which is even. Thus, the base case holds. \\
+    \textbf{Inductive Step:} Assume that every balanced string of length $k$ has an even number of characters. We need to show that every balanced string of length $k+1$ also has an even number of characters. There are two cases to consider based on the inductive definition of balanced strings:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If the balanced string is of the form $(s)$, where $s$ is a balanced string of length $k-1$, then the total length of the string is:
+        \[
+            \text{Length} = 2 + \text{Length}(s) = 2 + (k-1) = k + 1
+        \]
+        Since $k-1$ is even by the inductive hypothesis, adding $2$ (which is even) results in an even number.
+        \item If the balanced string is of the form $s_1 s_2$, where both $s_1$ and $s_2$ are balanced strings with lengths $m$ and $n$ respectively such that $m + n = k+1$, then by the inductive hypothesis, both $m$ and $n$ are even. The sum of two even numbers is also even:
+        \[
+            m + n = k + 1
+        \]
+    \end{itemize}
+    In both cases, we have shown that a balanced string of length $k+1$ has an even number of characters. This completes the inductive step. By the principle of mathematical induction, every balanced string has an even number of characters.
+\end{proof}
