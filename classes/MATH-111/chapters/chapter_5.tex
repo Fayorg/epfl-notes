@@ -347,3 +347,157 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
         F_n = c_1 \phi^n + c_2 (-\phi) \left(\frac{-1}{\phi}\right)^n = \frac{1 + \phi}{1 + \phi^2} \phi^n + \frac{1}{1 + \phi^2} \left(\frac{-1}{\phi}\right)^n
     \]
 \end{eg}
+
+\begin{theorem}
+    Let $A$ be a matrix of size $n \times n$ and $\vec{v_1}, \ldots, \vec{v_r}$ be eigenvectors of $A$ corresponding to distinct eigenvalues $\lambda_1, \ldots, \lambda_r$. Then, the set $\{\vec{v_1}, \ldots, \vec{v_r}\}$ is linearly independent.
+\end{theorem}
+
+\begin{eg}
+    Let $A$ be a matrix, $\lambda_1, \ldots, \lambda_p$ be the eigenvalues of $A$ and $\vec{v_1}, \ldots, \vec{v_p}$ be the corresponding eigenvectors. If we now take a new matrix $B = 2A$, what are the eigenvalues and eigenvectors of $B$? We have:
+    \[B \vec{v_i} = 2A \vec{v_i} = 2 \lambda_i \vec{v_i}\]
+    Thus, the eigenvalues of $B$ are $2 \lambda_1, \ldots, 2 \lambda_p$ and the eigenvectors are the same as those of $A$, i.e. $\vec{v_1}, \ldots, \vec{v_p}$.
+\end{eg}
+
+\begin{definition}[Caracteristic Polynomial]
+    Let $A$ be an $n \times n$ matrix. The characteristic polynomial of $A$ is defined as:
+    \[
+        p_A(\lambda) = \det(A - \lambda I_n)
+    \]
+    for $\lambda \in \mathbb{R}$.
+\end{definition}
+Remark that for any matrix $A$ of size $n \times n$, the constant term of the characteristic polynomial is given by $p_A(0) = \det(A)$ (since in this case $\lambda = 0$ and thus $A - 0 \cdot I_n = A$).
+
+\begin{theorem}
+    Let $A$ be an $n \times n$ matrix. The characteristic polynomial $p_A(\lambda)$ is a polynomial of degree $n$ in the variable $\lambda$.
+\end{theorem}
+Remark that since the characteristic polynomial is of degree $n$, it has exactly $n$ roots (counting multiplicities) in the complex numbers (by the Fundamental Theorem of Algebra), thus it can always be factored as:
+\[p_A(\lambda) = (-1)^n (\lambda - \lambda_1)^{m_1} (\lambda - \lambda_2)^{m_2} \cdots (\lambda - \lambda_k)^{m_k}\]
+where $\lambda_1, \ldots, \lambda_k$ are the distinct eigenvalues of $A$ and $m_1, \ldots, m_k$ are their respective algebraic multiplicities (with $m_1 + m_2 + \cdots + m_k = n$).
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        3 & 9 & 3 & 1 \\
+        0 & 6 & -2 & 0 \\
+        0 & 0 & 0 & -2 \\
+        0 & 0 & 0 & 6
+    \end{bmatrix}$. Find the eigenvalues of $A$. We compute:
+    \[\det(A - \lambda I_4) = \det\begin{bmatrix}
+        3 - \lambda & 9 & 3 & 1 \\
+        0 & 6 - \lambda & -2 & 0 \\
+        0 & 0 & -\lambda & -2 \\
+        0 & 0 & 0 & 6 - \lambda
+    \end{bmatrix} = (3 - \lambda)(6 - \lambda)^2 (-\lambda)\]
+    Thus, the eigenvalues of $A$ are $3$, $6$ (with a multiplicity of $2$), and $0$.
+\end{eg}
+Remark that the sum of the algebraic multiplicities of the eigenvalues is equal to $4$, which is the size of the matrix $A$.
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        0 & -1 \\ 1 & 0
+    \end{bmatrix}$. Find the eigenvalues of $A$. We compute:
+    \[\det(A - \lambda I_2) = \det\begin{bmatrix}
+        -\lambda & -1 \\ 1 & -\lambda
+    \end{bmatrix} = \lambda^2 + 1 = (i - \lambda)(-i - \lambda) = 0\]
+    Thus, the eigenvalues of $A$ are $\lambda_1 = i$ and $\lambda_2 = -i$. Geometrically, this matrix represents a rotation by $90^\circ$ in the counter-clockwise direction, which does not have any real eigenvalues or eigenvectors.
+\end{eg}
+More generally, if a matrix $A$ has complex eigenvalues, they will always come in conjugate pairs. That is, if $\lambda = a + bi$ is an eigenvalue of $A$ (where $a,b \in \mathbb{R}$ and $b \neq 0$), then its complex conjugate $\bar{\lambda} = a - bi$ is also an eigenvalue of $A$ and both eigenvalues have the same algebraic multiplicity.
+
+\section{Similarity of Matrices}
+\begin{definition}[Similar Matrices]
+    Let $A$ and $B$ be two $n \times n$ matrices. We say that $A$ is similar to $B$ if there exists an invertible matrix $P$ such that:
+    \[B = P^{-1} A P \quad \iff \quad A = P B P^{-1}\]
+\end{definition}
+Remark that similarity of matrices is an equivalence relation, i.e. for any $n \times n$ matrices $A$, $B$, and $C$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $A$ is similar to $A$ (reflexivity).
+    \item If $A$ is similar to $B$, then $B$ is similar to $A$ (symmetry).
+    \item If $A$ is similar to $B$ and $B$ is similar to $C$, then $A$ is similar to $C$ (transitivity).
+\end{itemize}
+\begin{proof}
+    \textbf{1. Property}: Let $A$ be an $n \times n$ matrix. We have:
+    \[A = I_n A I_n\]
+    where $I_n$ is the identity matrix of size $n \times n$, which is invertible. Thus, $A$ is similar to itself. \\
+    \textbf{2. Property}: Let $A$ and $B$ be two $n \times n$ matrices such that $A$ is similar to $B$. Then, there exists an invertible matrix $P$ such that:
+    \[B = P^{-1} A P\]
+    Multiplying both sides by $P$ on the left and by $P^{-1}$ on the right, we have:
+    \[A = P B P^{-1}\]
+    Thus, $B$ is similar to $A$. \\
+    \textbf{3. Property}: Let $A$, $B$, and $C$ be three $n \times n$ matrices such that $A$ is similar to $B$ and $B$ is similar to $C$. Then, there exist invertible matrices $P$ and $Q$ such that:
+    \[B = P^{-1} A P \quad \text{and} \quad C = Q^{-1} B Q\]
+    Substituting the first equation into the second, we have:
+    \[C = Q^{-1} (P^{-1} A P) Q = (Q^{-1} P^{-1}) A (P Q)\]
+    Since the product of two invertible matrices is also invertible, $Q^{-1} P^{-1}$ is invertible and $P Q$ is invertible. Thus, $A$ is similar to $C$.
+\end{proof}
+
+\begin{theorem}[Similarity and Eigenvalues]
+    Let $A$ and $B$ be two similar $n \times n$ matrices. Then:
+    \[
+        p_B(\lambda) = p_A(\lambda)
+    \]
+    Thus, $A$ and $B$ have the same eigenvalues (counting algebraic multiplicities).
+\end{theorem}
+\begin{proof}
+    Let $A$ and $B$ be two similar $n \times n$ matrices. Then, there exists an invertible matrix $P$ such that:
+    \[B = P^{-1} A P\]
+    We compute the characteristic polynomial of $B$:
+    \begin{align*}
+        p_B(\lambda) &= \det(B - \lambda I_n) \\
+        &= \det(P^{-1} A P - \lambda I_n) = \det(P^{-1} A P - \lambda P^{-1} I_n P) = \det(P^{-1} (A - \lambda I_n) P) \\
+        &= \det(P^{-1}) \det(A - \lambda I_n) \det(P) = \det(A - \lambda I_n) = p_A(\lambda)
+    \end{align*}
+    Thus, $p_B(\lambda) = p_A(\lambda)$, which implies that $A$ and $B$ have the same eigenvalues (counting algebraic multiplicities).
+\end{proof}
+Remark that the converse of this theorem is not necessarily true, i.e. two matrices can have the same eigenvalues (counting algebraic multiplicities) without being similar. For example, the matrices
+\[
+A = \begin{bmatrix}
+    1 & 0 \\ 0 & 0
+\end{bmatrix}, \quad B = \begin{bmatrix}
+    1 & 1 \\ 0 & 1
+\end{bmatrix}
+\]
+both have the same characteristic polynomial $p(\lambda) = \lambda^2 - 1$, but they are not similar since $A$ is diagonal while $B$ is not. \\
+
+\subsection{Link between Similarity and Change of Basis}
+\begin{eg}
+    Let $T: \mathbb{R}^3 \to \mathbb{R}^3$ be a linear transformation and $A$ be the matrix representation of $T$ with respect to the standard basis $\mathcal{E} = \{\vec{e_1}, \vec{e_2}, \vec{e_3}\}$. If we have a new basis $\mathcal{B} = \{\vec{v_1}, \vec{v_2}, \vec{v_3}\}$ of $\mathbb{R}^3$, what is the matrix representation of $T$ with respect to the basis $\mathcal{B}$? Let $P$ be the change of basis matrix from $\mathcal{B}$ to $\mathcal{E}$ such that for all $\vec{x} \in \mathbb{R}^3$:
+    \[ [\vec{x}]_{\mathcal{E}} = P [\vec{x}]_{\mathcal{B}} \]
+    Thus, we have:
+    \[
+        [T(\vec{x})]_{\mathcal{B}} = P^{-1} T(\vec{x}) = P^{-1} A \vec{x} = P^{-1} A P [\vec{x}]_{\mathcal{B}} 
+    \]
+    Therefore, the matrix representation of $T$ with respect to the basis $\mathcal{B}$ is given by:
+    \[B = P^{-1} A P\]
+    which shows that the matrix representations of a linear transformation with respect to different bases are similar matrices.
+\end{eg}
+
+\subsection{Diagonalization of Matrices}
+\begin{definition}[Diagonalizable Matrix]
+    An $n \times n$ matrix $A$ is said to be diagonalizable if it is similar to a diagonal matrix, i.e. there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
+    \[A = P D P^{-1} \quad \iff \quad D = P^{-1} A P\]
+\end{definition}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        7 & 2 \\ -4 & 1
+    \end{bmatrix}, P = \begin{bmatrix}
+        1 & 1 \\ -1 & -2
+    \end{bmatrix}$ and $D = \begin{bmatrix}
+        5 & 0 \\ 0 & 3
+    \end{bmatrix}$. Let's verify that $A$ is diagonalizable by checking if $A = P D P^{-1}$. We first compute $P^{-1}$:
+    \[P^{-1} = \frac{1}{(1)(-2) - (1)(-1)} \begin{bmatrix}
+        -2 & -1 \\ 1 & 1
+    \end{bmatrix} = \begin{bmatrix}
+        -2 & -1 \\ 1 & 1
+    \end{bmatrix}\]
+    Now, we compute $P D P^{-1}$:
+    \[P D P^{-1} = \begin{bmatrix}
+        1 & 1 \\ -1 & -2
+    \end{bmatrix} \begin{bmatrix}
+        5 & 0 \\ 0 & 3
+    \end{bmatrix} \begin{bmatrix}
+        -2 & -1 \\ 1 & 1
+    \end{bmatrix} = \begin{bmatrix}
+        7 & 2 \\ -4 & 1
+    \end{bmatrix} = A\]
+    Thus, $A$ is diagonalizable.
+\end{eg}
