@@ -290,3 +290,218 @@ Remark that strings can be defined inductively as follows:
     \end{itemize}
     In both cases, we have shown that a balanced string of length $k+1$ has an even number of characters. This completes the inductive step. By the principle of mathematical induction, every balanced string has an even number of characters.
 \end{proof}
+
+\section{Recursively Defined Functions}
+\begin{definition}[Recursively Defined Functions]
+    A recursively defined function is a function that is defined in terms of itself using base cases and recursive rules. The process of defining such functions typically involves:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} Specify the value of the function for one or more initial inputs.
+        \item \textbf{Recursive Step:} Define the value of the function for other inputs in terms of the function's values at smaller inputs.
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    Let $f$ be a function defined recursively as follows:
+    \[
+        \begin{cases}
+            f(0) = 3 \\
+            f(n + 1) = 2 \cdot f(n) + 3 \quad \text{for } n \geq 0
+        \end{cases}
+    \]
+    We can compute the first few values of $f$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $f(0) = 3$
+        \item $f(1) = 2 \cdot f(0) + 3 = 2 \cdot 3 + 3 = 9$
+        \item $f(2) = 2 \cdot f(1) + 3 = 2 \cdot 9 + 3 = 21$
+        \item $f(3) = 2 \cdot f(2) + 3 = 2 \cdot 21 + 3 = 45$
+    \end{itemize}
+    Thus, the first few values of the function can be written as:
+    \[
+        f(0) = 3 = 1 \cdot 3, \quad f(1) = 9 = 3 \cdot 3, \quad f(2) = 21 = 7 \cdot 3, \quad f(3) = 45 = 15 \cdot 3
+    \]
+    We can observe that the coefficients $1, 3, 7, 15$ are one less than powers of $2$. Specifically:
+    \[
+        f(n) = (2^{n+1} - 1) \cdot 3
+    \]
+    We can prove this formula using mathematical induction. \\
+    \textbf{Base Case:} For $n=0$:
+    \[
+        f(0) = 3 = (2^{0+1} - 1) \cdot 3 = (2^1 - 1) \cdot 3 = 1 \cdot 3 \quad \text{(True)}
+    \]
+    \textbf{Inductive Step:} Assume the formula holds for some arbitrary $k \geq 0$, i.e., assume:
+    \[
+        f(k) = (2^{k+1} - 1) \cdot 3
+    \]
+    We need to show that it holds for $k+1$:
+    \[
+        f(k+1) = 2 \cdot f(k) + 3
+    \]
+    Using the inductive hypothesis:
+    \[
+        f(k+1) = 2 \cdot ((2^{k+1} - 1) \cdot 3) + 3 = (2^{k+2} - 2) \cdot 3 + 3 = (2^{k+2} - 1) \cdot 3
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the formula holds for all $n \geq 0$.
+\end{eg}
+
+\begin{eg}
+    Let's define the factorial function $n!$ recursively as follows:
+    \[
+        \begin{cases}
+            f(0) = 1 \\
+            f(n + 1) = (n + 1) \cdot f(n) \quad \text{for } n \geq 0
+        \end{cases}
+    \]
+\end{eg}
+
+\begin{eg}
+    Let $F(n)$ be the Fibonacci sequence defined recursively as follows:
+    \[
+        \begin{cases}
+            F(0) = 0 \\
+            F(1) = 1 \\ 
+            F(n + 2) = F(n + 1) + F(n) \quad \text{for } n \geq 0
+        \end{cases}
+    \]
+    We want to show that for all $n \geq 3$ we have:
+    \[
+        F(n) > \alpha^{n -2}
+    \]
+    where $\alpha = \frac{1 + \sqrt{5}}{2}$ is the golden ratio. \\
+    \textbf{Base Cases:} For $n=3$
+    \[
+        F(3) = F(2) + F(1) = 1 + 1 = 2 > \alpha^{3-2} = \alpha^1 \approx 1.618
+    \]
+    For $n=4$:
+    \[
+        F(4) = F(3) + F(2) = 2 + 1 = 3 > \alpha^{4-2} = \alpha^2 \approx 2.618
+    \]
+    Thus, the base cases hold. \\
+    \textbf{Inductive Step:} Assume the statement holds for all integers up to $k \geq 4$, i.e., assume:
+    \[
+        F(m) > \alpha^{m - 2} \quad \text{for all } 3 \leq m \leq k
+    \]
+    We need to show that it holds for $k+1$:
+    \[
+        F(k+1) = F(k) + F(k-1)
+    \]
+    Using the inductive hypothesis:
+    \[
+        F(k+1) > \alpha^{k - 2} + \alpha^{k - 3} = \alpha^{k - 3}(\alpha + 1)
+    \]
+    Since $\alpha$ satisfies the equation $\alpha^2 = \alpha + 1$, we have:
+    \[
+        F(k+1) > \alpha^{k - 3} \cdot \alpha^2 = \alpha^{k - 1}
+    \]
+    This completes the inductive step. By the principle of strong induction, the statement holds for all $n \geq 3$.
+\end{eg}
+
+\begin{eg}
+    Again consider the Fibonacci sequence defined as above. We want to find an exact formula for $F(n)$ using generating functions. \\
+    Define the generating function $G(x)$ as follows:
+    \[
+        G(x) = \sum_{n=0}^{\infty} f_n x^n = f_0 x^0 + f_1 x^1  + \sum_{n = 2}^{\infty} f_n x^n = x + \sum_{n = 2}^{\infty} f_n x^n
+    \]
+    where $x \in [0,1)$ otherwise the series diverges. Using the recursive definition of the Fibonacci sequence, we can rewrite the summation:
+    \[
+        G(x) = x + \sum_{n = 2}^{\infty} (f_{n-1} + f_{n-2}) x^n = x + \sum_{n = 2}^{\infty} f_{n-1} x^n + \sum_{n = 2}^{\infty} f_{n-2} x^n
+    \]
+    Re-indexing the summations gives:
+    \[
+        G(x) = x + x \sum_{n = 1}^{\infty} f_n x^n + x^2 \sum_{n = 0}^{\infty} f_n x^n = x + xG(x) + x^2 G(x)
+    \]
+    Rearranging the equation, we have:
+    \[
+        G(x) - xG(x) - x^2 G(x) = x
+    \]
+    \[        G(x)(1 - x - x^2) = x
+    \]
+    \[        G(x) = \frac{x}{1 - x - x^2}
+    \]
+    To find an explicit formula for $F(n)$, we can perform partial fraction decomposition on $G(x)$:
+    \[        G(x) = \frac{x}{(1 - \alpha x)(1 - \beta x)}
+    \]
+    where $\alpha = \frac{1 + \sqrt{5}}{2}$ and $\beta = \frac{1 - \sqrt{5}}{2}$. Thus, we can write:
+    \[        G(x) = \frac{A}{1 - \alpha x} + \frac{B}{1 - \beta x}
+    \]
+    for some constants $A$ and $B$. Solving for $A$ and $B$ gives:
+    \[        A = \frac{1}{\sqrt{5}}, \quad B = -\frac{1}{\sqrt{5}}
+    \]
+    Therefore:
+    \[        G(x) = \frac{1}{\sqrt{5}} \cdot \frac{1}{1 - \alpha x} - \frac{1}{\sqrt{5}} \cdot \frac{1}{1 - \beta x}
+    \]
+    Using the formula for the sum of a geometric series, we have:
+    \[        G(x) = \frac{1}{\sqrt{5}} \cdot \sum_{n=0}^{\infty} (\alpha x)^n - \frac{1}{\sqrt{5}} \cdot \sum_{n=0}^{\infty} (\beta x)^n
+    \]
+    \[        G(x) = \sum_{n=0}^{\infty} \left( \frac{\alpha^n - \beta^n}{\sqrt{5}} \right) x^n
+    \]
+    Thus, the explicit formula for the $n$-th Fibonacci number is:
+    \[        F(n) = \frac{\alpha^n - \beta^n}{\sqrt{5}}
+    \]
+\end{eg}
+
+\begin{definition}[Recursive Definition of Strings]
+    The set $\Sigma^*$ of strings over the alphabet $\Sigma$ is defined inductively by:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} $\lambda \in \Sigma^*$ (where $\lambda$ is the empty string containing no symbols).
+        \item \textbf{Recursive Step:} If $s \in \Sigma^*$ and $a \in \Sigma$, then the concatenation of $s$ and $a$, denoted by $sa$, is also in $\Sigma^*$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Length of a String]
+    The length of a string $s$, denoted by $l(s)$, is defined recursively as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} $l(\lambda) = 0$.
+        \item \textbf{Recursive Step:} If $s \in \Sigma^*$ and $a \in \Sigma$, then $l(sa) = l(s) + 1$.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    For any strings $s_1, s_2 \in \Sigma^*$, the length of their concatenation is the sum of their lengths:
+    \[
+        l(s_1 s_2) = l(s_1) + l(s_2)
+    \]
+\end{theorem}
+\begin{proof}
+    We will prove this theorem using mathematical induction on the length of the string $s_2$. \\
+    \textbf{Base Case:} For $s_2 = \lambda$ (the empty string):
+    \[
+        l(s_1 \lambda) = l(s_1) + l(\lambda) = l(s_1) + 0 = l(s_1)
+    \]
+    Thus, the base case holds. \\
+    \textbf{Inductive Step:} Assume the statement holds for some arbitrary string $s_2$ of length $k$, i.e., assume:
+    \[
+        l(s_1 s_2) = l(s_1) + l(s_2)
+    \]
+    We need to show that it holds for a string $s_2 a$, where $a \in \Sigma$ and the length of $s_2 a$ is $k + 1$:
+    \[
+        l(s_1 (s_2 a)) = l(s_1 s_2) + 1
+    \]
+    Using the inductive hypothesis:
+    \[
+        l(s_1 (s_2 a)) = (l(s_1) + l(s_2)) + 1 = l(s_1) + (l(s_2) + 1) = l(s_1) + l(s_2 a)
+    \]
+    This completes the inductive step. By the principle of mathematical induction, the statement holds for all strings $s_2 \in \Sigma^*$.
+\end{proof}
+
+\section{Recursive Algorithms}
+\begin{definition}[Recursive Algorithm]
+    A recursive algorithm is an algorithm that solves a problem by breaking it down into smaller subproblems of the same type. The algorithm typically consists of:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Base Case:} A condition under which the algorithm can return a result without further recursion.
+        \item \textbf{Recursive Step:} A set of instructions that break the problem into smaller subproblems and call the algorithm recursively on these subproblems.
+    \end{itemize}
+\end{definition}
+Note that the difference between recursive algorithms and iterative algorithms is that recursive algorithms rely on function calls to solve subproblems, while iterative algorithms use loops to repeat a set of instructions until a condition is met.
+
+\begin{eg}
+    Let's write a recursive algorithm to compute the factorial of a non-negative integer $n$:
+    \begin{algorithmic}
+        \Function{factorial}{$n$}
+            \If{$n = 0$}
+                \State \Return $1$
+            \Else
+                \State \Return $n \ \cdot$ \Call{factorial}{$n - 1$}
+            \EndIf
+        \EndFunction
+    \end{algorithmic}
+\end{eg}
