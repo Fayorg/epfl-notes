@@ -475,6 +475,21 @@ both have the same characteristic polynomial $p(\lambda) = \lambda^2 - 1$, but t
     An $n \times n$ matrix $A$ is said to be diagonalizable if it is similar to a diagonal matrix, i.e. there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
     \[A = P D P^{-1} \quad \iff \quad D = P^{-1} A P\]
 \end{definition}
+Remark that if $A$ is diagonal, then the eigenvalues, rank and determinant of $A$ can be easily computed from the entries on the main diagonal of $A$ but also that computing powers of $A$ is straightforward since:
+\[A^k = \begin{bmatrix}
+    d_1 & 0 & \cdots & 0 \\
+    0 & d_2 & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & d_n
+\end{bmatrix}^k = \begin{bmatrix}
+    d_1^k & 0 & \cdots & 0 \\
+    0 & d_2^k & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & d_n^k
+\end{bmatrix}\]
+Thus, if a matrix $A$ is diagonalizable, we can compute its powers as follows:
+\[A^k = (P D P^{-1})^k = P D^k P^{-1}\]
+which is much easier to compute than $A^k$ directly. In one of the previous examples, we saw how diagonalization can be used to compute the $n$-th Fibonacci number efficiently.
 
 \begin{eg}
     Let $A = \begin{bmatrix}
@@ -501,3 +516,208 @@ both have the same characteristic polynomial $p(\lambda) = \lambda^2 - 1$, but t
     \end{bmatrix} = A\]
     Thus, $A$ is diagonalizable.
 \end{eg}
+Remark that the columns of the matrix $P$ used to diagonalize $A$ are the eigenvectors of $A$ and the entries on the main diagonal of the matrix $D$ are the corresponding eigenvalues of $A$.
+
+\begin{eg}
+    If we complete the previous example, let's show that the $P$ is made of the eigenvectors of $A$ and that the entries on the main diagonal of $D$ are the corresponding eigenvalues of $A$. We have:
+    \[
+        A = P D P^{-1} \quad \iff \quad A P = P D
+    \]
+    Thus, we have:
+    \[ AP = A \begin{bmatrix}
+        1 & 1 \\ -1 & -2
+    \end{bmatrix} = \begin{bmatrix}
+        A\begin{bmatrix}
+        1 \\ -1
+        \end{bmatrix}
+        & A\begin{bmatrix}
+        1 \\ -2
+        \end{bmatrix}
+    \end{bmatrix}\]
+    and:
+    \[PD = \begin{bmatrix}
+        1 & 1 \\ -1 & -2
+    \end{bmatrix} \begin{bmatrix}
+        5 & 0 \\ 0 & 3
+    \end{bmatrix} = \begin{bmatrix}
+        5 \begin{bmatrix}
+        1 \\ -1
+        \end{bmatrix}
+        & 3 \begin{bmatrix}
+        1 \\ -2
+        \end{bmatrix}
+    \end{bmatrix}\]
+    Therefore, we have:
+    \[A \begin{bmatrix}
+        1 \\ -1
+    \end{bmatrix} = 5 \begin{bmatrix}
+        1 \\ -1
+    \end{bmatrix} \quad \text{and} \quad A \begin{bmatrix}
+        1 \\ -2
+    \end{bmatrix} = 3 \begin{bmatrix}
+        1 \\ -2
+    \end{bmatrix}\]
+    which shows that $\begin{bmatrix}
+        1 \\ -1
+    \end{bmatrix}$ and $\begin{bmatrix}
+        1 \\ -2
+    \end{bmatrix}$ are eigenvectors of $A$ corresponding to the eigenvalues $5$ and $3$, respectively.
+\end{eg}
+
+\begin{theorem}
+    An $n \times n$ matrix $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors.
+\end{theorem}
+\begin{proof}
+    \textbf{($\Rightarrow$) Direction}: Suppose that $A$ is diagonalizable. Then, there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
+    \[A = P D P^{-1}\]
+    Let the columns of $P$ be denoted as $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$. Since $P$ is invertible, the set $\{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}\}$ is linearly independent. Now, we have:
+    \[A P = P D\]
+    which implies that:
+    \[A \vec{v_i} = d_{ii} \vec{v_i}\]
+    for each $i = 1, 2, \ldots, n$, where $d_{ii}$ is the $i$-th diagonal entry of $D$. Thus, each $\vec{v_i}$ is an eigenvector of $A$ corresponding to the eigenvalue $d_{ii}$. Therefore, $A$ has $n$ linearly independent eigenvectors. \\
+    \textbf{($\Leftarrow$) Direction}: Suppose that $A$ has $n$ linearly independent eigenvectors $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$ corresponding to eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$. Let $P$ be the matrix whose columns are the eigenvectors of $A$:
+    \[P = [\vec{v_1} \quad \vec{v_2} \quad \cdots \quad \vec{v_n}]\]
+    Since the eigenvectors are linearly independent, $P$ is invertible. Now, let $D$ be the diagonal matrix with the eigenvalues on the main diagonal:
+    \[D = \begin{bmatrix}
+        \lambda_1 & 0 & \cdots & 0 \\
+        0 & \lambda_2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \lambda_n
+    \end{bmatrix}\]
+    We have:
+    \[A P = [A \vec{v_1} \quad A \vec{v_2} \quad \cdots \quad A \vec{v_n}] = [\lambda_1 \vec{v_1} \quad \lambda_2 \vec{v_2} \quad \cdots \quad \lambda_n \vec{v_n}] = P D\]
+    Multiplying both sides by $P^{-1}$, we obtain:
+    \[A = P D P^{-1}\]
+    Thus, $A$ is diagonalizable.
+\end{proof}
+Remark that both $P$ and $D$ can be constructed from the eigenvectors and eigenvalues of $A$.
+
+% \begin{theorem}
+%     Let $A$ be a $n \times n$ matrix and let $\vec{v_1}, \ldots, \vec{v_k}$ be eigenvectors of $A$ corresponding to distinct eigenvalues $\lambda_1, \ldots, \lambda_k$. Then these eigenvectors are linearly independent.
+% \end{theorem}
+
+\begin{theorem}
+    Let $A$ be an $n \times n$ matrix with $n$ distinct eigenvalues. Then, $A$ is diagonalizable.
+\end{theorem}
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        -1 & 7 & 9 \\
+        0 & 2 & -2 \\
+        0 & 0 & 0
+    \end{bmatrix}$. We easily see that the eigenvalues of $A$ are $-1$, $2$, and $0$ (since $A$ is an upper triangular matrix). Since $A$ has $3$ distinct eigenvalues, it is diagonalizable.
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        1 & 3 & 3 \\ -3 & -5 & -3 \\ 3 & 3 & 1
+    \end{bmatrix}$. Let's show that $A$ is diagonalizable. We compute the characteristic polynomial of $A$:
+    \[\det(A - \lambda I_3) = \det\begin{bmatrix}
+        1 - \lambda & 3 & 3 \\ -3 & -5 - \lambda & -3 \\ 3 & 3 & 1 - \lambda
+    \end{bmatrix} = (1 - \lambda)(2 + \lambda)^2\]
+    Thus, the eigenvalues of $A$ are $\lambda_1 = 1$ and $\lambda_2 = -2$ (with a multiplicity of $2$). Let's find the eigenvectors corresponding to each eigenvalue: \\
+    \textbf{For $\lambda = 1$:}
+    \[\begin{bmatrix}
+        1 - 1 & 3 & 3 \\ -3 & -5 - 1 & -3 \\ 3 & 3 & 1 - 1
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 3 & 3 \\ -3 & -6 & -3 \\ 3 & 3 & 0
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & 0 & -1 \\ 0 & 1 & 1 \\ 0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ -1 \\ 1
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $1$. \\
+    \textbf{For $\lambda = -2$:}
+    \[\begin{bmatrix}
+        1 + 2 & 3 & 3 \\ -3 & -5 + 2 & -3 \\ 3 & 3 & 1 + 2
+    \end{bmatrix} = \begin{bmatrix}
+        3 & 3 & 3 \\ -3 & -3 & -3 \\ 3 & 3 & 3
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ -1 \\ 0
+    \end{bmatrix}$ and $\begin{bmatrix}
+        1 \\ 0 \\ -1
+    \end{bmatrix}$ are eigenvectors corresponding to the eigenvalue $-2$.
+    Since we have found $3$ linearly independent eigenvectors of $A$, we conclude that $A$ is diagonalizable. We can construct the matrices $P$ and $D$ as follows:
+    \[P = \begin{bmatrix}
+        1 & 1 & 1 \\ -1 & -1 & 0 \\ 1 & 0 & -1
+    \end{bmatrix}, \quad D = \begin{bmatrix}
+        1 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & -2
+    \end{bmatrix}\]
+\end{eg}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        2 & 4 & 3 \\ -4   & -6 & -3 \\ 3 & 3 & 1
+    \end{bmatrix}$. Let's show that $A$ is not diagonalizable. We compute the characteristic polynomial of $A$:
+    \[\det(A - \lambda I_3) = \det\begin{bmatrix}
+        2 - \lambda & 4 & 3 \\ -4 & -6 - \lambda & -3 \\ 3 & 3 & 1 - \lambda
+    \end{bmatrix} = (1 - \lambda)^2 ( 2 + \lambda )\]
+    Thus, the eigenvalues of $A$ are $\lambda_1 = 1$ (with a multiplicity of $2$) and $\lambda_2 = -2$. Let's find the eigenvectors corresponding to each eigenvalue: \\
+    \textbf{For $\lambda = 1$:}
+    \[\begin{bmatrix}
+        2 - 1 & 4 & 3 \\ -4 & -6 - 1 & -3 \\ 3 & 3 & 1 - 1
+    \end{bmatrix} = \begin{bmatrix}
+        1 & 4 & 3 \\ -4 & -7 & -3 \\ 3 & 3 & 0
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & 0 & -1 \\ 0 & 1 & 1 \\ 0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        1 \\ -1 \\ 1
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $1$. \\
+    \textbf{For $\lambda = -2$:}
+    \[\begin{bmatrix}
+        2 + 2 & 4 & 3 \\ -4 & -6 + 2 & -3 \\ 3 & 3 & 1 + 2
+    \end{bmatrix} = \begin{bmatrix}
+        4 & 4 & 3 \\ -4 & -4 & -3 \\ 3 & 3 & 3
+    \end{bmatrix} \sim \begin{bmatrix}
+        1 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any non-zero scalar multiple of $\begin{bmatrix}
+        -1 \\ 1 \\ 0
+    \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $-2$.
+    Since we have found only $2$ linearly independent eigenvectors of $A$, we conclude that $A$ is not diagonalizable.
+\end{eg}
+% For a matrix $A$ to be diagonalizable, the following conditions must be met:
+% \begin{itemize}[itemsep=1pt,label=$\circ$]
+%     \item $n$ linearly independent eigenvectors.
+%     \item 
+
+\subsection{Geometric Multiplicity of Eigenvalues}
+\begin{definition}[Geometric Multiplicity]
+    Let $A$ be an $n \times n$ matrix and $\lambda$ be an eigenvalue of $A$. The geometric multiplicity of $\lambda$ is defined as the dimension of the eigenspace corresponding to $\lambda$ ($\ker(A - \lambda I_n)$), i.e. the geometric multiplicity of $\lambda$ is given by:
+    \[
+        \dim(\ker(A - \lambda I_n))
+    \]
+\end{definition}
+Note that the geometric multiplicity of an eigenvalue represents the number of linearly independent eigenvectors associated with that eigenvalue.
+
+\begin{theorem}
+    Let $A$ be an $n \times n$ matrix and $\lambda_i$ and $\lambda_j$ be two distinct eigenvalues of $A$. Then, the eigenspaces corresponding to $\lambda_i$ and $\lambda_j$ intersect only at the zero vector, i.e.:
+    \[\ker(A - \lambda_i I_n) \cap \ker(A - \lambda_j I_n) = \{\vec{0}\}\]
+    Thus, the eigenvectors corresponding to distinct eigenvalues are linearly independent.
+\end{theorem}
+\begin{proof}
+    Let $\vec{v}$ be a vector in the intersection of the eigenspaces corresponding to $\lambda_i$ and $\lambda_j$. Then, we have:
+    \[(A - \lambda_i I_n) \vec{v} = \vec{0} \quad \text{and} \quad (A - \lambda_j I_n) \vec{v} = \vec{0}\]
+    From the first equation, we have:
+    \[A \vec{v} = \lambda_i \vec{v}\]
+    Substituting this into the second equation, we get:
+    \[(\lambda_i - \lambda_j) \vec{v} = \vec{0}\]
+    Since $\lambda_i$ and $\lambda_j$ are distinct eigenvalues, we have $\lambda_i - \lambda_j \neq 0$. Therefore, the only solution to this equation is $\vec{v} = \vec{0}$. Thus, the intersection of the eigenspaces corresponding to $\lambda_i$ and $\lambda_j$ contains only the zero vector. This implies that the eigenvectors corresponding to distinct eigenvalues are linearly independent.
+\end{proof}
+
+\begin{theorem}
+    The geometric multiplicity of an eigenvalue $\lambda$ of an $n \times n$ matrix $A$ is always less than or equal to its algebraic multiplicity.
+\end{theorem}
+
+\begin{theorem}
+    Let $A$ be a matrix of size $n \times n$ and let $\lambda_1, \ldots, \lambda_k$ be its distinct eigenvalues with $m_1, \ldots, m_k$ as their respective algebraic multiplicities. Then:
+    \[
+        \sum_{i=1}^k \dim(\ker(A - \lambda_i I_n)) \leq \sum_{i=1}^k m_i = n
+    \]
+\end{theorem}
+Remark that $A$ is diagonalizable if and only if the equality holds in the previous theorem, i.e. if and only if:
+\[\sum_{i=1}^k \dim(\ker(A - \lambda_i I_n)) = \sum_{i=1}^k m_i = n\]
+Or equivalently, if and only if the geometric multiplicity of each eigenvalue is equal to its algebraic multiplicity.
