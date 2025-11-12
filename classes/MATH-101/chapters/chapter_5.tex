@@ -1210,6 +1210,231 @@ Remark that this condition could be spit into three parts:
         \item $f(x) = \sin(x)$ and $g(x) = \cos(x)$ are continuous at every point $x_0 \in \mathbb{R}$.
     \end{itemize}
 \end{eg}
+\begin{theorem}[Cauchy's Criterion for Continuity]
+    Let $f: E \to F$ be a function defined in a neighborhood of $x = x_0$ and at $x_0$. The function $f$ is continuous at point $x_0$ if and only if for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x, y \in E$ with $|x - x_0| < \delta$ and $|y - x_0| < \delta$, we have:
+    \[
+        |f(x) - f(y)| < \epsilon
+    \]
+\end{theorem}
+\begin{proof}
+    \textbf{($\Rightarrow$) Direction}: Assume that $f$ is continuous at point $x_0$. Let $\epsilon > 0$ be given. By the definition of continuity, there exists $\delta > 0$ such that for all $x \in E$ with $|x - x_0| < \delta$, we have:
+    \[
+        |f(x) - f(x_0)| < \frac{\epsilon}{2}
+    \]
+    Now, let $x, y \in E$ such that $|x - x_0| < \delta$ and $|y - x_0| < \delta$. We have:
+    \[
+        |f(x) - f(y)| = |f(x) - f(x_0) + f(x_0) - f(y)| \leq |f(x) - f(x_0)| + |f(y) - f(x_0)| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+    \]
+    Thus, the condition is satisfied. \\
+    \textbf{($\Leftarrow$) Direction}: Assume that for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $x, y \in E$ with $|x - x_0| < \delta$ and $|y - x_0| < \delta$, we have:
+    \[
+        |f(x) - f(y)| < \epsilon
+    \]
+    To show that $f$ is continuous at point $x_0$, let $\epsilon > 0$ be given. By assumption, there exists $\delta > 0$ such that for all $x, y \in E$ with $|x - x_0| < \delta$ and $|y - x_0| < \delta$, we have:
+    \[
+        |f(x) - f(y)| < \epsilon
+    \]
+    In particular, for any $x \in E$ with $|x - x_0| < \delta$, we can choose $y = x_0$. Thus, we have:
+    \[
+        |f(x) - f(x_0)| < \epsilon
+    \]
+    Therefore, by the definition of continuity, we conclude that $f$ is continuous at point $x_0$.
+\end{proof}
+
+\begin{definition}[Continuity on the left and on the right]
+    Let $f: E \to F$ be a function and $x_0 \in E$. The function $f$ is said to be continuous on the \textbf{right} at point $x_0$ if:
+    \[
+        \lim_{x \to x_0^+} f(x) = f(x_0)
+    \]
+    The function $f$ is said to be continuous on the \textbf{left} at point $x_0$ if:
+    \[
+        \lim_{x \to x_0^-} f(x) = f(x_0)
+    \]
+\end{definition}
+Remark that $f$ is continuous at point $x_0$ if and only if it is continuous on the left and on the right at point $x_0$.
+
+\begin{eg}
+    Let's study the continuity of a function $f$ in $x = 0$. Consider the function:
+    \[
+        f(x) = \begin{cases}
+            2x + 1, & x \geq 0 \\
+            \frac{\sin x}{x}, & x < 0
+        \end{cases}
+    \]
+    Let's compute the right limit:
+    \[
+        \lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (2x + 1) = 1
+    \]
+    Let's compute the left limit:
+    \[
+        \lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} \frac{\sin x}{x} = 1
+    \]
+    Since both limits are the same, we conclude that $f$ is continuous at point $x = 0$.
+\end{eg}
+
+\begin{eg}
+    Let's study the continuity of a function $f$ in $x = 0$. Consider the function:
+    \[
+        f(x) = \begin{cases}
+            2x + 1, & x > 0 \\
+            2, & x = 0 \\
+            \frac{\sin x}{x}, & x < 0
+        \end{cases}
+    \]
+    Let's compute the right limit:
+    \[
+        \lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (2x + 1) = 1
+    \]
+    Let's compute the left limit:
+    \[
+        \lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} \frac{\sin x}{x} = 1
+    \]
+    Since both limits are the same but different from $f(0) = 2$, we conclude that $f$ is not continuous at point $x = 0$.
+\end{eg}
+
+\subsection{Operations on Continuous Functions}
+Let $f, g: E \to F$ be two functions continuous at point $x_0 \in E$. The following operations produce new functions that are also continuous at point $x_0$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The sum function $h(x) = \alpha f(x) + \beta g(x)$ is continuous at point $x_0$ (for any $\alpha, \beta \in \mathbb{R}$).
+    \item The product function $h(x) = f(x) \cdot g(x)$ is continuous at point $x_0$.
+    \item The quotient function $h(x) = \frac{f(x)}{g(x)}$ is continuous at point $x_0$ if $g(x_0) \neq 0$.
+    \item If $f: E \to F$ and $g: G \to H$, $f(E) \subset G$, $f$ is continuous at point $x_0 \in E$ and $g$ is continuous at point $f(x_0) \in G$, then the composition function $h(x) = g(f(x))$ is continuous at point $x_0$.
+\end{itemize}
+Remark that if $(g \circ f)$ is continuous at point $x_0$, it does not necessarily imply that $f$ is continuous at point $x_0$ or that $g$ is continuous at point $f(x_0)$.
+
+\begin{eg}
+    Let $f$ be a function defined as:
+    \[
+        f(x) = \frac{\sqrt{e^{2x^2 + \sin x} + 8x^2} + \ln (x^2 + 1)}{x^4 + 8}
+    \]
+    We can see that $f$ is a composition of continuous functions (polynomial, exponential, square root, logarithm) and thus it is continuous for all $x \in \mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+    Let consider the functions:
+    \[
+    f(x) = \begin{cases}
+        |x|, & x \neq 0 \\
+        -1, & x = 0
+    \end{cases} \quad \text{and} \quad g(x) = \begin{cases}
+        0, & x \geq -1 \\
+        1, & x < -1
+    \end{cases}
+    \]
+    We have:
+    \[
+        (g \circ f)(x) = g(f(x)) = 0 \quad \text{for all} \ x \in \mathbb{R}
+    \]
+    Thus, $(g \circ f)(x)$ is continuous at point $x = 0$, but $f(x)$ is not continuous at point $x = 0$ and $g(x)$ is not continuous at point $f(0) = -1$.
+\end{eg}
+
+% TEACHER: "a l'exanen il y a toujours une questions sur un prolongement par continutié, il faut juste faire les limites et voir si elles sont gales, si oui on peut prolonger la fonction en ce point en mettant la valeur de la limite"
+\subsection{Extension by Continuity}
+\begin{definition}[Extension by Continuity]
+    Let $f: E \to F$ be a function and $x_0$ be an accumulation point of $E$ but not in $E$. If the limit $\lim_{x \to x_0} f(x) = L$ exists, we can define a new function $\tilde{f}: E \cup \{x_0\} \to F$ as:
+    \[
+        \tilde{f}(x) = \begin{cases}
+            f(x), & x \in E \\
+            L, & x = x_0
+        \end{cases}
+    \]
+    The function $\tilde{f}$ is called the extension by continuity of $f$ at point $x_0$.
+\end{definition}
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = x \sin\left(\frac{1}{x}\right)
+    \]
+    defined on $E = \mathbb{R} \setminus \{0\}$. We have:
+    \[
+        \lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0
+    \]
+    Thus, we can define the extension by continuity of $f$ at point $x_0 = 0$ as:
+    \[
+        \tilde{f}(x) = \begin{cases}
+            x \sin\left(\frac{1}{x}\right), & x \neq 0 \\
+            0, & x = 0
+        \end{cases}
+    \]
+    The function $\tilde{f}$ is continuous on $\mathbb{R}$.
+\end{eg}
+
+\section{Continuous Functions on Intervals}
+\begin{definition}[Continuous Function on an Interval]
+    A function $f: I \to F$ where $I$ is an open, non-empty interval, is said to be continuous on the interval $I$ if it is continuous at every point $x_0 \in I$ i.e. for $f: [a, b] \to F$ to be continuous on $[a, b]$, it must be continuous on $(a, b)$, continuous on the right at point $a$ and continuous on the left at point $b$.
+\end{definition}
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \begin{cases}
+            \frac{1}{2x + 3}, & x \neq -\frac{3}{2} \\
+            0, & x = -\frac{3}{2}
+        \end{cases}
+    \]
+    The function $f$ is continuous on the interval $\left(-\infty, -\frac{3}{2}\right)$ and $\left(-\frac{3}{2}, +\infty\right)$ but not continuous at point $x = -\frac{3}{2}$ since the limit $\lim_{x \to -\frac{3}{2}} f(x)$ does not exist.
+\end{eg}
+
+\begin{theorem}
+    Let $a < b \in \mathbb{R}$ and $f: [a, b] \to F$ be a continuous function on the bounded and closed interval $[a, b]$. Then, $f$ reaches its minimum and maximum on $[a, b]$, i.e., there exist $c, d \in [a, b]$ such that:
+    \[
+        f(c) = \min_{x \in [a, b]} f(x) \quad \text{and} \quad f(d) = \max_{x \in [a, b]} f(x)
+    \]
+\end{theorem}
+% TODO: maybe add graphs to illustrate why all the requirements of the theorem are necessary (bounded, closed interval, continuity) - w9c2 @ 55:00
+
+\begin{theorem}[Indeterminate Value Theorem]
+    Let $a < b \in \mathbb{R}$ and $f: [a, b] \to \mathbb{R}$ be a continuous function on the bounded and closed interval $[a, b]$. Then, for every $L$ in $[f(a), f(b)]$, there exists at least one $c \in [a, b]$ such that:
+    \[
+        f(c) = L
+    \]
+    i.e.:
+    \[
+        f([a, b]) = [\min_{x \in [a, b]} f(x), \max_{x \in [a, b]} f(x)]
+    \]
+\end{theorem}
+Remark that if $f(a) \cdot f(b) < 0$, then there exists at least one $c \in [a, b]$ such that $f(c) = 0$.
+
+\begin{eg}
+    Let's consider the following graph:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-0.25,0) -- (4.7,0) node[right] {$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+            \draw[thick,primary,domain=0:3.7,smooth,variable=\x] plot ({\x},{(\x - 2)*(\x - 2) - 2}) node[right] {$f(x)$};
+
+            \draw[primary] (0.1,2) -- (-0.1,2) node[left] {$\max_{[a,b]} f(x)$};
+            \draw[primary, dashed] (2,-2) -- (-0.1,-2) node[left] {$\min_{[a,b]} f(x)$};
+            \draw[primary] (0.1,-2) -- (-0.1,-2);
+
+            \node[below left, primary] at (0,0) {$a$};
+            \draw[dashed, primary] (3.7, 0.89) -- (3.7,0) node[below, primary] {$b$};
+
+            \draw[dashed, secondary] (4, -1) -- (-0.1,-1) node[left, secondary] {$L$};
+
+            \draw[dashed, secondary] (3, -1) -- (3,0) node[above, secondary] {$c_1$};
+            \draw[dashed, secondary] (1, -1) -- (1,0) node[above, secondary] {$c_2$};
+        \end{tikzpicture}
+    \end{center}
+    We have $f: [a, b] \to \mathbb{R}$ continuous on $[a, b]$. According to the Indeterminate Value Theorem, there exist at least a point (in this case two) $c_1, c_2 \in [a, b]$ such that $f(c_1) = f(c_2) = L$ for any $L \in [\min_{x \in [a, b]} f(x), \max_{x \in [a, b]} f(x)]$.
+\end{eg}
+
+\begin{eg}
+    Let's show that the equation $\sin x + \frac{1}{x - 4} = 0$ has at least two solution in the interval $[0, \pi]$. We first notice that the function is continuous on the interval since it is the sum of two continuous functions on $[0, \pi]$ and the interval is bounded and closed, thus we can use the Intermediate Value Theorem. We have:
+    \[
+        f(0) = \sin 0 + \frac{1}{0 - 4} = -\frac{1}{4} < 0
+    \]
+    and
+    \[
+        f(\pi) = \sin \pi + \frac{1}{\pi - 4} = 0 + \frac{1}{\pi - 4} < 0
+    \]
+    Since both values are negative, we need to find a point where the function is positive. Let's try $x = \frac{\pi}{2}$:
+    \[
+        f\left(\frac{\pi}{2}\right) = \sin \frac{\pi}{2} + \frac{1}{\frac{\pi}{2} - 4} = 1 + \frac{1}{\frac{\pi}{2} - 4} > 0
+    \]
+    Thus, by the Intermediate Value Theorem, there exists at least one $c_1 \in (0, \frac{\pi}{2})$ such that $f(c_1) = 0$ and at least one $c_2 \in (\frac{\pi}{2}, \pi)$ such that $f(c_2) = 0$. Therefore, the equation $\sin x + \frac{1}{x - 4} = 0$ has at least two solutions in the interval $[0, \pi]$.
+\end{eg}
 
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
