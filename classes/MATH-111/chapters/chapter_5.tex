@@ -721,3 +721,132 @@ Note that the geometric multiplicity of an eigenvalue represents the number of l
 Remark that $A$ is diagonalizable if and only if the equality holds in the previous theorem, i.e. if and only if:
 \[\sum_{i=1}^k \dim(\ker(A - \lambda_i I_n)) = \sum_{i=1}^k m_i = n\]
 Or equivalently, if and only if the geometric multiplicity of each eigenvalue is equal to its algebraic multiplicity.
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        5 & 0 & 0 & 0 \\ 0 & 5 & 0 & 0 \\ 1 & 4 & -3 & 0 \\ -1 & -2 & 0 & -3
+    \end{bmatrix}$ be a matrix. Let's determine if $A$ is diagonalizable. We compute the characteristic polynomial of $A$:
+    \[\det(A - \lambda I_4) = \det\begin{bmatrix}
+        5 - \lambda & 0 & 0 & 0 \\ 0 & 5 - \lambda & 0 & 0 \\ 1 & 4 & -3 - \lambda & 0 \\ -1 & -2 & 0 & -3 - \lambda
+    \end{bmatrix} = (5 - \lambda)^2 (-3 - \lambda)^2\]
+    Thus, the eigenvalues of $A$ are $\lambda_1 = 5$ (with a multiplicity of $2$) and $\lambda_2 = -3$ (with a multiplicity of $2$). Let's find the eigenvectors corresponding to each eigenvalue: \\
+    \textbf{For $\lambda = 5$:}
+    \[\begin{bmatrix}
+        5 - 5 & 0 & 0 & 0 \\ 0 & 5 - 5 & 0 & 0 \\ 1 & 4 & -3 - 5 & 0 \\ -1 & -2 & 0 & -3 - 5
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 4 & -8 & 0 \\ -1 & -2 & 0 & -8
+    \end{bmatrix}\]
+    Thus, any linear combinations of $\begin{bmatrix}
+        8 \\ 0 \\ 1 \\ -1
+    \end{bmatrix}$ and $\begin{bmatrix}
+        0 \\ 4 \\ 2 \\ -1
+    \end{bmatrix}$ are eigenvectors corresponding to the eigenvalue $5$. \\
+    \textbf{For $\lambda = -3$:}
+    \[\begin{bmatrix}
+        5 + 3 & 0 & 0 & 0 \\ 0 & 5 + 3 & 0 & 0 \\ 1 & 4 & -3 + 3 & 0 \\ -1 & -2 & 0 & -3 + 3
+    \end{bmatrix} = \begin{bmatrix}
+        8 & 0 & 0 & 0 \\ 0 & 8 & 0 & 0 \\ 1 & 4 & 0 & 0 \\ -1 & -2 & 0 & 0
+    \end{bmatrix}\]
+    Thus, any linear combinations of $\begin{bmatrix}
+        0 \\ 0 \\ 0 \\ 1
+    \end{bmatrix}$ and $\begin{bmatrix}
+        0 \\ 0 \\ 1 \\ 0
+    \end{bmatrix}$ are eigenvectors corresponding to the eigenvalue $-3$. \\
+    Since we have found $4$ linearly independent eigenvectors of $A$, we conclude that $A$ is diagonalizable. Let's construct the matrices $P$ and $D$ as follows:
+    \[P = \begin{bmatrix}
+        8 & 0 & 0 & 0 \\ 0 & 4 & 0 & 0 \\ 1 & 2 & 1 & 0 \\ -1 & -1 & 0 & 1
+    \end{bmatrix}, \quad D = \begin{bmatrix}
+        5 & 0 & 0 & 0 \\ 0 & 5 & 0 & 0 \\ 0 & 0 & -3 & 0 \\ 0 & 0 & 0 & -3
+    \end{bmatrix}\]
+    We clearly see that $P$ is invertible since it is an upper triangular matrix with non-zero entries on the main diagonal. Thus:
+    \[
+        A = P D P^{-1}
+    \]
+    To avoid computing the inverse of $P$, we can verify the equality by checking that $A P = P D$:
+    \[A P = \begin{bmatrix}
+        5 & 0 & 0 & 0 \\ 0 & 5 & 0 & 0 \\ 1 & 4 & -3 & 0 \\ -1 & -2 & 0 & -3
+    \end{bmatrix} \begin{bmatrix}
+        8 & 0 & 0 & 0 \\ 0 & 4 & 0 & 0 \\ 1 & 2 & 1 & 0 \\ -1 & -1 & 0 & 1
+    \end{bmatrix} = \begin{bmatrix}
+        40 & 0 & 0 & 0 \\ 0 & 20 & 0 & 0 \\ 5 & 8 & -3 & 0 \\ -5 & -8 & 0 & -3
+    \end{bmatrix}\]
+    and:
+    \[P D = \begin{bmatrix}
+        8 & 0 & 0 & 0 \\ 0 & 4 & 0 & 0 \\ 1 & 2 & 1 & 0 \\ -1 & -1 & 0 & 1
+    \end{bmatrix} \begin{bmatrix}
+        5 & 0 & 0 & 0 \\ 0 & 5 & 0 & 0 \\ 0 & 0 & -3 & 0 \\ 0 & 0 & 0 & -3
+    \end{bmatrix} = \begin{bmatrix}
+        40 & 0 & 0 & 0 \\ 0 & 20 & 0 & 0 \\ 5 & 8 & -3 & 0 \\ -5 & -8 & 0 & -3
+    \end{bmatrix}\]
+    Thus, we have verified that $A = P D P^{-1}$.
+\end{eg}
+
+\subsection{Diagonalization and Linear Transformations}
+\begin{eg}
+    Let $T: \mathbb{R}^n \to \mathbb{R}^n$ a linear transformation with a matrix representation $A$ with respect to the standard basis of $\mathbb{R}^n$ and let $\mathcal{G} = (\vec{c_1}, \ldots, \vec{c_n})$ a basis of $\mathbb{R}^n$. Let's find the matrix representation of $T$ with respect to the basis $\mathcal{G}$ i.e. we want to find $[T]_{\mathcal{G}}$. Let's take a graphical approach to understand the problem. For any vector $\vec{x} \in \mathbb{R}^n$, we have:
+    \begin{center}
+        \begin{tikzpicture}[node distance=5cm, auto, >=stealth]
+            % Nodes
+            \node (V) {};
+            \node (W) [right of=V] {};
+            \node (V_coords) [below of=V, node distance=3cm] {};
+            \node (W_coords) [below of=W, node distance=3cm] {};
+
+            \node[left of=V, node distance=1.2cm] {$\mathbb{R}^n$};
+            \node[right of=W, node distance=1.7cm] {$\mathbb{R}^n$};
+            \node[left of=V_coords, node distance=1.2cm] {$\mathbb{R}^n$};
+            \node[right of=W_coords, node distance=1.7cm] {$\mathbb{R}^n$};
+
+            % Parallelograms
+            \draw (-1,-0.5) -- (1,-0.5) -- (1.5,0.5) -- (-0.5,0.5) -- cycle;
+            \node[primary] at (0,0) {$\vec{x}$};
+
+            \begin{scope}[xshift=5cm]
+                \draw (-1,-0.5) -- (1,-0.5) -- (1.5,0.5) -- (-0.5,0.5) -- cycle;
+                \node[primary] at (0,0) {$T(\vec{x})$};
+            \end{scope}
+
+            \begin{scope}[yshift=-3cm]
+                \draw (-1,-0.5) -- (1,-0.5) -- (1.5,0.5) -- (-0.5,0.5) -- cycle;
+                \node[primary] at (0,0) {$[\vec{x}]_{\mathcal{B}}$};
+            \end{scope}
+
+            \begin{scope}[xshift=5cm, yshift=-3cm]
+                \draw (-1,-0.5) -- (1,-0.5) -- (1.5,0.5) -- (-0.5,0.5) -- cycle;
+                \node[primary] at (0,0) {$[T(\vec{x})]_{\mathcal{C}}$};
+            \end{scope}
+
+            % Arrows
+            \path[->, shorten <=2mm, shorten >=3mm, thick, secondary] (V) edge [bend left] node {$A$} (W);
+            \path[->, shorten <=2mm, shorten >=2mm, thick, secondary] (V_coords) edge node {$C$} (V);
+            \path[->, shorten <=2mm, shorten >=2mm, thick, secondary] (W) edge node [swap] {$C^{-1}$} (W_coords);
+            \path[->, shorten <=3mm, shorten >=3mm, thick, secondary] (V_coords) edge [bend right] node [swap] {$[T]_{\mathcal{C}}^{\mathcal{B}}$} (W_coords);
+        \end{tikzpicture}
+    \end{center}
+    where $C$ is the change of basis matrix from the basis $\mathcal{G}$ to the standard basis of $\mathbb{R}^n$. From the diagram, we have:
+    \[[T(\vec{x})]_{\mathcal{G}} = C^{-1} T(\vec{x}) = C^{-1} A \vec{x} = C^{-1} A C [\vec{x}]_{\mathcal{G}}\]
+    Therefore, the matrix representation of $T$ with respect to the basis $\mathcal{G}$ is given by:
+    \[[T]_{\mathcal{G}} = C^{-1} A C\]
+    If $A$ is diagonalizable, i.e. if there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
+    \[A = P D P^{-1}\]
+    then we have:
+    \[[T]_{\mathcal{G}} = C^{-1} P D P^{-1} C\]
+    which shows that the matrix representation of $T$ with respect to the basis $\mathcal{G}$ is also diagonalizable.
+\end{eg}
+Before ending this chapter, remark the 3 following important points:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Not all matrices are diagonalizable, for example the matrix $\begin{bmatrix}
+            1 & 2 \\ 0 & 1
+        \end{bmatrix}$ is not diagonalizable (the $1$s can be replace by any value, and the $2$ can also be replaced by any number not equal to zero).
+    \item For any matrix $A \in \mathbb{R}^{n \times n}$, it follows:
+        \[
+            \det(A - \lambda I_n) = p_A(\lambda) = \prod_{i=1}^n (\lambda_i - \lambda)
+        \]
+        Thus, if $p_A$ is evaluated at $0$, we have:
+        \[\det(A) = p_A(0) = (-1)^n \prod_{i=1}^n \lambda_i\]
+        which shows that the determinant of a matrix is equal to the product of its eigenvalues (counting algebraic multiplicities).
+    \item For any matrix $A \in \mathbb{R}^{n \times n}$, the trace of $A$ (denoted by $\text{tr}(A)$) is defined as the sum of the entries on the main diagonal of $A$:
+        \[\text{tr}(A) = \sum_{i=1}^n a_{ii}\]
+        It can be shown that the trace of a matrix is equal to the sum of its eigenvalues (counting algebraic multiplicities):
+        \[\text{tr}(A) = \sum_{i=1}^n \lambda_i\]
+\end{itemize}
