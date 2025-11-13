@@ -1,0 +1,147 @@
+\chapter{Representations of Numbers}
+
+\section{Integers}
+
+\begin{definition}[Decimal Notation]
+    The decimal notation of an integer \( z \in \mathbb{Z} \) is a sequence of digits \( d_n d_{n-1} \ldots d_1 d_0 \) such that
+    \[
+        z = \sum_{i=0}^{n} d_i \cdot 10^i
+    \]
+    where each digit \( d_i \) is in the set \( \{0, 1, 2, \ldots, 9\} \).
+\end{definition}
+
+\begin{eg}
+    The decimal notation of the integer \( 345 \) is given by the digits \( 3, 4, 5 \):
+    \[
+        345 = 3 \cdot 10^2 + 4 \cdot 10^1 + 5 \cdot 10^0
+    \]
+\end{eg}
+Numbers can also be represented in other bases, the most important for computing are: binary (base 2), octal (base 8), and hexadecimal (base 16), but are not limited to these (ancient Mayans used base 20, ancient Babylonians used base 60).
+
+\begin{definition}[Base $b$ Notation]
+    The base \( b \) notation of an integer greater than $1$ is a sequence of digits \( d_n d_{n-1} \ldots d_1 d_0 \) such that \( 0 \leq d_i < b \), $n$ a non negative integer and \( d_n \neq 0 \).
+    \[
+        z = \sum_{i=0}^{n} d_i \cdot b^i
+    \]
+    where each digit \( d_i \) is in the set \( \{0, 1, 2, \ldots, b-1\} \).
+\end{definition}
+Remark that the base \( b \) notation is unique for each integer.
+\begin{proof}
+    Let \( z \in \mathbb{Z} \) be an integer and suppose there exist two different base \( b \) notations for \( z \):
+    \[
+        z = \sum_{i=0}^{n} d_i \cdot b^i = \sum_{i=0}^{m} e_i \cdot b^i
+    \]
+    where \( d_i, e_i \in \{0, 1, 2, \ldots, b-1\} \), \( d_n \neq 0 \), and \( e_m \neq 0 \). Without loss of generality, assume \( n \geq m \). We can rewrite the equation as:
+    \[
+        \sum_{i=0}^{n} d_i \cdot b^i - \sum_{i=0}^{m} e_i \cdot b^i = 0
+    \]
+    This implies:
+    \[
+        \sum_{i=0}^{m} (d_i - e_i) b^i + \sum_{i=m+1}^{n} d_i b^i = 0
+    \]
+    Since \( d_n \neq 0 \), the term \( d_n b^n \) is non-zero and dominates the sum for sufficiently large \( n \). Therefore, the only way for the entire sum to equal zero is if all coefficients are zero:
+    \[
+        d_i - e_i = 0 \quad \text{for } i = 0, 1, \ldots, m
+    \]
+    and
+    \[
+        d_i = 0 \quad \text{for } i = m+1, m+2, \ldots, n
+    \]
+    This leads to a contradiction since \( d_n \neq 0 \). Hence, our assumption that there exist two different base \( b \) notations for \( z \) is false. Therefore, the base \( b \) notation of an integer is unique.
+\end{proof}
+
+\begin{eg}
+    Let's represent the integer $17$ in common bases:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Binary (base 2): \( 17 = 1 \cdot 2^4 + 0 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 10001_2 \)
+        \item Octal (base 8): \( 17 = 2 \cdot 8^1 + 1 \cdot 8^0 = 21_8 \)
+        \item Hexadecimal (base 16): \( 17 = 1 \cdot 16^1 + 1 \cdot 16^0 = 11_{16} \)
+    \end{itemize}
+\end{eg}
+Note that in hexadecimal notation, digits above 9 are represented using letters A to F (A=10, B=11, C=12, D=13, E=14, F=15) so all the numbers from $1$ to $15$ have a single digit representation.
+
+\subsection{Contruction of Base $b$ Notation}
+There are several algorithms to construct the base \( b \) notation of an integer \( n \geq 0 \).
+
+\begin{eg}
+    To construct a number \( n \) in base \( b \), we can use the repeated subtraction method:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Find the largest power of \( b \), say \( b^k \), such that \( b^k \leq n \).
+        \item Determine the coefficient \( d_k \) by calculating \( d_k = \lfloor n / b^k \rfloor \).
+        \item Update \( n \) to \( n - d_k \cdot b^k \).
+        \item Repeat the process for \( b^{k-1}, b^{k-2}, \ldots, b^0 \) until \( n \) becomes zero.
+    \end{itemize}
+    For example, to convert \( 45 \) to base \( 3 \):
+    \[
+        3^3 = 27 \leq 45 < 81 = 3^4 \quad \Rightarrow \quad d_3 = \lfloor 45 / 27 \rfloor = 1
+    \]
+    \[
+        n = 45 - 1 \cdot 27 = 18
+    \]
+    \[
+        3^2 = 9 \leq 18 < 27 = 3^3 \quad \Rightarrow \quad d_2 = \lfloor 18 / 9 \rfloor = 2
+    \]
+    \[
+        n = 18 - 2 \cdot 9 = 0
+    \]
+    \[
+        3^1 = 3 \leq 0 < 9 = 3^2 \quad \Rightarrow \quad d_1 = \lfloor 0 / 3 \rfloor = 0
+    \]
+    \[
+        3^0 = 1 \leq 0 < 3 = 3^1 \quad \Rightarrow \quad d_0 = \lfloor 0 / 1 \rfloor = 0
+    \]
+    Thus, reading the coefficients from \( d_3 \) to \( d_0 \), we get \( 45 = 1200_3 \).
+\end{eg}
+
+\begin{theorem}[Division Remainder Method]
+    If $a$ is an integer and $d$ a positive integer, then there are unique integers $q$ and $r$ such that $0 \leq r < d$ and:
+    \[
+        a = d \cdot q + r
+    \]
+    The integer $q$ is called the quotient, $d$ is called the divisor, $a$ is called the dividend and $r$ the remainder of the division of $a$ by $d$.
+\end{theorem}
+
+\begin{eg}
+    For example, dividing \( 17 \) by \( 5 \):
+    \[
+        17 = 5 \cdot 3 + 2
+    \]
+    Here, the quotient \( q = 3 \) and the remainder \( r = 2 \).
+\end{eg}
+
+\begin{eg}
+    Another example, dividing $-11$ by $3$:
+    \[
+        -11 = 3 \cdot (-4) + 1
+    \]
+    Here, the quotient \( q = -4 \) and the remainder \( r = 1 \).
+\end{eg}
+
+\begin{eg}
+    To construct a number $n$ in base $b$, we can use the division-remainder method:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Divide \( n \) by \( b \) to get a quotient \( q_0 \) and a remainder \( d_0 \) (the least significant digit).
+        \item Set \( n = q_0 \) and repeat the division until the quotient is zero.
+        \item The base \( b \) representation is obtained by reading the remainders in reverse order.
+    \end{itemize}
+    For example, to convert \( 45 \) to base \( 2 \):
+    \[
+        45 \div 2 = 22 \text{ remainder } 1 \quad (d_0 = 1)
+    \]
+    \[
+        22 \div 2 = 11 \text{ remainder } 0 \quad (d_1 = 0)
+    \]
+    \[
+        11 \div 2 = 5 \text{ remainder } 1 \quad (d_2 = 1)
+    \]
+    \[
+        5 \div 2 = 2 \text{ remainder } 1 \quad (d_3 = 1)
+    \]
+    \[
+        2 \div 2 = 1 \text{ remainder } 0 \quad (d_4 = 0)
+    \]
+    \[
+        1 \div 2 = 0 \text{ remainder } 1 \quad (d_5 = 1)
+    \]
+    Reading the remainders in reverse order, we get \( 45 = 101101_2 \).
+\end{eg}

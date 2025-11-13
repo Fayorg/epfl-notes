@@ -505,3 +505,69 @@ Note that the difference between recursive algorithms and iterative algorithms i
         \EndFunction
     \end{algorithmic}
 \end{eg}
+
+\subsection{Divide and Conquer}
+\begin{definition}[Divide and Conquer]
+    Divide and conquer is a recursive algorithm design paradigm that involves three main steps:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Divide:} Split the problem into smaller subproblems that are similar to the original problem.
+        \item \textbf{Conquer:} Solve each subproblem recursively. If the subproblem size is small enough, solve it directly (base case).
+        \item \textbf{Combine:} Combine the solutions of the subproblems to form a solution to the original problem.
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    The algorithm Binary Search, previously defined, is an example of a divide and conquer algorithm. It divides the search interval in half, conquers by recursively searching in the appropriate half, and combines by returning the result of the recursive call. We can write it in pseudocode as follows:
+    \begin{algorithmic}
+        \Function{\textcolor{primary}{binary\_search}}{$A, target, low, high$}
+            \If{$low > high$}
+                \State \Return $-1$ \Comment{Target not found}
+            \EndIf
+            \State $mid \gets \lfloor (low + high) / 2 \rfloor$
+            \If{$A[mid] = target$}
+                \State \Return $mid$ \Comment{Target found}
+            \ElsIf{$A[mid] < target$}
+                \State \Return \Call{\textcolor{primary}{binary\_search}}{$A, target, mid + 1, high$}
+            \Else
+                \State \Return \Call{\textcolor{primary}{binary\_search}}{$A, target, low, mid - 1$}
+            \EndIf
+        \EndFunction
+    \end{algorithmic}
+    Let's find the complexity of this algorithm. Let $T(n)$ the worst case complexity of binary search on an array of size $n$. In each recursive call, the size of the array is halved. Thus, we can express $T(n)$ as:
+    \[
+        T(n) \simeq 2T\left(\frac{n}{2}\right) + O(1)
+    \]
+    where $O(1)$ accounts for the constant time operations performed in each call (like calculating the mid-point and comparing values) and $2$ accounts for the two recursive calls. To solve this recurrence relation, we can build a recursion tree:
+    \begin{center}
+        \begin{tikzpicture}
+            % TODO: add graph / w9c2 @ 31:00
+        \end{tikzpicture}
+    \end{center}
+    The height of the tree is $\log_2 n$, and at each level, we perform $O(1)$ work. Therefore, the total work done is:
+    \[
+        T(n) = O(\log n)
+    \]
+\end{eg}
+
+\begin{eg}
+    Another example of a divide and conquer algorithm is Merge Sort, which sorts an array by recursively dividing it into two halves, sorting each half, and then merging the sorted halves back together. The pseudocode for Merge Sort is as follows:
+    \begin{algorithmic}
+        \Function{\textcolor{primary}{merge\_sort}}{$A$}
+            \If{$\text{length}(A) \leq 1$}
+                \State \Return $A$ \Comment{Base case: array is already sorted}
+            \EndIf
+            \State $mid \gets \lfloor \text{length}(A) / 2 \rfloor$
+            \State $left \gets$ \Call{\textcolor{primary}{merge\_sort}}{$A[0:mid]$}
+            \State $right \gets$ \Call{\textcolor{primary}{merge\_sort}}{$A[mid:\text{length}(A)]$}
+            \State \Return \Call{\textcolor{primary}{merge}}{$left, right$}
+        \EndFunction
+    \end{algorithmic}
+    The merge function combines two sorted arrays into one sorted array thus it can also be represented by a recursive tree with two branches coming out of each node. The time complexity of Merge Sort can be analyzed using the recurrence relation:
+    \[
+        T(n) = 2T\left(\frac{n}{2}\right) + O(n)
+    \]
+    where $O(n)$ accounts for the time taken to merge the two sorted halves and the $2$ accounts for the two recursive calls. Solving this recurrence relation using the Master Theorem gives:
+    \[
+        T(n) = O(n \log n)
+    \]
+\end{eg}
