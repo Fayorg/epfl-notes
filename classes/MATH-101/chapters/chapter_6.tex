@@ -1,0 +1,241 @@
+\chapter{Differential Calculus}
+
+\section{Differentiability of Functions}
+
+\begin{definition}[Derivative]
+    It is said that $f$ is differentiable at a point $x_0 \in I$ if the following limit exists and is finite:
+    \[
+        f'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}.
+    \]
+    The value $f'(x_0)$ is called the derivative of $f$ at the point $x_0$.
+\end{definition}
+Remark that if $f$ is differentiable at $x_0$, then it can be written as:
+\[
+    f(x) = f(x_0) + f'(x_0)(x - x_0) + r(x)
+\]
+where the remainder term $r(x) = f(x) - f(x_0) - f'(x_0)(x - x_0)$ satisfies:
+\[    \lim_{x \to x_0} \frac{r(x)}{x - x_0} = \lim_{x \to x_0} \left(\underbrace{\frac{f(x) - f(x_0)}{x - x_0}}_{\to f'(x_0)} - f'(x_0)\right) = 0. \]
+
+\begin{definition}[Linear Approximation]
+    Let $f$ be a function that is differentiable at a point $x_0 \in I$. The linear approximation of $f$ at the point $x_0$ is defined by:
+    \[
+        f(x) = f(x_0) + a(x - x_0) + r(x).
+    \]
+    where $a \in \mathbb{R}$. The value $a$ is called the slope of the linear approximation and is equal to the derivative of $f$ at the point $x_0$, i.e. $a = f'(x_0)$.
+\end{definition}
+
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = x^2$. Let $x_0 \in \mathbb{R}$. We have:
+    \[
+        f'(x_0) = \lim_{x \to x_0} \frac{x^2 - x_0^2}{x - x_0} = \lim_{x \to x_0} \frac{(x - x_0)(x + x_0)}{x - x_0} = \lim_{x \to x_0} (x + x_0) = 2x_0.
+    \]
+    Therefore, the derivative of the function $f(x) = x^2$ is given by $f'(x) = 2x$ for all $x \in \mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = \cos x$. Let $x_0 \in \mathbb{R}$. We have:
+    \begin{align*}
+        f'(x_0) &= \lim_{x \to x_0} \frac{\cos x - \cos x_0}{x - x_0} = \lim_{x \to x_0} \frac{\cos(x_0 + (x - x_0)) - \cos x_0}{x - x_0} \\
+        &= \lim_{x \to x_0} \frac{\cos x_0 \cos(x - x_0) - \sin x_0 \sin(x - x_0) - \cos x_0}{x - x_0} \\
+        &= \lim_{x \to x_0} \left[\frac{-\sin x_0 \cdot \sin (x - x_0)}{x-x_0} + \frac{\cos x_0 (\cos(x - x_0) - 1)}{x - x_0}\right] \\
+        &= \lim_{x \to x_0} \left[-\sin x_0  \cdot \underbrace{\frac{\sin(x-x_0)}{x-x_0}}_{\to 1} + \cos x_0 \cdot \underbrace{\frac{\left(-2 \sin^2 \left(\frac{x - x_0}{2}\right)\right)}{\left(\frac{x - x_0}{2}\right)^2}}_{\to -2} \cdot \underbrace{\frac{\left(\frac{x - x_0}{2}\right)^2}{x - x_0}}_{\to 0}\right] \\
+        &= -\sin x_0.
+    \end{align*}
+    Therefore, the derivative of the function $f(x) = \cos x$ is given by $f'(x) = -\sin x$ for all $x \in \mathbb{R}$.
+\end{eg}
+
+% \begin{eg}
+%     Let's compute the derivative of the function $f(x) = \sin x$. Let $x_0 \in \mathbb{R}$. We have:
+%     \[
+%         f'(x_0) = \lim_{h \to 0} \frac{\sin(x_0 + h) - \sin x_0}{h} = \lim_{h \to 0} \frac{\sin x_0 \cos h + \cos x_0 \sin h - \sin x_0}{h}.
+%     \]
+%     Using the limits $\lim_{h \to 0} \frac{\sin h}{h} = 1$ and $\lim_{h \to 0} \cos h = 1$, we get:
+%     \[
+%         f'(x_0) = \sin x_0 \cdot 0 + \cos x_0 \cdot 1 = \cos x_0.
+%     \]
+%     Therefore, the derivative of the function $f(x) = \sin x$ is given by $f'(x) = \cos x$ for all $x \in \mathbb{R}$.
+% \end{eg}
+
+\begin{definition}[Derivative Function]
+    Let $f: E \to \mathbb{R}$ be a function differentiable on a set $D(f') \subset E$. The derivative function of $f$ is defined as the function $f': D(f') \to \mathbb{R}$ such that:
+    \[
+        f(x) = f'(x) \quad \forall x \in D(f').
+    \]
+\end{definition}
+
+\begin{theorem}
+    A derivable function $f$ at a point $x_0 \in I$ is continuous at $x_0$.
+\end{theorem}
+\begin{proof}
+    Let $f: I \to \mathbb{R}$ be a function derivable at a point $x_0 \in I$. We have:
+    \[
+        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} \left[f(x_0) + f'(x_0)(x - x_0) + r(x)\right] = f(x_0) + f'(x_0) \cdot 0 + \lim_{x \to x_0} r(x) = f(x_0).
+    \]
+    Therefore, the function $f$ is continuous at the point $x_0$.
+\end{proof}
+Remark that the converse is not true: a function can be continuous at a point but not derivable at that point.
+
+\subsection{Operations on Derivatives}
+Let $f, g: I \to \mathbb{R}$ be two functions derivable at a point $x_0 \in I$. The following operations can be performed on the derivatives of $f$ and $g$ at the point $x_0$:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The function $\alpha f + \beta g$ is derivable at the point $x_0$ and:
+    \[        (\alpha f + \beta g)'(x_0) = \alpha f'(x_0) + \beta g'(x_0). \]
+    \item The function $f \cdot g$ is derivable at the point $x_0$ and:
+    \[        (f \cdot g)'(x_0) = f'(x_0) \cdot g(x_0) + f(x_0) \cdot g'(x_0). \]
+    \item If $g(x_0) \neq 0$, then the function $\frac{f}{g}$ is derivable at the point $x_0$ and:
+    \[        \left(\frac{f}{g}\right)'(x_0) = \frac{f'(x_0) \cdot g(x_0) - f(x_0) \cdot g'(x_0)}{(g(x_0))^2}. \]
+\end{itemize}
+\begin{proof}
+    Let's prove each of these properties one by one. \\
+    \textbf{1. Linearity} We have:
+    \begin{align*}
+        (\alpha f + \beta g)'(x_0) &= \lim_{x \to x_0} \frac{\alpha f(x) + \beta g(x) - \alpha f(x_0) - \beta g(x_0)}{x - x_0} \\
+        &= \lim_{x \to x_0} \left[\alpha \cdot \frac{f(x) - f(x_0)}{x - x_0} + \beta \cdot \frac{g(x) - g(x_0)}{x - x_0}\right] \\
+        &= \alpha f'(x_0) + \beta g'(x_0).
+    \end{align*}
+    \textbf{2. Product Rule} We have:
+    \begin{align*}
+        (f \cdot g)'(x_0) &= \lim_{x \to x_0} \frac{f(x)g(x) - f(x_0)g(x_0)}{x - x_0} \\
+        &= \lim_{x \to x_0} \frac{f(x)g(x) - f(x)g(x_0) + f(x)g(x_0) - f(x_0)g(x_0)}{x - x_0} \\
+        &= \lim_{x \to x_0} \left[f(x) \cdot \frac{g(x) - g(x_0)}{x - x_0} + g(x_0) \cdot \frac{f(x) - f(x_0)}{x - x_0}\right] \\
+        &= f(x_0) \cdot g'(x_0) + g(x_0) \cdot f'(x_0).
+    \end{align*}
+    \textbf{3. Quotient Rule} We have:
+    \begin{align*}
+        \left(\frac{f}{g}\right)'(x_0) &= \lim_{x \to x_0} \frac{\frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)}}{x - x_0} \\
+        &= \lim_{x \to x_0} \frac{f(x)g(x_0) - f(x_0)g(x)}{(x - x_0) g(x) g(x_0)} \\
+        &= \lim_{x \to x_0} \frac{g(x_0) [f(x) - f(x_0)] - f(x_0) [g(x) - g(x_0)]}{(x - x_0) g(x) g(x_0)} \\
+        &= \frac{g(x_0) f'(x_0) - f(x_0) g'(x_0)}{(g(x_0))^2}.
+    \end{align*}
+\end{proof}
+
+\subsection{Derivatives of Usual Functions}
+\vskip0.3cm
+\begin{center}
+    \begin{tabular}{p{0.45\textwidth} | p{0.45\textwidth}}
+        \\ {\centering \textbf{$f(x)$} \par} & {\centering \textbf{$f'(x)$} \par} \\ \\ \hline \\
+        {\centering $c$ (constant function) \par} & {\centering $0$ \par} \\ \\
+        {\centering$x^n$ ($n \in \mathbb{N}$) \par} & {\centering $n x^{n-1}$ \par} \\ \\
+        {\centering$e^x$ \par} & {\centering $e^x$ \par} \\ \\
+        % {\centering$\ln x$ \par} & {\centering $\frac{1}{x}$ \par} \\ \\
+        {\centering$\sin x$ \par} & {\centering $\cos x$ \par} \\ \\
+        {\centering$\cos x$ \par} & {\centering $-\sin x$ \par} \\ \\
+        {\centering$\tan x$ \par} & {\centering $\sec^2 x = \frac{1}{(\cos x)^2}$ \par} \\ \\
+        % {\centering$\arcsin x$ \par} & {\centering $\frac{1}{\sqrt{1 - x^2}}$ \par} \\ \\
+        % {\centering$\arccos x$ \par} & {\centering $-\frac{1}{\sqrt{1 - x^2}}$ \par} \\ \\
+        % {\centering$\arctan x$ \par} & {\centering $\frac{1}{1 + x^2}$ \par} \\ \\
+    \end{tabular}
+\end{center}
+\begin{proof}
+    Let's prove some of these results. \\
+    \textbf{2. $f(x) = x^n$:} Let $x_0 \in \mathbb{R}$. By recurrence on $n$: \\
+    For $n = 0$, we have $f(x) = 1$ and $f'(x) = 0$. \\
+    Assume that the result is true for some $n \in \mathbb{N}$. We have:
+    \begin{align*}
+        f'(x_0) &= \lim_{x \to x_0} \frac{x^{n+1} - x_0^{n+1}}{x - x_0} = \lim_{x \to x_0} \frac{(x - x_0)(x^n + x^{n-1}x_0 + \ldots + x_0^n)}{x - x_0} \\
+        &= \lim_{x \to x_0} (x^n + x^{n-1} x_0 + \ldots + x_0^n) = (n + 1) x_0^n.
+    \end{align*}
+    \textbf{3. $f(x) = e^x$}: Let $x_0 \in \mathbb{R}$. We have:
+    \begin{align*}
+        f'(x_0) &= \lim_{x \to x_0} \frac{e^x - e^{x_0}}{x - x_0} = \lim_{x \to x_0} \frac{e^{x_0}(e^{x - x_0} - 1)}{x - x_0} \\
+        &= e^{x_0} \cdot 1 = e^{x_0}.
+    \end{align*}
+    \textbf{6. $f(x) = \tan x $:} By the quotient rule, we have:
+    \[        f'(x) = \left(\frac{\sin x}{\cos x}\right)' = \frac{\cos x \cdot \cos x - \sin x \cdot (-\sin x)}{(\cos x)^2} = \frac{(\cos x)^2 + (\sin x)^2}{(\cos x)^2} = \frac{1}{(\cos x)^2}. \]
+\end{proof}
+
+\subsection{Geometric Interpretation of the Derivative}
+It can easily be seen from the definition of the derivative that the derivative at a point $x_0$ represents the slope of the tangent line $t(x)$ to the graph of the function $f$ at the point $(x_0, f(x_0))$.
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->] (-0.25,0) -- (4.25,0) node[right] {$x$};
+        \draw[->] (0,-0.25) -- (0,4.25) node[above] {$y$};
+
+        \draw[thick,primary,domain=0.25:4,smooth,variable=\x] plot ({\x},{1/\x}) node[above right] {$f(x)$};
+        \draw[thick,secondary,domain=-0.25:1.75,smooth,variable=\x] plot ({\x},{-1.78*(\x - 0.75) + 1.33}) node[right] {$t(x)$};
+
+        \draw[dashed, primary] (0.75,1.33) -- (0.75,0) node[below] {$x_0$};
+    \end{tikzpicture}
+\end{center}
+
+\begin{definition}[Equation of the Tangent Line]
+    Let $f: I \to \mathbb{R}$ be a function differentiable at a point $x_0 \in I$. The equation of the tangent line $t(x)$ to the graph of $f$ at the point $(x_0, f(x_0))$ is given by:
+    \[
+        t(x) = f(x_0) + f'(x_0)(x - x_0).
+    \]
+\end{definition}
+
+\subsection{Right and Left Derivatives}
+\begin{definition}[Right and Left Derivatives]
+    Let $f: I \to \mathbb{R}$ be a function and $x_0 \in I$. \\
+    \textbf{The right derivative} of $f$ at the point $x_0$ is defined as:
+    \[
+        f'_+(x_0) = \lim_{x \to x_0^+} \frac{f(x) - f(x_0)}{x - x_0}.
+    \]
+    \textbf{The left derivative} of $f$ at the point $x_0$ is defined as:
+    \[
+        f'_-(x_0) = \lim_{x \to x_0^-} \frac{f(x) - f(x_0)}{x - x_0}.
+    \]
+\end{definition}
+Remark that if the right and left derivatives at a point $x_0$ exist and are equal, then the function is derivable at that point and the derivative is equal to the common value of the right and left derivatives, i.e.:
+\[    f'(x_0) = f'_+(x_0) = f'_-(x_0). \]
+
+\begin{eg}
+    Let's show that the function $f(x) = |x|$ is not derivable at the point $x_0 = 0$ (even if it is continuous on $\mathbb{R}$). We have:
+    \[
+        f'(0) = \lim_{x \to 0} \frac{|x| - |0|}{x - 0} = \lim_{x \to 0} \frac{|x|}{x}.
+    \]
+    We compute the left-hand limit and the right-hand limit:
+    \[
+        \lim_{x \to 0^-} \frac{|x|}{x} = \lim_{x \to 0^-} \frac{-x}{x} = -1,
+    \]
+    \[
+        \lim_{x \to 0^+} \frac{|x|}{x} = \lim_{x \to 0^+} \frac{x}{x} = 1.
+    \]
+    Since the left-hand limit and the right-hand limit are not equal, the limit $\lim_{x \to 0} \frac{|x|}{x}$ does not exist. Therefore, the function $f(x) = |x|$ is not derivable at the point $x_0 = 0$.
+\end{eg}
+
+\subsection{Infinite Derivative}
+\begin{definition}[Infinite Derivative]
+    Let $f: I \to \mathbb{R}$ be a function and $x_0 \in I$. It is said that $f$ has an infinite derivative at the point $x_0$ if:
+    \[
+        \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = \pm \infty.
+    \]
+\end{definition}
+Remark that if a function has an infinite derivative at a point $x_0$, then the tangent line to the graph of the function at that point is vertical.
+
+\begin{eg}
+    Let $f(x) = \sqrt[3]{x}$. We are going to show that $f$ has an infinite derivative at the point $x_0 = 0$. We have:
+    \[
+        \lim_{x \to 0} \frac{\sqrt[3]{x} - \sqrt[3]{0}}{x - 0} = \lim_{x \to 0} \frac{\sqrt[3]{x}}{x} = \lim_{x \to 0} \frac{1}{\sqrt[3]{x^2}}.
+    \]
+    We compute the left-hand limit and the right-hand limit:
+    \[        \lim_{x \to 0^-} \frac{1}{\sqrt[3]{x^2}} = +\infty, \]
+    \[        \lim_{x \to 0^+} \frac{1}{\sqrt[3]{x^2}} = +\infty. \]
+    Since the left-hand limit and the right-hand limit are equal, the limit $\lim_{x \to 0} \frac{\sqrt[3]{x}}{x}$ is $+\infty$. Therefore, we can say that $f$ has an infinite derivative at the point $x_0 = 0$. Therefore, the tangent line to the graph of the function at the point $(0, 0)$ is vertical.
+\end{eg}
+
+\subsection{Derivative of Composite Functions}
+\begin{theorem}[Chain Rule]
+    Let $f: I \to \mathbb{R}$ and $g: J \to \mathbb{R}$ be two functions such that $f(I) \subset J$. If $f$ is derivable at a point $x_0 \in I$ and $g$ is derivable at the point $f(x_0) \in J$, then the composite function $g \circ f: I \to \mathbb{R}$ is derivable at the point $x_0$ and:
+    \[        (g \circ f)'(x_0) = g'(f(x_0)) \cdot f'(x_0). \]
+\end{theorem}
+\begin{proof}
+    Let $f: I \to \mathbb{R}$ and $g: J \to \mathbb{R}$ be two functions such that $f(I) \subset J$. We have:
+    \begin{align*}
+        (g \circ f)'(x_0) &= \lim_{x \to x_0} \frac{g(f(x)) - g(f(x_0))}{x - x_0} \\
+        &= \lim_{x \to x_0} \left[\frac{g(f(x)) - g(f(x_0))}{f(x) - f(x_0)} \cdot \frac{f(x) - f(x_0)}{x - x_0}\right] \\
+        &= g'(f(x_0)) \cdot f'(x_0).
+    \end{align*}
+\end{proof}
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = e^{2x^2 + \sin x}$. We have:
+    \[        f'(x) = e^{2x^2 + \sin x} \cdot (4x + \cos x). \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = \frac{\sin x}{e^x - e^{-x}}$. We have:
+    \[        f'(x) = \frac{\cos x (e^x - e^{-x}) - \sin x (e^x + e^{-x})}{(e^x - e^{-x})^2}. \]  
+\end{eg}
