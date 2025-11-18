@@ -145,3 +145,222 @@ There are several algorithms to construct the base \( b \) notation of an intege
     \]
     Reading the remainders in reverse order, we get \( 45 = 101101_2 \).
 \end{eg}
+
+\subsection{Operations on Base $b$ Notation}
+
+\begin{definition}[Addition in Base $b$]
+    To add two numbers in base \( b \), align the digits and add them column by column from right to left, carrying over any value that exceeds \( b-1 \) to the next column.
+\end{definition}
+
+\begin{eg}
+    For example, adding \( 345_8 \) and \( 267_8 \) in base \( 8 \):
+    \[
+        \begin{array}{c@{}c@{}c@{}c}
+          & 3 & 4 & 5_8 \\
+        + & 2 & 6 & 7_8 \\
+        \hline
+          & 6 & 3 & 4_8 \\
+        \end{array}
+    \]
+    Here, \( 5 + 7 = 12_{10} = 14_8 \) (write down \( 4 \), carry over \( 1 \)), \( 4 + 6 + 1 = 11_{10} = 13_8 \) (write down \( 3 \), carry over \( 1 \)), and \( 3 + 2 + 1 = 6_{10} = 6_8 \).
+\end{eg}
+
+\begin{definition}[Multiplication in Base $b$]
+    To multiply two numbers in base \( b \), use the standard multiplication algorithm, multiplying each digit of the second number by the entire first number, shifting left for each digit position, and then summing all the partial products. The pseudo-code is as follows:
+\end{definition}
+Remark that mutiplying a number by the base \( b \) is equivalent to shifting the number one position to the left (adding a zero at the end).
+
+\begin{eg}
+    For example, multiplying \( 23_5 \) and \( 14_5 \) in base \( 5 \):
+    \[
+        \begin{array}{c@{}c@{}c@{}c}
+          &   & 2 & 3_5 \\
+        \times &   & 1 & 4_5 \\
+        \hline
+          & 2 & 0 & 2_5 \\ 
+        + & 2 & 3 & 0_5 \\
+        \hline
+          & 4 & 3 & 2_5 \\
+        \end{array}
+    \]
+    Here, \(3\times 4 = 12_{10} = 22_5\) (write down \(2\), carry \(2\)), then \(2\times 4 + 2 = 10_{10} = 20_5\) (write down \(0\), carry \(2\)), so the partial product is \(202_5\); the other partial product is \(23_5\) shifted to \(230_5\); adding these gives \(202_5 + 230_5 = 432_5\).
+\end{eg}
+
+\section{Counting}
+\begin{definition}[Counting]
+    Counting is ubiquitous in mathematics (e.g., combinatorics) and computer science. It involves determining the number of elements in a set or the number of ways to arrange or select items. Various techniques such as permutations, combinations, and the principle of inclusion-exclusion are used in counting problems.
+\end{definition}
+Let's introduce some notations that will be useful in counting:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Sequences are ordered.
+    \item $X$ will be refered to as the alphabet.
+    \item Often $s(1),s(2), \ldots, s(n)$ will be denoted as $s = s_1,s_2, \ldots, s_n$.
+    \item Sequences will be used interchangeably with strings/words.
+\end{itemize}
+
+\begin{eg}
+    Given the set of vowels \( X = \{a, e, i, o, u\} \), the number of possible 4-letter sequences (words) that can be formed is:
+    \[
+        |X|^4 = 5^4 = 625
+    \]
+    since each position in the sequence can be filled by any of the 5 vowels.
+\end{eg}
+
+\begin{theorem}[Product Rule]
+    If a task can be broken down into \( k \) sequential steps, where the first step can be performed in \( n_1 \) ways, the second step in \( n_2 \) ways, and so on up to the \( k \)-th step which can be performed in \( n_k \) ways, then the total number of ways to perform the entire task is given by:
+    \[
+        N = n_1 \times n_2 \times \ldots \times n_k = \prod_{i=1}^{k} n_i
+    \]
+\end{theorem}
+Remark that the set from which we choose the elements can change at each step but the set must not depend on the previous choices.
+
+\begin{eg}
+    If a license plate consists of 2 letters followed by 3 digits, and there are 26 letters in the alphabet and 10 digits (0-9), the total number of different license plates that can be formed is:
+    \[
+        N = 26^2 \times 10^3 = 676000
+    \]
+\end{eg}
+
+\begin{theorem}
+    The number of different subset of a set $S$ with \( n \) elements is \( 2^n \).
+\end{theorem}
+\begin{proof}
+    When the element of $S$ are listed in an arbitrary order, there is a one-to-one correspondence between the subsets of $S$ and the binary sequences of length $n$: the $i$-th element of $S$ is in the subset if and only if the $i$-th digit of the sequence is $1$. Since there are \( 2^n \) binary sequences of length \( n \), there are \( 2^n \) subsets of \( S \).
+\end{proof}
+Remark that if the cardinality of a set is known and a bijection can be established between this set and another set, then the cardinality of the second set is also known and it is the same as the first set.
+
+\subsection{Counting Functions}
+\begin{definition}[Counting Functions]
+    Given two finite sets \( A \) and \( B \) with cardinalities \( |A| = m \) and \( |B| = n \), the number of functions from \( A \) to \( B \) is given by:
+    \[
+        n^m
+    \]
+    since each element in \( A \) can be mapped to any of the \( n \) elements in \( B \).
+\end{definition}
+Remark that if instead of functions, only injective (one-to-one) functions are considered, the counting changes to:
+\[
+    \frac{n!}{(n-m)!}
+\]
+provided that \( n \geq m \).
+
+\begin{eg}
+    Rob has 4 blue socks, 7 red socks, 5 white socks and 3 black socks. He likes to wear either a red sock on his left foot with a blue sock on his right foot or a white sock on his left foot with a black sock on his right foot. How many different ways can Rob wear his socks?
+    \[
+        \text{Total ways} = (7 \times 4) + (5 \times 3) = 28 + 15 = 43
+    \]
+\end{eg}
+
+\begin{theorem}[Sum Rule]
+    If a task can be performed in \( n_1 \) ways or \( n_2 \) ways (but not both), then the total number of ways to perform the task is:
+    \[
+        N = n_1 + n_2
+    \]
+\end{theorem}
+
+\begin{eg}
+    Each user on a computer system has a password, which is $6$ to $8$ characters long, where each character is an uppercase letter (A-Z) or a digit (0-9). How many different passwords are possible?
+    \[
+        \text{Total passwords} = 36^6 + 36^7 + 36^8 = 2,901,650,853,888
+    \]
+\end{eg}
+
+\begin{eg}
+    Same example as before but now the password must contain at least one digit. How many different passwords are possible?
+    \[
+        \text{Total passwords} = (36^6 - 26^6) + (36^7 - 26^7) + (36^8 - 26^8) = 2,743,303,001,088
+    \]
+\end{eg}
+
+\begin{theorem}[Substraction Rule]
+    If a task can be performed in \( n \) ways, and \( m \) of these ways are not allowed, then the total number of ways to perform the task is:
+    \[
+        N = n - m
+    \]
+\end{theorem}
+
+\begin{eg}
+    How many bit strings of length $8$ either start with a 1 bit or end with the two bits 00?
+    \[
+        \text{Total bit strings} = 2^7 + 2^6 - 2^5 = 160
+    \]
+    Note that the bit strings that both start with a 1 and end with 00 have been subtracted once to avoid double counting. \\
+    We could also view this example has two sets: $A$ the set of bit strings of length $8$ that start with a 1 and $B$ the set of bit strings of length $8$ that end with 00. The cardinality of the union of these two sets is given by:
+    \[
+        |A \cup B| = |A| + |B| - |A \cap B| = 2^7 + 2^6 - 2^5 = 160
+    \]
+\end{eg}
+
+\begin{eg}
+    How many integers from $1$ to $100$ are not divisible by $2$ or $5$?
+    \[
+        \text{Total integers} = 100 - (50 + 20 - 10) = 40
+    \]
+    Here, $50$ integers are divisible by $2$, $20$ integers are divisible by $5$ and $10$ integers are divisible by both $2$ and $5$.
+\end{eg}
+
+\subsection{Permutations}
+\begin{definition}[Permutations]
+    A permutation of a set of \( n \) distinct elements is an arrangement of all the elements in a specific order. The number of different permutations of \( n \) distinct elements is given by:
+    \[
+        n! = n \times (n-1) \times (n-2) \times \ldots \times 2 \times 1
+    \]
+\end{definition}
+Remark that if only \( r \) elements are to be arranged from a set of \( n \) distinct elements, the number of different permutations is given by:
+\[
+    P(n, r) = \frac{n!}{(n-r)!}
+\]
+
+\begin{eg}
+    Let's take two similar examples:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item A class of $100$ sutdents is electing a president, a vice-president and a secretary. How many different ways can these positions be filled?
+        \[
+            P(100, 3) = \frac{100!}{(100-3)!} = 970200
+        \]
+        \item A class of $100$ is electing $3$ representatives. How many different ways can these positions be filled? Let's denote the representatives as $R_1$, $R_2$ and $R_3$ to distinguish them, then the number of different ways to fill these positions is:
+        \[
+            \begin{array}{ccc}
+                R_1 & R_2 & R_3 \\
+                R_1 & R_3 & R_2 \\
+                R_2 & R_1 & R_3 \\
+                 & \vdots & \\
+                R_3 & R_2 & R_1 \\
+            \end{array}
+        \]
+        There are \( 3! = 6 \) ways to arrange the representatives for each selection of \( 3 \) students. Therefore, the total number of different ways to select the representatives is:
+        \[
+            C(n, k) = \frac{P(n, k)}{k!} = \begin{pmatrix}
+                n \\ k
+            \end{pmatrix}= \frac{P(100, 3)}{3!} = 161700
+        \]
+    \end{itemize}
+\end{eg}
+
+\begin{theorem}[Combinations]
+    The number of ways to choose \( k \) elements from a set of \( n \) distinct elements, where the order of selection does not matter, is given by the binomial coefficient:
+    \[
+        C(n, k) = \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} = \frac{n!}{k!(n-k)!}
+    \]
+\end{theorem}
+Remark that \( C(n, k) = C(n, n-k) \) since choosing \( k \) elements to include is equivalent to choosing \( n-k \) elements to exclude.
+
+\begin{eg}
+    How many poker hands of $5$ cards can be dealt from a standard deck of $52$ cards?
+    \[
+        C(52, 5) = \begin{pmatrix}
+            52 \\ 5
+        \end{pmatrix} = \frac{52!}{5!(52-5)!} = 2,598,960
+    \]
+\end{eg}
+
+\begin{eg}
+    Based on the previous example, how many poker hands with a full house (can be three of a kind and a pair) can be dealt from a standard deck of $52$ cards?
+    \[
+        \text{Total full house hands} = 13 \times C(4, 3) \times 12 \times C(4, 2) = 3,744
+    \]
+    Here, \( 13 \) is the number of ranks for the three of a kind, \( C(4, 3) \) is the number of ways to choose \( 3 \) suits from \( 4 \), \( 12 \) is the number of remaining ranks for the pair, and \( C(4, 2) \) is the number of ways to choose \( 2 \) suits from \( 4 \).
+\end{eg}
+
+% TODO: add fruits example plus demo that was cutted from the video
