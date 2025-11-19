@@ -162,7 +162,7 @@ It can easily be seen from the definition of the derivative that the derivative 
 \begin{definition}[Equation of the Tangent Line]
     Let $f: I \to \mathbb{R}$ be a function differentiable at a point $x_0 \in I$. The equation of the tangent line $t(x)$ to the graph of $f$ at the point $(x_0, f(x_0))$ is given by:
     \[
-        t(x) = f(x_0) + f'(x_0)(x - x_0).
+        t(x) = f(x_0) + f'(x_0)(x - x_0)
     \]
 \end{definition}
 
@@ -171,27 +171,27 @@ It can easily be seen from the definition of the derivative that the derivative 
     Let $f: I \to \mathbb{R}$ be a function and $x_0 \in I$. \\
     \textbf{The right derivative} of $f$ at the point $x_0$ is defined as:
     \[
-        f'_+(x_0) = \lim_{x \to x_0^+} \frac{f(x) - f(x_0)}{x - x_0}.
+        f'_+(x_0) = \lim_{x \to x_0^+} \frac{f(x) - f(x_0)}{x - x_0}
     \]
     \textbf{The left derivative} of $f$ at the point $x_0$ is defined as:
     \[
-        f'_-(x_0) = \lim_{x \to x_0^-} \frac{f(x) - f(x_0)}{x - x_0}.
+        f'_-(x_0) = \lim_{x \to x_0^-} \frac{f(x) - f(x_0)}{x - x_0}
     \]
 \end{definition}
 Remark that if the right and left derivatives at a point $x_0$ exist and are equal, then the function is derivable at that point and the derivative is equal to the common value of the right and left derivatives, i.e.:
-\[    f'(x_0) = f'_+(x_0) = f'_-(x_0). \]
+\[    f'(x_0) = f'_+(x_0) = f'_-(x_0) \]
 
 \begin{eg}
     Let's show that the function $f(x) = |x|$ is not derivable at the point $x_0 = 0$ (even if it is continuous on $\mathbb{R}$). We have:
     \[
-        f'(0) = \lim_{x \to 0} \frac{|x| - |0|}{x - 0} = \lim_{x \to 0} \frac{|x|}{x}.
+        f'(0) = \lim_{x \to 0} \frac{|x| - |0|}{x - 0} = \lim_{x \to 0} \frac{|x|}{x}
     \]
     We compute the left-hand limit and the right-hand limit:
     \[
-        \lim_{x \to 0^-} \frac{|x|}{x} = \lim_{x \to 0^-} \frac{-x}{x} = -1,
+        \lim_{x \to 0^-} \frac{|x|}{x} = \lim_{x \to 0^-} \frac{-x}{x} = -1
     \]
     \[
-        \lim_{x \to 0^+} \frac{|x|}{x} = \lim_{x \to 0^+} \frac{x}{x} = 1.
+        \lim_{x \to 0^+} \frac{|x|}{x} = \lim_{x \to 0^+} \frac{x}{x} = 1
     \]
     Since the left-hand limit and the right-hand limit are not equal, the limit $\lim_{x \to 0} \frac{|x|}{x}$ does not exist. Therefore, the function $f(x) = |x|$ is not derivable at the point $x_0 = 0$.
 \end{eg}
@@ -200,7 +200,7 @@ Remark that if the right and left derivatives at a point $x_0$ exist and are equ
 \begin{definition}[Infinite Derivative]
     Let $f: I \to \mathbb{R}$ be a function and $x_0 \in I$. It is said that $f$ has an infinite derivative at the point $x_0$ if:
     \[
-        \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = \pm \infty.
+        \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = \pm \infty
     \]
 \end{definition}
 Remark that if a function has an infinite derivative at a point $x_0$, then the tangent line to the graph of the function at that point is vertical.
@@ -208,34 +208,287 @@ Remark that if a function has an infinite derivative at a point $x_0$, then the 
 \begin{eg}
     Let $f(x) = \sqrt[3]{x}$. We are going to show that $f$ has an infinite derivative at the point $x_0 = 0$. We have:
     \[
-        \lim_{x \to 0} \frac{\sqrt[3]{x} - \sqrt[3]{0}}{x - 0} = \lim_{x \to 0} \frac{\sqrt[3]{x}}{x} = \lim_{x \to 0} \frac{1}{\sqrt[3]{x^2}}.
+        \lim_{x \to 0} \frac{\sqrt[3]{x} - \sqrt[3]{0}}{x - 0} = \lim_{x \to 0} \frac{\sqrt[3]{x}}{x} = \lim_{x \to 0} \frac{1}{\sqrt[3]{x^2}}
     \]
     We compute the left-hand limit and the right-hand limit:
-    \[        \lim_{x \to 0^-} \frac{1}{\sqrt[3]{x^2}} = +\infty, \]
-    \[        \lim_{x \to 0^+} \frac{1}{\sqrt[3]{x^2}} = +\infty. \]
+    \[        \lim_{x \to 0^-} \frac{1}{\sqrt[3]{x^2}} = +\infty \]
+    \[        \lim_{x \to 0^+} \frac{1}{\sqrt[3]{x^2}} = +\infty \]
     Since the left-hand limit and the right-hand limit are equal, the limit $\lim_{x \to 0} \frac{\sqrt[3]{x}}{x}$ is $+\infty$. Therefore, we can say that $f$ has an infinite derivative at the point $x_0 = 0$. Therefore, the tangent line to the graph of the function at the point $(0, 0)$ is vertical.
 \end{eg}
 
 \subsection{Derivative of Composite Functions}
 \begin{theorem}[Chain Rule]
     Let $f: I \to \mathbb{R}$ and $g: J \to \mathbb{R}$ be two functions such that $f(I) \subset J$. If $f$ is derivable at a point $x_0 \in I$ and $g$ is derivable at the point $f(x_0) \in J$, then the composite function $g \circ f: I \to \mathbb{R}$ is derivable at the point $x_0$ and:
-    \[        (g \circ f)'(x_0) = g'(f(x_0)) \cdot f'(x_0). \]
+    \[        (g \circ f)'(x_0) = g'(f(x_0)) \cdot f'(x_0) \]
 \end{theorem}
 \begin{proof}
     Let $f: I \to \mathbb{R}$ and $g: J \to \mathbb{R}$ be two functions such that $f(I) \subset J$. We have:
     \begin{align*}
         (g \circ f)'(x_0) &= \lim_{x \to x_0} \frac{g(f(x)) - g(f(x_0))}{x - x_0} \\
         &= \lim_{x \to x_0} \left[\frac{g(f(x)) - g(f(x_0))}{f(x) - f(x_0)} \cdot \frac{f(x) - f(x_0)}{x - x_0}\right] \\
-        &= g'(f(x_0)) \cdot f'(x_0).
+        &= g'(f(x_0)) \cdot f'(x_0)
     \end{align*}
 \end{proof}
 
 \begin{eg}
     Let's compute the derivative of the function $f(x) = e^{2x^2 + \sin x}$. We have:
-    \[        f'(x) = e^{2x^2 + \sin x} \cdot (4x + \cos x). \]
+    \[        f'(x) = e^{2x^2 + \sin x} \cdot (4x + \cos x) \]
 \end{eg}
 
 \begin{eg}
     Let's compute the derivative of the function $f(x) = \frac{\sin x}{e^x - e^{-x}}$. We have:
-    \[        f'(x) = \frac{\cos x (e^x - e^{-x}) - \sin x (e^x + e^{-x})}{(e^x - e^{-x})^2}. \]  
+    \[        f'(x) = \frac{\cos x (e^x - e^{-x}) - \sin x (e^x + e^{-x})}{(e^x - e^{-x})^2} \]  
+\end{eg}
+
+\subsection{Derivative of Inverse Functions}
+\begin{theorem}
+    Let $f: I \to F$ a bijective function that is continuous and differentiable at a point $x_0 \in I$ such that $f'(x_0) \neq 0$. Then, the inverse function $f^{-1}: F \to I$ is differentiable at the point $y_0 = f(x_0)$ and:
+    \[        (f^{-1})'(y_0) = \frac{1}{f'(x_0)} \]
+\end{theorem}
+\begin{proof}
+    Let $f: I \to F$ a bijective function that is continuous and differentiable at a point $x_0 \in I$ such that $f'(x_0) \neq 0$. We have:
+    \begin{align*}
+        (f^{-1})'(y_0) &= \lim_{y \to y_0} \frac{f^{-1}(y) - f^{-1}(y_0)}{y - y_0} = \lim_{y \to y_0} \frac{f^{-1}(y) - f^{-1}(f(x_0))}{y - f(x_0)} \\
+        &= \lim_{x \to x_0} \frac{x - x_0}{f(x) - f(x_0)} = \frac{1}{\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}} = \frac{1}{f'(x_0)}
+    \end{align*}
+\end{proof}
+Remark that if $f: I \to F$ and $f^{-1}: F \to I$ two reciprocal and continuous function that are differentiable at every point of their respective domains, such that $f'(f^{-1}(x)) \neq 0$, then:
+\[    (f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))} = \left. \frac{1}{f'(y)}{y = f^{-1}(x)}\right|_{y = f^{-1}(x)} \quad \forall x \in F \]
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = \arccos x$ ($[-1, 1] \to [0, \pi]$) by its inverse function $\cos x$ ($[0, \pi] \to [-1, 1]$). We have:
+    \[        f'(x) = \frac{1}{\left. (\cos y)'\right|_{y = \arccos x}} = \frac{1}{-\sin(\arccos x)} = -\frac{1}{\sqrt{1 - (\cos (\arccos x))^2}} = -\frac{1}{\sqrt{1 - x^2}} \]
+    Remark that $\sin y = \pm \sqrt{1 - \cos^2 y}$ and since $y \in [0, \pi]$, we have $\sin y \geq 0$ thus we choose the positive root.
+\end{eg}
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = \ln x$ ($\mathbb{R}^+ \to \mathbb{R}$) by its inverse function $e^x$ ($\mathbb{R} \to \mathbb{R}^+$). We have:
+    \[        f'(x) = \frac{1}{\left. (e^y)'\right|_{y = \ln x}} = \frac{1}{e^{\ln x}} = \frac{1}{x} \]
+\end{eg}
+Remark that $a^x = e^{x \ln a}$ for all $x \in \mathbb{R}$ and $a > 0, a \neq 1$. Thus, by the chain rule, we have:
+\[    (a^x)' = (e^{x \ln a})' = e^{x \ln a} \cdot \ln a = a^x \ln a \]
+and by the inverse function theorem, we have:
+\[    (\log_a x)' = \frac{1}{(a^{\log_a x})'|_{x = \log_a x}} = \frac{1}{a^{\log_a x} \cdot \ln a} = \frac{1}{x \ln a} \]
+\begin{eg}
+    Let $r \in \mathbb{R}$ and $f: \mathbb{R}^*_+ \to \mathbb{R}^*_+$ defined by $f(x) = x^r = e^{r \ln x}$. We have:
+    \[        f'(x) = \left(e^{r \ln x}\right)' = e^{r \ln x} \cdot \frac{r}{x} = r x^{r - 1} \]
+\end{eg}
+
+% \begin{eg}
+%     Let's compute the derivative of the function $f(x) = f_1(x)^{f_2(x)}$. We have:
+%     \[
+%         f(x) = e^{f_2(x) \ln (f_1(x))}
+%     \]
+%     where $f_1(x) > 0$, thus, by the chain rule, we get:
+%     \[        f'(x) = f_1(x)^{f_2(x)} \cdot \left[f_2'(x) \ln (f_1(x)) + f_2(x) \cdot \frac{f_1'(x)}{f_1(x)}\right] \]
+% \end{eg}
+\begin{theorem}
+    Let $f_1(x) > 0$ and $f_2(x)$ be two differentiable functions on an interval $I$. The function $f: I \to \mathbb{R}$ defined by $f(x) = f_1(x)^{f_2(x)}$ is differentiable on $I$ and:
+    \[        f'(x) = f_1(x)^{f_2(x)} \cdot \left(f_2 (x) \cdot \ln(f_1(x))\right)' \]
+\end{theorem}
+\begin{proof}
+    Let $f_1(x) > 0$ and $f_2(x)$ be two differentiable functions on an interval $I$. We have:
+    \[
+        f(x) = f_1(x)^{f_2(x)} = e^{f_2(x) \ln (f_1(x))}
+    \]
+    Thus, by the chain rule, we get:
+    \[
+        f'(x) = \left(e^{f_2(x) \ln (f_1(x))}\right)' = e^{f_2(x) \ln (f_1(x))} \cdot \left(f_2 (x) \cdot \ln(f_1(x))\right)' = f_1(x)^{f_2(x)} \cdot \left(f_2 (x) \cdot \ln(f_1(x))\right)' 
+    \]
+\end{proof}
+More generally if $\ln(f(x))$ is defined, then:
+\[    (\ln f(x))' = \frac{f'(x)}{f(x)} \implies f'(x) = f(x) \cdot (\ln f(x))' \]
+
+\begin{eg}
+    Let's compute the derivative of the function $f(x) = x^{x^x}$. By the logarithm rule, we have:
+    \[
+        f(x) = e^{x^x \ln x} = e^{e^{\ln x \cdot x} \ln x}
+    \]
+    Thus, by the chain rule, we get:
+    \[        f'(x) = \left(e^{e^{\ln x \cdot x} \ln x}\right)' = x^{x^x} x^x \cdot \left[(\ln x)^2 + \ln x + \frac{1}{x}\right] \]
+\end{eg}
+
+\section{Hyperbolic Functions}
+\begin{definition}[Sine and Cosine Hyperbolic Functions]
+    The hyperbolic sine function is defined as follows:
+    \[
+        \sinh x = \frac{e^x - e^{-x}}{2}, \quad \text{odd} \ \forall x \in \mathbb{R}
+    \]
+    Graphically, the hyperbolic sine function can be represented as:
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+            \draw[->] (0,-3) -- (0,3) node[above] {$y$};
+
+            \draw[thick,primary,domain=-1.7:1.7,smooth,variable=\x] plot ({\x},{(exp(\x) - exp(-\x))/2}) node[above right] {$\sinh x$};
+        \end{tikzpicture}
+    \end{center}
+    The hyperbolic cosine function is defined as follows:
+    \[
+        \cosh x = \frac{e^x + e^{-x}}{2}, \quad \text{even} \ \forall x \in \mathbb{R}
+    \]
+    Graphically, the hyperbolic cosine function can be represented as:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[->] (0,-0.2) -- (0,3) node[above] {$y$};
+
+            \draw[thick,primary,domain=-1.7:1.7,smooth,variable=\x] plot ({\x},{(exp(\x) + exp(-\x))/2}) node[above right] {$\cosh x$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+Remark that this definition is similar to the definition of the cosine and sine functions using Euler's formula:
+\[    \sin x = \frac{e^{ix} - e^{-ix}}{2i}, \quad \cos x = \frac{e^{ix} + e^{-ix}}{2} \]
+Some properties of hyperbolic functions are similar to those of trigonometric functions. For example, we have:
+\[    \cosh^2 x - \sinh^2 x = 1 \quad \text{(similar to } \cos^2 x + \sin^2 x = 1\text{)} \]
+
+\subsection{Derivatives of Hyperbolic Functions}
+\begin{theorem}
+    The derivatives of the hyperbolic sine and cosine functions are given by:
+    \[        (\sinh x)' = \cosh x, \quad (\cosh x)' = \sinh x \quad \forall x \in \mathbb{R} \]
+\end{theorem}
+\begin{proof}
+    We have:
+    \[        (\sinh x)' = \left(\frac{e^x - e^{-x}}{2}\right)' = \frac{e^x + e^{-x}}{2} = \cosh x \]
+    \[        (\cosh x)' = \left(\frac{e^x + e^{-x}}{2}\right)' = \frac{e^x - e^{-x}}{2} = \sinh x \]
+\end{proof}
+
+\subsection{Tangent and Cotangent Hyperbolic Functions}
+\begin{definition}[Tangent and Cotangent Hyperbolic Functions]
+    The hyperbolic tangent function is defined as follows:
+    \[        \tanh x = \frac{\sinh x}{\cosh x} = \frac{e^x - e^{-x}}{e^x + e^{-x}} \quad \forall x \in \mathbb{R} \]
+    Graphically, the hyperbolic tangent function can be represented as:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+            \draw[thick,primary,domain=-2.8:2.8,smooth,variable=\x] plot ({\x},{(exp(\x) - exp(-\x))/(exp(\x) + exp(-\x))}) node[right] {$\tanh x$};
+        \end{tikzpicture}
+    \end{center}
+    The hyperbolic cotangent function is defined as follows:
+    \[        \coth x = \frac{\cosh x}{\sinh x} = \frac{e^x + e^{-x}}{e^x - e^{-x}} \quad \forall x \in \mathbb{R}^* \]
+    Graphically, the hyperbolic cotangent function can be represented as:
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[->] (0,-4) -- (0,4) node[above] {$y$};
+            \draw[thick,primary,domain=-2.8:-0.3,smooth,variable=\x] plot ({\x},{(exp(\x) + exp(-\x))/(exp(\x) - exp(-\x))}) node[below left] {$\coth x$};
+            \draw[thick,primary,domain=0.3:2.8,smooth,variable=\x] plot ({\x},{(exp(\x) + exp(-\x))/(exp(\x) - exp(-\x))});
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+\subsection{Arguments of Hyperbolic Functions}
+\begin{definition}[Arguments of Hyperbolic Functions]
+    The inverse hyperbolic sine function is defined as follows:
+    \[        \operatorname{arsinh} x = \ln\left(x + \sqrt{x^2 + 1}\right) \quad \forall x \in \mathbb{R} \]
+    The inverse hyperbolic cosine function is defined as follows:
+    \[        \operatorname{arcosh} x = \ln\left(x + \sqrt{x^2 - 1}\right) \quad \forall x \geq 1 \]
+    The inverse hyperbolic tangent function is defined as follows:
+    \[        \operatorname{artanh} x = \frac{1}{2} \ln\left(\frac{1 + x}{1 - x}\right) \quad \forall x \in (-1, 1) \]
+\end{definition}
+
+\begin{theorem}
+    The derivatives of the inverse hyperbolic functions are given by:
+    \[        (\operatorname{arsinh} x)' = \frac{1}{\sqrt{x^2 + 1}}, \quad (\operatorname{arcosh} x)' = \frac{1}{\sqrt{x^2 - 1}}, \quad (\operatorname{artanh} x)' = \frac{1}{1 - x^2} \]
+\end{theorem}
+\begin{proof}
+    We have:
+    \[        (\operatorname{arsinh} x)' = \left(\ln\left(x + \sqrt{x^2 + 1}\right)\right)' = \frac{1 + \frac{x}{\sqrt{x^2 + 1}}}{x + \sqrt{x^2 + 1}} = \frac{\sqrt{x^2 + 1} + x}{\sqrt{x^2 + 1} (x + \sqrt{x^2 + 1})} = \frac{1}{\sqrt{x^2 + 1}} \]
+    \[        (\operatorname{arcosh} x)' = \left(\ln\left(x + \sqrt{x^2 - 1}\right)\right)' = \frac{1 + \frac{x}{\sqrt{x^2 - 1}}}{x + \sqrt{x^2 - 1}} = \frac{\sqrt{x^2 - 1} + x}{\sqrt{x^2 - 1} (x + \sqrt{x^2 - 1})} = \frac{1}{\sqrt{x^2 - 1}} \]
+    \[        (\operatorname{artanh} x)' = \left(\frac{1}{2} \ln\left(\frac{1 + x}{1 - x}\right)\right)' = \frac{1}{2} \cdot \frac{\frac{1}{1 + x} + \frac{1}{1 - x}}{\frac{1 + x}{1 - x}} = \frac{1}{2} \cdot \frac{(1 - x) + (1 + x)}{(1 - x)(1 + x)} = \frac{1}{1 - x^2} \]
+\end{proof}
+
+\section{Derivatives of Higher Order}
+\begin{definition}[Higher Order Derivatives]
+    Let $f: I \to \mathbb{R}$ be a function. If $f$ is differentiable on $I$, then the derivative function $f' : I \to \mathbb{R}$ exists. If $f'$ is also differentiable on $I$, then the second derivative function $f'' : I \to \mathbb{R}$ exists, and so on. The $n$-th derivative of $f$, denoted by $f^{(n)}$, is defined recursively as follows:
+    \[        f^{(0)}(x) = f(x), \quad f^{(n)}(x) = (f^{(n-1)})'(x) \quad \forall n \in \mathbb{N}^* \]
+\end{definition}
+
+\begin{eg}
+    Let's compute the n-th derivative of the function $f(x) = x^n$ where $n \in \mathbb{N}^*$. We have:
+    \[        f'(x) = n x^{n-1}, \quad f''(x) = n (n-1) x^{n-2}, \quad \ldots, \quad f^{(n)}(x) = n! \]
+    and for all $k > n$, we have:
+    \[        f^{(k)}(x) = 0 \]
+\end{eg}
+
+\begin{definition}[Class $C^n$ Functions]
+    Let $n \in \mathbb{N} \cup \{\infty\}$. A function $f: I \to \mathbb{R}$ is said to be of class $C^n$ on the interval $I$ if it is $n$ times differentiable on $I$ and its $n$-th derivative $f^{(n)}$ is continuous on $I$.
+\end{definition}
+Remark that the sine and cosine functions are of class $C^{\infty}$ on $\mathbb{R}$ ($C^{\infty}(\mathbb{R})$) since they are differentiable any number of times and all their derivatives are continuous on $\mathbb{R}$.
+
+\section{Properties of Differentiable Functions}
+\begin{theorem}
+    If a function $f: E \to F$ is differentiable at a point $x_0 \in E$, such that $f$ has a local extremum at $x_0$, then:
+    \[        f'(x_0) = 0 \]
+\end{theorem}
+\begin{proof}
+    Let $f: E \to F$ be a function differentiable at a point $x_0 \in E$, such that $f$ has a local extremum at $x_0$. We have:
+    \[
+        f'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}
+    \]
+    If $f$ has a local maximum at $x_0$, then for all $x$ in a neighborhood of $x_0$, we have $f(x) \leq f(x_0)$. Thus, for $x > x_0$, we have:
+    \[
+        \frac{f(x) - f(x_0)}{x - x_0} \leq 0
+    \]
+    and for $x < x_0$, we have:
+    \[
+        \frac{f(x) - f(x_0)}{x - x_0} \geq 0
+    \]
+    Therefore, the right-hand limit is less than or equal to 0 and the left-hand limit is greater than or equal to 0. Since the limit exists, both limits must be equal, thus:
+    \[
+        f'(x_0) = 0
+    \]
+    The same reasoning applies if $f$ has a local minimum at $x_0$.
+\end{proof}
+Remark that the converse is not true, i.e., if $f'(x_0) = 0$, it does not imply that $f$ has a local extremum at $x_0$. For example, the function $f(x) = x^3$ has a derivative equal to 0 at the point $x_0 = 0$, but it does not have a local extremum at that point.
+
+\begin{definition}[Critical Point]
+    Let $f: E \to F$ be a function differentiable at a point $x_0 \in E$. The point $x_0$ is called a critical point of $f$ if:
+    \[        f'(x_0) = 0 \]
+\end{definition}
+Remark that the extrema of a function $f: [a,b] \to \mathbb{R}$ can only occur at:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Critical points
+    \item Points where the function is not differentiable
+    \item Endpoints of the interval ($x = a$ or $x = b$)
+\end{itemize}
+
+\begin{theorem}[Rolle's Theorem]
+    Let $f: [a,b] \to \mathbb{R}$ be a function that is continuous on $[a,b]$ and differentiable on $(a,b)$ such that:
+    \[        f(a) = f(b) \]
+    Then, there exists at least one point $c \in (a,b)$ such that:
+    \[        f'(c) = 0 \]
+\end{theorem}
+\begin{proof}
+    Let $f: [a,b] \to \mathbb{R}$ be a function that is continuous on $[a,b]$ and differentiable on $(a,b)$ such that $f(a) = f(b)$. By the Extreme Value Theorem, $f$ attains its maximum and minimum values on the interval $[a,b]$. Let $M$ be the maximum value of $f$ on $[a,b]$ and let $m$ be the minimum value of $f$ on $[a,b]$: \\
+    \textbf{If $M = m$}, then $f$ is constant on $[a,b]$, and thus $f'(x) = 0$ for all $x \in (a,b)$. \\
+    \textbf{If $M \neq m$}, then either the maximum or minimum value is attained at some point $c \in (a,b)$. Without loss of generality, assume that the maximum value is attained at some point $c \in (a,b)$. Since $f$ is differentiable at $c$ and has a local maximum at that point, by the previous theorem, we have:
+    \[        f'(c) = 0 \]
+\end{proof}
+
+\begin{eg}
+    Let's apply Rolle's theorem. Let $f: \mathbb{R} \to \mathbb{R}$ a function of class $C^{\infty}$ such that:
+    \[
+        f(0) = f(4) = 0 \quad \text{and} \quad f'(0) = f'(4) = 0
+    \]
+    Let's show that the equation $f''(x) = 0$ has at least two solutions in the interval $(0,4)$. \\
+    Since $f(0) = f(4) = 0$, by Rolle's theorem, there exists at least one point $c_1 \in (0,4)$ such that:
+    \[        f'(c_1) = 0
+    \]
+    Since $f'(0) = f'(4) = 0$, by Rolle's theorem, there exists at least one point $c_2 \in (0,4)$ such that:
+    \[        f''(c_2) = 0
+    \]
+    Now, we have two cases:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $c_1 < c_2$, then by Rolle's theorem, there exists at least one point $c_3 \in (c_1, c_2)$ such that:
+        \[            f''(c_3) = 0
+        \]
+        \item If $c_1 > c_2$, then by Rolle's theorem, there exists at least one point $c_3 \in (c_2, c_1)$ such that:
+        \[            f''(c_3) = 0
+        \]
+    \end{itemize}
+    Therefore, in both cases, we have found at least two points $c_2$ and $c_3$ in the interval $(0,4)$ such that:
+    \[        f''(c_2) = 0 \quad \text{and} \quad f''(c_3) = 0
+    \]
 \end{eg}
