@@ -7,4 +7,289 @@ with $A \in \mathbb{R}^{m \times n}$, $\vec{b} \in \mathbb{R}^n$ and $\vec{x} \i
 \[
     A \vec{x} \approx \vec{b}
 \]
-Thus new concepts are needed to find an approximate solution.
+Thus new concepts, such as size and distance, are needed to find an approximate solution.
+
+\section{Dot Product}
+\begin{definition}[Dot Product]
+    Let $\vec{u}, \vec{v} \in \mathbb{R}^n$. The dot product of $\vec{u}$ and $\vec{v}$ is defined as:
+    \[
+        \vec{u} \cdot \vec{v} = \vec{u}^T \vec{v} = \begin{bmatrix}
+            u_1 & u_2 & \ldots & u_n
+        \end{bmatrix} \begin{bmatrix}
+            v_1 \\ v_2 \\ \vdots \\ v_n
+        \end{bmatrix} = u_1 v_1 + u_2 v_2 + \ldots + u_n v_n
+    \]
+\end{definition}
+Remark that $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$, i.e., the dot product is commutative.
+
+\begin{eg}
+    Let $\vec{u} = \begin{bmatrix}
+        1 \\ 2 \\ 3
+    \end{bmatrix}$ and $\vec{v} = \begin{bmatrix}
+        4 \\ 5 \\ 6
+    \end{bmatrix}$. Then:
+    \[
+        \vec{u} \cdot \vec{v} = 1 \cdot 4 + 2 \cdot 5 + 3 \cdot 6 = 32
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let $\vec{u}, \vec{v}$ and $\vec{w}$ be vectors in $\mathbb{R}^n$ and $c \in \mathbb{R}$. The following properties hold:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\vec{u} \cdot \vec{u} \geq 0$ and $\vec{u} \cdot \vec{u} = 0$ if and only if $\vec{u} = \vec{0}$ (positivity).
+        \item $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$ (commutativity).
+        \item $(\vec{u} + \vec{v}) \cdot \vec{w} = \vec{u} \cdot \vec{w} + \vec{v} \cdot \vec{w}$ (distributivity).
+        \item $(c \vec{u}) \cdot \vec{v} = c (\vec{u} \cdot \vec{v})$ (homogeneity).
+    \end{itemize}
+\end{theorem}
+
+\begin{eg}
+    Let $\vec{u_1}, \vec{u_2}, \vec{u_3}$ and $\vec{w}$ be vectors in $\mathbb{R}^n$. Then:
+    \[
+        (7\vec{u_1} - 2 \vec{u_2} + 4\vec{u_3}) \cdot \vec{w} = 7(\vec{u_1} \cdot \vec{w}) - 2(\vec{u_2} \cdot \vec{w}) + 4(\vec{u_3} \cdot \vec{w})
+    \]
+\end{eg}
+
+\subsection{Norm}
+\begin{definition}[Norm]
+    Let $\vec{u} \in \mathbb{R}^n$. The norm (or length) of $\vec{u}$ is defined as:
+    \[
+        \|\vec{u}\| = \sqrt{\vec{u} \cdot \vec{u}} = \sqrt{u_1^2 + u_2^2 + \ldots + u_n^2}
+    \]
+\end{definition}
+Note that since $\vec{u} \cdot \vec{u} \geq 0$, the norm is always defined.
+
+\begin{eg}
+    Let $\vec{u} = \begin{bmatrix}
+        3 \\ -4
+    \end{bmatrix}$. Then:
+    \[
+        \|\vec{u}\| = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+    \]
+    We then have:
+    \[
+        \|5 \vec{u}\| = 5 \|\vec{u}\| = 5 \times 5 = 25
+    \]
+    and \[
+        \|-\vec{u}\| = \| \vec{u} \| = 5
+    \]
+\end{eg}
+
+\begin{definition}[Unit Vector]
+    A unit vector is a vector $\vec{u}$ such that $\|\vec{u}\| = 1$.
+\end{definition}
+Remark that any non-zero vector $\vec{u}$ can be converted into a unit vector by dividing it by its norm:
+\[
+    \frac{\vec{u}}{\|\vec{u}\|}
+\]
+This process is called normalizing the vector $\vec{u}$.
+
+\begin{eg}
+    Let $\vec{u} = \begin{bmatrix}
+        3 \\ 4
+    \end{bmatrix}$. Then the unit vector in the direction of $\vec{u}$ is:
+    \[
+        \frac{\vec{u}}{\|\vec{u}\|} = \frac{1}{5} \begin{bmatrix}
+            3 \\ 4
+        \end{bmatrix} = \begin{bmatrix}
+            \frac{3}{5} \\ \frac{4}{5}
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\subsection{Distance}
+\begin{definition}[Distance]
+    Let $\vec{u}, \vec{v} \in \mathbb{R}^n$. The distance between $\vec{u}$ and $\vec{v}$ is defined as:
+    \[
+        d(\vec{u}, \vec{v}) = \|\vec{u} - \vec{v}\|
+    \]
+\end{definition}
+Remark that the distance is symmetric, i.e., $d(\vec{u}, \vec{v}) = d(\vec{v}, \vec{u})$. Graphically:
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->, primary] (0,0) -- (4,2) node[midway, above] {$\vec{u}$};
+        \draw[->, primary] (0,0) -- (1,3) node[midway, left] {$\vec{v}$};
+        \draw[->, dashed, secondary, thick] (4,2) -- (1,3) node[midway, above right] {$\vec{u} - \vec{v}$};
+        % \draw[fill] (4,2) circle [radius=0.05];
+        % \draw[fill] (1,3) circle [radius=0.05];
+    \end{tikzpicture}
+\end{center}
+
+\begin{eg}
+    Let $\vec{u} = \begin{bmatrix}
+        2 \\ 3
+    \end{bmatrix}$ and $\vec{v} = \begin{bmatrix}
+        5 \\ 7
+    \end{bmatrix}$. Then the distance between $\vec{u}$ and $\vec{v}$ is:
+    \[
+        d(\vec{u}, \vec{v}) = \|\vec{u} - \vec{v}\| = \left\| \begin{bmatrix}
+            2 - 5 \\ 3 - 7
+        \end{bmatrix} \right\| = \left\| \begin{bmatrix}
+            -3 \\ -4
+        \end{bmatrix} \right\| = \sqrt{(-3)^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+    \]
+\end{eg}
+
+\section{Orthogonality}
+\begin{definition}[Orthogonal Vectors]
+    Let $\vec{u}, \vec{v} \in \mathbb{R}^n$. The vectors $\vec{u}$ and $\vec{v}$ are said to be orthogonal if:
+    \[
+        \vec{u} \cdot \vec{v} = 0
+    \]
+\end{definition}
+
+\begin{eg}
+    Let $\vec{u} = \begin{bmatrix}
+        1 \\ 2 \\ -2
+    \end{bmatrix}$ and $\vec{v} = \begin{bmatrix}
+        2 \\ -1 \\ 1
+    \end{bmatrix}$. Then:
+    \[
+        \vec{u} \cdot \vec{v} = 1 \cdot 2 + 2 \cdot (-1) + (-2) \cdot 1 = 2 - 2 - 2 = -2
+    \]
+    Thus, $\vec{u}$ and $\vec{v}$ are not orthogonal.
+\end{eg}
+
+\begin{theorem}
+    Let $\vec{u}$ and $\vec{v}$ be orthogonal vectors in $\mathbb{R}^n$ if and only if:
+    \[
+        \|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2
+    \]
+\end{theorem}
+\begin{proof}
+    We have:
+    \begin{align*}
+        \|\vec{u} + \vec{v}\|^2 &= (\vec{u} + \vec{v}) \cdot (\vec{u} + \vec{v}) \\
+        &= \vec{u} \cdot \vec{u} + 2 \vec{u} \cdot \vec{v} + \vec{v} \cdot \vec{v} \\
+        &= \|\vec{u}\|^2 + 2 \vec{u} \cdot \vec{v} + \|\vec{v}\|^2
+    \end{align*}
+    Thus, if $\vec{u}$ and $\vec{v}$ are orthogonal, then $\vec{u} \cdot \vec{v} = 0$ and:
+    \[
+        \|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2
+    \]
+    Conversely, if $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$, then:
+    \[
+        0 = 2 \vec{u} \cdot \vec{v}
+    \]
+    which implies that $\vec{u} \cdot \vec{v} = 0$, i.e., $\vec{u}$ and $\vec{v}$ are orthogonal.
+\end{proof}
+
+\subsection{Angle between Vectors}
+\begin{theorem}
+    Let $\vec{u}, \vec{v} \in \mathbb{R}^n$ be non-zero vectors. The angle $\theta$ between $\vec{u}$ and $\vec{v}$ is given by:
+    \[
+        \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}
+    \]
+\end{theorem}
+\begin{proof}
+    From the law of cosines, we have:
+    \[
+        a^2 + b^2 - 2ab \cos(\theta) = c^2
+    \]
+    where $a = \|\vec{u}\|$, $b = \|\vec{v}\|$ and $c = \|\vec{u} - \vec{v}\|$. Thus:
+    \[
+        \|\vec{u}\|^2 + \|\vec{v}\|^2 - 2 \|\vec{u}\| \|\vec{v}\| \cos(\theta) = \|\vec{u} - \vec{v}\|^2
+    \]
+    But:
+    \begin{align*}
+        \|\vec{u} - \vec{v}\|^2 &= (\vec{u} - \vec{v}) \cdot (\vec{u} - \vec{v}) \\
+        &= \vec{u} \cdot \vec{u} - 2 \vec{u} \cdot \vec{v} + \vec{v} \cdot \vec{v} \\
+        &= \|\vec{u}\|^2 - 2 \vec{u} \cdot \vec{v} + \|\vec{v}\|^2
+    \end{align*}
+    Thus:
+    \[
+        \|\vec{u}\|^2 + \|\vec{v}\|^2 - 2 \|\vec{u}\| \|\vec{v}\| \cos(\theta) = \|\vec{u}\|^2 - 2 \vec{u} \cdot \vec{v} + \|\vec{v}\|^2
+    \]
+    which implies that:
+    \[
+        \vec{u} \cdot \vec{v} = \|\vec{u}\| \|\vec{v}\| \cos(\theta)
+    \]
+    Therefore:
+    \[
+        \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}
+    \]
+\end{proof}
+
+\subsection{Orthogonality to a Subspace}
+Remark that if $\vec{u}$ is orthogonal to $\vec{v}$, then $\vec{u}$ is also orthogonal to any vector in $\text{span}\{\vec{v}\}$ i.e., for any vector $\vec{w} = c \vec{v}$ for some scalar $c \in \mathbb{R}$:
+\[
+    \vec{u} \cdot \vec{w} = \vec{u} \cdot (c \vec{v}) = c (\vec{u} \cdot \vec{v}) = c \cdot 0 = 0
+\]
+
+\begin{definition}[Orthogonal Complement to a Subspace]
+    Let $W$ be a subspace of $\mathbb{R}^n$. The orthogonal complement to $W$, denoted by $W^{\perp}$, is defined as:
+    \[
+        W^{\perp} = \{ \vec{u} \in \mathbb{R}^n \mid \vec{u} \cdot \vec{w} = 0, \forall \vec{w} \in W \}
+    \]
+\end{definition}
+Graphically, if $W$ is a line in $\mathbb{R}^3$, then $W^{\perp}$ is the plane orthogonal to that line passing through the origin:
+\begin{center}
+    \begin{tikzpicture}[scale=2.5]
+        % Axes
+        \draw[->] (-0.8,0,0) -- (1.2,0,0) node[right] {$x_1$};
+        \draw[->] (0,-1.0,0) -- (0,1.2,0) node[above] {$x_2$};
+        \draw[->] (0,0,0.8) -- (0,0,-1.2) node[below right] {$x_3$};
+
+        % Plane W⊥ (contains x_3 and makes -45 deg with x_1)
+        \filldraw[fill=secondary!40, draw=secondary, opacity=0.3] 
+            (0.7,-0.7,-0.8) -- (0.7,-0.7,0.8) -- (-0.7,0.7,0.8) -- (-0.7,0.7,-0.8) -- cycle;
+        \node[secondary, thick, left] at (-0.7,0.7,0.8) {$W^{\perp}$};
+        
+        % Line W (orthogonal to the plane, i.e. along x_2 = x_1)
+        \draw[->, thick, primary] (0,0,0) -- (0.8,0.8,0) node[right] {$W$};
+        \draw[dashed, thick, primary] (0,0,0) -- (-0.3,-0.3,0);
+        \draw[thick, primary] (-0.3,-0.3,0) -- (-0.6,-0.6,0);
+    \end{tikzpicture}
+\end{center}
+
+\begin{theorem}
+    $W^{\perp}$ is a subspace of $\mathbb{R}^n$.
+\end{theorem}
+\begin{proof}
+    Let $\vec{u_1}, \vec{u_2} \in W^{\perp}$ and $c \in \mathbb{R}$. We need to show that $\vec{u_1} + \vec{u_2} \in W^{\perp}$ and $c \vec{u_1} \in W^{\perp}$.
+    For any $\vec{w} \in W$, we have:
+    \[
+        (\vec{u_1} + \vec{u_2}) \cdot \vec{w} = \vec{u_1} \cdot \vec{w} + \vec{u_2} \cdot \vec{w} = 0 + 0 = 0
+    \]
+    Thus, $\vec{u_1} + \vec{u_2} \in W^{\perp}$.
+    Similarly, for any $\vec{w} \in W$, we have:
+    \[
+        (c \vec{u_1}) \cdot \vec{w} = c (\vec{u_1} \cdot \vec{w}) = c \cdot 0 = 0
+    \]
+    Thus, $c \vec{u_1} \in W^{\perp}$.
+    Therefore, $W^{\perp}$ is a subspace of $\mathbb{R}^n$.
+\end{proof}
+
+\begin{theorem}
+    $(W^{\perp})^{\perp} = W$
+\end{theorem}
+\begin{proof}
+    We need to show that $W \subseteq (W^{\perp})^{\perp}$ and $(W^{\perp})^{\perp} \subseteq W$.
+    Let $\vec{w} \in W$. For any $\vec{u} \in W^{\perp}$, we have:
+    \[
+        \vec{w} \cdot \vec{u} = 0
+    \]
+    Thus, $\vec{w} \in (W^{\perp})^{\perp}$, which implies that $W \subseteq (W^{\perp})^{\perp}$.
+    Conversely, let $\vec{v} \in (W^{\perp})^{\perp}$. For any $\vec{w} \in W$, we have:
+    \[
+        \vec{v} \cdot \vec{w} = 0
+    \]
+    Thus, $\vec{v} \in W$, which implies that $(W^{\perp})^{\perp} \subseteq W$.
+    Therefore, $(W^{\perp})^{\perp} = W$.
+\end{proof}
+
+\begin{theorem}
+    If $W = \text{span}(\vec{w_1}, \vec{w_2}, \ldots, \vec{w_k})$, then $\vec{u} \in W^{\perp}$ if and only if $\vec{u} \cdot \vec{w_i} = 0$ for all $i = 1, 2, \ldots, k$.
+\end{theorem}
+\begin{proof}
+    \textbf{($\Rightarrow$)} Let $\vec{u} \in W^{\perp}$. Then, for any $\vec{w} \in W$, we have $\vec{u} \cdot \vec{w} = 0$. In particular, for each basis vector $\vec{w_i}$, we have $\vec{u} \cdot \vec{w_i} = 0$. \\
+    \textbf{($\Leftarrow$)} Let $\vec{u}$ be such that $\vec{u} \cdot \vec{w_i} = 0$ for all $i = 1, 2, \ldots, k$. Any vector $\vec{w} \in W$ can be expressed as a linear combination of the basis vectors:
+    \[
+        \vec{w} = c_1 \vec{w_1} + c_2 \vec{w_2} + \ldots + c_k \vec{w_k}
+    \]
+    for some scalars $c_1, c_2, \ldots, c_k$. Then:
+    \[
+        \vec{u} \cdot \vec{w} = \vec{u} \cdot (c_1 \vec{w_1} + c_2 \vec{w_2} + \ldots + c_k \vec{w_k}) = c_1 (\vec{u} \cdot \vec{w_1}) + c_2 (\vec{u} \cdot \vec{w_2}) + \ldots + c_k (\vec{u} \cdot \vec{w_k}) = 0
+    \]
+    Thus, $\vec{u} \in W^{\perp}$.
+\end{proof}
