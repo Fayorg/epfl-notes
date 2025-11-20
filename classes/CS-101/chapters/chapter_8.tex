@@ -298,6 +298,49 @@ provided that \( n \geq m \).
     Here, $50$ integers are divisible by $2$, $20$ integers are divisible by $5$ and $10$ integers are divisible by both $2$ and $5$.
 \end{eg}
 
+\section{Permutations and Combinations}
+Let's assume that $S = \{1,2,3,4\}$. The number of ways to build a strings of length $2$ from the elements of $S$:
+\vskip0.3cm
+\begin{center}
+    \begin{tabular}{p{0.30\textwidth} | p{0.30\textwidth} | p{0.30\textwidth}}
+        & & \\
+        & {\centering \textbf{Permutation} \par} & {\centering \textbf{Combination} \par} \\ 
+        & & \\ \hline 
+        & & \\ 
+        {\centering \textbf{without repetition} \par} & { \centering
+            $\begin{array}{cccc}
+                & 12 & 13 & 14 \\
+                21 & & 23 & 24 \\
+                31 & 32 & & 34 \\
+                41 & 42 & 43 &
+            \end{array}$ \par
+        } & {\centering
+        $\begin{array}{cccc}
+            & 12 & 13 & 14 \\
+            & & 23 & 24 \\
+            & & & 34 \\
+            & & &
+        \end{array}$\par} \\ 
+        & & \\ \hline
+        & & \\
+        {\centering \textbf{with repetition} \par} & { \centering
+            $\begin{array}{cccc}
+                11 & 12 & 13 & 14 \\
+                21 & 22 & 23 & 24 \\
+                31 & 32 & 33 & 34 \\
+                41 & 42 & 43 & 44
+            \end{array}$ \par
+        } & {\centering 
+            $\begin{array}{cccc}
+                11 & 12 & 13 & 14 \\
+                 & 22 & 23 & 24 \\
+                 &    & 33 & 34 \\
+                 &    &    & 44
+            \end{array}$
+        \par} \\ 
+        & & \\
+    \end{tabular}
+\end{center}
 \subsection{Permutations}
 \begin{definition}[Permutations]
     A permutation of a set of \( n \) distinct elements is an arrangement of all the elements in a specific order. The number of different permutations of \( n \) distinct elements is given by:
@@ -336,6 +379,40 @@ Remark that if only \( r \) elements are to be arranged from a set of \( n \) di
     \end{itemize}
 \end{eg}
 
+\subsection{Combinations}
+\begin{definition}[Binomial Coefficient]
+    The binomial coefficient is defined as:
+    \[
+        \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} = \frac{n!}{k!(n-k)!}
+    \]
+\end{definition}
+Remark that this is the same coefficient used to expand the binomial expression \( (x + y)^n \) using the Binomial Theorem.
+
+\begin{eg}
+    Let's expend the binomial expression \( (x + y)^4 \) using the Binomial Theorem:
+    \[
+        (x + y)^4 = \sum_{k=0}^{4} \begin{pmatrix}
+            4 \\ k
+        \end{pmatrix} x^{4-k} y^k = \begin{pmatrix}
+            4 \\ 0
+        \end{pmatrix} x^4 + \begin{pmatrix}
+            4 \\ 1
+        \end{pmatrix} x^3 y + \begin{pmatrix}
+            4 \\ 2
+        \end{pmatrix} x^2 y^2 + \begin{pmatrix}
+            4 \\ 3
+        \end{pmatrix} x y^3 + \begin{pmatrix}
+            4 \\ 4
+        \end{pmatrix} y^4
+    \]
+    Calculating the binomial coefficients, we get:
+    \[
+        (x + y)^4 = 1 \cdot x^4 + 4 \cdot x^3 y + 6 \cdot x^2 y^2 + 4 \cdot x y^3 + 1 \cdot y^4
+    \]
+\end{eg}
+
 \begin{theorem}[Combinations]
     The number of ways to choose \( k \) elements from a set of \( n \) distinct elements, where the order of selection does not matter, is given by the binomial coefficient:
     \[
@@ -363,4 +440,243 @@ Remark that \( C(n, k) = C(n, n-k) \) since choosing \( k \) elements to include
     Here, \( 13 \) is the number of ranks for the three of a kind, \( C(4, 3) \) is the number of ways to choose \( 3 \) suits from \( 4 \), \( 12 \) is the number of remaining ranks for the pair, and \( C(4, 2) \) is the number of ways to choose \( 2 \) suits from \( 4 \).
 \end{eg}
 
-% TODO: add fruits example plus demo that was cutted from the video
+% TODO: add fruits example plus demo that was cutted from the video (w10c1 end and review w10c2 begining)
+\begin{eg}
+    A fruit shop offers \( 5 \) types of fruits: apples, bananas, cherries, dates, and elderberries. A customer wants to buy a fruit basket containing \( 8 \) pieces of fruit, where the order of selection does not matter and repetitions are allowed. How many different fruit baskets can the customer create? \\
+    This problem can be solved using the "Stars and Bars" method. We represent the \( r=8 \) fruits as stars (\(*\)) and use \( n-1 \) bars (\(|\)) to separate the \( n=5 \) different types of fruit. We need \( 5-1 = 4 \) bars to create \( 5 \) compartments (bins). \\
+    For example, if we select 2 apples, 3 bananas, 1 cherry, 0 dates, and 2 elderberries, this corresponds to the string:
+    \[
+        **|***|*||**
+    \]
+    Any arrangement of these \( 8 \) stars and \( 4 \) bars represents a unique fruit basket. The total length of the string is \( 8 + 4 = 12 \). The problem reduces to choosing which \( 8 \) of the \( 12 \) positions contain stars (or equivalently, which \( 4 \) positions contain bars). \\
+    The formula for the number of combinations with repetition is thus given by:
+    \[
+        C(n + r - 1, r) = \begin{pmatrix}
+            n + r - 1 \\ r
+        \end{pmatrix}
+    \]
+    In this case, \( n = 5 \) and \( r = 8 \):
+    \[
+        \text{Total fruit baskets} = \begin{pmatrix}
+            5 + 8 - 1 \\ 8
+        \end{pmatrix} = \begin{pmatrix}
+            12 \\ 8
+        \end{pmatrix} = \frac{12!}{8!4!} = 495
+    \]
+    Therefore, the customer can create \( 495 \) different fruit baskets.
+\end{eg}
+
+% \subsection{Permutations vs Combinations}
+% Let's assume that $S = \{1,2,3,4\}$. The number of ways to build a strings of length $2$ from the elements of $S$:
+% \vskip0.3cm
+% \begin{center}
+%     \begin{tabular}{p{0.30\textwidth} | p{0.30\textwidth} | p{0.30\textwidth}}
+%         & & \\
+%         & {\centering \textbf{Permutation} \par} & {\centering \textbf{Combination} \par} \\ 
+%         & & \\ \hline 
+%         & & \\ 
+%         {\centering \textbf{without repetition} \par} & { \centering
+%             $\begin{array}{cccc}
+%                 & 12 & 13 & 14 \\
+%                 21 & & 23 & 24 \\
+%                 31 & 32 & & 34 \\
+%                 41 & 42 & 43 &
+%             \end{array}$ \par
+%         } & {\centering
+%         $\begin{array}{cccc}
+%             & 12 & 13 & 14 \\
+%             & & 23 & 24 \\
+%             & & & 34 \\
+%             & & &
+%         \end{array}$\par} \\ 
+%         & & \\ \hline
+%         & & \\
+%         {\centering \textbf{with repetition} \par} & { \centering
+%             $\begin{array}{cccc}
+%                 11 & 12 & 13 & 14 \\
+%                 21 & 22 & 23 & 24 \\
+%                 31 & 32 & 33 & 34 \\
+%                 41 & 42 & 43 & 44
+%             \end{array}$ \par
+%         } & {\centering 
+%             $\begin{array}{cccc}
+%                 11 & 12 & 13 & 14 \\
+%                  & 22 & 23 & 24 \\
+%                  &    & 33 & 34 \\
+%                  &    &    & 44
+%             \end{array}$
+%         \par} \\ 
+%         & & \\
+%     \end{tabular}
+% \end{center}
+
+% \begin{eg}
+%     How many different 4-digit even numbers can be formed? We assume that the digits can be repeated.
+%     \[
+%         \text{Total even numbers} = 9 \times 10 \times 10 \times 5 = 4500
+%     \]
+%     Here, the first digit can be any digit from \( 1 \) to \( 9 \) (9 options because it cannot be 0 otherwise the number would not be a 4-digit number), the second and third digits can be any digit from \( 0 \) to \( 9 \) (10 options each), and the last digit must be an even digit (0, 2, 4, 6, or 8) (5 options).
+% \end{eg}
+
+\subsection{Permutations with Indistinguishable Objects}
+\begin{theorem}[Permutations with Indistinguishable Objects]
+    The number of distinct permutations of \( n \) objects, where there are \( n_1 \) indistinguishable objects of type 1, \( n_2 \) indistinguishable objects of type 2, ..., and \( n_k \) indistinguishable objects of type \( k \) (with \( n_1 + n_2 + ... + n_k = n \)), is given by:
+    \[
+        \frac{n!}{n_1! \times n_2! \times ... \times n_k!}
+    \]
+\end{theorem}
+\begin{proof}
+    Consider a set of \( n \) objects, where \( n_1 \) are of type 1, \( n_2 \) are of type 2, ..., and \( n_k \) are of type \( k \). The total number of permutations of these \( n \) objects, if they were all distinguishable, would be \( n! \). However, since the objects of the same type are indistinguishable, we need to account for the overcounting that occurs when we permute the indistinguishable objects among themselves. \\
+    For each type \( i \), there are \( n_i! \) ways to arrange the \( n_i \) indistinguishable objects of that type. Therefore, to find the number of distinct permutations, we divide the total permutations \( n! \) by the product of the factorials of the counts of each type:
+    \[
+        \text{Distinct permutations} = \frac{n!}{n_1! \times n_2! \times ... \times n_k!}
+    \]
+    This formula gives us the correct count of distinct arrangements by eliminating the overcounting due to indistinguishable objects.
+\end{proof}
+Remark that this theorem could also be proved using the product rule by considering the selection of positions for each type of indistinguishable object sequentially ($C(n,n_1) \cdot C(n-n_1,n_2) \cdot \ldots \cdot C(n-n_1-...-n_{k-1}, n_k)$). which would lead to the same result.
+
+\begin{eg}
+    How many different strings can be made by reordering the letters of the word "SUCCESS"?
+    \[
+        \text{Total strings} = \frac{7!}{3!2!1!1!} = 420
+    \]
+    Here, the total number of letters is \( 7 \), with the letter 'S' appearing \( 3 \) times, 'C' appearing \( 2 \) times, and 'U' and 'E' appearing \( 1 \) time each. The formula accounts for the indistinguishable letters by dividing by the factorial of their counts.
+\end{eg}
+
+\subsection{Repetition vs. Indistinguishable Objects}
+\begin{eg}
+    Let's suppose we have the following alphabet $S = \{s,u,c\}$ and we build strings of length $4$ from the elements of $S$. \\
+    \textbf{If repetition is allowed}, the total number of strings is:
+    \[
+        |S|^4 = 3^4 = 81
+    \]
+    \textbf{If repetition are not allowed}, then the number of strings with the alphabet $S' = \{s,s,u,c\}$ is:
+    \[
+        \text{Total strings} = \frac{4!}{2!1!1!} = 12
+    \]
+    Here, the total number of letters is \( 4 \), with the letter 's' appearing \( 2 \) times, and 'u' and 'c' appearing \( 1 \) time each. The formula accounts for the indistinguishable letters by dividing by the factorial of their counts.
+\end{eg}
+
+\section{Pigeonhole Principle}
+\begin{theorem}[Pigeonhole Principle]
+    If \( n \) items are put into \( m \) containers, with \( n > m \), then at least one container must contain more than one item.
+\end{theorem}
+\begin{proof}
+    Assume, for the sake of contradiction, that no container contains more than one item. This means that each container can hold at most one item. Therefore, the maximum number of items that can be placed in \( m \) containers is \( m \). However, since \( n > m \), this leads to a contradiction because we have more items than the maximum capacity of the containers. Hence, our assumption is false, and at least one container must contain more than one item.
+\end{proof}
+
+\begin{theorem}[Generalized Pigeonhole Principle]
+    If \( n \) items are put into \( m \) containers, then at least one container must contain at least \( \lceil n/m \rceil \) items.
+\end{theorem}
+\begin{proof}
+    Assume, for the sake of contradiction, that no container contains \( \lceil n/m \rceil \) or more items. This means that each container can hold at most \( \lceil n/m \rceil - 1 \) items. Therefore, the maximum number of items that can be placed in \( m \) containers is:
+    \[
+        m \times (\lceil n/m \rceil - 1)
+    \]
+    Since \( \lceil n/m \rceil - 1 < n/m \), we have:
+    \[
+        m \times (\lceil n/m \rceil - 1) < m \times (n/m) = n
+    \]
+    This leads to a contradiction because we have more items than the maximum capacity of the containers. Hence, our assumption is false, and at least one container must contain at least \( \lceil n/m \rceil \) items.
+\end{proof}
+
+\begin{eg}
+    Let's show that among $100$ students, at least one month has at least $9$ students born in that month. \\
+    There are $12$ months in a year, so we have $n = 100$ students and $m = 12$ months. Using the generalized pigeonhole principle:
+    \[
+        \text{At least one month has } \lceil 100/12 \rceil = 9 \text{ students.}
+    \]
+\end{eg}
+
+\subsection{Minimum Number of Items to Guarantee a Certain Outcome}
+\begin{definition}[Minimum Number of Items to Guarantee a Certain Outcome]
+    To guarantee that at least \( k \) items are in the same container when \( n \) items are distributed among \( m \) containers, we need at least:
+    \[
+        n = m \times (k - 1) + 1
+    \]
+    items.
+\end{definition}
+
+\begin{eg}
+    What is the minimum number of students required in a physics class to guarantee that at least $6$ students receive the same grade, assuming the possible grades are A, B, C, D, and F? \\
+    There are $5$ possible grades, so we have $m = 5$ grades. To ensure that at least one grade has at least $6$ students, we can use the generalized pigeonhole principle:
+    \[
+        n = m \times (k - 1) + 1 = 5 \times (6 - 1) + 1 = 26
+    \]
+    Therefore, a minimum of $26$ students is required to guarantee that at least $6$ students receive the same grade.
+\end{eg}
+
+\begin{eg}
+    How many numbers must be selected from the set $\{1,2,3,4,5,6\}$ to guarantee that at least one pair of these numbers add up to $7$? \\
+    The pairs that add up to $7$ are: $(1,6)$, $(2,5)$, and $(3,4)$. Thus, we have $m = 3$ pairs. To ensure that at least one pair is selected, we can use the generalized pigeonhole principle:
+    \[
+        n = m \times (k - 1) + 1 = 3 \times (1 - 1) + 1 = 4
+    \]
+    Therefore, a minimum of $4$ numbers must be selected to guarantee that at least one pair adds up to $7$.
+\end{eg}
+
+\begin{eg}
+    How many cards must be selected from a standard deck of $52$ cards to guarantee that at least $3$ cards of the same suit are selected? \\
+    There are $4$ suits in a standard deck of cards (hearts, diamonds, clubs, spades), so we have $m = 4$ suits. To ensure that at least one suit has at least $3$ cards selected, we can use the generalized pigeonhole principle:
+    \[
+        n = m \times (k - 1) + 1 = 4 \times (3 - 1) + 1 = 9
+    \]
+    Therefore, a minimum of $9$ cards must be selected to guarantee that at least $3$ cards of the same suit are selected.
+\end{eg}
+
+\begin{eg}
+    How many cards must be selected from a standard deck of $52$ cards to guarantee that at least $3$ hearts are chosen? \\
+    There are $13$ hearts in a standard deck of cards, so to ensure that at least $3$ hearts are selected, we can consider the worst-case scenario where we select all non-heart cards first. There are $52 - 13 = 39$ non-heart cards. To guarantee that at least $3$ hearts are selected, we need to select:
+    \[
+        n = 39 + 3 = 42
+    \]
+    Therefore, a minimum of $42$ cards must be selected to guarantee that at least $3$ hearts are chosen.
+\end{eg}
+
+% TODO: maybe move this section to the example of the bijection between the number of subsets and the number of binary sequences of length n
+\section{Combinatorial Proofs}
+\begin{definition}[Combinatorial Proofs]
+    A combinatorial proof is a method of proving mathematical identities by counting the same set of objects in two different ways. This approach often provides a more intuitive understanding of the identity being proved. There are two main steps in a combinatorial proof:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Showing that there is a bijection between the set being counted by the two side of the identity.
+        \item Prove that both sides of the identity count the same objects but in different ways.
+    \end{itemize}
+\end{definition}
+
+\subsection{Bijection Principle}
+\begin{theorem}[Bijection Principle]
+    If there exists a bijection between two finite sets \( A \) and \( B \), then the cardinalities of the sets are equal, i.e., \( |A| = |B| \).
+\end{theorem}
+\begin{proof}
+    A bijection is a one-to-one correspondence between the elements of two sets. This means that for every element in set \( A \), there is a unique element in set \( B \), and vice versa. Since each element in \( A \) can be paired with exactly one element in \( B \), the number of elements in both sets must be the same. Therefore, if there exists a bijection between \( A \) and \( B \), it follows that \( |A| = |B| \).
+\end{proof}
+
+\begin{eg}
+    Prove that \( C(n, k) = C(n, n-k) \) using a combinatorial proof. \\
+    Consider a set \( S \) with \( n \) elements. The left side of the identity, \( C(n, k) \), counts the number of ways to choose \( k \) elements from the set \( S \). The right side of the identity, \( C(n, n-k) \), counts the number of ways to choose \( n-k \) elements from the same set \( S \). \\
+    There is a bijection between the two sets of choices: for every subset of \( k \) elements chosen from \( S \), there is a corresponding subset of \( n-k \) elements that are not chosen. This means that choosing \( k \) elements is equivalent to choosing which \( n-k \) elements to leave out. Therefore, both sides of the identity count the same number of subsets, leading to the conclusion that:
+    \[
+        C(n, k) = C(n, n-k)
+    \]
+\end{eg}
+
+\subsection{Double Counting Principle}
+\begin{theorem}[Double Counting Principle]
+    If a set \( S \) can be counted in two different ways, then the two counts must be equal.
+\end{theorem}
+\begin{proof}
+    Let \( S \) be a set that can be counted in two different ways, resulting in counts \( A \) and \( B \). Since both counts represent the same set \( S \), they must be equal. Therefore, we have:
+    \[
+        A = B
+    \]
+\end{proof}
+
+\begin{eg}
+    Let's prove the identity \( \sum_{k=0}^{n} C(n, k) = 2^n \) using a combinatorial proof. \\
+    The left side of the identity, \( \sum_{k=0}^{n} C(n, k) \), counts the total number of subsets of a set with \( n \) elements. This is because \( C(n, k) \) represents the number of ways to choose \( k \) elements from the set, and summing over all possible values of \( k \) gives the total number of subsets. \\
+    The right side of the identity, \( 2^n \), counts the same set of subsets by considering that each element in the set can either be included in a subset or not. Since there are \( n \) elements, and each element has \( 2 \) choices (to be included or not), the total number of subsets is \( 2^n \). \\
+    Since both sides of the identity count the same set of subsets, we conclude that:
+    \[
+        \sum_{k=0}^{n} C(n, k) = 2^n
+    \]
+\end{eg}
