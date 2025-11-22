@@ -173,6 +173,37 @@ Remark that the distance is symmetric, i.e., $d(\vec{u}, \vec{v}) = d(\vec{v}, \
     \]
     which implies that $\vec{u} \cdot \vec{v} = 0$, i.e., $\vec{u}$ and $\vec{v}$ are orthogonal.
 \end{proof}
+Remark that when multiplying a vector and a matrix, the result is multiple dot product between the rows of the matrix and the vector. Thus, if all rows of a matrix are orthogonal to a vector, then the result of the multiplication is the zero vector.
+
+\begin{eg}
+    Let $\vec{v_1} = \begin{bmatrix}
+        7 \\ 3 \\ 1
+    \end{bmatrix}, \vec{v_2} = \begin{bmatrix}
+        2 \\ 4 \\ 5
+    \end{bmatrix}$ and $\vec{x} = \begin{bmatrix}
+        9 \\ 10 \\ 8
+    \end{bmatrix}$. Then:
+    \[
+        \begin{bmatrix}
+            7 & 3 & 1 \\
+            2 & 4 & 5
+        \end{bmatrix} \begin{bmatrix}
+            9 \\ 10 \\ 8
+        \end{bmatrix} = \begin{bmatrix}
+            \vec{v_1} \cdot \vec{x} \\
+            \vec{v_2} \cdot \vec{x}
+        \end{bmatrix} = \begin{bmatrix}
+            7 \cdot 9 + 3 \cdot 10 + 1 \cdot 8 \\
+            2 \cdot 9 + 4 \cdot 10 + 5 \cdot 8
+        \end{bmatrix} = \begin{bmatrix}
+            63 + 30 + 8 \\
+            18 + 40 + 40
+        \end{bmatrix} = \begin{bmatrix}
+            101 \\ 98
+        \end{bmatrix}
+    \]
+    Therefore, $\vec{x}$ is not orthogonal to the rows of the matrix.
+\end{eg}
 
 \subsection{Angle between Vectors}
 \begin{theorem}
@@ -292,4 +323,296 @@ Graphically, if $W$ is a line in $\mathbb{R}^3$, then $W^{\perp}$ is the plane o
         \vec{u} \cdot \vec{w} = \vec{u} \cdot (c_1 \vec{w_1} + c_2 \vec{w_2} + \ldots + c_k \vec{w_k}) = c_1 (\vec{u} \cdot \vec{w_1}) + c_2 (\vec{u} \cdot \vec{w_2}) + \ldots + c_k (\vec{u} \cdot \vec{w_k}) = 0
     \]
     Thus, $\vec{u} \in W^{\perp}$.
+\end{proof}
+
+\begin{theorem}
+    $(\text{Im} A^T)^{\perp} = \text{Ker} A$
+\end{theorem}
+\begin{proof}
+    We need to show that $(\text{Im} A^T)^{\perp} \subseteq \text{Ker} A$ and $\text{Ker} A \subseteq (\text{Im} A^T)^{\perp}$.
+    Let $\vec{x} \in \text{Ker A}$ and let $\vec{w} \in \text{Im} A^T$. Then, there exists $\vec{y}$ such that $\vec{w} = A^T \vec{y}$. Thus:
+    \[
+        \vec{x} \cdot \vec{w} = \vec{x} \cdot (A^T \vec{y}) = (A \vec{x}) \cdot \vec{y} = \vec{0} \cdot \vec{y} = 0
+    \]
+    Therefore, $\vec{x} \in (\text{Im} A^T)^{\perp}$, which implies that $\text{Ker} A \subseteq (\text{Im} A^T)^{\perp}$.
+    Conversely, let $\vec{x} \in (\text{Im} A^T)^{\perp}$. For any $\vec{y}$, we have:
+    \[
+        \vec{x} \cdot (A^T \vec{y}) = 0
+    \]
+    which implies that:
+    \[
+        (A \vec{x}) \cdot \vec{y} = 0
+    \]
+    for all $\vec{y}$. Thus, $A \vec{x} = \vec{0}$, which means that $\vec{x} \in \text{Ker} A$. Therefore, $(\text{Im} A^T)^{\perp} \subseteq \text{Ker} A$.
+\end{proof}
+Remark that from this theorem, the following corollary holds:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\text{Im} A = (\text{Ker} A^T)^{\perp}$
+    \item $\text{Ker} A^T = (\text{Im} A)^{\perp}$
+    \item $\text{Im} A^T = (\text{Ker} A)^{\perp}$
+    \item $\text{Ker} A = (\text{Im} A^T)^{\perp}$
+\end{itemize}
+
+\begin{eg}
+    Let $W$ be a subspace of $\mathbb{R}^n$ and let $(\vec{w_1}, \ldots, \vec{w_p})$ a basis of $W$. To find a basis of $W^{\perp}$, we can use the theorem above to get:
+    \[
+        W = \text{Im} A \quad \iff \quad W^{\perp} = \left(\text{Im} A\right)^{\perp} = \text{Ker} A^T
+    \]
+    where:
+    \[
+        A^T = \begin{bmatrix}
+            - & (\vec{w_1})^T & - \\
+            - & (\vec{w_2})^T & - \\
+            & \vdots & \\
+            - & (\vec{w_p})^T & -   
+        \end{bmatrix}
+    \]
+    Therefore, a basis of $W^{\perp}$ can be found by finding the kernel of $A^T$.
+\end{eg}
+
+\subsection{Orthogonal Family}
+\begin{definition}[Orthogonal Family]
+    A family of vectors $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ in $\mathbb{R}^n$ is said to be orthogonal if:
+    \[
+        \vec{u_i} \cdot \vec{u_j} = 0 \quad \text{for all } i \neq j
+    \]
+\end{definition}
+Note that since the null vector is orthogonal to any vector, an orthogonal family can contain the null vector.
+
+\begin{eg}
+    Let $\vec{v_1} = \begin{bmatrix}
+        2 \\ 1
+    \end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix}
+        2 \\ -4
+    \end{bmatrix}$ in $\mathbb{R}^2$. Then:
+    \[
+        \vec{v_1} \cdot \vec{v_2} = 2 \cdot 2 + 1 \cdot (-4) = 4 - 4 = 0
+    \]
+    Thus, $(\vec{v_1}, \vec{v_2})$ is an orthogonal family.
+\end{eg}
+
+\begin{eg}
+    Let $\vec{v_1} = \begin{bmatrix}
+        1 \\ 0 \\ 0
+    \end{bmatrix}, \vec{v_2} = \begin{bmatrix}
+        0 \\ 1 \\ 0
+    \end{bmatrix}$ and $\vec{v_3} = \begin{bmatrix}
+        0 \\ 0 \\ 1
+    \end{bmatrix}$ in $\mathbb{R}^3$. Then:
+    \[
+        \vec{v_1} \cdot \vec{v_2} = 1 \cdot 0 + 0 \cdot 1 + 0 \cdot 0 = 0
+    \]
+    \[
+        \vec{v_1} \cdot \vec{v_3} = 1 \cdot 0 + 0 \cdot 0 + 0 \cdot 1 = 0
+    \]
+    \[
+        \vec{v_2} \cdot \vec{v_3} = 0 \cdot 0 + 1 \cdot 0 + 0 \cdot 1 = 0
+    \]
+    Thus, $(\vec{v_1}, \vec{v_2}, \vec{v_3})$ is an orthogonal family.
+\end{eg}
+
+\begin{theorem}
+    An orthogonal family of non-zero vectors is linearly independent.
+\end{theorem}
+\begin{proof}
+    Let $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ be an orthogonal family of non-zero vectors in $\mathbb{R}^n$. We need to show that if:
+    \[
+        c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k} = \vec{0}
+    \]
+    for some scalars $c_1, c_2, \ldots, c_k$, then $c_1 = c_2 = \ldots = c_k = 0$.
+    Taking the dot product of both sides with $\vec{u_j}$ for some $j \in \{1, 2, \ldots, k\}$, we get:
+    \[
+        (c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}) \cdot \vec{u_j} = \vec{0} \cdot \vec{u_j} = 0
+    \]
+    Using the distributive property of the dot product, we have:
+    \[
+        c_1 (\vec{u_1} \cdot \vec{u_j}) + c_2 (\vec{u_2} \cdot \vec{u_j}) + \ldots + c_k (\vec{u_k} \cdot \vec{u_j}) = 0
+    \]
+    Since the family is orthogonal, $\vec{u_i} \cdot \vec{u_j} = 0$ for all $i \neq j$, and $\vec{u_j} \cdot \vec{u_j} = \|\vec{u_j}\|^2 > 0$ (since $\vec{u_j}$ is non-zero). Thus, the above equation simplifies to:
+    \[
+        c_j \|\vec{u_j}\|^2 = 0
+    \]
+    Since $\|\vec{u_j}\|^2 > 0$, it follows that $c_j = 0$.
+    Since this holds for any $j$, we conclude that $c_1 = c_2 = \ldots = c_k = 0$.
+    Therefore, the family $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ is linearly independent.
+\end{proof}
+
+\begin{definition}[Orthogonal Basis]
+    An orthogonal basis of a subspace $W$ of $\mathbb{R}^n$ is a basis of $W$ that is also an orthogonal family.
+\end{definition}
+
+\begin{theorem}
+    Let $W$ be a subspace of $\mathbb{R}^n$ and let $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ be an orthogonal basis of $W$. Then, for any vector $\vec{v} \in W$, the coordinates of $\vec{v}$ in this basis are given by:
+    \[
+        c_i = \frac{\vec{v} \cdot \vec{u_i}}{\vec{u_i} \cdot \vec{u_i}} \quad \text{for } i = 1, 2, \ldots, k
+    \]
+    such that:
+    \[
+        \vec{v} = c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}
+    \]
+\end{theorem}
+\begin{proof}
+    Since $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ is a basis of $W$, any vector $\vec{v} \in W$ can be expressed as:
+    \[
+        \vec{v} = c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}
+    \]
+    for some scalars $c_1, c_2, \ldots, c_k$.
+    Taking the dot product of both sides with $\vec{u_j}$ for some $j \in \{1, 2, \ldots, k\}$, we get:
+    \[
+        \vec{v} \cdot \vec{u_j} = (c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}) \cdot \vec{u_j}
+    \]
+    Using the distributive property of the dot product, we have:
+    \[
+        \vec{v} \cdot \vec{u_j} = c_1 (\vec{u_1} \cdot \vec{u_j}) + c_2 (\vec{u_2} \cdot \vec{u_j}) + \ldots + c_k (\vec{u_k} \cdot \vec{u_j})
+    \]
+    Since the family is orthogonal, $\vec{u_i} \cdot \vec{u_j} = 0$ for all $i \neq j$, and $\vec{u_j} \cdot \vec{u_j} = \|\vec{u_j}\|^2$. Thus, the above equation simplifies to:
+    \[
+        \vec{v} \cdot \vec{u_j} = c_j (\vec{u_j} \cdot \vec{u_j})
+    \]
+    Therefore:
+    \[
+        c_j = \frac{\vec{v} \cdot \vec{u_j}}{\vec{u_j} \cdot \vec{u_j}}
+    \]
+    for each $j = 1, 2, \ldots, k$.
+\end{proof}
+
+\begin{eg}
+    Let $W$ be the subspace of $\mathbb{R}^3$ spanned by the orthogonal basis:
+    \[
+        \vec{u_1} = \begin{bmatrix}
+            1 \\ 0 \\ 0
+        \end{bmatrix}, \quad \vec{u_2} = \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}
+    \]
+    and let $\vec{v} = \begin{bmatrix}
+        3 \\ 4 \\ 4
+    \end{bmatrix} \in W$. To find the coordinates of $\vec{v}$ in this basis, we compute:
+    \[
+        c_1 = \frac{\vec{v} \cdot \vec{u_1}}{\vec{u_1} \cdot \vec{u_1}} = \frac{3 \cdot 1 + 4 \cdot 0 + 4 \cdot 0}{1^2 + 0^2 + 0^2} = \frac{3}{1} = 3
+    \]
+    \[
+        c_2 = \frac{\vec{v} \cdot \vec{u_2}}{\vec{u_2} \cdot \vec{u_2}} = \frac{3 \cdot 0 + 4 \cdot 1 + 4 \cdot 1}{0^2 + 1^2 + 1^2} = \frac{8}{2} = 4
+    \]
+    Thus, the coordinates of $\vec{v}$ in the orthogonal basis $(\vec{u_1}, \vec{u_2})$ are $(3, 4)$, and we have:
+    \[
+        \vec{v} = 3\vec{u_1} + 4\vec{u_2} = 3\begin{bmatrix}
+            1 \\ 0 \\ 0
+        \end{bmatrix} + 4\begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix} = \begin{bmatrix}
+            3 \\ 4 \\ 4
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\subsection{Orthogonal Projection}
+\begin{definition}[Orthogonal Projection]
+    Let $W$ be a subspace of $\mathbb{R}^n$ and let $\vec{v} \in \mathbb{R}^n$. The orthogonal projection of $\vec{v}$ onto $W$, denoted by $\text{proj}_W(\vec{v})$, is the vector in $W$ such that the vector $\vec{v} - \text{proj}_W(\vec{v})$ is orthogonal to $W$.
+\end{definition}
+Geometrically, the orthogonal projection of $\vec{y} \in \mathbb{R}^2$ onto the line $W$ spanned by the vector $\vec{w}$ is represented as follows:
+\begin{center}
+    \begin{tikzpicture}
+        \draw[] (-3,-1.5) -- (3,1.5) node[very near start, below right] {$W = \text{span}(\vec{w})$};
+        \draw[->, primary] (0,0) -- (2,1) node[midway, above] {$\vec{w}$};
+        \draw[->, primary] (0,0) -- (-2,1) node[midway, above] {$\vec{y}$};
+
+        \draw[dashed, secondary] (-6/5,-3/5) -- (-2,1);
+        \draw[->, secondary, thick] (0,0) -- (-6/5,-3/5) node[midway, below right] {$\vec{\hat{y}} = \text{proj}_W(\vec{y})$};
+    \end{tikzpicture}
+\end{center}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item the vector $\vec{y} - \vec{\hat{y}}$ is orthogonal to $W$
+    \item the vector $\vec{\hat{y}}$ is the orthogonal projection of $\vec{y}$ onto $W$, denoted by $\text{proj}_W(\vec{y})$
+    \item the coordinates of $\vec{\hat{y}}$ are given by:
+    \[
+        \vec{\hat{y}} = \frac{\vec{y} \cdot \vec{w}}{\vec{w} \cdot \vec{w}} \vec{w}
+    \]
+\end{itemize}
+
+\begin{eg}
+    Let's take the same situation as above but in $\mathbb{R}^3$. We have the subspace $W$, a plane, spanned by the vectors $\vec{u_1}$ and $\vec{u_2}$. To find the coordinates of $\text{proj}_W(\vec{y})$ we can start with:
+    \[
+        \text{proj}_W(\vec{y}) = c_1 \vec{u_1} + c_2 \vec{u_2}
+    \]
+    and we also have:
+    \[
+        \begin{cases*}
+            (\vec{y} - \text{proj}_W(\vec{y})) \cdot \vec{u_1} = 0 \\ 
+            (\vec{y} - \text{proj}_W(\vec{y})) \cdot \vec{u_2} = 0
+        \end{cases*} \quad \iff \quad \begin{cases*}
+            \text{proj}_W(\vec{y}) \cdot \vec{u_1} = \vec{y} \cdot \vec{u_1} \\
+            \text{proj}_W(\vec{y}) \cdot \vec{u_2} = \vec{y} \cdot \vec{u_2}
+        \end{cases*}
+    \]
+    By substituting $\text{proj}_W(\vec{y})$ in the equations above, we get:
+    \[
+        \begin{cases*}
+            (c_1 \vec{u_1} + c_2 \vec{u_2}) \cdot \vec{u_1} = \vec{y} \cdot \vec{u_1} \\
+            (c_1 \vec{u_1} + c_2 \vec{u_2}) \cdot \vec{u_2} = \vec{y} \cdot \vec{u_2}
+        \end{cases*}
+    \]
+    which simplifies to:
+    \[
+        \begin{cases*}
+            c_1 (\vec{u_1} \cdot \vec{u_1}) + c_2 (\vec{u_2} \cdot \vec{u_1}) = \vec{y} \cdot \vec{u_1} \\
+            c_1 (\vec{u_1} \cdot \vec{u_2}) + c_2 (\vec{u_2} \cdot \vec{u_2}) = \vec{y} \cdot \vec{u_2}
+        \end{cases*}
+    \]
+    In matrix form, we have:
+    \[
+        \begin{bmatrix}
+            \vec{u_1} \cdot \vec{u_1} & \vec{u_2} \cdot \vec{u_1} \\
+            \vec{u_1} \cdot \vec{u_2} & \vec{u_2} \cdot \vec{u_2}
+        \end{bmatrix} \begin{bmatrix}
+            c_1 \\ c_2
+        \end{bmatrix} = \begin{bmatrix}
+            \vec{y} \cdot \vec{u_1} \\ \vec{y} \cdot \vec{u_2}
+        \end{bmatrix}
+    \]
+    Therefore, by solving this system of equations, we can find the coefficients $c_1$ and $c_2$, and thus the orthogonal projection $\text{proj}_W(\vec{y})$.
+\end{eg}
+
+\begin{theorem}
+    Let $W$ be a subspace of $\mathbb{R}^n$ and let $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ be an orthogonal basis of $W$. Then, for any vector $\vec{v} \in \mathbb{R}^n$, the orthogonal projection of $\vec{v}$ onto $W$ is given by:
+    \[
+        \text{proj}_W(\vec{v}) = \sum_{i=1}^{k} \frac{\vec{v} \cdot \vec{u_i}}{\vec{u_i} \cdot \vec{u_i}} \vec{u_i}
+    \]
+\end{theorem}
+\begin{proof}
+    Since $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$ is a basis of $W$, any vector in $W$ can be expressed as:
+    \[
+        \text{proj}_W(\vec{v}) = c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}
+    \]
+    for some scalars $c_1, c_2, \ldots, c_k$.
+    To find the coefficients $c_i$, we use the property that $\vec{v} - \text{proj}_W(\vec{v})$ is orthogonal to $W$. Thus, for each $j = 1, 2, \ldots, k$, we have:
+    \[
+        (\vec{v} - \text{proj}_W(\vec{v})) \cdot \vec{u_j} = 0
+    \]
+    which implies:
+    \[
+        \text{proj}_W(\vec{v}) \cdot \vec{u_j} = \vec{v} \cdot \vec{u_j}
+    \]
+    Substituting the expression for $\text{proj}_W(\vec{v})$, we get:
+    \[
+        (c_1 \vec{u_1} + c_2 \vec{u_2} + \ldots + c_k \vec{u_k}) \cdot \vec{u_j} = \vec{v} \cdot \vec{u_j}
+    \]
+    Using the distributive property of the dot product, we have:
+    \[
+        c_1 (\vec{u_1} \cdot \vec{u_j}) + c_2 (\vec{u_2} \cdot \vec{u_j}) + \ldots + c_k (\vec{u_k} \cdot \vec{u_j}) = \vec{v} \cdot \vec{u_j}
+    \]
+    Since the family is orthogonal, $\vec{u_i} \cdot \vec{u_j} = 0$ for all $i \neq j$, and $\vec{u_j} \cdot \vec{u_j} = \|\vec{u_j}\|^2$. Thus, the above equation simplifies to:
+    \[
+        c_j (\vec{u_j} \cdot \vec{u_j}) = \vec{v} \cdot \vec{u_j}
+    \]
+    Therefore:
+    \[
+        c_j = \frac{\vec{v} \cdot \vec{u_j}}{\vec{u_j} \cdot \vec{u_j}}
+    \]
+    for each $j = 1, 2, \ldots, k$.
+    Substituting these coefficients back into the expression for $\text{proj}_W(\vec{v})$, we get:
+    \[
+        \text{proj}_W(\vec{v}) = \sum_{i=1}^{k} \frac{\vec{v} \cdot \vec{u_i}}{\vec{u_i} \cdot \vec{u_i}} \vec{u_i}
+    \]
 \end{proof}
