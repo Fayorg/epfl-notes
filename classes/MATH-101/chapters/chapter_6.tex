@@ -466,6 +466,7 @@ Remark that the extrema of a function $f: [a,b] \to \mathbb{R}$ can only occur a
     \textbf{If $M \neq m$}, then either the maximum or minimum value is attained at some point $c \in (a,b)$. Without loss of generality, assume that the maximum value is attained at some point $c \in (a,b)$. Since $f$ is differentiable at $c$ and has a local maximum at that point, by the previous theorem, we have:
     \[        f'(c) = 0 \]
 \end{proof}
+Remark that if $f: (a, b) \to \mathbb{R}$ is a function that is differentiable and $\lim_{x \to a^+} f(x) = \lim_{x \to b^-} f(x) = \alpha$ where $\alpha \in \mathbb{R} \cup {+ \infty}$, then there exists at least one point $c \in (a,b)$ such that $f'(c) = 0$.
 
 \begin{eg}
     Let's apply Rolle's theorem. Let $f: \mathbb{R} \to \mathbb{R}$ a function of class $C^{\infty}$ such that:
@@ -492,3 +493,202 @@ Remark that the extrema of a function $f: [a,b] \to \mathbb{R}$ can only occur a
     \[        f''(c_2) = 0 \quad \text{and} \quad f''(c_3) = 0
     \]
 \end{eg}
+
+\begin{eg}
+    Let's apply Rolle's theorem on the function:
+    \[
+        f(x) = \begin{cases}
+            x^2 \cos\left(\frac{1}{x}\right), &x \neq 0 \\
+            0, &x = 0
+        \end{cases}
+    \]
+    defined on the interval $[-\frac{1}{2}, \frac{1}{2}]$. We first need to show that $f$ is continuous on $[-\frac{1}{2}, \frac{1}{2}]$:
+    \[
+        \lim_{x \to 0} f(x) = \lim_{x \to 0} x^2 \cos\left(\frac{1}{x}\right) = 0 = f(0)
+    \]
+    Thus, $f$ is continuous on $[-\frac{1}{2}, \frac{1}{2}]$. Next, we need to show that $f$ is differentiable on $(-\frac{1}{2}, \frac{1}{2})$. For $x \neq 0$, we have:
+    \[        f'(x) = 2x \cos\left(\frac{1}{x}\right) + x^2 \sin\left(\frac{1}{x}\right) \cdot \frac{1}{x^2} = 2x \cos\left(\frac{1}{x}\right) + \sin\left(\frac{1}{x}\right) \]
+    For $x = 0$, we have:
+    \[        f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{x^2 \cos\left(\frac{1}{x}\right)}{x} = \lim_{x \to 0} x \cos\left(\frac{1}{x}\right) = 0
+    \]
+    Thus, $f$ is differentiable on $(-\frac{1}{2}, \frac{1}{2})$. Finally, we have:
+    \[        f\left(-\frac{1}{2}\right) = \left(-\frac{1}{2}\right)^2 \cos(-2) = \frac{1}{4} \cos(2) \]
+    \[        f\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^2 \cos(2) = \frac{1}{4} \cos(2) \]
+    Since $f\left(-\frac{1}{2}\right) = f\left(\frac{1}{2}\right)$, by Rolle's theorem, there exists at least one point $c \in \left(-\frac{1}{2}, \frac{1}{2}\right)$ such that:
+    \[        f'(c) = 0
+    \]
+    Let's solve the equation $f'(c) = 0$:
+    \[        2c \cos\left(\frac{1}{c}\right) + \sin\left(\frac{1}{c}\right) = 0 \]
+    Let $t = \frac{1}{c}$. Thus, we have:
+    \[        \sin t + \frac{2}{t} \cos t = 0 \]
+    Since if $\cos t = 0$ then $\sin t \neq 0$, thus $\cos t = 0$ cannot be a solution, thus allowing us to divide by $\cos t$, we have:
+    \[        \tan t = -\frac{2}{t} \]
+    We have that $x \in (-\frac{1}{2}, \frac{1}{2}) - \{0\}$, thus $t \in (-\infty, -2) \cup (2, +\infty)$. The function $\tan t$ is continuous and periodic with period $\pi$, and the function $-\frac{2}{t}$ is continuous and strictly increasing on the intervals $(-\infty, 0)$ and $(0, +\infty)$. Therefore, the equation $\tan t = -\frac{2}{t}$ has an infinite number of solutions in the intervals $(-\infty, -2)$ and $(2, +\infty)$. Thus, the equation $f'(c) = 0$ has an infinite number of solutions in the interval $\left(-\frac{1}{2}, \frac{1}{2}\right)$.
+    % TODO: maybe add graph of tan y = -2/y
+\end{eg}
+Remark that $f(x)$ is derivable on $(-\frac{1}{2}, \frac{1}{2})$ but $f$ is not of class $C^1((-\frac{1}{2}, \frac{1}{2}))$ since $f'$ is not continuous at $x = 0$ (due to the term $\sin(\frac{1}{x})$).
+
+\begin{theorem}[Mean Value Theorem]
+    Let $f: [a,b] \to \mathbb{R}$ be a function that is continuous on $[a,b]$ and differentiable on $(a,b)$. Then, there exists at least one point $c \in (a,b)$ such that:
+    \[        f'(c) = \frac{f(b) - f(a)}{b - a} \]
+\end{theorem}
+\begin{proof}
+    Remark that the line passing through the points $(a, f(a))$ and $(b, f(b))$ has the equation:
+    \[        y = f(a) + \frac{f(b) - f(a)}{b - a} (x - a) \]
+    Let's define the function $g: [a,b] \to \mathbb{R}$ as follows:
+    \[        g(x) = f(x) - \left[f(a) + \frac{f(b) - f(a)}{b - a} (x - a)\right] \]
+    The function $g$ is continuous on $[a,b]$ and differentiable on $(a,b)$. Moreover, we have:
+    \[        g(a) = f(a) - f(a) = 0 \]
+    \[        g(b) = f(b) - \left[f(a) + \frac{f(b) - f(a)}{b - a} (b - a)\right] = f(b) - f(b) = 0 \]
+    Thus, by Rolle's theorem, there exists at least one point $c \in (a,b)$ such that:
+    \[        g'(c) = 0 \]
+    We have:
+    \[        g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} \]
+    Therefore, we have:
+    \[        g'(c) = f'(c) - \frac{f(b) - f(a)}{b - a} = 0 \implies f'(c) = \frac{f(b) - f(a)}{b - a} \]
+    % TODO: maybe add graph - w11c1 @ 29:40
+\end{proof}
+Remark that the Mean Value Theorem generalizes Rolle's theorem. Indeed, if $f(a) = f(b)$, then:
+\[    f'(c) = \frac{f(b) - f(a)}{b - a} = 0 \]
+The following holds as a direct consequence of the Mean Value Theorem:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Let $f: [a,b] \to \mathbb{R}$ continuous on $[a,b]$, differentiable on $(a,b)$ and such that $f'(x) = 0$ for all $x \in (a,b)$. Then, $f$ is constant on $[a,b]$.
+    \item Let $f(x)$ and $g(x)$ be two continuous functions on $[a,b]$ and differentiable on $(a,b)$ such that $f'(x) = g'(x)$ for all $x \in (a,b)$. Then, there exists a constant $C \in \mathbb{R}$ such that:
+    \[        f(x) = g(x) + C \quad \forall x \in [a,b] \]
+    \item If $f'(x) \geq 0$ (respectively $f'(x) \leq 0$) for all $x \in (a,b)$, then $f$ is increasing (respectively decreasing) on $[a,b]$.
+    \item If $f'(x) > 0$ (respectively $f'(x) < 0$) for all $x \in (a,b)$, then $f$ is strictly increasing (respectively strictly decreasing) on $[a,b]$.
+\end{itemize}
+\begin{proof}
+    Let's prove the third and fourth points. Let $f: [a,b] \to \mathbb{R}$ be a function continuous on $[a,b]$ and differentiable on $(a,b)$. \\
+    \textbf{Third point:} If $f'(x) \geq 0$ for all $x \in (a,b)$, then for any $x_1, x_2 \in [a,b]$ such that $x_1 < x_2$, by the Mean Value Theorem, there exists at least one point $c \in (x_1, x_2)$ such that:
+    \[        f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1} \]
+    Since $f'(c) \geq 0$, we have:
+    \[        \frac{f(x_2) - f(x_1)}{x_2 - x_1} \geq 0 \implies f(x_2) - f(x_1) \geq 0 \implies f(x_2) \geq f(x_1) \]
+    Thus, $f$ is increasing on $[a,b]$. \\
+    \textbf{Fourth point:} If $f'(x) > 0$ for all $x \in (a,b)$, then for any $x_1, x_2 \in [a,b]$ such that $x_1 < x_2$, by the Mean Value Theorem, there exists at least one point $c \in (x_1, x_2)$ such that:
+    \[        f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1} \]
+    Since $f'(c) > 0$, we have:
+    \[        \frac{f(x_2) - f(x_1)}{x_2 - x_1} > 0 \implies f(x_2) - f(x_1) > 0 \implies f(x_2) > f(x_1) \]
+    Thus, $f$ is strictly increasing on $[a,b]$.
+\end{proof}
+Remark that the converse of the third and fourth points is not necessarily true. For example, the function $f(x) = x^3$ is strictly increasing on $\mathbb{R}$, but its derivative $f'(x) = 3x^2$ is equal to 0 at $x = 0$.
+
+\begin{eg}
+    Let's show that the equation $f(x) = \ln x + e^x = 0$ ($f \in C^{\infty}((0, \infty))$) has exactly one solution, $x > 0$. Let's first show the existence of a solution. We have:
+    \[        f(e) = \ln(e) + e^e = 1 + e^e > 0 \]
+    \[        f(e^{-100}) = \ln(e^{-100}) + e^{e^{-100}} = -100 + e^{e^{-100}} < 0 \]
+    Since $f$ is continuous on $(0, \infty)$, by the Intermediate Value Theorem, there exists at least one point $c \in (e^{-100}, e)$ such that:
+    \[        f(c) = 0 \]
+    Now to show the uniqueness, let's suppose that there are two distinct solutions $c_1, c_2 \in (0, \infty)$ such that $f(c_1) = f(c_2) = 0$ and $c_1 < c_2$. By the Mean Value Theorem, there exists at least one point $d \in (c_1, c_2)$ such that:
+    \[        f'(d) = \frac{f(c_2) - f(c_1)}{c_2 - c_1} = \frac{0 - 0}{c_2 - c_1} = 0 \]
+    However, we have:
+    \[        f'(x) = \frac{1}{x} + e^x > 0 \quad \forall x \in (0, \infty) \]
+    This is a contradiction. Therefore, the equation $f(x) = 0$ has exactly one solution $x > 0$.
+\end{eg}
+
+\begin{theorem}
+    Let $f, g: [a,b] \to \mathbb{R}$ such that they are continuous on $[a,b]$, differentiable on $(a,b)$ and $g'(x) \neq 0$ on $(a,b)$. Then, there exists at least one point $c \in (a,b)$ such that:
+    \[        \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)} \]
+\end{theorem}
+
+\begin{theorem}[L'Hôpital's Rule]
+    Let $f, g: \{x \in I, x_0 \neq x\} \to \mathbb{R}$ be two functions differentiable on $I - \{x_0\}$. Suppose that:
+    \[
+        g(x) \neq 0, g'(x) \neq 0 \quad \forall x \in I - \{x_0\}
+    \]
+    and:
+    \[        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} g(x) \in \{0, +\infty, -\infty\} \]
+    If the limit:
+    \[        \lim_{x \to x_0} \frac{f'(x)}{g'(x)} = L \in \mathbb{R} \cup \{\pm \infty\} \]
+    exists, then:
+    \[        \lim_{x \to x_0} \frac{f(x)}{g(x)} = L \]
+\end{theorem}
+\begin{proof}
+    Let's only prove the case where:
+    \[        \lim_{x \to x_0} f(x) = \lim_{x \to x_0} g(x) = 0 \]
+    Then, $g(x_0) = f(x_0) = 0$ and both $f,g$ are continuous on the right of $x_0$. For any $x \in (a,b)$, by the previous theorem, there exists at least one point $c(x) \in (a,x)$ such that:
+    \[        \frac{f'(c(x))}{g'(c(x))} = \frac{f(x) - f(x_0)}{g(x) - g(x_0)} = \frac{f(x)}{g(x)} \]
+    Thus, we have:
+    \[        \frac{f(x)}{g(x)} = \frac{f'(c(x))}{g'(c(x))} \]
+    Taking the limit as $x \to x_0$, we have $c(x) \to x_0$, thus:
+    \[        \lim_{x \to x_0} \frac{f(x)}{g(x)} = \lim_{c(x) \to x_0} \frac{f'(c(x))}{g'(c(x))} = L \]
+\end{proof}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item L'Hôpital's Rule can also be applied when $x_0 = \pm \infty$.
+    \item If the limit $\lim_{x \to x_0} \frac{f'(x)}{g'(x)}$ does not exist, it does not imply that $\lim_{x \to x_0} \frac{f(x)}{g(x)}$ does not exist.
+\end{itemize}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to \infty} \frac{x - \sin x}{x + \sin x}
+    \]
+    We have:
+    \[        \lim_{x \to \infty} \frac{x - \sin x}{x + \sin x} = \lim_{x \to \infty} \frac{1 - \frac{\sin x}{x}}{1 + \frac{\sin x}{x}} = 1 \]
+    Alternatively, we can apply L'Hôpital's Rule. We have:
+    \[        \lim_{x \to \infty} \frac{x - \sin x}{x + \sin x} \overset{\text{BH}}{=} \lim_{x \to \infty} \frac{1 - \cos x}{1 + \cos x} \]
+    However, this limit does not exist since $\cos x$ oscillates between $-1$ and $1$ as $x \to \infty$. Thus, L'Hôpital's Rule cannot be applied in this case.
+\end{eg}
+
+\begin{eg}
+    Let compute the limit:
+    \[
+        \lim_{x \to \infty} \frac{\ln x}{x^{\alpha}} \quad \alpha > 0
+    \]
+    We have:
+    \[        \lim_{x \to \infty} \frac{\ln x}{x^{\alpha}} \overset{\text{BH}}{=} \lim_{x \to \infty} \frac{\frac{1}{x}}{\alpha x^{\alpha - 1}} = \lim_{x \to \infty} \frac{1}{\alpha x^{\alpha}} = 0 \quad \forall \alpha > 0
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\ln (1 + x)}{x} 
+    \]
+    We have:
+    \[        \lim_{x \to 0} \frac{\ln (1 + x)}{x} \overset{\text{BH}}{=} \lim_{x \to 0} \frac{\frac{1}{1 + x}}{1} = 1
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \left(\cos (2x)\right)^{\frac{3}{x^2}}
+    \]
+    We have:
+    \[        \lim_{x \to 0} \left(\cos (2x)\right)^{\frac{3}{x^2}} = \lim_{x \to 0} e^{\frac{3}{x^2} \ln(\cos(2x))} = e^{\lim_{x \to 0} \frac{3 \ln(\cos(2x))}{x^2}} \]
+    Let's show that we can apply L'Hôpital's Rule to compute the limit in the exponent. We have:
+    \[        g(x) = x^2 \quad \implies \quad g(x) \neq 0 \ \text{in a neighborhood of } 0
+    \]
+    \[        g'(x) = 2x \quad \implies \quad g'(x) \neq 0 \ \text{in a neighborhood of } 0
+    \]
+    We also have:
+    \[        \lim_{x \to 0} 3 \ln(\cos(2x)) = 3 \ln(1) = 0 = \lim_{x \to 0} x^2
+    \]
+    Thus, we have an indeterminate form of type $\frac{0}{0}$ and we can apply L'Hôpital's Rule. We have:
+    \[        \lim_{x \to 0} \frac{3 \ln(\cos(2x))}{x^2} \overset{\text{BH}}{=} \lim_{x \to 0} \frac{\frac{3}{\cos (2x)} \cdot \left(- \sin(2x)\right) \cdot 2}{2x} = \lim_{x \to 0} \frac{\sin(2x)}{2x} \cdot \frac{-6}{\cos(2x)} = -6
+    \]
+    Therefore, we have:
+    \[        \lim_{x \to 0} \left(\cos (2x)\right)^{\frac{3}{x^2}} = e^{-6} \]
+\end{eg}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+\begin{exercise}[Quizz of lecture 20]
+    Let $f: \mathbb{R} \to \mathbb{R}$ be a function of class $C^1(\mathbb{R})$, such that $f'(x) > 5$ for all $x > 0$. Which of the following statements are true?
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\exists x > 0$ such that $f(x) = 5$
+        \item $\forall x > 0$ we have $f(x) > f(0) + 5x$
+        \item $\forall x > 0$ we have $f(x) > 5 f(0)$
+        \item $\exists x > 0$ such that $f(x) = 5 - f(0)$
+        \item $\forall x > 0$ we have $f(x) - 5x > 0$
+    \end{itemize}
+    \Answer
+    The correct statement is: \textbf{2.} \\
+    By the Mean Value Theorem, for any $x > 0$, there exists at least one point $c \in (0,x)$ such that:
+    \[        f'(c) = \frac{f(x) - f(0)}{x - 0} \]
+    Since $f'(c) > 5$, we have:
+    \[        \frac{f(x) - f(0)}{x} > 5 \implies f(x) - f(0) > 5x \implies f(x) > f(0) + 5x \]
+\end{exercise}
