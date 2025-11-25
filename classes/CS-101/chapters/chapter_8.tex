@@ -380,6 +380,7 @@ Remark that if only \( r \) elements are to be arranged from a set of \( n \) di
 \end{eg}
 
 \subsection{Combinations}
+
 \begin{definition}[Binomial Coefficient]
     The binomial coefficient is defined as:
     \[
@@ -388,7 +389,43 @@ Remark that if only \( r \) elements are to be arranged from a set of \( n \) di
         \end{pmatrix} = \frac{n!}{k!(n-k)!}
     \]
 \end{definition}
-Remark that this is the same coefficient used to expand the binomial expression \( (x + y)^n \) using the Binomial Theorem.
+
+\begin{theorem}[Binomial Theorem]
+    For any non-negative integer \( n \) and any real numbers \( x \) and \( y \):
+    \[
+        (x + y)^n = \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} x^{n-k} y^k
+    \]
+\end{theorem}
+% Remark that this is the same coefficient used to expand the binomial expression \( (x + y)^n \) using the Binomial Theorem.
+\begin{proof}
+    Let's prove the Binomial Theorem using generating functions. Let from compute for a given $z$:
+    \[
+        F(z) = \sum_{n=0}^{\infty} (x + y)^n z^n
+    \]
+    which is a geometric series and thus can be rewritten as:
+    \[
+        F(z) = \frac{1}{1 - (x + y)z} = \frac{1}{1 - xz - yz}
+    \]
+    Remark that this series converges if $|z| < \frac{1}{|x+y|}$. Let's then compute:
+    \[
+        G(z) = \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} x^{n-k} y^k \right) z^n
+    \]
+    If it can be shown that $G(z) = F(z)$ for $|z| < \frac{1}{|x+y|}$, then the Binomial Theorem holds. Let's compute $G(z)$:
+        \begin{align*}
+            G(z) &= \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} x^{n-k} y^k \right) z^n = \sum_{n = 0}^{\infty} \sum_{k = 0}^{n} \frac{n(n-1) \ldots (n-k+1)}{k!} (xz)^{n-k} (yz)^k \\
+        &= \sum_{k = 0}^{\infty} \sum_{n = k}^{\infty} \frac{n(n-1) \ldots (n-k+1)}{k!} (xz)^{n-k} (yz)^k \\
+        &= \sum_{k = 0}^{\infty} \frac{(yz)^k}{k!} \sum_{n = k}^{\infty} \underbrace{n(n-1) \ldots (n - k + 1) (xz)^{n-k}}_{\frac{d^k}{du^k} u^k} \\
+        &= \sum_{k = 0}^{\infty} \frac{(yz)^k}{k!} \frac{d^k}{du^k} \underbrace{\left( \sum_{n = k}^{\infty} u^n \right)}_{= \frac{1}{1 - u} - 1- u -u^2 - \ldots - u^{k-1}} \Bigg|_{u = xz} = \sum_{k = 0}^{\infty} \frac{(yz)^k}{k!} \frac{d^k}{du^k} \left( \frac{u^k}{1 - u} \right) \Bigg|_{u = xz}\\
+        &= \sum_{k = 0}^{\infty} \frac{(yz)^k}{k!} \cdot \frac{k!}{(1-u)^{j + 1}} \Bigg|_{u = xz} = \sum_{k = 0}^{\infty} \frac{(yz)^k}{(1 - xz)^{k + 1}}  \\
+        &= \frac{1}{1 - xz} \sum_{k = 0}^{\infty} \left( \frac{yz}{1 - xz} \right)^k = \frac{1}{1 - xz} \cdot \frac{1}{1 - \frac{yz}{1 - xz}}  \frac{1}{1 - xz - yz} = F(z)\\
+        \end{align*}
+\end{proof}
 
 \begin{eg}
     Let's expend the binomial expression \( (x + y)^4 \) using the Binomial Theorem:
@@ -412,6 +449,61 @@ Remark that this is the same coefficient used to expand the binomial expression 
         (x + y)^4 = 1 \cdot x^4 + 4 \cdot x^3 y + 6 \cdot x^2 y^2 + 4 \cdot x y^3 + 1 \cdot y^4
     \]
 \end{eg}
+
+\begin{theorem}[Pascal's Identity]
+    For any non-negative integer \( n \) and any integer \( k \) such that \( 0 < k < n \):
+    \[
+        \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} = \begin{pmatrix}
+            n-1 \\ k-1
+        \end{pmatrix} + \begin{pmatrix}
+            n-1 \\ k
+        \end{pmatrix}
+    \]
+\end{theorem}
+\begin{proof}
+    Let's directly compute:
+    \[
+        \begin{pmatrix}
+            n-1 \\ k-1
+        \end{pmatrix} + \begin{pmatrix}
+            n-1 \\ k
+        \end{pmatrix} = \frac{(n-1)!}{(k-1)!(n-k)!} + \frac{(n-1)!}{k!(n-1-k)!}
+    \]
+    Finding a common denominator, we get:
+    \[
+        = \frac{(n-1)!k + (n-1)!(n-k)}{k!(n-k)!} = \frac{(n-1)!(k + n - k)}{k!(n-k)!} = \frac{(n-1)!n}{k!(n-k)!} = \frac{n!}{k!(n-k)!} = \begin{pmatrix}
+            n \\ k
+        \end{pmatrix}
+    \]
+\end{proof}
+Remark that this identity is more commonly visualized using Pascal's Triangle, where each entry is the sum of the two entries directly above it.
+
+\begin{theorem}
+    The sum of the binomial coefficients for a given \( n \) ($n\geq 0$) is equal to \( 2^n \):
+    \[
+        \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} = 2^n
+    \]
+\end{theorem}
+\begin{proof}
+    This can be proven using the Binomial Theorem. Setting \( x = 1 \) and \( y = 1 \) in the theorem gives:
+    \[
+        (1 + 1)^n = \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} 1^{n-k} 1^k = \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix}
+    \]
+    Since \( (1 + 1)^n = 2^n \), we have:
+    \[
+        \sum_{k=0}^{n} \begin{pmatrix}
+            n \\ k
+        \end{pmatrix} = 2^n
+    \]
+\end{proof}
 
 \begin{theorem}[Combinations]
     The number of ways to choose \( k \) elements from a set of \( n \) distinct elements, where the order of selection does not matter, is given by the binomial coefficient:
@@ -680,3 +772,137 @@ Remark that this theorem could also be proved using the product rule by consider
         \sum_{k=0}^{n} C(n, k) = 2^n
     \]
 \end{eg}
+
+\section{Counting with Recurrence Relations}
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Some counting problems cannot (easily) be solved with the methods introduced so far (for example, How many bit strings of length $n$ do not contain two consecutive zeros?).
+    \item In these cases, recurrence relations are a powerful tool to solve counting problems.
+\end{itemize}
+Remember that a recurrence relation is an equation that recursively defines a sequence, where each term is defined as a function of its preceding terms. A sequence is called a solution of the recurrence relation if it satisfies the relation and a recurrence relation recursively defines a sequence. \\
+To solve a counting problem using recurrence relations, generally follow these steps:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Define a set $P_n$ depending on a parameter $n$.
+    \item Describe $P_n$ in terms of $P_{n-1}, P_{n-2}, \ldots, P_{n - k}$.
+    \item Derive a recurrence relation for $|P_n|$.
+    \item Solve the recurrence relation.
+\end{itemize}
+
+\begin{eg}
+    What is the number of permutations (whitout repetition) of a set with $n$ elements? \\
+    Let's define the set \( P_n \) as the set of all permutations of a set with \( n \) elements. To form a permutation of \( n \) elements, we can start by choosing one of the \( n \) elements to be the first element in the permutation. Once we have chosen the first element, we are left with \( n-1 \) elements to arrange. The number of ways to arrange these \( n-1 \) elements is given by \( |P_{n-1}| \). \\
+    Therefore, we can express \( |P_n| \) in terms of \( |P_{n-1}| \) as follows:
+    \[
+        |P_n| = n \times |P_{n-1}|
+    \]
+    This gives us the recurrence relation:
+    \[
+        |P_n| = n \times |P_{n-1}| \quad \text{for } n \geq 1
+    \]
+    with the base case:
+    \[
+        |P_1| = 1
+    \]
+    To solve this recurrence relation, we can expand it:
+    \begin{align*}
+        |P_n| &= n \times |P_{n-1}| = n \times (n-1) \times |P_{n-2}| \\
+        &= n \times (n-1) \times (n-2) \times |P_{n-3}| \\
+        &= \ldots = n \times (n-1) \times (n-2) \times \ldots \times 1 \times |P_1|
+    \end{align*}
+    Since \( |P_1| = 1 \), we have:
+    \[
+        |P_n| = n!
+    \]
+    Therefore, the number of permutations of a set with \( n \) elements is \( n! \).
+\end{eg}
+
+\begin{eg}
+    Find a recursion relation for the number of way to climb a staircase with \( n \) steps, where at each step you can climb either \( 1 \) step or \( 2 \) steps. \\
+    Let's define \( P_n \) as the number of ways to climb a staircase with \( n \) steps. To reach the \( n \)-th step, you can either:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Climb \( 1 \) step from the \( (n-1) \)-th step. The number of ways to reach the \( (n-1) \)-th step is \( |P_{n-1}| \).
+        \item Climb \( 2 \) steps from the \( (n-2) \)-th step. The number of ways to reach the \( (n-2) \)-th step is \( |P_{n-2}| \).
+    \end{itemize}
+    Therefore, we can express \( |P_n| \) in terms of \( |P_{n-1}| \) and \( |P_{n-2}| \) as follows:
+    \[
+        |P_n| = |P_{n-1}| + |P_{n-2}|
+    \]
+    This gives us the recurrence relation:
+    \[
+        |P_n| = |P_{n-1}| + |P_{n-2}| \quad \text{for } n \geq 2
+    \]
+    with the base cases:
+    \[
+        |P_0| = 1 \quad \text{(1 way to stay at the ground level)}
+    \]
+    \[
+        |P_1| = 1 \quad \text{(1 way to climb 1 step)}
+    \]
+    This recurrence relation is similar to the Fibonacci sequence, and the number of ways to climb a staircase with \( n \) steps can be computed using this relation.
+\end{eg}
+
+\begin{eg}
+    Let's find the minimum number of steps to solve the Tower of Hanoi problem with \( n \) disks. \\
+    Let's define \( P_n \) as the minimum number of steps required to move \( n \) disks from one peg to another, following the rules of the Tower of Hanoi. To move \( n \) disks, we can follow these steps:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Move the top \( n-1 \) disks from the source peg to an auxiliary peg. This requires \( |P_{n-1}| \) steps.
+        \item Move the \( n \)-th disk (the largest disk) directly from the source peg to the destination peg. This requires \( 1 \) step.
+        \item Move the \( n-1 \) disks from the auxiliary peg to the destination peg. This again requires \( |P_{n-1}| \) steps.
+    \end{itemize}
+    Therefore, we can express \( |P_n| \) in terms of \( |P_{n-1}| \) as follows:
+    \[
+        |P_n| = 2 \times |P_{n-1}| + 1
+    \]
+    This gives us the recurrence relation:
+    \[
+        |P_n| = 2 \times |P_{n-1}| + 1 \quad \text{for } n \geq 1
+    \]
+    with the base case:
+    \[
+        |P_0| = 0 \quad \text{(0 steps needed to move 0 disks)}
+    \]
+    To solve this recurrence relation, we can expand it:
+    \begin{align*}
+        |P_n| &= 2 \times |P_{n-1}| + 1 = 2 \times (2 \times |P_{n-2}| + 1) + 1 \\
+        &= 2^2 \times |P_{n-2}| + 2 + 1 \\
+        &= 2^3 \times |P_{n-3}| + 2^2 + 2 + 1 \\
+        &= \ldots = 2^n \times |P_0| + (2^{n-1} + 2^{n-2} + \ldots + 2 + 1)
+    \end{align*}
+    Since \( |P_0| = 0 \), we have:
+    \[
+        |P_n| = 2^{n-1} + 2^{n-2} + \ldots + 2 + 1 = 2^n - 1
+    \]
+    Therefore, the minimum number of steps required to solve the Tower of Hanoi problem with \( n \) disks is \( 2^n - 1 \).
+\end{eg}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+% TODO: add in the exercise the quizz of w11c1 @ 40:40
+
+\begin{exercise}[Week 11, Class 1, Bit Strings]
+    Find a recurrence relation for the number of bit strings of length $n$ that contain a pair of consecutive zeros.
+    \Answer
+    Let's define \( P_n \) as the number of bit strings of length \( n \) that contain at least one pair of consecutive zeros. To form such a bit string, we can consider the following cases based on the last bit of the string:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If the last bit is \( 1 \), then the first \( n-1 \) bits can be any bit string of length \( n-1 \) that contains a pair of consecutive zeros. The number of such strings is \( |P_{n-1}| \).
+        \item If the last bit is \( 0 \), we need to consider the second last bit:
+        \begin{itemize}[itemsep=1pt,label=$\circ$]
+            \item If the second last bit is also \( 0 \), then we have a pair of consecutive zeros at the end of the string. The first \( n-2 \) bits can be any bit string of length \( n-2 \). The number of such strings is \( 2^{n-2} \).
+            \item If the second last bit is \( 1 \), then the first \( n-2 \) bits must contain a pair of consecutive zeros. The number of such strings is \( |P_{n-2}| \).
+        \end{itemize}
+    \end{itemize}
+    Therefore, we can express \( |P_n| \) in terms of \( |P_{n-1}| \) and \( |P_{n-2}| \) as follows:
+    \[
+        |P_n| = |P_{n-1}| + 2^{n-2} + |P_{n-2}|
+    \]
+    This gives us the recurrence relation:
+    \[
+        |P_n| = |P_{n-1}| + |P_{n-2}| + 2^{n-2} \quad \text{for } n \geq 2
+    \]
+    with the base cases:
+    \[
+        |P_1| = 0 \quad \text{(no bit strings of length 1 can contain consecutive zeros)}
+    \]
+    \[
+        |P_2| = 1 \quad \text{(the only bit string of length 2 that contains consecutive zeros is "00")}
+    \]
+\end{exercise}
