@@ -616,3 +616,279 @@ Remark that:
         \text{proj}_W(\vec{v}) = \sum_{i=1}^{k} \frac{\vec{v} \cdot \vec{u_i}}{\vec{u_i} \cdot \vec{u_i}} \vec{u_i}
     \]
 \end{proof}
+Remark the following:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If $\vec{y}$ is in $W$, then $\text{proj}_W(\vec{y}) = \vec{y}$.
+    \item If $\vec{y}$ is in $W^{\perp}$, then $\text{proj}_W(\vec{y}) = \vec{0}$.
+    \item For $\vec{y} \in \mathbb{R}^n$ an arbitrary vector and $W$ a subspace with an orthogonal basis $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k})$, then $\text{proj}_{W^{\perp}}(\vec{y}) = \vec{y} - \text{proj}_W(\vec{y})$.
+\end{itemize}
+
+\begin{theorem}
+    Let $W$ be a subspace of $\mathbb{R}^n$, $\vec{y}$ an arbitrary vector in $\mathbb{R}^n$ and $\vec{\hat{y}}$ the orthogonal projection of $\vec{y}$ onto $W$. Then, $\vec{\hat{y}}$ is the closest vector in $W$ to $\vec{y}$, i.e.:
+    \[
+        \|\vec{y} - \vec{\hat{y}}\| < \|\vec{y} - \vec{w}\| \quad \text{for all } \vec{w} \in W
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\vec{w} \in W$. We can express $\vec{w}$ as:
+    \[
+        \vec{w} = \vec{\hat{y}} + \vec{z}
+    \]
+    for some vector $\vec{z} \in W$. Then:
+    \[
+        \|\vec{y} - \vec{w}\|^2 = \|\vec{y} - (\vec{\hat{y}} + \vec{z})\|^2 = \|(\vec{y} - \vec{\hat{y}}) - \vec{z}\|^2
+    \]
+    Expanding the right-hand side, we have:
+    \[
+        \|(\vec{y} - \vec{\hat{y}}) - \vec{z}\|^2 = \|\vec{y} - \vec{\hat{y}}\|^2 - 2(\vec{y} - \vec{\hat{y}}) \cdot \vec{z} + \|\vec{z}\|^2
+    \]
+    Since $\vec{y} - \vec{\hat{y}}$ is orthogonal to $W$ and $\vec{z} \in W$, we have:
+    \[
+        (\vec{y} - \vec{\hat{y}}) \cdot \vec{z} = 0
+    \]
+    Therefore:
+    \[
+        \|\vec{y} - \vec{w}\|^2 = \|\vec{y} - \vec{\hat{y}}\|^2 + \|\vec{z}\|^2
+    \]
+    Since $\|\vec{z}\|^2 > 0$ for all $\vec{z} \neq \vec{0}$, it follows that:
+    \[
+        \|\vec{y} - \vec{w}\|^2 > \|\vec{y} - \vec{\hat{y}}\|^2
+    \]
+    Taking the square root of both sides, we get:
+    \[
+        \|\vec{y} - \vec{w}\| > \|\vec{y} - \vec{\hat{y}}\|
+    \]
+    Thus, $\vec{\hat{y}}$ is the closest vector in $W$ to $\vec{y}$.
+\end{proof}
+
+\subsection{Orthonormal Basis}
+\begin{definition}[Orthonormal Basis]
+    An orthonormal basis of a subspace $W$ of $\mathbb{R}^n$ is a basis of $W$ that is an orthogonal family of unit vectors i.e.:
+    \[
+        \vec{u_i} \cdot \vec{u_j} = \begin{cases*}
+            1 & if $i = j$ \\
+            0 & if $i \neq j$
+        \end{cases*}
+    \]
+\end{definition}
+Remark that then, for an orthonormal basis, $\text{proj}_W(\vec{v})$ simplifies to:
+\[
+    \text{proj}_W(\vec{v}) = \sum_{i=1}^{k} (\vec{v} \cdot \vec{u_i}) \vec{u_i}
+\]
+Also note that the standard basis of $\mathbb{R}^n$ is an orthonormal basis.
+
+\begin{theorem}
+    The columns of a matrix $U \in \mathbb{R}^{m \times n}$ form an orthonormal basis of $\text{Im} U$ if and only if $U^T U = I_n$.
+\end{theorem}
+\begin{proof}
+    Let $\mathcal{U} = (\vec{u_1}, \vec{u_2}, \ldots, \vec{u_n})$ be a basis of a subspace $W$ of $\mathbb{R}^m$. Then, the matrix $U \in \mathbb{R}^{m \times n}$ can be expressed as:
+    \[
+        U = \begin{bmatrix}
+            | & | & & | \\
+            \vec{u_1} & \vec{u_2} & \ldots & \vec{u_n} \\
+            | & | & & |
+        \end{bmatrix}
+    \]
+    and thus $U^T \in \mathbb{R}^{n \times m}$ is given by:
+    \[
+        U^T = \begin{bmatrix}
+            - & (\vec{u_1})^T & - \\
+            - & (\vec{u_2})^T & - \\
+            & \vdots & \\
+            - & (\vec{u_n})^T & -
+        \end{bmatrix}
+    \]
+    Therefore, the product $U^T U$ is:
+    \[
+        U^T U = \begin{bmatrix}
+            \vec{u_1} \cdot \vec{u_1} & \vec{u_1} \cdot \vec{u_2} & \ldots & \vec{u_1} \cdot \vec{u_n} \\
+            \vec{u_2} \cdot \vec{u_1} & \vec{u_2} \cdot \vec{u_2} & \ldots & \vec{u_2} \cdot \vec{u_n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \vec{u_n} \cdot \vec{u_1} & \vec{u_n} \cdot \vec{u_2} & \ldots & \vec{u_n} \cdot \vec{u_n}
+        \end{bmatrix}
+    \]
+    Thus, if $\mathcal{U}$ is an orthonormal basis of $W$, then:
+    \[
+        U^T U = I_n
+    \]
+    Conversely, if $U^T U = I_n$, then:
+    \[
+        \vec{u_i} \cdot \vec{u_j} = \begin{cases*}
+            1 & if $i = j$ \\
+            0 & if $i \neq j$
+        \end{cases*}
+    \]
+    which means that $\mathcal{U}$ is an orthonormal basis of $W$.
+\end{proof}
+Remark that if $\mathcal{U}$ is an orthogonal basis but not orthonormal, then $U^T U$ is a diagonal matrix where the diagonal entries are the squared norms of the basis vectors:
+\[
+    U^T U = \begin{bmatrix}
+        \vec{u_1} \cdot \vec{u_1} & 0 & \ldots & 0 \\
+        0 & \vec{u_2} \cdot \vec{u_2} & \ldots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \ldots & \vec{u_n} \cdot \vec{u_n}
+    \end{bmatrix}
+\]
+
+\begin{eg}
+    Let $\vec{u_1} = \begin{bmatrix}
+        1 \\ 1 \\ 1 \\ 0
+    \end{bmatrix}$, $\vec{u_2} = \begin{bmatrix}
+        1 \\ 0 \\ -1 \\ 2
+    \end{bmatrix}$ and $\vec{u_3} = \begin{bmatrix}
+        1 \\ -1 \\ 0 \\ - \frac{1}{2}
+    \end{bmatrix}$ be vectors in $\mathbb{R}^4$. Let's check if $\mathcal{U} = (\vec{u_1}, \vec{u_2}, \vec{u_3})$ forms an orthonormal or orthogonal basis. We start by constructing the matrix $U$:
+    \[
+        U = \begin{bmatrix}
+            1 & 1 & 1 \\
+            1 & 0 & -1 \\
+            1 & -1 & 0 \\
+            0 & 2 & -\frac{1}{2}
+        \end{bmatrix}
+    \]
+    Then, we compute $U^T U$:
+    \[
+        U^T U = \begin{bmatrix}
+            3 & 0 & 0 \\
+            0 & 6 & 0 \\
+            0 & 0 & \frac{9}{4}
+        \end{bmatrix}
+    \]
+    Since $U^T U$ is not the identity matrix, the vectors $\vec{u_1}, \vec{u_2}, \vec{u_3}$ do not form an orthonormal basis. However, they do form an orthogonal basis since the off-diagonal entries are zero. \\
+    For any vector $\vec{y} \in \text{span}\{u_1, u_2, u_3\}$, we can find its coordinates in this basis using:
+    \[
+        \vec{y} = c_1 \vec{u_1} + c_2 \vec{u_2} + c_3 \vec{u_3} = \begin{bmatrix}
+            1 & 1 & 1 \\
+            1 & 0 & -1 \\
+            1 & -1 & 0 \\
+            0 & 2 & -\frac{1}{2}
+        \end{bmatrix} \begin{bmatrix}
+            c_1 \\ c_2 \\ c_3
+        \end{bmatrix} = U [\vec{y}]_{\mathcal{U}}
+    \]
+    We have:
+    \[
+        U^T \cdot U [\vec{y}]_{\mathcal{U}} = U^T \vec{y}
+    \]
+    Which implies:
+    \[
+        \begin{bmatrix}
+            3 & 0 & 0 \\
+            0 & 6 & 0 \\
+            0 & 0 & \frac{9}{4}
+        \end{bmatrix}
+        \begin{bmatrix}
+            c_1 \\ c_2 \\ c_3
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 1 & 1 & 0 \\
+            1 & 0 & -1 & 2 \\
+            1 & -1 & 0 & -\frac{1}{2}
+        \end{bmatrix} \vec{y}
+    \]
+    Thus:
+    \[
+        \begin{bmatrix}
+            c_1 \\ c_2 \\ c_3
+        \end{bmatrix} = \begin{bmatrix}
+            \frac{1}{3} & 0 & 0 \\
+            0 & \frac{1}{6} & 0 \\
+            0 & 0 & \frac{4}{9}
+        \end{bmatrix} \begin{bmatrix}
+            \vec{u_1} \cdot \vec{y} \\
+            \vec{u_2} \cdot \vec{y} \\
+            \vec{u_3} \cdot \vec{y}
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let $U$ be a matrix whose columns form an orthonormal basis of a subspace $W$ of $\mathbb{R}^n$. Then, for any vectors $\vec{v}, \vec{w} \in \mathbb{R}^n$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $||U\vec{v}|| = ||\vec{v}||$
+        \item $(U\vec{v}) \cdot (U\vec{w}) = \vec{v} \cdot \vec{w}$
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let $\vec{v}, \vec{w} \in \mathbb{R}^n$. Since the columns of $U$ form an orthonormal basis of $W$, we have $U^T U = I_n$.
+    For the first property:
+    \[
+        ||U\vec{v}||^2 = (U\vec{v}) \cdot (U\vec{v}) = (U\vec{v})^T (U\vec{v}) = \vec{v}^T (U^T U) \vec{v} = \vec{v}^T I_n \vec{v} = \vec{v}^T \vec{v} = ||\vec{v}||^2
+    \]
+    Taking the square root of both sides, we get:
+    \[
+        ||U\vec{v}|| = ||\vec{v}||
+    \]
+    For the second property:
+    \[
+        (U\vec{v}) \cdot (U\vec{w}) = (U\vec{v})^T (U\vec{w}) = \vec{v}^T (U^T U) \vec{w} = \vec{v}^T I_n \vec{w} = \vec{v}^T \vec{w} = \vec{v} \cdot \vec{w}
+    \]
+\end{proof}
+
+\begin{theorem}
+    If $(\vec{u_1}, \ldots, \vec{u_p})$ is a orthonormal basis of a subspace $W$ of $\mathbb{R}^n$, then:
+    \[
+        \text{proj}_W(\vec{v}) = (\vec{v} \cdot \vec{u_1}) \vec{u_1} + (\vec{v} \cdot \vec{u_2}) \vec{u_2} + \ldots + (\vec{v} \cdot \vec{u_p}) \vec{u_p}
+    \]
+    If $U$ is the matrix whose columns are the vectors of the orthonormal basis, then:
+    \[
+        \text{proj}_W(\vec{v}) = U U^T \vec{v}
+    \]
+\end{theorem}
+\begin{proof}
+    Let $(\vec{u_1}, \ldots, \vec{u_p})$ be an orthonormal basis of a subspace $W$ of $\mathbb{R}^n$. By the definition of orthonormal basis, we have:
+    \[
+        \text{proj}_W(\vec{v}) = \sum_{i=1}^{p} (\vec{v} \cdot \vec{u_i}) \vec{u_i}
+    \]
+    Now, let $U$ be the matrix whose columns are the vectors of the orthonormal basis:
+    \[
+        U = \begin{bmatrix}
+            | & | & & | \\
+            \vec{u_1} & \vec{u_2} & \ldots & \vec{u_p} \\
+            | & | & & |
+        \end{bmatrix}
+    \]
+    Then, the transpose of $U$ is:
+    \[
+        U^T = \begin{bmatrix}
+            - & (\vec{u_1})^T & - \\
+            - & (\vec{u_2})^T & - \\
+            & \vdots & \\
+            - & (\vec{u_p})^T & -
+        \end{bmatrix}
+    \]
+    The product $U U^T$ is given by:
+    \[
+        U U^T = \sum_{i=1}^{p} \vec{u_i} (\vec{u_i})^T
+    \]
+    Therefore, for any vector $\vec{v} \in \mathbb{R}^n$, we have:
+    \[
+        U U^T \vec{v} = \sum_{i=1}^{p} \vec{u_i} (\vec{u_i})^T \vec{v} = \sum_{i=1}^{p} (\vec{v} \cdot \vec{u_i}) \vec{u_i} = \text{proj}_W(\vec{v})
+    \]
+\end{proof}
+Remark that $U U^T = I_n$ holds but in general $U U^T \neq I_m$.
+
+\begin{definition}[Orthogonal Matrix]
+    A matrix $Q \in \mathbb{R}^{n \times n}$ is called an orthogonal matrix if its columns form an orthonormal basis of $\mathbb{R}^n$, i.e. if $Q^T Q = I_n$.
+\end{definition}
+Remark that $Q^{-1} = Q^T$ since $Q^T Q = I_n$.
+
+\begin{theorem}
+    If $Q \in \mathbb{R}^{n \times n}$ is an orthogonal matrix, then:
+    \[
+        Q^T Q = Q Q^T = I_n
+    \]
+\end{theorem}
+\begin{proof}
+    Since $Q$ is an orthogonal matrix, by definition, we have:
+    \[
+        Q^T Q = I_n
+    \]
+    To show that $Q Q^T = I_n$, let $V = Q^T$. Then:
+    \[
+        V^{-1} = (Q^T)^{-1} = (Q^{-1})^T = (Q^T)^T = V^T \quad \iff \quad V^T V = V^{-1} V = I_n
+    \]
+    Thus $V$ is also an orthogonal matrix, and thus it's columns form an orthonormal basis of $\mathbb{R}^n$. Therefore:
+    \[
+        Q Q^T = V^T V = I_n
+    \]
+\end{proof}
