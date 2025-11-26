@@ -454,6 +454,8 @@ Remark that the extrema of a function $f: [a,b] \to \mathbb{R}$ can only occur a
     \item Endpoints of the interval ($x = a$ or $x = b$)
 \end{itemize}
 
+\subsection{Rolle's Theorem}
+
 \begin{theorem}[Rolle's Theorem]
     Let $f: [a,b] \to \mathbb{R}$ be a function that is continuous on $[a,b]$ and differentiable on $(a,b)$ such that:
     \[        f(a) = f(b) \]
@@ -528,6 +530,7 @@ Remark that if $f: (a, b) \to \mathbb{R}$ is a function that is differentiable a
 \end{eg}
 Remark that $f(x)$ is derivable on $(-\frac{1}{2}, \frac{1}{2})$ but $f$ is not of class $C^1((-\frac{1}{2}, \frac{1}{2}))$ since $f'$ is not continuous at $x = 0$ (due to the term $\sin(\frac{1}{x})$).
 
+\subsection{Mean Value Theorem}
 \begin{theorem}[Mean Value Theorem]
     Let $f: [a,b] \to \mathbb{R}$ be a function that is continuous on $[a,b]$ and differentiable on $(a,b)$. Then, there exists at least one point $c \in (a,b)$ such that:
     \[        f'(c) = \frac{f(b) - f(a)}{b - a} \]
@@ -586,6 +589,7 @@ Remark that the converse of the third and fourth points is not necessarily true.
     This is a contradiction. Therefore, the equation $f(x) = 0$ has exactly one solution $x > 0$.
 \end{eg}
 
+\subsection{L'Hôpital's Rule}
 \begin{theorem}
     Let $f, g: [a,b] \to \mathbb{R}$ such that they are continuous on $[a,b]$, differentiable on $(a,b)$ and $g'(x) \neq 0$ on $(a,b)$. Then, there exists at least one point $c \in (a,b)$ such that:
     \[        \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)} \]
@@ -672,6 +676,280 @@ Remark that:
     Therefore, we have:
     \[        \lim_{x \to 0} \left(\cos (2x)\right)^{\frac{3}{x^2}} = e^{-6} \]
 \end{eg}
+
+\section{Taylor's Series}
+\begin{theorem}[Taylor's Theorem]
+    Let $f: I \to \mathbb{R}$ be a function of class $C^{n + 1}$ on the interval $I$ and let $x_0 \in I$. Then, for any $x \in I$, there exists a point $c \in (x_0, x)$ such that:
+    \[
+        f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \ldots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + R_n(x)
+    \]
+    where:
+    \[        R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x - x_0)^{n+1}
+    \]
+\end{theorem}
+Remark that the term without the remainder $R_n(x)$ is called the Taylor polynomial of degree $n$ of the function $f$ at the point $x_0$. The remainder term $R_n(x)$ represents the error made when approximating $f(x)$ by its Taylor polynomial of degree $n$. \\
+Note the following:
+\[
+    T_f'(x) \Big|_{x = x_0} = f'(x_0) \quad \text{and} \quad T_f''(x) \Big|_{x = x_0} = f''(x_0) \quad \ldots \quad T_f^{(n)}(x) \Big|_{x = x_0} = f^{(n)}(x_0)
+\]
+Making the Taylor polynomial $T_f(x)$ of degree $n$ at the point $x_0$ the best approximation of $f(x)$ in the sense that it matches the first $n$ derivatives of $f$ at the point $x_0$. 
+
+\begin{eg}
+    Let's compute the Taylor polynomial of $f(x) = \sin x$ at the point $x_0 = 0$. We have:
+    \[
+        f'(x) = \cos x \quad f''(x) = -\sin x \quad f'''(x) = -\cos x \quad f^{(4)}(x) = \sin x \quad \ldots
+    \]
+    and:
+    \[
+        f'(0) = 1 \quad f''(0) = 0 \quad f'''(0) = -1 \quad f^{(4)}(0) = 0 \quad \ldots
+    \]
+    Thus, the Taylor polynomial of degree $n$ at the point $x_0 = 0$ is given by:
+    \[
+        \sin x = \frac{1}{1!}(x - 0) + \frac{-1}{3!}(x - 0)^3 + \frac{1}{5!}(x - 0)^5 + \ldots + \frac{(-1)^{n}}{(2n + 1)!}(x - 0)^{2n + 1} + R_{2n + 1}(x)
+    \]
+    Or more compactly:
+    \[        \sin x = \sum_{k=0}^{n} \frac{(-1)^{k}}{(2k + 1)!} (x - 0)^{2k + 1} + R_{2n + 1}(x)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the Taylor polynomial of $f(x) = \cos x$ at the point $x_0 = 0$. We have:
+    \[        f'(x) = -\sin x \quad f''(x) = -\cos x \quad f'''(x) = \sin x \quad f^{(4)}(x) = \cos x \quad \ldots
+    \]
+    and:
+    \[        f'(0) = 0 \quad f''(0) = -1 \quad f'''(0) = 0 \quad f^{(4)}(0) = 1 \quad \ldots
+    \]
+    Thus, the Taylor polynomial of degree $n$ at the point $x_0 = 0$ is given by:
+    \[        \cos x = 1 + \frac{-1}{2!}(x - 0)^2 + \frac{1}{4!}(x - 0)^4 + \ldots + \frac{(-1)^{n}}{(2n)!}(x - 0)^{2n} + R_{2n}(x)
+    \]
+    Or more compactly:
+    \[        \cos x = \sum_{k=0}^{n} \frac{(-1)^{k}}{(2k)!} (x - 0)^{2k} + R_{2n}(x)
+    \]
+    Another method to obtain the Taylor polynomial of $\cos x$ is to use the Taylor polynomial of $\sin x$ and the relation:
+    \[        \frac{d}{dx}(\sin x) = \cos x
+    \]
+    Since:
+    \[
+        \sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots + \frac{(-1)^{n}}{(2n + 1)!} x^{2n + 1} + R_{2n + 1}(x)
+    \]
+    If we differentiate this expression term by term, we obtain:
+    \[        \cos x = 1 - \frac{3x^2}{3!} + \frac{5x^4}{5!} - \ldots + \frac{(-1)^{n}(2n + 1)x^{2n}}{(2n + 1)!} + R_{2n + 1}'(x)
+    \]
+    Simplifying the coefficients, we get:
+    \[        \cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots + \frac{(-1)^{n}}{(2n)!} x^{2n} + R_{2n + 1}'(x)
+    \]
+\end{eg}
+Remark that the Taylor polynomial of degree $n$ at the point $x_0 = 0$ is also called the Maclaurin polynomial of degree $n$.
+
+\subsection{Expansions}
+\begin{definition}[Expansion]
+    Let $f: E \to F$ be a function defined in a neighborhood of $x_0 \in E$. We say that $f$ admits an expansion of order $n$ at the point $x_0$ if there exist constants $a_0, a_1, \ldots, a_n \in F$ and a function $\epsilon: E \to F$ such that for all $x \in E, x \neq x_0$, the following holds:
+    \[        f(x) = a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n + (x - x_0)^n \epsilon(x)
+    \]
+    with:
+    \[        \lim_{x \to x_0} \epsilon(x) = 0
+    \]
+\end{definition}
+Note that $R_n(x) = (x - x_0)^n \epsilon(x)$ is called the reminder of the expansion, and $P_n(x) = a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n$ is called the polynomial part of the expansion.
+
+\begin{theorem}
+    If $f: E \to F$ admits an expansion of order $n$ at the point $x_0 \in E$, then the expansion is unique.
+\end{theorem}
+\begin{proof}
+    Let's suppose that $f$ admits two expansions of order $n$ at the point $x_0$:
+    \[        f(x) = a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n + (x - x_0)^n \epsilon_1(x)
+    \]
+    and:
+    \[        f(x) = b_0 + b_1 (x - x_0) + \ldots + b_n (x - x_0)^n + (x - x_0)^n \epsilon_2(x)
+    \]
+    with:
+    \[        \lim_{x \to x_0} \epsilon_1(x) = 0 \quad \text{and} \quad \lim_{x \to x_0} \epsilon_2(x) = 0
+    \]
+    Let $k$ be the smallest integer such that $a_k \neq b_k$. Thus, we have:
+    \[
+        f(x) - f(x) = (a_k - b_k)(x - x_0)^k + (a_{k+1} - b_{k+1})(x - x_0)^{k+1} + \ldots + (x - x_0)^n (\epsilon_1(x) - \epsilon_2(x))
+    \]
+    Dividing both sides by $(x - x_0)^k$, we get:
+    \[
+        0 = (a_k - b_k) + (a_{k+1} - b_{k+1})(x - x_0) + \ldots + (x - x_0)^{n - k} (\epsilon_1(x) - \epsilon_2(x))
+    \]
+    Taking the limit as $x \to x_0$, we have:
+    \[        0 = (a_k - b_k) + 0 + \ldots + 0 = a_k - b_k
+    \]
+    This is a contradiction since we assumed that $a_k \neq b_k$. Therefore, the expansion is unique.
+\end{proof}
+Let's show that if $f: I \to \mathbb{R}$ is a function of class $C^{n + 1}$ on the interval $I$, then Taylor's theorem implies that $f$ admits an expansion of order $n$ at any point $x_0 \in I$ i.e. if the reminder of Taylor's theorem can be written as:
+\[
+    R_n(x) = (x - x_0)^n \epsilon(x)
+\]
+with:
+\[    \lim_{x \to x_0} \epsilon(x) = 0
+\]
+Then Taylor's theorem is an expansion. With Taylor's theorem, the reminder is:
+\[
+    R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x - x_0)^{n+1}
+\]
+Let $\epsilon (x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x - x_0)$. Thus by computing the limit:
+\[
+    \lim_{x \to x_0} \left|\frac{f^{(n+1)}(c)}{(n+1)!}(x - x_0)\right| \leq \lim_{x \to x_0} M \left|\frac{(x - x_0)}{(n + 1)!}\right| = 0
+\]
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item to use Taylor's theorem, $f$ only needs to be of class $C^{n}$ and the remainder can be expressed as $R_n(x) = (x - x_0)^n \epsilon(x)$ (Note that the proof above does not hold, but the result is still valid. The proof for this argument is much more complicated).
+    \item $f$ might admit an expansion even if Taylor's theorem cannot be applied.
+\end{itemize}
+
+\begin{eg}
+    Let's compute the expension of $f(x) = e^x$ at the point $x_0 = 0$. We have:
+    \[        f^{(n)}(x) = e^x \quad \implies \quad f^{(n)}(0) = 1
+    \]
+    Thus, the expansion of $f$ at the point $x_0 = 0$ is given by:
+    \[        e^x = 1 + \frac{1}{1!} x + \frac{1}{2!} x^2 + \ldots + \frac{1}{n!} x^n + R_n(x)
+    \]
+    with:
+    \[        R_n(x) = \frac{e^c}{(n+1)!} x^{n+1}
+    \]
+    where $c$ is a point between $0$ and $x$. Thus, we have:
+    \[        \epsilon(x) = \frac{e^c}{(n+1)!} x \quad \implies \quad \lim_{x \to 0} \epsilon(x) = 0
+    \]
+    Therefore, the expansion of $f$ at the point $x_0 = 0$ is:
+    \[        e^x = 1 + \frac{1}{1!} x + \frac{1}{2!} x^2 + \ldots + \frac{1}{n!} x^n + (x - 0)^n \epsilon(x)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute a expansion for $f(x) = \frac{1}{1 - x}$ of order $n$ at the point $x_0 = 0$. We could compute the expansion using Taylor's theorem, but a easier way would be to transform it into a geometric series. Let $|x| < 1$, we have:
+    \[
+        \frac{1}{1-x} = \sum_{n = 0}^{\infty} x^n
+    \]
+    thus we have:
+    \[
+        \frac{1}{1-x} = \underbrace{1 + x + x^2 + \ldots + x^n}_{P_n(x)} + \underbrace{x^{n + 1} + x^{n + 2} + \ldots}_{x^n \epsilon(x)}
+    \]
+    with:
+    \[
+        x^n \epsilon(x) = x^{n + 1} + x^{n + 2} + \ldots = x^{n + 1} \left(1 + x + x^2 + \ldots\right) = x^{n + 1} \cdot \sum_{k = 0}^{\infty} x^k = x^{n + 1} \cdot \frac{1}{1 - x}
+    \]
+    and thus the limit of $\epsilon(x)$ as $x \to 0$ is:
+    \[        \lim_{x \to 0} \epsilon(x) = \lim_{x \to 0} \frac{1}{1 - x} = 0 \]
+    Therefore, the expansion of $f$ at the point $x_0 = 0$ is:
+    \[        \frac{1}{1-x} = 1 + x + x^2 + \ldots + x^n + (x - 0)^n \epsilon(x)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the expansion of $f(x) = \sin(x^2)$ of order $n$ at the point $x_0 = 0$. We have:
+    \[
+        \sin x = \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k + 1)!} x^{2k + 1}
+    \]
+    Thus, we have:
+    \[        \sin(x^2) = \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k + 1)!} (x^2)^{2k + 1} = \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k + 1)!} x^{4k + 2}
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\sin x}{x}
+    \]
+    Using the expansion of $\sin x$ at the point $x_0 = 0$, we have:
+    \[        \sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots + \frac{(-1)^{n}}{(2n + 1)!} x^{2n + 1} + R_{2n + 1}(x)
+    \]
+    Thus, we have:
+    \begin{align*}
+        \frac{\sin x}{x} &= \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots + \frac{(-1)^{n}}{(2n + 1)!} x^{2n + 1} + R_{2n + 1}(x)}{x} \\
+        &= 1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \ldots + \frac{(-1)^{n}}{(2n + 1)!} x^{2n} + \frac{R_{2n + 1}(x)}{x}
+    \end{align*}
+    Taking the limit as $x \to 0$, we have:
+    \[        \lim_{x \to 0} \frac{\sin x}{x} = 1 - 0 + 0 - \ldots + 0 + 0 = 1
+    \]
+\end{eg}
+
+\section{Function Study}
+Recall that if $f: I \to F$ is differentiable on $I$ and $f$ has a local extremum at $x_0 \in I$, then:
+\[    f'(x_0) = 0
+\]
+
+\begin{theorem}[Sufficient Condition for Local Extremum]
+    Let $f: I \to F$ be a function of class $C^n$ on $I$ such that for some even $n \in \mathbb{N}$:
+    \[
+        f'(x_0) = f''(x_0) = \ldots = f^{(n-1)}(x_0) = 0 \quad \text{and} \quad f^{(n)}(x_0) \neq 0
+    \]
+    Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item if $f^{(n)}(x_0) > 0$, then $f$ has a local minimum at $x_0$.
+        \item if $f^{(n)}(x_0) < 0$, then $f$ has a local maximum at $x_0$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Let's prove the first point. The second point can be proved similarly. Since $f$ is of class $C^n$ on $I$, by Taylor's theorem, for any $x \in I$, there exists a point $c$ between $x_0$ and $x$ such that:
+    \[
+        f(x) = f(x_0) + \frac{f^{(n)}(c)}{n!} (x - x_0)^n
+    \]
+    Since $f^{(n)}$ is continuous at $x_0$ and $f^{(n)}(x_0) > 0$, there exists a neighborhood $U$ of $x_0$ such that for all $c \in U$, we have:
+    \[        f^{(n)}(c) > 0
+    \]
+    Thus, for any $x \in U$, we have:
+    \[        f(x) - f(x_0) = \frac{f^{(n)}(c)}{n!} (x - x_0)^n > 0
+    \]
+    since $(x - x_0)^n \geq 0$ for even $n$. Therefore, $f(x) > f(x_0)$ for all $x \in U, x \neq x_0$. Thus, $f$ has a local minimum at $x_0$.
+\end{proof}
+
+\begin{definition}[Inflection Point]
+    Let $f: E \to F$ be a function differentiable on $a \in E$. Let $l(x) = f(a) + f'(a)(x - a)$ be the tangent line to the graph of $f$ at the point $(a, f(a))$. Let's define the following function:
+    \[
+        \psi(x) = f(x) - l(x) = f(x) - f(a) - f'(a)(x - a)
+    \]
+    If $\psi(x)$ changes sign at $x = a$, then $(a, f(a))$ is called an inflection point of $f$.
+\end{definition}
+
+\begin{theorem}[Sufficient Condition for Inflection Point]
+    Let $f: I \to F$ be a function of class $C^n$ on $I$ such that for some odd $n \in \mathbb{N}$ ($n > 1$):
+    \[
+        f''(x_0) = f'''(x_0) = \ldots = f^{(n-1)}(x_0) = 0 \quad \text{and} \quad f^{(n)}(x_0) \neq 0
+    \]
+    Then, $(x_0, f(x_0))$ is an inflection point of $f$.
+\end{theorem}
+\begin{proof}
+    Since $f$ is of class $C^n$ on $I$, by Taylor's theorem, for any $x \in I$, there exists a point $c$ between $x_0$ and $x$ such that:
+    \[
+        f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f^{(n)}(c)}{n!} (x - x_0)^n
+    \]
+    Thus, we have:
+    \[
+        \psi(x) = f(x) - f(x_0) - f'(x_0)(x - x_0) = \frac{f^{(n)}(c)}{n!} (x - x_0)^n
+    \]
+    Since $f^{(n)}$ is continuous at $x_0$ and $f^{(n)}(x_0) \neq 0$, there exists a neighborhood $U$ of $x_0$ such that for all $c \in U$, we have:
+    \[        f^{(n)}(c) \neq 0
+    \]
+    Thus, for any $x \in U, x \neq x_0$, we have:
+    \[        \psi(x) = \frac{f^{(n)}(c)}{n!} (x - x_0)^n
+    \]
+    Since $n$ is odd, $(x - x_0)^n$ changes sign as $x$ crosses $x_0$. Therefore, $\psi(x)$ changes sign at $x = x_0$. Thus, $(x_0, f(x_0))$ is an inflection point of $f$.
+\end{proof}
+
+\subsection{Convexity and Concavity}
+\begin{definition}[Convexity]
+    Let $f: I \to \mathbb{R}$ be a function defined on an interval $I$. It is said that $f$ is convex on $I$ if for any $a < b \in I$, the graph of $f(x)$ lies below the chord connecting the points $(a, f(a))$ and $(b, f(b))$. In other words, for any $x \in (a,b)$, we have:
+    \[        f(x) \leq f(a) + \frac{f(b) - f(a)}{b - a} (x - a)
+    \]
+\end{definition}
+
+\begin{definition}[Concavity]
+    Let $f: I \to \mathbb{R}$ be a function defined on an interval $I$. It is said that $f$ is concave on $I$ if for any $a < b \in I$, the graph of $f(x)$ lies above the chord connecting the points $(a, f(a))$ and $(b, f(b))$. In other words, for any $x \in (a,b)$, we have:
+    \[        f(x) \geq f(a) + \frac{f(b) - f(a)}{b - a} (x - a)
+    \]
+\end{definition}
+
+\begin{theorem}
+    Let $f: I \to \mathbb{R}$ be a function of class $C^2$ on the interval $I$. Then:
+    \[
+        f \text{ is convex on } I \quad \iff \quad f''(x) \geq 0 \text{ on } I \quad \iff \quad f'(x) \text{ is non-decreasing on } I
+    \]
+    \[
+        f \text{ is concave on } I \quad \iff \quad f''(x) \leq 0 \text{ on } I \quad \iff \quad f'(x) \text{ is non-increasing on } I
+    \]
+\end{theorem}
 
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
