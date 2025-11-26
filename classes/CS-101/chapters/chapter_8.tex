@@ -874,6 +874,382 @@ To solve a counting problem using recurrence relations, generally follow these s
     Therefore, the minimum number of steps required to solve the Tower of Hanoi problem with \( n \) disks is \( 2^n - 1 \).
 \end{eg}
 
+\section{Advanced Counting}
+
+\begin{eg}
+    Let $A$ and $B$ be two finite sets. We want to find the cardinality of their union $A \cup B$. We showed previously that:
+    \[
+        |A \cup B| = |A| + |B| - |A \cap B|
+    \]
+    This formula accounts for the fact that when we add the cardinalities of sets \( A \) and \( B \), the elements that are in both sets (the intersection \( A \cap B \)) are counted twice. To correct for this double counting, we subtract the cardinality of the intersection \( |A \cap B| \) once.  
+\end{eg}
+
+\begin{eg}
+    How many integers between $1$ and $100$ are divisible by $2$ or $5$? \\
+    Let's define the sets:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( A \): the set of integers between \( 1 \) and \( 100 \) that are divisible by \( 2 \).
+        \item \( B \): the set of integers between \( 1 \) and \( 100 \) that are divisible by \( 5 \).
+    \end{itemize}
+    We want to find the cardinality of the union \( A \cup B \), which represents the integers that are divisible by \( 2 \) or \( 5 \). \\
+    First, we calculate the cardinalities of sets \( A \), \( B \), and their intersection \( A \cap B \):
+    \[
+        |A| = \left\lfloor \frac{100}{2} \right\rfloor = 50
+    \]
+    \[
+        |B| = \left\lfloor \frac{100}{5} \right\rfloor = 20
+    \]
+    \[
+        |A \cap B| = \left\lfloor \frac{100}{10} \right\rfloor = 10
+    \]
+    Now, we can use the formula for the cardinality of the union:
+    \[
+        |A \cup B| = |A| + |B| - |A \cap B| = 50 + 20 - 10 = 60
+    \]
+    Therefore, there are \( 60 \) integers between \( 1 \) and \( 100 \) that are divisible by \( 2 \) or \( 5 \).
+\end{eg}
+
+\begin{eg}
+    How many integers between $1$ and $1000$ are divisible by $5$, $7$ and $11$? \\
+    Let's define the sets:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( A \): the set of integers between \( 1 \) and \( 1000 \) that are divisible by \( 5 \).
+        \item \( B \): the set of integers between \( 1 \) and \( 1000 \) that are divisible by \( 7 \).
+        \item \( C \): the set of integers between \( 1 \) and \( 1000 \) that are divisible by \( 11 \).
+    \end{itemize}
+    We want to find the cardinality of the union \( A \cup B \cup C \), which represents the integers that are divisible by \( 5 \), \( 7 \), or \( 11 \). \\
+    First, we calculate the cardinalities of sets \( A \), \( B \), \( C \), and their pairwise and triple intersections:
+    \[
+        |A| = \left\lfloor \frac{1000}{5} \right\rfloor = 200
+    \]
+    \[
+        |B| = \left\lfloor \frac{1000}{7} \right\rfloor = 142
+    \]
+    \[
+        |C| = \left\lfloor \frac{1000}{11} \right\rfloor = 90
+    \]
+    \[
+        |A \cap B| = \left\lfloor \frac{1000}{35} \right\rfloor = 28
+    \]
+    \[
+        |A \cap C| = \left\lfloor \frac{1000}{55} \right\rfloor = 18
+    \]
+    \[
+        |B \cap C| = \left\lfloor \frac{1000}{77} \right\rfloor = 12
+    \]
+    \[
+        |A \cap B \cap C| = \left\lfloor \frac{1000}{385} \right\rfloor = 2
+    \]
+    Now, we can use the Inclusion-Exclusion Principle to find the cardinality of the union:
+    \begin{align*}
+        |A \cup B \cup C| &= |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| \\
+        &= 200 + 142 + 90 - 28 - 18 - 12 + 2 \\
+        &= 374
+    \end{align*}
+\end{eg}
+If generalized to \( n \) sets, the following can be observed:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Include the cardinalities of individual sets.
+    \item Exclude the cardinalities of all pairwise intersections.
+    \item Include the cardinalities of all triple intersections.
+    \item Continue this process, alternating between inclusion and exclusion, until the intersection of all \( n \) sets is included or excluded based on whether \( n \) is odd or even.
+\end{itemize}
+\begin{theorem}[Inclusion-Exclusion Principle]
+    For any finite sets \( A_1, A_2, \ldots, A_n \), the cardinality of their union is given by:
+    \begin{align*}
+        |A_1 \cup A_2 \cup \ldots \cup A_n| &= \sum_{i=1}^{n} |A_i| - \sum_{1 \leq i < j \leq n} |A_i \cap A_j| \\
+        &+ \sum_{1 \leq i < j < k \leq n} |A_i \cap A_j \cap A_k| - \ldots + (-1)^{n+1} |A_1 \cap A_2 \cap \ldots \cap A_n|
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Assume that an element $a$ is in $r$ sets with $1 \leq r \leq n$ i.e. $a \in A_{i_1}, A_{i_2}, \ldots, A_{i_r}$. \\
+    \textbf{Counting the contribution of $a$ to the right-hand side:}
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item In the first sum, $a$ is counted $r$ times (once for each set it belongs to).
+        \item In the second sum, $a$ is counted $\binom{r}{2}$ times (once for each pair of sets it belongs to).
+        \item In the third sum, $a$ is counted $\binom{r}{3}$ times (once for each triplet of sets it belongs to).
+        \item This pattern continues until the last term, where $a$ is counted $(-1)^{r+1} \binom{r}{r} = (-1)^{r+1}$ times.
+    \end{itemize}
+    Therefore, the total contribution of $a$ to the right-hand side is:
+    \[
+        r - \binom{r}{2} + \binom{r}{3} - \ldots + (-1)^{r + 1} \binom{r}{r - 1}
+    \]
+    Which can be rewritten as:
+    \[
+        \sum_{k=1}^{r} (-1)^{k-1} \binom{r}{k} = \sum_{k = 1}^{r} \binom{r}{k} (1)^{r-k} (-1)^{k - 1} = (1 - 1)^r - (-1) = 1
+    \]
+    This shows that each element $a$ is counted exactly once on the right-hand side, which matches its contribution to the left-hand side. Therefore, the two sides are equal, proving the Inclusion-Exclusion Principle.
+\end{proof}
+
+\begin{eg}
+    How many permutations of the five digits $1,2,3,4,5$ begin with a $1$, contain the digit $45$ in second and third positionsm or end with a $3$? \\
+    Let's define the sets:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( A \): the set of permutations that begin with a \( 1 \).
+        \item \( B \): the set of permutations that contain the digits \( 4, 5 \) in the second and third positions.
+        \item \( C \): the set of permutations that end with a \( 3 \).
+    \end{itemize}
+    We want to find the cardinality of the union \( A \cup B \cup C \), which represents the permutations that satisfy at least one of the conditions. \\
+    First, we calculate the cardinalities of sets \( A \), \( B \), \( C \), and their pairwise and triple intersections:
+    \[
+        |A| = 4! = 24
+    \]
+    \[
+        |B| = 3! = 6
+    \]
+    \[
+        |C| = 4! = 24
+    \]
+    \[
+        |A \cap B| = 2! = 2
+    \]
+    \[
+        |A \cap C| = 3! = 6
+    \]
+    \[
+        |B \cap C| = 2! = 2
+    \]
+    \[
+        |A \cap B \cap C| = 1! = 1
+    \]
+    Now, we can use the Inclusion-Exclusion Principle to find the cardinality of the union:
+    \begin{align*}
+        |A \cup B \cup C| &= |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| \\
+        &= 24 + 6 + 24 - 2 - 6 - 2 + 1 \\
+        &= 45
+    \end{align*}
+    Therefore, there are \( 45 \) permutations of the digits \( 1, 2, 3, 4, 5 \) that begin with a \( 1 \), contain the digits \( 4, 5 \) in the second and third positions, or end with a \( 3 \).
+\end{eg}
+
+\subsection{Derangements}
+\begin{definition}[Derangement]
+    A derangement is a permutation of a set in which none of the elements appear in their original position. In other words, for a set of \( n \) elements, a derangement is a permutation \( \sigma \) such that \( \sigma(i) \neq i \) for all \( i \) from \( 1 \) to \( n \).
+\end{definition}
+
+\begin{theorem}
+    The number of derangements of a set with \( n \) elements, denoted as \( D_n \), is given by the formula:
+    \[
+        D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}
+    \]
+\end{theorem}
+\begin{proof}
+    Let $P_i$ be the set of permutations that fix the position of element $i$. The number of derangements is the number of permutations having none of the properties $P_i$ for $i = 1, 2, \ldots, n$. Thus:
+    \[
+        D_n = \left(n! - \underbrace{\sum_{i = 1}^{n}}_{= n} \underbrace{|P_i|}_{= (n-1)!} + \underbrace{\sum_{i \neq j}^{n}}_{= \binom{n}{2}} \underbrace{|P_i \cap P_j|}_{= (n-2)!} - \ldots + (-1)^n |P_1 \cap P_2 \cap \ldots \cap P_n|\right)
+    \]
+    Therefore:
+    \begin{align*}
+        D_n &= n! - n (n-1)! + \binom{n}{2} (n-2)! - \ldots + (-1)^n 1 \\
+        &= n! - n! + \frac{n!}{2!} - \ldots + (-1)^n \frac{n!}{n!} \\
+        &= n! \left(1 - \frac{1}{1!} + \frac{1}{2!} - \ldots + (-1)^n \frac{1}{n!}\right)
+    \end{align*}
+\end{proof}
+
+\begin{eg}
+    An employee checks the hats of $5$ people at a restaurant, but forget to put claim check numbers on the hats. When customers returns for their hats, the checker gives them back a hat chosen at random from the remaining hats. What is the change that no one receives their correct hat? \\
+    We want to find the probability that no one receives their correct hat when $5$ hats are randomly distributed among $5$ people. This is equivalent to finding the number of derangements of $5$ elements, denoted as $D_5$, and dividing it by the total number of permutations of $5$ elements, which is $5!$. \\
+    Using the formula for derangements, we have:
+    \[
+        D_5 = 5! \sum_{k=0}^{5} \frac{(-1)^k}{k!} = 120 \left(1 - 1 + \frac{1}{2!} - \frac{1}{3!} + \frac{1}{4!} - \frac{1}{5!}\right) = 120 \left(\frac{1}{2} - \frac{1}{6} + \frac{1}{24} - \frac{1}{120}\right) = 44
+    \]
+    Therefore, the probability that no one receives their correct hat is:
+    \[
+        \text{Probability} = \frac{D_5}{5!} = \frac{44}{120} = \frac{11}{30} \approx 0.3667 \approx \frac{1}{e}
+    \]
+\end{eg}
+
+\section{Countability}
+\begin{definition}[Cardinality]
+    The cardinality of a set \( A \), denoted as \( |A| \), is a measure of the "number of elements" in the set. For finite sets, the cardinality is simply the count of distinct elements in the set. For infinite sets, cardinality is defined using concepts such as bijections and countability.
+\end{definition}
+
+\subsection{Finite Sets}
+\begin{theorem}
+    Let $A$ and $B$ be two sets. If there exists an injection from $A$ to $B$, then:
+    \[
+        |A| \leq |B|
+    \]
+\end{theorem}
+\begin{proof}
+    An injection from set \( A \) to set \( B \) is a function \( f: A \to B \) such that for every pair of distinct elements \( a_1, a_2 \in A \), we have \( f(a_1) \neq f(a_2) \). This means that each element in \( A \) is mapped to a unique element in \( B \), and no two elements in \( A \) map to the same element in \( B \). \\
+    Since each element in \( A \) corresponds to a distinct element in \( B \), the number of elements in \( A \) cannot exceed the number of elements in \( B \). Therefore, we conclude that:
+    \[
+        |A| \leq |B|
+    \]
+\end{proof}
+
+\begin{eg}
+    Let $A$ be the set of students at EPFL and $B$ be the set of sciper numbers. We know that each student has a unique sciper number, which means there exists an injection from $A$ to $B$. Therefore, we can conclude that:
+    \[
+        |A| \leq |B|
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let $A$ and $B$ be two sets. If there exists a surjection from $A$ to $B$, then:
+    \[
+        |A| \geq |B|
+    \]
+\end{theorem}
+\begin{proof}
+    A surjection from set \( A \) to set \( B \) is a function \( f: A \to B \) such that for every element \( b \in B \), there exists at least one element \( a \in A \) such that \( f(a) = b \). This means that every element in \( B \) is "covered" by at least one element in \( A \). \\
+    Since every element in \( B \) has at least one corresponding element in \( A \), the number of elements in \( A \) must be at least as large as the number of elements in \( B \). Therefore, we conclude that:
+    \[
+        |A| \geq |B|
+    \]
+\end{proof}
+
+\begin{eg}
+    Let $A$ be the set of students at EPFL and $B$ be the set of sections offered at EPFL. We know that each section has at least one student enrolled and every student is enrolled in at least one section, which means there exists a surjection from $A$ to $B$. Therefore, we can conclude that:
+    \[
+        |A| \geq |B|
+    \]
+\end{eg}
+
+\begin{theorem}
+    Let $A$ and $B$ be two sets. If there exists a bijection from $A$ to $B$, then:
+    \[
+        |A| = |B|
+    \]
+\end{theorem}
+\begin{proof}
+    A bijection from set \( A \) to set \( B \) is a function \( f: A \to B \) that is both an injection and a surjection. This means that for every pair of distinct elements \( a_1, a_2 \in A \), we have \( f(a_1) \neq f(a_2) \) (injection), and for every element \( b \in B \), there exists at least one element \( a \in A \) such that \( f(a) = b \) (surjection). \\
+    Since each element in \( A \) corresponds to a unique element in \( B \), and every element in \( B \) is "covered" by at least one element in \( A \), the number of elements in both sets must be the same. Therefore, we conclude that:
+    \[
+        |A| = |B|
+    \]
+\end{proof}
+
+\subsection{Infinite Sets}
+\begin{eg}
+    Let's compare the cardinalities of the set of natural numbers \( \mathbb{N} \) and the set of even natural numbers \( 2\mathbb{N} \). \\
+    We can define a bijection \( f: \mathbb{N} \to 2\mathbb{N} \) by the function \( f(n) = 2n \). This function maps each natural number \( n \) to its double, which is an even natural number. \\
+    To show that \( f \) is a bijection, we need to demonstrate that it is both an injection and a surjection:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Injection: If \( f(n_1) = f(n_2) \), then \( 2n_1 = 2n_2 \). Dividing both sides by \( 2 \), we get \( n_1 = n_2 \). Therefore, \( f \) is injective.
+        \item Surjection: For every even natural number \( m \in 2\mathbb{N} \), there exists a natural number \( n = \frac{m}{2} \in \mathbb{N} \) such that \( f(n) = m \). Therefore, \( f \) is surjective.
+    \end{itemize}
+    Since \( f \) is both an injection and a surjection, it is a bijection. Therefore, we conclude that:
+    \[
+        |\mathbb{N}| = |2\mathbb{N}|
+    \]
+\end{eg}
+Remark that this result in counter-intuitive, as $2\mathbb{N}$ is a proper subset of $\mathbb{N}$.
+
+\begin{definition}[Infinite Set]
+    A set \( A \) is called infinite if there exists a bijection between \( A \) and a proper subset of \( A \). Otherwise, the set is called finite.
+\end{definition}
+
+\subsection{Countable Sets}
+\begin{definition}[Countable Set]
+    A set \( A \) is called countable if there exists a bijection between \( A \) and the set of natural numbers \( \mathbb{N} \) or a subset of \( \mathbb{N} \). If no such bijection exists, the set is called uncountable.
+\end{definition}
+Remark that when an infinite set is countable (countably infinite), its cardinality is denoted by \( \aleph_0 \) (aleph-null).
+
+\begin{theorem}
+    An infinite set $S$ is countable if and only if it is possible to list the elements of the set in a sequence indexed by the positive integers, i.e., $S = \{s_1, s_2, s_3, \ldots\}$.
+\end{theorem}
+\begin{proof}
+    (\( \Rightarrow \)) Assume that \( S \) is countable. By definition, there exists a bijection \( f: \mathbb{N} \to S \). We can list the elements of \( S \) in a sequence as follows:
+    \[
+        s_1 = f(1), \quad s_2 = f(2), \quad s_3 = f(3), \quad \ldots
+    \]
+    This gives us a sequence \( S = \{s_1, s_2, s_3, \ldots\} \).
+
+    (\( \Leftarrow \)) Conversely, assume that we can list the elements of \( S \) in a sequence indexed by the positive integers:
+    \[
+        S = \{s_1, s_2, s_3, \ldots\}
+    \]
+    We can define a function \( f: \mathbb{N} \to S \) by \( f(n) = s_n \). This function is a bijection because:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Injection: If \( f(n_1) = f(n_2) \), then \( s_{n_1} = s_{n_2} \). Since the elements are listed in a sequence, this implies that \( n_1 = n_2 \).
+        \item Surjection: For every element \( s_k \in S \), there exists a natural number \( k \) such that \( f(k) = s_k \).
+    \end{itemize}
+    Therefore, we conclude that \( S \) is countable.
+\end{proof}
+
+\begin{eg}
+    Let's show that the set of positive odd integers $F$ is a countable set. Let $f: \mathbb{Z}^+ \to F, f(n) = 2n -1$. \\
+    We will show that $f$ is a bijection:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Injection: Assume that $f(n_1) = f(n_2)$. Then, $2n_1 - 1 = 2n_2 - 1$. By adding $1$ to both sides and dividing by $2$, we get $n_1 = n_2$. Therefore, $f$ is injective.
+        \item Surjection: Let $m \in F$. By definition of $F$, there exists $k \in \mathbb{Z}^+$ such that $m = 2k - 1$. Thus, $f(k) = m$. Therefore, $f$ is surjective.
+    \end{itemize}
+    Since $f$ is both injective and surjective, it is a bijection. Therefore, we conclude that:
+    \[
+        |\mathbb{Z}^+| = |F|
+    \]
+\end{eg}
+Remark that by intuition, the cardinality of a set is the "size of" the set. However, in the case of infinite sets, this intuition does not always hold, as demonstrated by the example of the set of natural numbers and the set of even natural numbers, i.e. $A \subset B \nrightarrow |A| < |B|$.
+
+\subsection{Properties of Countable Sets}
+All of the following properties hold for countable sets:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Any subset of a countable set is countable.
+    \item The union of a finite number of countable sets is countable.
+    \item The cartesian product of a finite number of countable sets is countable.
+    \item The set of all strings associated to a finite alphabet is countable.
+\end{itemize}
+Also:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If there is an injective function from $A$ to $B$ and $B$ is countable, then $A$ is countable.
+    \item If there is a surjective function from $A$ to $B$ and $A$ is countable, then $B$ is countable.
+\end{itemize}
+
+\begin{eg}
+    Let's show that the set of integers $\mathbb{Z}$ is countable. We can define a bijection $f: \mathbb{Z}^+ \to \mathbb{Z}$ as follows:
+    \[
+        f(n) = \begin{cases}
+            \frac{n}{2} & \text{if } n \text{ is even} \\
+            -\frac{n-1}{2} & \text{if } n \text{ is odd}
+        \end{cases}
+    \]
+    We will show that $f$ is a bijection:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Injection: Assume that $f(n_1) = f(n_2)$. We consider two cases:
+        \begin{itemize}[itemsep=1pt,label=$\circ$]
+            \item If both $n_1$ and $n_2$ are even, then $\frac{n_1}{2} = \frac{n_2}{2}$, which implies that $n_1 = n_2$.
+            \item If both $n_1$ and $n_2$ are odd, then $-\frac{n_1 - 1}{2} = -\frac{n_2 - 1}{2}$, which implies that $n_1 = n_2$.
+            \item If one of $n_1$ or $n_2$ is even and the other is odd, then $f(n_1)$ and $f(n_2)$ cannot be equal, since one is non-negative and the other is negative. Therefore, $f$ is injective.
+        \end{itemize}
+        \item Surjection: Let $m \in \mathbb{Z}$. We consider two cases:
+        \begin{itemize}[itemsep=1pt,label=$\circ$]
+            \item If $m \geq 0$, then we can choose $n = 2m$. Thus, $f(n) = m$.
+            \item If $m < 0$, then we can choose $n = -2m - 1$. Thus, $f(n) = m$.
+        \end{itemize}
+        Therefore, $f$ is surjective.
+    \end{itemize}
+    Since $f$ is both injective and surjective, it is a bijection. Therefore, we conclude that:
+    \[
+        |\mathbb{Z}^+| = |\mathbb{Z}|
+    \]
+\end{eg}
+Remark that this result could have been obtained using the property that the union of a finite number of countable sets is countable, since:
+\[
+    \mathbb{Z} = \{0\} \cup \mathbb{Z}^+ \cup (-\mathbb{Z}^+)
+\]
+
+\begin{eg}[Hilbert's Hotel]
+    A hotel with a countably infinite number of rooms is fully occupied. A new guest arrives and wants a room. Is it possible to accommodate this new guest? \\
+    Yes, it is possible to accommodate the new guest by shifting the current guests to different rooms. We can define a function \( f: \mathbb{Z}^+ \to \mathbb{Z}^+ \) that maps each current guest's room number to a new room number:
+    \[
+        f(n) = n + 1
+    \]
+    This function shifts each guest from room \( n \) to room \( n + 1 \). As a result, room \( 1 \) becomes available for the new guest. \\
+    Since \( f \) is a bijection, it shows that the hotel can accommodate the new guest while still having a countably infinite number of rooms occupied. Therefore, the hotel can successfully accommodate the new guest. \\
+    Now a bus with a countably infinite number of new guests arrives. Is it possible to accommodate all these new guests? \\
+    Yes, it is possible to accommodate all the new guests by shifting the current guests to different rooms. We can define a function \( g: \mathbb{Z}^+ \to \mathbb{Z}^+ \) that maps each current guest's room number to a new room number:
+    \[
+        g(n) = 2n
+    \]
+    This function shifts each guest from room \( n \) to room \( 2n \). As a result, all odd-numbered rooms become available for the new guests. \\
+    We can then assign the new guests to the odd-numbered rooms as follows:
+    \[
+        \text{New guest } k \text{ is assigned to room } 2k - 1
+    \]
+    Since both \( g \) and the assignment of new guests are bijections, it shows that the hotel can accommodate all the new guests while still having a countably infinite number of rooms occupied. Therefore, the hotel can successfully accommodate all the new guests.
+\end{eg}
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 % TODO: add in the exercise the quizz of w11c1 @ 40:40
