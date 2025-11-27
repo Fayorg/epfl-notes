@@ -892,3 +892,144 @@ Remark that $Q^{-1} = Q^T$ since $Q^T Q = I_n$.
         Q Q^T = V^T V = I_n
     \]
 \end{proof}
+
+\section{Gram-Schmidt Process}
+\begin{eg}
+    Let $W = \text{span}\{\vec{x_1}, \vec{x_2}\}$ with $\vec{x_1} = \begin{bmatrix}
+        3 \\ 6 \\ 0
+    \end{bmatrix}$ and $\vec{x_2} = \begin{bmatrix}
+        1 \\ 2 \\ 2
+    \end{bmatrix}$. We clearly see that $\vec{x_1}$ and $\vec{x_2}$ are not linearly dependent and thus they form a basis of $W$. We want to transform this basis into an orthonormal basis. To do so, let's start by normalizing $\vec{x_1}$:
+    \[
+        \vec{u_1} = \frac{\vec{x_1}}{||\vec{x_1}||} = \frac{1}{\sqrt{3^2 + 6^2 + 0^2}} \begin{bmatrix}
+            3 \\ 6 \\ 0
+        \end{bmatrix} = \frac{1}{\sqrt{45}} \begin{bmatrix}
+            3 \\ 6 \\ 0
+        \end{bmatrix} = \begin{bmatrix}
+            \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0
+        \end{bmatrix}
+    \]
+    Now, this vector generate a line through the origin. By a previous theorem, if we want to find a vector orthogonal to $\vec{x_1}$, we can project $\vec{x_2}$ onto the line spanned by $\vec{u_1}$ and subtract this projection from $\vec{x_2}$:
+    \[
+        \text{proj}_{\vec{u_1}}(\vec{x_2}) = (\vec{x_2} \cdot \vec{u_1}) \vec{u_1} = \left( \begin{bmatrix}
+            1 \\ 2 \\ 2
+        \end{bmatrix} \cdot \begin{bmatrix}
+            \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0
+        \end{bmatrix} \right) \begin{bmatrix}
+            \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0
+        \end{bmatrix} = \frac{5}{\sqrt{5}} \begin{bmatrix}
+            \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0
+        \end{bmatrix} = \begin{bmatrix}
+            1 \\ 2 \\ 0
+        \end{bmatrix}
+    \]
+    Thus, we can find a vector orthogonal to $\vec{u_1}$ by computing:
+    \[
+        \vec{y} = \vec{x_2} - \text{proj}_{\vec{u_1}}(\vec{x_2}) = \begin{bmatrix}
+            1 \\ 2 \\ 2
+        \end{bmatrix} - \begin{bmatrix}
+            1 \\ 2 \\ 0
+        \end{bmatrix} = \begin{bmatrix}
+            0 \\ 0 \\ 2
+        \end{bmatrix}
+    \]
+    Finally, we normalize $\vec{y}$ to get $\vec{u_2}$:
+    \[
+        \vec{u_2} = \frac{\vec{y}}{||\vec{y}||} = \frac{1}{\sqrt{0^2 + 0^2 + 2^2}} \begin{bmatrix}
+            0 \\ 0 \\ 2
+        \end{bmatrix} = \frac{1}{2} \begin{bmatrix}
+            0 \\ 0 \\ 2
+        \end{bmatrix} = \begin{bmatrix}
+            0 \\ 0 \\ 1
+        \end{bmatrix}
+    \]
+    Therefore, the orthonormal basis of $W$ is given by:
+    \[
+        \mathcal{U} = \left( \begin{bmatrix}
+            \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0
+        \end{bmatrix}, \begin{bmatrix}
+            0 \\ 0 \\ 1
+        \end{bmatrix} \right)
+    \]
+    Remark that we can view what we did in terms of matrix factorization. We have:
+    \[
+        \vec{x_1} = ||\vec{x_1}|| \vec{u_1}
+    \]
+    and:
+    \[
+        \vec{x_2} = \text{proj}_{\vec{u}_1}(\vec{x_2}) + \vec{y} = (\vec{x_2} \cdot \vec{u_1}) \vec{u_1} + \vec{y} = (\vec{x_2} \cdot \vec{u_1}) \vec{u_1} + ||\vec{y}|| \vec{u_2}
+    \]
+    Thus, we can write:
+    \[
+        \underbrace{\begin{bmatrix}
+            | & | \\
+            \vec{x_1} & \vec{x_2} \\
+            | & |
+        \end{bmatrix}}_{A} = \underbrace{\begin{bmatrix}
+            | & | \\
+            \vec{u_1} & \vec{u_2} \\
+            | & |
+        \end{bmatrix}}_{Q} \underbrace{\begin{bmatrix}
+            ||\vec{x_1}|| & \vec{x_2} \cdot \vec{u_1} \\
+            0 & ||\vec{y}||
+        \end{bmatrix}}_{R}
+    \]
+\end{eg}
+Note that if this example was in $\mathbb{R}^4$ with $\vec{x_1}, \vec{x_2}, \vec{x_3}$ and the orthonormal basis $\vec{u_1}, \vec{u_2}, \vec{u_3}$, then the following holds:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\{\vec{u_1}\}$ is a basis of $\text{span}\{\vec{x_1}\}$
+    \item $\{\vec{u_1}, \vec{u_2}\}$ is a basis of $\text{span}\{\vec{x_1}, \vec{x_2}\}$
+    \item $\{\vec{u_1}, \vec{u_2}, \vec{u_3}\}$ is a basis of $\text{span}\{\vec{x_1}, \vec{x_2}, \vec{x_3}\}$
+\end{itemize}
+Remark that since the columns of $Q$ form an orthonormal basis of $\text{Im} A$, it follows that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $Q^T Q = I_n$
+    \item $\text{proj}_{\text{Im} A} (\vec{y}) = Q Q^T \vec{y}$
+\end{itemize}
+
+\begin{theorem}[Gram-Schmidt Process]
+    Let $A = \begin{bmatrix}
+        | & | & & | \\
+        \vec{x_1} & \vec{x_2} & \ldots & \vec{x_n} \\
+        | & | & & |
+    \end{bmatrix}$ be a matrix in $\mathbb{R}^{m \times n}$ with linearly independent columns i.e. $(\vec{x_1}, \vec{x_2}, \ldots, \vec{x_n})$ is a basis of $W = \text{Im} A$. Then, there exists an orthonormal basis $(\vec{u_1}, \vec{u_2}, \ldots, \vec{u_n})$ of $W$ that can be constructed as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Set $\vec{u_1} = \frac{\vec{x_1}}{||\vec{x_1}||}$
+        \item For $k = 2, 3, \ldots, n$:
+        \[
+            \vec{y_k} = \vec{x_k} - \sum_{j=1}^{k-1} \text{proj}_{\vec{u_j}}(\vec{x_k}) = \vec{x_k} - \sum_{j=1}^{k-1} (\vec{x_k} \cdot \vec{u_j}) \vec{u_j}
+        \]
+        \[
+            \vec{u_k} = \frac{\vec{y_k}}{||\vec{y_k}||}
+        \]
+    \end{itemize}
+\end{theorem}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If the vectors $\vec{x_1}, \vec{x_2}, \ldots, \vec{x_n}$ are orthogonal, then the Gram-Schmidt process simply normalizes each vector to obtain the orthonormal basis.
+    \item If the vectors $\vec{x_1}, \vec{x_2}, \ldots, \vec{x_n}$ are linearly dependent, the Gram-Schmidt process can still be applied by ignoring the vectors that lead to $\vec{y_k} = \vec{0}$ or if their norme is zero.
+\end{itemize}
+Also remark that to solve $A \vec{x} = \vec{b}$ using the QR factorization obtained from the Gram-Schmidt process:
+\[
+    A \vec{x} = \vec{b} \quad \iff \quad Q R \vec{x} = \vec{b} \quad \iff \quad R \vec{x} = Q^T \vec{b}
+\]
+and since $R$ is triangular solving this system is easy using back substitution.
+
+\subsection{QR and Determinant}
+The $QR$ factorization can also be used to compute/understand the determinant of a square matrix. Indeed, if $A$ is a square matrix and $A = QR$ is its $QR$ factorization, then:
+\[
+    1 = \det(I_n) = \det(Q^T Q) = \det(Q^T) \det(Q) = (\det(Q))^2 \quad \implies \quad \det(Q) = \pm 1
+\]
+and thus:
+\[
+    \det(A) = \det(QR) = \det(Q) \det(R) = \pm \det(R)
+\]
+Since $R$ is an upper triangular matrix, its determinant is the product of its diagonal entries:
+\[
+    \det(R) = r_{11} r_{22} \ldots r_{nn} = ||\vec{x_1}|| \cdot ||\vec{y_2}|| \cdot \ldots \cdot ||\vec{y_n}||
+\]
+Therefore:
+\[
+    |\det(A)| = ||\vec{x_1}|| \cdot ||\vec{y_2}|| \cdot \ldots \cdot ||\vec{y_n}||
+\]
+Remark that the absolute value of the determinant of $A$ gives the volume of the "hyper" parallelepiped spanned by the columns of $A$. Thus, the product of the norms of the orthogonal vectors $\vec{x_1}, \vec{y_2}, \ldots, \vec{y_n}$ also gives this volume.
