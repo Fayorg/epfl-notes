@@ -951,6 +951,219 @@ Recall that if $f: I \to F$ is differentiable on $I$ and $f$ has a local extremu
     \]
 \end{theorem}
 
+\subsection{Algebraic operations on Expansions}
+Let $f,g: E \to F$ be two functions that admit expansions of order $n$ at the point $x_0 \in E$:
+\[
+    f(x) = a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n + (x - x_0)^n \epsilon_f(x) = P_f^n(x) + (x- x_0)^n \epsilon_f(x)
+\]
+and:
+\[
+    g(x) = b_0 + b_1 (x - x_0) + \ldots + b_n (x - x_0)^n + (x - x_0)^n \epsilon_g(x) = P_g^n(x) + (x- x_0)^n \epsilon_g(x)
+\]
+where both $\epsilon_f(x)$ and $\epsilon_g(x)$ tend to $0$ as $x$ tends to $x_0$. The following operations can be performed on these expansions:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item \textbf{Addition:} The function $\alpha f + \beta g$ admits an expansion of order $n$ at the point $x_0$ given by:
+    \begin{align*}
+        (\alpha f + \beta g)(x) &= \alpha a_0 + \beta b_0 + (\alpha a_1 + \beta b_1)(x - x_0) + \ldots + (\alpha a_n + \beta b_n)(x - x_0)^n \\
+        &\quad + (x - x_0)^n (\alpha \epsilon_f(x) + \beta \epsilon_g(x)) \\
+        &= \alpha P_f^n(x) + \beta P_g^n(x) + (x - x_0)^n (\alpha \epsilon_f(x) + \beta \epsilon_g(x))
+    \end{align*}
+    \item \textbf{Multiplication:} The function $f \cdot g$ admits an expansion of order $n$ at the point $x_0$ given by:
+    \begin{align*}
+        (f \cdot g)(x) &= (a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n)(b_0 + b_1 (x - x_0) + \ldots + b_n (x - x_0)^n) \\
+        &\quad + (x - x_0)^n \cdot \epsilon(x) \\
+        &= P_f^n(x) \cdot P_g^n(x) + (x - x_0)^n \cdot \epsilon(x)
+    \end{align*}
+    Remark that all the terms of degree higher than $n$ in the product $P_f(x) \cdot P_g(x)$ are included in the remainder.
+    \item \textbf{Division:} If $b_0 \neq 0$ and $g(x) \neq 0$ on $E$, the function $\frac{f}{g}$ admits an expansion of order $n$ at the point $x_0$ given by:
+    \begin{align*}
+        \left(\frac{f}{g}\right)(x) &= \frac{(a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n) + (x - x_0)^n \epsilon_f(x)}{(b_0 + b_1 (x - x_0) + \ldots + b_n (x - x_0)^n) + (x - x_0)^n \epsilon_g(x)} \\
+        &= \frac{P_f^n(x) + (x - x_0)^n \epsilon_f(x)}{P_g^n(x) + (x - x_0)^n \epsilon_g(x)} \\
+        &= \frac{P_f^n(x)}{P_g^n(x)} + (x - x_0)^n \cdot \epsilon(x)
+    \end{align*}
+    Remark that all the terms of degree higher than $n$ in the division $\frac{P_f(x)}{P_g(x)}$ are included in the remainder.
+\end{itemize}
+
+\begin{eg}
+    Let's compute the expansion of order $n = 4$ at the point $x_0 = 0$ of the function:
+    \[
+        f(x) = \frac{1}{1-x^2}
+    \]
+    \textbf{By using the decomposition} of $f(x)$ into partial fractions, we have:
+    \[        f(x) = \frac{1}{2} \cdot \frac{1}{1 - x} + \frac{1}{2} \cdot \frac{1}{1 + x}
+    \]
+    We know that the expansion of $\frac{1}{1 - x}$ at the point $x_0 = 0$ is given by:
+    \[        \frac{1}{1 - x} = 1 + x + x^2 + x^3 + x^4 + (x - 0)^4 \epsilon_1(x)
+    \]
+    And the expansion of $\frac{1}{1 + x}$ at the point $x_0 = 0$ is given by:
+    \[        \frac{1}{1 + x} = 1 - x + x^2 - x^3 + x^4 + (x - 0)^4 \epsilon_2(x)
+    \]
+    Thus, by adding these two expansions, we get:
+    \begin{align*}
+        f(x) &= \frac{1}{2} \left(1 + x + x^2 + x^3 + x^4 + (x - 0)^4 \epsilon_1(x)\right) + \frac{1}{2} \left(1 - x + x^2 - x^3 + x^4 + (x - 0)^4 \epsilon_2(x)\right) \\
+        &= 1 + x^2 + x^4 + (x - 0)^4 \epsilon(x)
+    \end{align*}
+    Now, \textbf{by using the multiplication}, we have:
+    \[        f(x) = \frac{1}{1 - x^2} = \frac{1}{1 - x} \cdot \frac{1}{1 + x}
+    \]
+    Thus, by multiplying the two expansions, we get:
+    \begin{align*}
+        f(x) &= \left(1 + x + x^2 + x^3 + x^4 + (x - 0)^4 \epsilon_1(x)\right) \cdot \left(1 - x + x^2 - x^3 + x^4 + (x - 0)^4 \epsilon_2(x)\right) \\
+        &= 1 + x^2 + x^4 + (x - 0)^4 \epsilon(x)
+    \end{align*}
+    Now, \textbf{by using the division} (i.e. using the Euclidean division of polynomials), we have:
+    % TODO: make this look better
+    $$\begin{array}{r@{}r|@{}l} \multicolumn{2}{r}{1\phantom{x^4}} & 1-x^2 \\ \cline{3-3} -(1 & -x^2) & 1+x^2+x^4 \\ \cline{1-1} \multicolumn{2}{r}{x^2\phantom{x^4}} \\ \multicolumn{2}{r}{-(x^2} & -x^4) \\ \cline{1-1} \multicolumn{2}{r}{x^4} \\ \multicolumn{2}{r}{-(x^4} & -x^6) \\ \cline{1-1} \multicolumn{2}{r}{x^6} & \text{(Remainder)} \end{array}$$
+    And finally, \textbf{by using indeterminate coefficients}. We have by multipling both sides by $1 - x^2$:
+    \[        (1 - x^2)(a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + x^4 \epsilon(x)) = 1
+    \]
+    Expanding the left-hand side, we get:
+    \begin{align*}
+        & a_0 + a_1 x + a_2 x^2 + a_3 x^3 + a_4 x^4 + x^4 \epsilon(x) \\
+        & - a_0 x^2 - a_1 x^3 - a_2 x^4 - a_3 x^5 - a_4 x^6 - x^6 \epsilon(x) = 1
+    \end{align*}
+    Grouping the terms by degree, we have:
+    \begin{align*}
+        & a_0 + a_1 x + (a_2 - a_0      ) x^2 + (a_3 - a_1) x^3 + (a_4 - a_2) x^4 \\
+        & - a_3 x^5 - a_4 x^6 + x^4 \epsilon(x) - x^6 \epsilon(x) = 1
+    \end{align*}
+    By identifying the coefficients, we get the following system of equations:
+    \[        \begin{cases}
+            a_0 = 1 \\
+            a_1 = 0 \\
+            a_2 - a_0 = 0 \\
+            a_3 - a_1 = 0 \\
+            a_4 - a_2 = 0
+        \end{cases}
+    \]
+    Solving this system, we find:
+    \[        a_0 = 1, \quad a_1 = 0, \quad a_2 = 1, \quad a_3 = 0, \quad a_4 = 1
+    \]
+    Therefore, the expansion of $f(x)$ at the point $x_0 = 0$ is:
+    \[        f(x) = 1 + x^2 + x^4 + x^4 \epsilon(x)
+    \]
+\end{eg}
+
+\subsection{Composition of expansions}
+Let $f: E \to F$ and $g: F \to G$ be two functions such that $f$ admits an expansion of order $n$ at the point $x_0 \in E$:
+\[    f(x) = a_0 + a_1 (x - x_0) + \ldots + a_n (x - x_0)^n + (x - x_0)^n \epsilon_f(x)
+\]
+and $g$ admits an expansion of order $n$ at the point $y_0 = 0 \in F$:
+\[    g(y) = b_0 + b_1 (y - y_0) + \ldots + b_n (y - y_0)^n + (y - y_0)^n \epsilon_g(y)
+\]
+Then, the composition $g \circ f$ admits an expansion of order $n$ at the point $x_0$ given by:
+\begin{align*}
+    P_{g \circ f}^n(x) = g(0) + b_1(P_f^n(x - x_0)) + b_2(P_f^n(x - x_0))^2 + \ldots + b_n(P_f^n(x - x_0))^n
+\end{align*}
+where all the terms of degree higher than $n$ are included in the remainder.
+
+\begin{eg}
+    Let's compute the expansion of order $n = 4$ at the point $x_0 = 0$ of the function:
+    \[
+        f(x) = \frac{1}{1 - x^2}
+    \]
+    We know that the expansion of $\frac{1}{1 - x}$ at the point $x_0 = 0$ is given by:
+    \[        \frac{1}{1 - x} = 1 + x + x^2 + x^3 + x^4 + (x - 0)^4 \epsilon_1(x)
+    \]
+    Thus, by composing this expansion with $x^2$, we get:
+    \begin{align*}
+        f(x) &= \frac{1}{1 - x^2} = \frac{1}{1 - (x^2)} \\
+        &= 1 + (x^2) + (x^2)^2 + (x^2)^3 + (x^2)^4 + (x^2)^4 \epsilon(x) \\
+        &= 1 + x^2 + x^4 + (x - 0)^4 \epsilon(x)
+    \end{align*}
+\end{eg}
+Remark that the expansion of order $n = 4$ of $x^2$ at the point $x_0 = 0$ is given by:
+\[    x^2 = 0 + 0 \cdot (x - 0) + 1 \cdot (x - 0)^2 + 0 \cdot (x - 0)^3 + 0 \cdot (x - 0)^4 + (x - 0)^4 \epsilon(x)
+\]
+thus, the expansion of $x^2$ at order $n < 2$ is simply:
+\[    x^2 = 0 + 0 \cdot (x - 0) + (x - 0)^n \epsilon(x)
+\]
+
+\section{Applications of expansions}
+Expansions can be used to compute limits, study the behavior of functions near a point, and approximate functions.
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{\left(e^x - \frac{1}{1 - x}\right)^2}{x \sin(x) - x^2}
+    \]
+    We first note that since the expansion of $x \cdot \sin(x)$ at the point $x_0 = 0$ is given by:
+    \[        x \sin(x) = x^2 - \frac{x^4}{3!} + \frac{x^6}{5!} - \ldots + \frac{(-1)^n}{(2n + 1)!} x^{2n + 2} + R_{2n + 1}(x)
+    \]
+    Thus, we will need to take the order $n = 4$ for the expansion. Let's compute the expansions of the numerator and denominator separately.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Numerator:} Note that since the numerator is squared, we only need to compute the expansion of $e^x - \frac{1}{1 - x}$ at the point $x_0 = 0$ up to order $n = 2$. We have:
+        \[        e^x = 1 + \frac{1}{1!} x + \frac{1}{2!} x^2 + (x - 0)^2 \epsilon_1(x)
+        \]
+        and:
+        \[        \frac{1}{1 - x} = 1 + x + x^2 + (x - 0)^2 \epsilon_2(x)
+        \]
+        Thus, by subtracting these two expansions, we get:
+        \begin{align*}
+            e^x - \frac{1}{1 - x} &= \left(1 + \frac{1}{1!} x + \frac{1}{2!} x^2 + (x - 0)^2 \epsilon_1(x)\right) - \left(1 + x + x^2 + (x - 0)^2 \epsilon_2(x)\right) \\
+            &= -\frac{x^2}{2} + x^2 \epsilon_3(x)
+        \end{align*}
+        Therefore, by squaring this expansion, we get:
+        \begin{align*}
+            \left(e^x - \frac{1}{1 - x}\right)^2 &= \left(-\frac{x^2}{2} + x^2 \epsilon_3(x)\right)^2 \\
+            &= \frac{1}{4} x^4 + x^4 \epsilon_4(x)
+        \end{align*}
+        \item \textbf{Denominator:} The expansion of $x \sin(x)$ at the point $x_0 = 0$ is given by:
+        \[        x \sin(x) = x^2 - \frac{x^4}{3!} + (x - 0)^4 \epsilon_3(x)
+        \]
+        Thus, by subtracting $x^2$, we get:
+        \begin{align*}
+            x \sin(x) - x^2 &= \left(x^2 - \frac{x^4}{3!} + (x - 0)^4 \epsilon_3(x)\right) - x^2 \\
+            &= -\frac{1}{6} x^4 + (x - 0)^4 \epsilon_4(x)
+        \end{align*}
+    \end{itemize}
+    Therefore, we have:
+    \begin{align*}
+        \frac{\left(e^x - \frac{1}{1 - x}\right)^2}{x \sin(x) - x^2} &= \frac{\frac{1}{4} x^4 + x^4 \epsilon_4(x)}{-\frac{1}{6} x^4 + x^4 \epsilon_4(x)}
+    \end{align*}
+    Taking the limit as $x \to 0$, we have:
+    \[        \lim_{x \to 0} \frac{\left(e^x - \frac{1}{1 - x}\right)^2}{x \sin(x) - x^2} = \frac{\frac{x^4}{4} + x^4 \epsilon_5(x)}{-\frac{1}{6} x^4 + x^4 \epsilon_6(x)} = \frac{\frac{1}{4} + \epsilon_5(x)}{-\frac{1}{6} + \epsilon_6(x)} = -\frac{3}{2}
+    \]
+\end{eg}
+Remark that this limit could have been computed using L'Hôpital's rule, but one would need to apply it 4 times to get the correct result.
+
+\begin{eg}
+    Let's compute the limit:
+    \[
+        \lim_{x \to 0} \frac{e^{\sin x} - e^x}{x^3}
+    \]
+    We first note that since the denominator is of order $3$, we will need to take the expansion of the numerator up to order $n = 3$. Let's compute the expansions of $e^{\sin x}$ and $e^x$ separately.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \textbf{Expansion of $e^{\sin x}$:} We know that the expansion of $\sin x$ at the point $x_0 = 0$ is given by:
+        \[        \sin x = x - \frac{x^3}{3!} + (x - 0)^3 \epsilon_1(x)
+        \]
+        Thus, by composing this expansion with $e^x$, we get:
+        \begin{align*}
+            e^{\sin x} &= e^{x - \frac{x^3}{6} + (x - 0)^3 \epsilon_1(x)} \\
+            &= 1 + \left(x - \frac{x^3}{6} + (x - 0)^3 \epsilon_1(x)\right) + \frac{1}{2!} \left(x - \frac{x^3}{6} + (x - 0)^3 \epsilon_1(x)\right)^2 \\
+            &\quad + \frac{1}{3!} \left(x - \frac{x^3}{6} + (x - 0)^3 \epsilon_1(x)\right)^3 + (x - 0)^3 \epsilon_2(x) \\
+            &= 1 + x + \frac{x^2}{2} + \frac{x^3}{6} - \frac{x^3}{6} + (x - 0)^3 \epsilon_3(x) \\
+            &= 1 + x + \frac{x^2}{2} + (x - 0)^3 \epsilon_3(x)
+        \end{align*}
+        \item \textbf{Expansion of $e^x$:} We know that the expansion of $e^x$ at the point $x_0 = 0$ is given by:
+        \[        e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + (x - 0)^3 \epsilon_4(x)
+        \]
+    \end{itemize}
+    Thus, by subtracting these two expansions, we get:
+    \begin{align*}
+        e^{\sin x} - e^x &= \left(1 + x + \frac{x^2}{2} + (x - 0)^3 \epsilon_3(x)\right) - \left(1 + x + \frac{x^2}{2} + \frac{x^3}{6} + (x - 0)^3 \epsilon_4(x)\right) \\
+        &= -\frac{x^3}{6} + (x - 0)^3 \epsilon_5(x)
+    \end{align*}
+    Therefore, we have:
+    \begin{align*}
+        \frac{e^{\sin x} - e^x}{x^3} &= \frac{-\frac{x^3}{6} + (x - 0)^3 \epsilon_5(x)}{x^3}
+    \end{align*}
+    Taking the limit as $x \to 0$, we have:
+    \[        \lim_{x \to 0} \frac{e^{\sin x} - e^x}{x^3} = -\frac{1}{6}
+    \]
+\end{eg}
+Remark that any expansions of order $n \geq 3$, will lead to the same result (it just makes the calculations longer).
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 

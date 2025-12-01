@@ -1,0 +1,178 @@
+\chapter{Power Series}
+
+\begin{definition}[Convergence Radius]
+    Let $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ ($x_0 \in \mathbb{R}, a_k \in \mathbb{R} \ \forall k \in \mathbb{N}$) be a power series. The domain of convergence is given by:
+    \[
+        D = \{x \in \mathbb{R}: \sum_{n=0}^{\infty} a_n (x - x_0)^n \text{ converges}\}
+    \]
+    The function $f: D \to \mathbb{R}, f(x) = \sum_{n=0}^{\infty} a_n (x - x_0)^n$ is called the function defined by the power series.
+\end{definition}
+
+\begin{eg}
+    We previously defined the exponential function as:
+    \[
+        \exp(x) = \sum_{n=0}^{\infty} \underbrace{\frac{x^n}{n!}}_{u_n}
+    \]
+    a power series with $a_n = \frac{1}{n!}$ and $x_0 = 0$. Let's determine its domain of convergence using d'Alembert's ratio test:
+    \[
+        \lim_{n \to \infty} \left| \frac{u_{n+1}}{u_n} \right| = \lim_{n \to \infty} \left| \frac{\frac{x^{n+1}}{(n+1)!}}{\frac{x^n}{n!}} \right| = \lim_{n \to \infty} \left| \frac{x}{n+1} \right| = 0
+    \]
+    Since this limit is $0$ for all $x \in \mathbb{R}$, the series converges for all real numbers. Thus, the domain of convergence is $D = \mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+    Let's consider the power series:
+    \[
+        \sum_{k = 0}^{\infty} a^k (x - x_0)^k 
+    \]
+    where $a > 0$. Using d'Alembert's ratio test, we have:
+    \[
+        \lim_{k \to \infty} \left| \frac{a^{k+1} (x - x_0)^{k+1}}{a^k (x - x_0)^k} \right| = \lim_{k \to \infty} |a (x - x_0)| = |a (x - x_ 0)| = a |x - x_0|
+    \]
+    For the series to converge, we need:
+    \[
+        |a (x - x_0)| < 1 \implies |x - x_0| < \frac{1}{a}
+    \]
+    Therefore, the domain of convergence is:
+    \[
+        D = \left( x_0 - \frac{1}{a}, x_0 + \frac{1}{a} \right)
+    \]
+    Note that if $|x - x_0| = \frac{1}{a}$, the series becomes:
+    \[
+        \sum_{k = 0}^{\infty} a^k \left(\pm \frac{1}{a}\right)^k = \sum_{k = 0}^{\infty} (\pm 1)^k
+    \]
+    which diverges. Thus, the endpoints are not included in the domain of convergence and if $x = x_0 \pm \frac{1}{a}$, the series diverges.
+\end{eg}
+
+\begin{theorem}[Convergence Radius of Power Series]
+    Let $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ be a power series. Then, there exists a unique $R \in [0, +\infty]$ such that the domain of convergence is:
+    \[
+        D = \{x \in \mathbb{R}: |x - x_0| < R\}
+    \]
+    with the following properties:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $R = 0$, the series converges only at $x = x_0$.
+        \item If $R = +\infty$, the series converges for all $x \in \mathbb{R}$.
+        \item If $0 < R < +\infty$, the series converges for all $x$ such that $|x - x_0| < R$ and diverges for all $x$ such that $|x - x_0| > R$. The behavior at the endpoints $x = x_0 \pm R$ must be examined separately.
+    \end{itemize}
+\end{theorem}
+Remark that the convergence radius $R$ is symmetric around $x_0$ and remark that if $R \in \mathbb{R}^*_+$, the domain of convergence has one of the following forms:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $(x_0 - R, x_0 + R)$
+    \item $[x_0 - R, x_0 + R)$
+    \item $(x_0 - R, x_0 + R]$
+    \item $[x_0 - R, x_0 + R]$
+\end{itemize}
+
+\subsection{Finding the Convergence Radius}
+\begin{theorem}
+    Let $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ ($a_n \neq 0 \forall n \in \mathbb{N}$) be a power series. The convergence radius $R$ is given by:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If the limit $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|$ exists and equals $l$, then:
+        \[
+            R = \frac{1}{l}
+        \]
+        \item If the limit $\lim_{n \to \infty} \sqrt[n]{|a_n|}$ exists and equals $l$, then:
+        \[
+            R = \frac{1}{l}
+        \]
+    \end{itemize}
+    With the convention that $\frac{1}{0} = +\infty$ and $\frac{1}{+\infty} = 0$ since $0 \leq l \leq +\infty$.
+\end{theorem}
+\begin{proof}
+    Let $x \in \mathbb{R}, x \neq x_0$. Applying d'Alembert's ratio test to the series $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ gives:
+    \[
+        \lim_{n \to \infty} \left| \frac{a_{n+1} (x - x_0)^{n+1}}{a_n (x - x_0)^n} \right| = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| |x - x_0|
+    \]
+    If the limit $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|$ exists and equals $l$, then the above limit becomes $l |x - x_0|$. According to d'Alembert's ratio test, the series converges if $l |x - x_0| < 1$, which is equivalent to $|x - x_0| < \frac{1}{l}$. Thus, the convergence radius is $R = \frac{1}{l}$.
+    Now, by applying Cauchy's root test to the same series:
+    \[
+        \lim_{n \to \infty} \sqrt[n]{|a_n (x - x_0)^n|} = \lim_{n \to \infty} \sqrt[n]{|a_n|} |x - x_0|
+    \]
+    If the limit $\lim_{n \to \infty} \sqrt[n]{|a_n|}$ exists and equals $l$, then the above limit becomes $l |x - x_0|$. According to Cauchy's root test, the series converges if $l |x - x_0| < 1$, which is equivalent to $|x - x_0| < \frac{1}{l}$. Thus, the convergence radius is again $R = \frac{1}{l}$.
+\end{proof}
+
+\begin{eg}
+    Let's compute the convergence radius of the power series:
+    \[
+        \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} x^n
+    \]
+    Using d'Alembert's ratio test, we have:
+    \[
+        \lim_{n \to \infty} \left| \frac{\frac{(n + 2)^2}{5^{n+1}} x^{n+1}}{\frac{(n + 1)^2}{5^n} x^n} \right| = \lim_{n \to \infty} \left| \frac{(n + 2)^2}{(n + 1)^2} \cdot \frac{x}{5} \right| = \left| \frac{x}{5} \right|
+    \]
+    For the series to converge, we need:
+    \[
+        \left| \frac{x}{5} \right| < 1 \implies |x| < 5
+    \]
+    Let's now check the behavior at the endpoints $x = \pm 5$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For $x = 5$:
+        \[
+            \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} \cdot 5^n = \sum_{n = 1}^{\infty} (n + 1)^2
+        \]
+        which diverges.
+        \item For $x = -5$:
+        \[
+            \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} \cdot (-5)^n = \sum_{n = 1}^{\infty} (n + 1)^2 (-1)^n
+        \]
+        which also diverges.
+    \end{itemize}
+    Therefore, the domain of convergence is:
+    \[
+        D = (-5, 5)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the convergence radius of the power series:
+    \[
+        \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} x^{3n}
+    \]
+    Since multiples of $a_k = 0$, we can only use Cauchy's root test here:
+    \[
+        \lim_{n \to \infty} \sqrt[n]{\left| \frac{(n + 1)^2}{5^n} x^{3n} \right|} = \lim_{n \to \infty} \sqrt[n]{\frac{(n + 1)^2}{5^n}} \cdot \sqrt[n]{|x^{3n}|} = \frac{|x^3|}{5} = \frac{|x|^3}{5}
+    \]
+    For the series to converge, we need:
+    \[
+        \frac{|x|^3}{5} < 1 \implies |x| < \sqrt[3]{5}
+    \]
+    Let's now check the behavior at the endpoints $x = \pm \sqrt[3]{5}$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For $x = \sqrt[3]{5}$:
+        \[
+            \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} \cdot (\sqrt[3]{5})^{3n} = \sum_{n = 1}^{\infty} (n + 1)^2
+        \]
+        which diverges.
+        \item For $x = -\sqrt[3]{5}$:
+        \[
+            \sum_{n = 1}^{\infty} \frac{(n + 1)^2}{5^n} \cdot (-\sqrt[3]{5})^{3n} = \sum_{n = 1}^{\infty} (n + 1)^2
+        \]
+        which also diverges.
+    \end{itemize}
+    Therefore, the domain of convergence is:
+    \[
+        D = \left( -\sqrt[3]{5}, \sqrt[3]{5} \right)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the convergence radius of the power series:
+    \[
+        \sum_{n = 1}^{\infty} \frac{(3n)!}{(n!)^3 b_n}x^n
+    \]
+    where $b_n$ is a sequence such that $\lim_{n \to \infty} \frac{b_{n + 1}}{b_n} = 3$ and $b_n \neq 0 \ \forall n \in \mathbb{N}$. Using d'Alembert's ratio test, we have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{\frac{(3(n + 1))!}{((n + 1)!)^3 b_{n + 1}} x^{n + 1}}{\frac{(3n)!}{(n!)^3 b_n} x^n} \right| &= \lim_{n \to \infty} \frac{(3n + 3)! b_n (n!)^3}{((n + 1)!)^3 b_{n + 1} (3n)!} |x| \\
+        &= \lim_{n \to \infty} \frac{(3n + 3)(3n + 2)(3n + 1)}{(n + 1)^3} \cdot \frac{b_n}{b_{n + 1}} |x| \\
+        &= 27 \cdot \frac{1}{3} |x| = 9 |x|
+    \end{align*}
+    For the series to converge, we need:
+    \[
+        9 |x| < 1 \implies |x| < \frac{1}{9}
+    \]
+    (We could check the endpoints here, but they would lead to more complex series.) Therefore, the domain of convergence is at least:
+    \[
+        D \supseteq \left( -\frac{1}{9}, \frac{1}{9} \right)
+    \]
+\end{eg}
