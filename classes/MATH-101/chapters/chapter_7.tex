@@ -176,3 +176,298 @@ Remark that the convergence radius $R$ is symmetric around $x_0$ and remark that
         D \supseteq \left( -\frac{1}{9}, \frac{1}{9} \right)
     \]
 \end{eg}
+
+\begin{theorem}[Generalized Cauchy Root Test]
+    Let $\sum_{n=0}^{\infty} a_n$ be a series. Then:
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|a_n|} = l
+    \]
+    where $0 \leq l \leq +\infty$, then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $l < 1$, the series converges absolutely.
+        \item If $l > 1$, the series diverges.
+        \item If $l = 1$, the test is inconclusive.
+    \end{itemize}
+    
+\end{theorem}
+
+\begin{theorem}
+    Let $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ be a power series, then if:
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|a_n|} = l
+    \]
+    where $0 \leq l \leq +\infty$, the convergence radius $R$ is given by:
+    \[
+        R = \frac{1}{l}
+    \]
+    with the convention that $\frac{1}{0} = +\infty$ and $\frac{1}{+\infty} = 0$.
+\end{theorem}
+
+\begin{eg}
+    Let's compute the convergence radius of the power series:
+    \[
+        \sum_{n = 1}^{\infty} a_n x^n \quad \text{where} \quad a_n = \begin{cases}
+            \frac{1}{n} & \text{if } n \text{ is even} \\
+            \frac{1}{n^n} & \text{if } n \text{ is odd}
+        \end{cases}
+    \]
+    Remark that the limit for the sequence $(a_n)$ does not exists. Using the generalized Cauchy root test, we have:
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|a_n|} = \limsup_{n \to \infty} \sqrt[n]{\begin{cases}
+            \frac{1}{n} & \text{if } n \text{ is even} \\
+            \frac{1}{n^n} & \text{if } n \text{ is odd}
+        \end{cases}}
+    \]
+    We can separate the limit superior into two subsequences:
+    \[
+        \limsup_{n \to \infty} \sqrt[2n]{\frac{1}{2n}} = 1 \quad \text{and} \quad \limsup_{n \to \infty} \sqrt[2n + 1]{\frac{1}{(2n + 1)^{2n + 1}}} = 0
+    \]
+    Therefore:
+    \[
+        \limsup_{n \to \infty} \sqrt[n]{|a_n|} = 1
+    \]
+    Thus, the convergence radius is:
+    \[
+        R = \frac{1}{1} = 1
+    \]
+    Let's now check the behavior at the endpoints $x = \pm 1$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For $x = 1$:
+        \[
+            \sum_{n = 1}^{\infty} a_n = \sum_{n = 1}^{\infty} \begin{cases}
+                \frac{1}{n} & \text{if } n \text{ is even} \\
+                \frac{1}{n^n} & \text{if } n \text{ is odd}
+            \end{cases}
+        \]
+        The series diverges since the even terms form the harmonic series.
+        \item For $x = -1$:
+        \[
+            \sum_{n = 1}^{\infty} a_n (-1)^n = \sum_{n = 1}^{\infty} \begin{cases}
+                \frac{1}{n} & \text{if } n \text{ is even} \\
+                -\frac{1}{n^n} & \text{if } n \text{ is odd}
+            \end{cases}
+        \]
+        The series also diverges since the even terms form the harmonic series.
+    \end{itemize}
+    Therefore, the domain of convergence is:
+    \[
+        D = (-1, 1)
+    \]
+\end{eg}
+
+\subsection{Taylor Series}
+\begin{definition}[Taylor Series]
+    Let $f: I \to \mathbb{R}$ be a function that is of class $C^{\infty}(I)$ (i.e. infinitely differentiable on an open interval $I \subseteq \mathbb{R}$) and let $x_0 \in I$. The Taylor series of $f$ centered at $x_0$ is the power series given by:
+    \[
+        \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n
+    \]
+    where $f^{(n)}$ denotes the $n$-th derivative of $f$.
+\end{definition}
+Remark that if $x_0 = 0$, the Taylor series is also called the Maclaurin series. \\
+It's possible to compute the domain $D$ of convergence of a Taylor series but more intrestingly, one can ask if the function $f$ is equal to the function defined by its Taylor series on its domain of convergence ($E \subset D$ is the set for which this equality holds). Remember that for a given function:
+\[
+    f(x) = \sum_{k = 0}^{n} \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k + \frac{f^{n + 1}(u)}{(n + 1)!}(x - x_0)^{n + 1}
+\]
+Taking the limit $n \to \infty$ leads to:
+\[
+    f(x) = \sum_{k = 0}^{\infty} \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k + \lim_{n \to \infty} \frac{f^{n + 1}(u)}{(n + 1)!}(x - x_0)^{n + 1}
+\]
+Thus, if the remainder term:
+\[
+    R_n(x) = \frac{f^{(n + 1)}(u)}{(n + 1)!}(x - x_0)^{n + 1}
+\]
+tends to $0$ as $n \to \infty$, then $f$ is equal to the function defined by its Taylor series on its domain of convergence.
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = e^x
+    \]
+    Which by definition:
+    \[
+        e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+    \]
+    Thus it converges for all $x \in \mathbb{R}$ and $D = \mathbb{R}, E = D = \mathbb{R}$
+\end{eg}
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \ln(x)
+    \]
+    Note that $f \in C^{\infty}((0, +\infty))$. Let's compute its Taylor series centered at $x_0 = 1$:
+    \[
+        f^{(n)}(x) = (-1)^{n - 1} (n - 1)! x^{-n}
+    \]
+    Thus:
+    \[
+        f(x) = \sum_{n=1}^{\infty} \frac{(-1)^{n - 1} (n - 1)!}{n!} (x - 1)^n = \sum_{n=1}^{\infty} \frac{(-1)^{n - 1}}{n} (x - 1)^n
+    \]
+    If we make a change of variable $t = x - 1$, we get:
+    \[
+        \ln(1 + t) = \sum_{n=1}^{\infty} \frac{(-1)^{n - 1}}{n} t^n
+    \]
+    Let's determine the domain of convergence using the convergence radius formula:
+    \[
+        \lim_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right| = \lim_{n \to \infty} \left| \frac{\frac{(-1)^n}{n + 1}}{\frac{(-1)^{n - 1}}{n}} \right| = \lim_{n \to \infty} \frac{n}{n + 1} = 1
+    \]
+    Thus, the convergence radius is $R = 1$. Let's now check the behavior at the endpoints $t = \pm 1$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For $t = 1$:
+        \[
+            \sum_{n=1}^{\infty} \frac{(-1)^{n - 1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \ldots
+        \]
+        This series converges (conditionally) to $\ln(2)$.
+        \item For $t = -1$:
+        \[
+            \sum_{n=1}^{\infty} \frac{(-1)^{n - 1}}{n} (-1)^n = -1 + \frac{1}{2} - \frac{1}{3} + \frac{1}{4} - \ldots
+        \]
+        This series diverges.
+    \end{itemize}
+    Therefore, the domain of convergence is:
+    \[
+        D_t = (-1, 1] \quad \implies \quad D_x = (0, 2]
+    \]
+    Finally, let's check if $f$ is equal to the function defined by its Taylor series on $D_x$. We have:
+    \[
+        \lim_{n \to \infty} \left|R_n(x)\right| = \lim_{n \to \infty} \left|\frac{(-1)^{n + 2}}{u^{n + 1}} n! \frac{(x-1)^{n + 1}}{(n + 1)!}\right| = \lim_{n \to \infty} \frac{1}{n + 1} \left| \frac{x - 1}{u} \right|^{n + 1}
+    \]
+    Which is difficule to compute directly. We can still take the case where $x = 2$:
+    \[
+        \lim_{n \to \infty} \left|R_n(2)\right| = \lim_{n \to \infty} \underbrace{\left|\frac{1}{u}\right|^{n + 1}}_{1 < u < 2} = 0
+    \] 
+    Thus, in this case, $f$ is equal to the function defined by its Taylor series at $x = 2$. Later in this course, we will see that $D = E = (0, 2]$.
+\end{eg}
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \frac{1}{1-x}
+    \]
+    If we remark that:
+    \[
+        \frac{1}{1-x} = \sum_{n=0}^{\infty} x^n \quad \text{for } |x| < 1
+    \]
+    we can see that this is the Taylor series of $f$ centered at $x_0 = 0$. Thus, we have $D = E = (-1, 1)$.
+\end{eg}
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \sin(x)
+    \]
+    Its Taylor series centered at $x_0 = 0$ is given by:
+    \[
+        \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n + 1)!} x^{2n + 1}
+    \]
+    Using d'Alembert's ratio test, we have (note that since we don't have that all terms are non-zero, we can't use the convergence radius formula directly):
+    \[
+        \lim_{n \to \infty} \left| \frac{\frac{(-1)^{n + 1}}{(2(n + 1) + 1)!} x^{2(n + 1) + 1}}{\frac{(-1)^{n}}{(2n + 1)!} x^{2n + 1}} \right| = \lim_{n \to \infty} \left| \frac{x^2}{(2n + 2)(2n + 3)} \right| = 0
+    \]
+    Thus, $D = \mathbb{R}$. Let's now check if $f$ is equal to the function defined by its Taylor series on $D$. We have:
+    \[
+        \lim_{n \to \infty} \left|R_n(x)\right| = \lim_{n \to \infty} \left|\frac{\pm \sin(u) \text{ or } \pm \cos(u)}{(n + 1)!}\right| |x|^{n + 1} \leq \lim_{n \to \infty} \frac{|x|^{n + 1}}{(n + 1)!} = 0 \quad \forall x \in \mathbb{R}
+    \]
+\end{eg}
+Similarly, we can show for $f(x) = \cos(x)$ that $D = E = \mathbb{R}$. Also remark the following Taylor series:
+\[
+    \sin(x) = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n + 1)!} x^{2n + 1}
+\]
+\[
+    \cos(x) = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!} x^{2n}
+\]
+\[
+    e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+\]
+\[
+    \sinh(x) = \sum_{n=0}^{\infty} \frac{1}{(2n + 1)!} x^{2n + 1}
+\]
+\[
+    \cosh(x) = \sum_{n=0}^{\infty} \frac{1}{(2n)!} x^{2n}
+\]
+for all $x \in \mathbb{R}$.
+
+\begin{eg}
+    Let's consider the function:
+    \[
+        f(x) = \begin{cases}
+            e^{-\frac{1}{x^2}} & \text{if } x \neq 0 \\
+            0 & \text{if } x = 0
+        \end{cases}
+    \]
+    It's possible to show that $f \in C^{\infty}(\mathbb{R})$ and that $f^{(n)}(0) = 0$ for all $n \in \mathbb{N}$. Thus, the Taylor series of $f$ centered at $x_0 = 0$ is:
+    \[
+        \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} x^n = \sum_{n=0}^{\infty} 0 = 0
+    \]
+    Therefore, the Taylor series converges to $0$ for all $x \in \mathbb{R}$, but $f(x) \neq 0$ for $x \neq 0$. Thus, in this case, we have $D = \mathbb{R}$ but $E = \{0\}$.
+\end{eg}
+
+\subsection{Primitive and Derivative of a Function defined by a Power Series}
+
+\begin{definition}[Primitive]
+    Let $f: [a, b] \to \mathbb{R}$ be a continuous function. A function $F: [a, b] \to \mathbb{R}$ is called a primitive of $f$ on $[a, b]$ if:
+    \[
+        F'(x) = f(x) \quad \forall x \in [a, b]
+    \]
+\end{definition}
+Remark that if $F_1$ and $F_2$ are two primitives of $f$ on $[a, b]$, then there exists a constant $c \in \mathbb{R}$ such that:
+\[
+    F_1(x) - F_2(x) = c \quad \forall x \in [a, b]
+\]
+Note the following important primitives:
+\vskip0.3cm
+\begin{center}
+    \begin{tabular}{p{0.45\textwidth} | p{0.45\textwidth}}
+        \\ {\centering \textbf{$f(x)$} \par} & {\centering \textbf{$F(x)$} \par} \\ \\ \hline \\
+        {\centering $\sin(x)$ \par} & {\centering $- \cos(x) + C$ \par} \\ \\
+        {\centering$\cos(x)$ \par} & {\centering $\sin(x) + C$ \par} \\ \\
+        {\centering$\frac{1}{x}$ \par} & {\centering $\ln(x) + C$ ($x > 0$)\par} \\ \\
+        {\centering$x^k$ \par} & {\centering $\frac{x^{k+1}}{k+1} + C$ ($k \neq -1$) \par} \\ \\
+        {\centering$e^x$ \par} & {\centering $e^x + C$ \par} \\ \\
+        % {\centering$\arcsin x$ \par} & {\centering $\frac{1}{\sqrt{1 - x^2}}$ \par} \\ \\
+        % {\centering$\arccos x$ \par} & {\centering $-\frac{1}{\sqrt{1 - x^2}}$ \par} \\ \\
+        % {\centering$\arctan x$ \par} & {\centering $\frac{1}{1 + x^2}$ \par} \\ \\
+    \end{tabular}
+\end{center}
+
+\begin{theorem}
+    Let $\sum_{k=0}^{\infty} b_k (x- x_0)^k$ and $\sum_{k = 0}^{\infty} \frac{b_k}{k + 1} (x-x_0)^{k + 1}$ be two power series. The following holds:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Both series have the same convergence radius $R$.
+        \item If $R > 0$, then $f(x) = \sum_{k=0}^{\infty} b_k (x- x_0)^k$ is continuous on $(x_0 - R, x_0 + R)$.
+        \item If $R > 0$, then the function $F(x) = \sum_{k = 0}^{\infty} \frac{b_k}{k + 1} (x-x_0)^{k + 1}$ is a primitive of $f$ on $(x_0 - R, x_0 + R)$ such that $F(x_0) = 0$.
+    \end{itemize}
+\end{theorem}
+Remark that if $\sum_{k = 0}^{\infty} a_k(x - x_0)^k$ and $\sum_{k = 1}^{\infty} k a_k (x - x_0)^{k-1}$ two power series, then they also have the same convergence radius $R$ and if $R > 0$, then $f(x) = \sum_{k = 0}^{\infty} a_k(x - x_0)^k$ is continuously differentiable on $(x_0 - R, x_0 + R)$ and its derivative is given by:
+\[
+    f'(x) = \sum_{k = 1}^{\infty} k a_k (x - x_0)^{k-1}
+\]
+
+\begin{eg}
+    Let's consider the power series:
+    \[
+        \frac{1}{1 - z} = \sum_{k = 0}^{\infty} z^k \quad \forall |z| < 1
+    \]
+    Let $x = 1-z$ ($z = 1-x$), then we have:
+    \[
+        \frac{1}{x} = \sum_{k = 0}^{\infty} (1 - x)^k = \sum_{k = 0}^{\infty} (-1)^k  (x-1)^k \quad \forall x \in (0,2)
+    \]
+    Which has a convergence radius $R = 1$ centered at $x_0 = 1$. Now let's consider its primitive:
+    \[
+        \sum_{k = 0}^{\infty} \frac{(-1)^k}{k + 1} (x-1)^{k + 1} = \sum_{k = 1}^{\infty} \frac{(-1)^{k + 1}}{k}(x-1)^k
+    \]
+    Which is the Taylor series of $\ln(x)$ centered at $x_0 = 1$. Thus, by the previous theorem, we have that $\sum_{k = 1}^{\infty} \frac{(-1)^{k + 1}}{k}(x-1)^k$ is a primitive of $\frac{1}{x}$ and both series have the same convergence radius $R = 1$. Therefore, we have:
+    \begin{align*}
+        F(x) &= \left(\text{ the primitive of } \frac{1}{x} \text{ such that } F(1) = 0\right) \\
+        &= \ln(x) = \sum_{k = 1}^{\infty} \frac{(-1)^{k + 1}}{k}(x-1)^k \quad \forall x \in (0,2)
+    \end{align*}
+    In a previous example, we showed that this Taylor series converges to $\ln(2)$ at $x = 2$ as well, thus we have $D = E = (0, 2]$.
+\end{eg}
+From the example, it can be extracted that:
+\[
+    \ln(x) = \sum_{k = 1}^{\infty} \frac{(-1)^{k + 1}}{k}(x-1)^k \quad \forall x \in (0,2]
+\]
+\[
+    \frac{1}{x} = \sum_{k = 0}^{\infty} (-1)^k  (x-1)^k \quad \forall x \in (0,2)
+\]
+Remark that the domain of convergence of both series are not the same in this case, but they share the same convergence radius.
