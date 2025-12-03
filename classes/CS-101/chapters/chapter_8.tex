@@ -1250,6 +1250,180 @@ Remark that this result could have been obtained using the property that the uni
     Since both \( g \) and the assignment of new guests are bijections, it shows that the hotel can accommodate all the new guests while still having a countably infinite number of rooms occupied. Therefore, the hotel can successfully accommodate all the new guests.
 \end{eg}
 
+\subsection{Uncountable Sets}
+
+\begin{theorem}[Cantor's Diagonal Argument]
+    The set of real numbers \( \mathbb{R} \) is uncountable.
+\end{theorem}
+\begin{proof}
+    Assume, for the sake of contradiction, that the set of real numbers \( \mathbb{R} \) is countable. This means that we can list all the real numbers in a sequence:
+    \[
+        r_1, r_2, r_3, \ldots
+    \]
+    where each \( r_i \) is a real number. We can represent each real number in its decimal expansion:
+    \[
+        r_1 = 0.d_{11}d_{12}d_{13}\ldots
+    \]
+    \[
+        r_2 = 0.d_{21}d_{22}d_{23}\ldots
+    \]
+    \[
+        r_3 = 0.d_{31}d_{32}d_{33}\ldots
+    \]
+    and so on. Now, we will construct a new real number \( r \) that is not in the list. We define \( r \) by choosing its decimal digits as follows:
+    \[
+        d_n = \begin{cases}
+            1 & \text{if } d_{nn} \neq 1 \\
+            2 & \text{if } d_{nn} = 1
+        \end{cases}
+    \]
+    This means that the \( n \)-th digit of \( r \) is different from the \( n \)-th digit of \( r_n \). Therefore, \( r \) cannot be equal to any \( r_n \) in the list, since it differs from each \( r_n \) at least in the \( n \)-th digit. This contradicts our assumption that we have listed all real numbers. Hence, we conclude that the set of real numbers \( \mathbb{R} \) is uncountable.
+\end{proof}
+Remark that when constructing the new number $r$, one must be careful of same representations (e.g. $0.4999\ldots = 0.5000\ldots$). To avoid this, one can choose digits that are neither $0$ nor $9$. The same problem arise when wanting to prove that the interval $[0,1]$ is uncountable using binary representation (since $0.1111\ldots_2 = 1.0000\ldots_2$).
+
+% \begin{eg}
+%     Let's prove that the interval \( [0,1] \) represented in binary is uncountable using Cantor's Diagonal Argument. \\
+%     Assume, for the sake of contradiction, that the interval \( [0,1] \) represented in binary is countable. This means that we can list all the binary representations of numbers in \( [0,1] \) in a sequence:
+%     \[
+%         b_1, b_2, b_3, \ldots
+%     \]
+%     where each \( b_i \) is a binary representation of a number in \( [0,1] \). We can represent each binary representation as follows:
+%     \[
+%         b_1 = 0.b_{11}b_{12}b_{13}\ldots
+%     \]
+%     \[
+%         b_2 = 0.b_{21}b_{22}b_{23}\ldots
+%     \]
+%     \[
+%         b_3 = 0.b_{31}b_{32}b_{33}\ldots
+%     \]
+%     and so on. Now, we will construct a new binary representation \( b \) that is not in the list. We define \( b \) by choosing its binary digits as follows:
+%     \[
+%         b_n = \begin{cases}
+%             0 & \text{if } b_{nn} = 1 \\
+%             1 & \text{if } b_{nn} = 0
+%         \end{cases}
+%     \]
+%     This means that the \( n \)-th digit of \( b \) is different from the \( n \)-th digit of \( b_n \). Since 
+% \end{eg}
+
+\begin{eg}
+    Let's show that the set of sequences of binary digits (0s and 1s) is uncountable. Assume, for the sake of contradiction, that the set of binary sequences is countable. This means that we can list all the binary sequences in a sequence:
+    \[
+        s_1, s_2, s_3, \ldots
+    \]
+    where each \( s_i \) is a binary sequence. We can represent each binary sequence as follows:
+    \[
+        s_1 = b_{11}b_{12}b_{13}\ldots
+    \]
+    \[
+        s_2 = b_{21}b_{22}b_{23}\ldots
+    \]
+    \[
+        s_3 = b_{31}b_{32}b_{33}\ldots
+    \]
+    and so on. Now, we will construct a new binary sequence \( s \) that is not in the list. We define \( s \) by choosing its digits as follows:
+    \[
+        b_n = \begin{cases}
+            0 & \text{if } b_{nn} = 1 \\
+            1 & \text{if } b_{nn} = 0
+        \end{cases}
+    \]
+    This means that the \( n \)-th digit of \( s \) is different from the \( n \)-th digit of \( s_n \). Therefore, \( s \) cannot be equal to any \( s_n \) in the list, since it differs from each \( s_n \) at least in the \( n \)-th digit. This contradicts our assumption that we have listed all binary sequences. Hence, we conclude that the set of binary sequences is uncountable.
+\end{eg}
+
+\begin{eg}
+    Let's show that the positive set of rational numbers \( \mathbb{Q}^+ \) is countable. We can represent each positive rational number as a fraction \( \frac{p}{q} \), where \( p \) and \( q \) are positive integers. We can arrange these fractions in a two-dimensional grid, where the rows represent the numerator \( p \) and the columns represent the denominator \( q \):
+    \[
+        \begin{array}{c|ccccc}
+            \\ & q=1 & q=2 & q=3 & q=4 & \ldots \\ \\
+            \hline \\
+            p=1 & \frac{1}{1} & \frac{1}{2} & \frac{1}{3} & \frac{1}{4} & \ldots \\ \\
+            p=2 & \frac{2}{1} & \frac{2}{2} & \frac{2}{3} & \frac{2}{4} & \ldots \\ \\
+            p=3 & \frac{3}{1} & \frac{3}{2} & \frac{3}{3} & \frac{3}{4} & \ldots \\ \\
+            p=4 & \frac{4}{1} & \frac{4}{2} & \frac{4}{3} & \frac{4}{4} & \ldots \\ \\
+            \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+        \end{array}
+    \]
+    We can then list the positive rational numbers by traversing this grid in a diagonal manner, starting from the top-left corner:
+    \[
+        \frac{1}{1}, \frac{1}{2}, \frac{2}{1}, \frac{3}{1}, \frac{2}{2}, \frac{1}{3}, \frac{1}{4}, \frac{2}{3}, \frac{3}{2}, \frac{4}{1}, \ldots
+    \]
+    To avoid counting duplicates (fractions that are equivalent), we can only include fractions in their simplest form (i.e., where the numerator and denominator are coprime). \\
+    By this method, we can list all positive rational numbers in a sequence indexed by the positive integers. Therefore, we conclude that the set of positive rational numbers \( \mathbb{Q}^+ \) is countable.
+\end{eg}
+Remark the following regarding Cantor's Diagonal Argument:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If Cantor's Diagonal Argument fails to prove that a set is uncountable, it does not imply that the set is countable.
+\end{itemize}
+
+% \begin{eg}
+%     Let's prove that the set of natural numbers $\mathbb{N}$ is not uncountable by using Cantor's Diagonal Argument. \\
+%     Assume, for the sake of contradiction, that the set of natural numbers \( \mathbb{N} \) is uncountable. This means that we can list all the natural numbers in a sequence:
+%     \[
+%         n_1, n_2, n_3, \ldots
+%     \]
+%     where each \( n_i \) is a natural number. We can represent each natural number in its decimal expansion:
+%     \[
+%         n_1 = d_{11}d_{12}d_{13}\ldots
+%     \]
+%     \[
+%         n_2 = d_{21}d_{22}d_{23}\ldots
+%     \]
+%     \[
+%         n_3 = d_{31}d_{32}d_{33}\ldots
+%     \]
+%     and so on. Now, we will attempt to construct a new natural number \( n \) that is not in the list. We define \( n \) by choosing its decimal digits as follows:
+%     \[
+%         d_n = \begin{cases}
+%             (d_{nn} + 1) \mod 10 & \text{if } d_{nn} \neq 9 \\
+%             0 & \text{if } d_{nn} = 9
+%         \end{cases}
+%     \]
+%     This means that the \( n \)-th digit of \( n \) is different from the \( n \)-th digit of \( n_n \). Therefore, \( n \) cannot be equal to any \( n_n \) in the list, since it differs from each \( n_n \) at least in the \( n \)-th digit. However, this construction does not guarantee that \( n \) is a natural number, as it may lead to an infinite decimal expansion. This contradicts our assumption that we have listed all natural numbers. Hence, we conclude that the set of natural numbers \( \mathbb{N} \) is not uncountable.
+% \end{eg}
+
+\begin{eg}
+    Let's prove that the set of positive rational numbers \( \mathbb{Q}^+ \) is not uncountable by using Cantor's Diagonal Argument. \\
+    Let's try to construct a new positive rational number \( r \) that is not in the list. We define \( r \) by choosing its decimal digits as follows:
+    \[
+        d_n = \begin{cases}
+            1 & \text{if } d_{nn} \neq 1 \\
+            2 & \text{if } d_{nn} = 1
+        \end{cases}
+    \]
+    This means that the \( n \)-th digit of \( r \) is different from the \( n \)-th digit of \( r_n \). Therefore, \( r \) cannot be equal to any \( r_n \) in the list, since it differs from each \( r_n \) at least in the \( n \)-th digit. However, this construction does not guarantee that \( r \) is a positive rational number, as it may lead to an infinite decimal expansion that does not terminate or repeat. For example, $\frac{3}{7}$ has a decimal expansion that can be found by long division:
+    \[
+        \frac{30}{7} = 4 \quad remainder \quad 2
+    \]
+    \[
+        \frac{20}{7} = 2 \quad remainder \quad 6
+    \]
+    \[        \frac{60}{7} = 8 \quad remainder \quad 4
+    \]
+    \[        \frac{40}{7} = 5 \quad remainder \quad 5
+    \]
+    \[        \frac{50}{7} = 7 \quad remainder \quad 1
+    \]
+    \[        \frac{10}{7} = 1 \quad remainder \quad 3
+    \]
+    Thus since the reminder $3$ appears again, the decimal expansion is $0.\overline{428571}$ which is a repetition. In contrast, nothing guarantees that the constructed number $r$ will have such a repeating or terminating decimal expansion. This contradict our assumption that we are constructing a positive rational number. Hence, we conclude that the set of positive rational numbers \( \mathbb{Q}^+ \) is not uncountable.
+\end{eg}
+Remark that a similar argument can be made to prove that the set of natural numbers \( \mathbb{N} \) is not uncountable.
+
+\begin{theorem}
+    If $A$ is uncountable and $A \subseteq B$, then $B$ is uncountable.
+\end{theorem}
+\begin{proof}
+    Assume, for the sake of contradiction, that \( B \) is countable. Since \( A \subseteq B \), every element of \( A \) is also an element of \( B \). Therefore, we can define an injection \( f: A \to B \) that maps each element of \( A \) to itself in \( B \). \\
+    Since \( B \) is countable, there exists a bijection \( g: \mathbb{N} \to B \). We can then compose the functions \( f \) and \( g^{-1} \) to obtain a function \( h: A \to \mathbb{N} \) defined by:
+    \[
+        h(a) = g^{-1}(f(a))
+    \]
+    This function \( h \) is an injection from \( A \) to \( \mathbb{N} \), which implies that \( A \) is countable. However, this contradicts our assumption that \( A \) is uncountable. Hence, we conclude that if \( A \) is uncountable and \( A \subseteq B \), then \( B \) must be uncountable.
+\end{proof}
+Remark that this theorem proves that the set of real numbers \( \mathbb{R} \) is uncountable, since $[0,1] \subset \mathbb{R}$ and $[0,1]$ is uncountable by Cantor's Diagonal Argument.
+
 \section{Exercices}
 This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
 % TODO: add in the exercise the quizz of w11c1 @ 40:40

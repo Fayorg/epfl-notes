@@ -1,0 +1,61 @@
+\chapter{Probability}
+
+\section{Basic Concepts}
+\begin{definition}[Experiment]
+    An experiment is any process that can be repeated and has a well-defined set of possible outcomes.
+\end{definition}
+
+\begin{definition}[Sample Space $S$]
+    The sample space \( S \) of an experiment is the set of all possible outcomes of that experiment.
+\end{definition}
+
+\begin{definition}[Event]
+    An event is any subset of the sample space \( S \). An event occurs if the outcome of the experiment is an element of that subset.
+\end{definition}
+
+\begin{eg}
+    When throwing a pair of dice, the sample space is:
+    \[
+        S = \{(1,1), (1,2), \ldots, (6,6)\}
+    \]
+    An example event $E$ could be "the sum of the two dice is 3", then the set of outcomes in $E$ is:
+    \[
+        E = \{(1,2), (2,1)\}
+    \]
+    Thus the event $E$ occurs if the outcome of the experiment is either (1,2) or (2,1).
+\end{eg}
+
+\begin{definition}[Laplace]
+    The Laplace definition of probability states that if all outcomes in the sample space are equally likely, the probability of an event \( E \) is given by:
+    \[
+        P(E) = \frac{|E|}{|S|}
+    \]
+    where \( |E| \) is the number of outcomes in event \( E \) and \( |S| \) is the total number of outcomes in the sample space.
+\end{definition}
+
+\begin{eg}
+    Continuing with the previous example of throwing a pair of dice, the total number of outcomes in the sample space is \( |S| = 36 \). The event \( E \) (sum of the two dice is 3) has \( |E| = 2 \) outcomes. Therefore, the probability of event \( E \) occurring is:
+    \[
+        P(E) = \frac{|E|}{|S|} = \frac{2}{36} = \frac{1}{18}
+    \]
+\end{eg}
+
+\begin{eg}
+    If two dices are rolled after each other, what is the probability to roll at least one 6? \\
+    Let $E$ be the event "at least one 6 is rolled", the the possible outcome set is:
+    \[
+        E = \{(6, 1...6), (1...6, 6)\}
+    \]
+    By the principle of inclusion-exclusion, we have:
+    \[
+        |E| = 6 + 6 - 1 = 11
+    \]
+    More explicitly:
+    \[
+        E = \{(6,1), (6,2), (6,3), (6,4), (6,5), (6,6), (1,6), (2,6), (3,6), (4,6), (5,6)\}
+    \]
+    Thus the probability of rolling at least one 6 is:
+    \[
+        P(E) = \frac{|E|}{|S|} = \frac{11}{36}
+    \]
+\end{eg}
