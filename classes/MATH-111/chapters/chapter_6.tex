@@ -1033,3 +1033,219 @@ Therefore:
     |\det(A)| = ||\vec{x_1}|| \cdot ||\vec{y_2}|| \cdot \ldots \cdot ||\vec{y_n}||
 \]
 Remark that the absolute value of the determinant of $A$ gives the volume of the "hyper" parallelepiped spanned by the columns of $A$. Thus, the product of the norms of the orthogonal vectors $\vec{x_1}, \vec{y_2}, \ldots, \vec{y_n}$ also gives this volume.
+
+\section{Least Squares}
+For a given matrix $A \in \mathbb{R}^{m \times n}$ and a vector $\vec{b} \in \mathbb{R}^m$, the equation $A \vec{x} = \vec{b}$ may not have a solution if $\vec{b} \notin \text{Im} A$. In such cases, one could look for an approximate solution that minimizes the error between $A \vec{x}$ and $\vec{b}$. Note that this relates to the orthogonal projection since the goal is to find the vector in $\text{Im} A$ that is closest to $\vec{b}$ i.e. the projection of $\vec{b}$ onto $\text{Im} A$.
+
+\begin{theorem}
+    Let $A \in \mathbb{R}^{m \times n}$ and $\vec{b} \in \mathbb{R}^m$. The least squares solution $\vec{\hat{x}}$ to the equation $A \vec{x} = \vec{b}$ is given by the solution of the normal equations:
+    \[
+        A^T A \vec{\hat{x}} = A^T \vec{b}
+    \]
+    Moreover, each solution $\vec{\hat{x}}$ of the normal equations has the property:
+    \[
+        ||A \vec{\hat{x}} - \vec{b}|| \leq ||A \vec{x} - \vec{b}|| \quad \text{for all } \vec{x} \in \mathbb{R}^n
+    \]
+\end{theorem}
+\begin{proof}
+    Let $A$ be a matrix of size $m \times n$ and $\vec{b}$ a vector in $\mathbb{R}^m$. Let's find $\vec{\hat{x}}$ such that $||A \vec{\hat{x}} - \vec{b}||$ is minimized. This is equivalent to finding the orthogonal projection of $\vec{b}$ onto $\text{Im} A$. Let $\vec{\hat{b}} = A \vec{\hat{x}}$ be this projection. Then, the error vector $\vec{e} = \vec{\hat{b}} - \vec{b}$ is orthogonal to $\text{Im} A$ (i.e. $e \in \ker(A^T)$), which means:
+    \[
+        A^T \vec{e} = 0 \quad \iff \quad A^T (\vec{\hat{b}} - \vec{b}) = 0 \quad \iff \quad A^T (A \vec{\hat{x}} - \vec{b}) = 0
+    \]
+    Rearranging this equation gives the normal equations:
+    \[
+        A^T A \vec{\hat{x}} = A^T \vec{b}
+    \]
+\end{proof}
+Remark that the system of normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$ always has at least one solution.
+
+\begin{theorem}
+    The following statements are equivalent for a matrix $A \in \mathbb{R}^{m \times n}$:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The columns of $A$ are linearly independent.
+        \item The matrix $A^T A$ is invertible.
+        \item The equation $A \vec{x} = \vec{b}$ has a unique least squares solution for every $\vec{b} \in \mathbb{R}^m$.
+    \end{itemize}
+    In this case, the least squares solution is given by:
+    \[
+        \vec{\hat{x}} = (A^T A)^{-1} A^T \vec{b}
+    \]
+\end{theorem}
+\begin{proof}
+    We will prove the equivalence of the three statements in a cyclic manner. \\
+    \textbf{(1) $\implies$ (2)}: If the columns of $A$ are linearly independent, then $\ker(A) = \{\vec{0}\}$. This implies that $A^T A$ is positive definite and thus invertible. \\
+    \textbf{(2) $\implies$ (3)}: If $A^T A$ is invertible, then for any $\vec{b} \in \mathbb{R}^m$, the normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$ have a unique solution given by:
+    \[
+        \vec{\hat{x}} = (A^T A)^{-1} A^T \vec{b}
+    \]
+    Thus, the equation $A \vec{x} = \vec{b}$ has a unique least squares solution. \\
+    \textbf{(3) $\implies$ (1)}: If the equation $A \vec{x} = \vec{b}$ has a unique least squares solution for every $\vec{b} \in \mathbb{R}^m$, then $\ker(A)$ must be trivial. If there were a non-zero vector $\vec{v} \in \ker(A)$, then for any least squares solution $\vec{\hat{x}}$, the vector $\vec{\hat{x}} + \vec{v}$ would also be a least squares solution, contradicting the uniqueness. Therefore, the columns of $A$ are linearly independent. \\
+    Thus, all three statements are equivalent.
+\end{proof}
+
+\begin{eg}
+    Let $\vec{b} = \begin{bmatrix}
+        11 \\ 17 \\ 6
+    \end{bmatrix}$ and $A = \begin{bmatrix}
+        3 & 1 \\ 6 & 2 \\ 0 & 2
+    \end{bmatrix}$. We want to find the least squares solution $\vec{\hat{x}}$ to the equation $A \vec{x} = \vec{b}$. First, we compute $A^T A$ and $A^T \vec{b}$:
+    \[
+        A^T A = \begin{bmatrix}
+            3 & 6 & 0 \\
+            1 & 2 & 2
+        \end{bmatrix} \begin{bmatrix}
+            3 & 1 \\ 6 & 2 \\ 0 & 2
+        \end{bmatrix} = \begin{bmatrix}
+            45 & 15 \\ 15 & 9
+        \end{bmatrix}
+    \]
+    Since the columns of $A$ are linearly independent, $A^T A$ is invertible. Now, we compute $A^T \vec{b}$:
+    \[
+        A^T \vec{b} = \begin{bmatrix}
+            3 & 6 & 0 \\
+            1 & 2 & 2
+        \end{bmatrix} \begin{bmatrix}
+            11 \\ 17 \\ 6
+        \end{bmatrix} = \begin{bmatrix}
+            135 \\ 57
+        \end{bmatrix}
+    \]
+    Now, we can solve the normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$:
+    \[
+        \begin{bmatrix}
+            45 & 15 \\ 15 & 9
+        \end{bmatrix} \vec{\hat{x}} = \begin{bmatrix}
+            135 \\ 57
+        \end{bmatrix}
+    \]
+    Thus, the unique least squares solution is:
+    \[
+        \vec{\hat{x}} = \begin{bmatrix}
+            2 \\ 3
+        \end{bmatrix}
+    \]
+    We can compute the error vector:
+    \[
+        \vec{e} = A \vec{\hat{x}} - \vec{b} = \begin{bmatrix}
+            3 & 1 \\ 6 & 2 \\ 0 & 2
+        \end{bmatrix} \begin{bmatrix}
+            2 \\ 3
+        \end{bmatrix} - \begin{bmatrix}
+            11 \\ 17 \\ 6
+        \end{bmatrix} = \begin{bmatrix}
+            9 \\ 18 \\ 6
+        \end{bmatrix} - \begin{bmatrix}
+            11 \\ 17 \\ 6
+        \end{bmatrix} = \begin{bmatrix}
+            -2 \\ 1 \\ 0
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\subsection{Least Squares and QR Factorization}
+
+\begin{theorem}
+    If the columns of $A \in \mathbb{R}^{m \times n}$ are linearly independent then for any $\vec{b} \in \mathbb{R}^m$, the least squares solution $\vec{\hat{x}}$ to the equation $A \vec{x} = \vec{b}$ is given by the solution of the triangular system:
+    \[
+        R \vec{\hat{x}} = Q^T \vec{b}
+    \]
+    where $A = QR$ is the QR factorization of $A$.
+\end{theorem}
+\begin{proof}
+    Let $A = QR$ be the QR factorization of $A$, where $Q \in \mathbb{R}^{m \times n}$ has orthonormal columns and $R \in \mathbb{R}^{n \times n}$ is an upper triangular matrix. The normal equations for the least squares solution are given by:
+    \[
+        A^T A \vec{\hat{x}} = A^T \vec{b}
+    \]
+    Substituting $A = QR$ into the normal equations, we have:
+    \[
+        (QR)^T (QR) \vec{\hat{x}} = (QR)^T \vec{b}
+    \]
+    Simplifying this expression:
+    \[
+        R^T Q^T Q R \vec{\hat{x}} = R^T Q^T \vec{b}
+    \]
+    Since the columns of $Q$ are orthonormal, we have $Q^T Q = I_n$. Thus, the equation reduces to:
+    \[
+        R^T R \vec{\hat{x}} = R^T Q^T \vec{b}
+    \]
+    Multiplying both sides by $(R^T)^{-1}$ (which exists since the columns of $A$ are linearly independent and thus $R$ is invertible), we obtain:
+    \[
+        R \vec{\hat{x}} = Q^T \vec{b}
+    \]
+    Therefore, the least squares solution $\vec{\hat{x}}$ can be found by solving the triangular system:
+    \[
+        R \vec{\hat{x}} = Q^T \vec{b}
+    \]
+\end{proof}
+
+\begin{eg}
+    Let's take the same example as before with $\vec{b} = \begin{bmatrix}
+        11 \\ 17 \\ 6
+    \end{bmatrix}$ and $A = \begin{bmatrix}
+        3 & 1 \\ 6 & 2 \\ 0 & 2
+    \end{bmatrix}$. The QR factorization of $A$ is given by:
+    \[
+        Q = \begin{bmatrix}
+            \frac{1}{\sqrt{5}} & 0 \\
+            \frac{2}{\sqrt{5}} & 0 \\
+            0 & 1
+        \end{bmatrix}, \quad R = \begin{bmatrix}
+            3 \sqrt{5} & \sqrt{5} \\
+            0 & 2
+        \end{bmatrix}
+    \]
+    Now, we compute $Q^T \vec{b}$:
+    \[
+        Q^T \vec{b} = \begin{bmatrix}
+            \frac{1}{\sqrt{5}} & \frac{2}{\sqrt{5}} & 0 \\
+            0 & 0 & 1
+        \end{bmatrix} \begin{bmatrix}
+            11 \\ 17 \\ 6
+        \end{bmatrix} = \begin{bmatrix}
+            9 \sqrt{5} \\ 6
+        \end{bmatrix}
+    \]
+    Now, we solve the triangular system $R \vec{\hat{x}} = Q^T \vec{b}$:
+    \[
+        \begin{bmatrix}
+            3 \sqrt{5} & \sqrt{5} \\
+            0 & 2
+        \end{bmatrix} \vec{\hat{x}} = \begin{bmatrix}
+            \frac{45}{\sqrt{5}} \\ 6
+        \end{bmatrix}
+    \]
+    Solving this system, we find the unique least squares solution:
+    \[
+        \vec{\hat{x}} = \begin{bmatrix}
+            2 \\ 3
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\subsection{Linear Regression}
+Mathematically, linear regression can be formulated as finding the best-fitting line (or hyperplane in higher dimensions) to a set of data points. Given a set of data points $(x_1, y_1), (x_2, y_2), \ldots, \\ (x_m, y_m)$, the goal is to find a linear function of the form:
+\[    y = \beta_1 x + \beta_0
+\]
+that minimizes the sum of the squared differences between the observed values $y_i$ and the values predicted by the linear function i.e. for each data point $(x_i, y_i)$:
+\[
+    \beta_1 x_i + \beta_0 \approx y_i
+\]
+This can be expressed in matrix form as:
+\[
+    A \vec{\beta} \approx \vec{y}
+\]
+where:
+\[
+    A = \begin{bmatrix}
+        1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_m
+    \end{bmatrix}, \quad \vec{\beta} = \begin{bmatrix}
+        \beta_0 \\ \beta_1
+    \end{bmatrix}, \quad \vec{y} = \begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_m
+    \end{bmatrix}
+\]
+To find the best-fitting line, we can use the least squares method to solve for $\vec{\beta}$ by minimizing the error $||A \vec{\beta} - \vec{y}||$. The least squares solution is given by the normal equations:
+\[
+    A^T A \vec{\beta} = A^T \vec{y}
+\]
+Remark that a solution always exists (property of the normal equations) and is unique if the columns of $A$ are linearly independent (i.e. if there are at least two distinct $x_i$ values).
