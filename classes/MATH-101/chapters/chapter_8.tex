@@ -1,0 +1,329 @@
+\chapter{Integration}
+
+\section{Integration of a Continuous Function}
+
+\begin{definition}[Darboux Sums]
+    Let $f: [a, b] \to \mathbb{R}$ be a continuous function. Let $\sigma = \{x_0 = a < x_1 < x_2 < \cdots < x_n = b\}$ be a partition of the interval $[a, b]$.
+\end{definition}
+
+\begin{eg}
+    Let $\sigma_{\text{reg}} = \{a, a + \frac{b - a}{n}, a + 2\frac{b - a}{n}, \ldots, b\}$ be a regular partition of the interval $[a, b]$.
+\end{eg}
+
+\begin{definition}[Step of a Partition]
+    Let $\sigma = \{x_0 = a < x_1 < x_2 < \cdots < x_n = b\}$ be a partition of the interval $[a, b]$. The step of the partition $\sigma$ is defined as:
+    \[
+        \mathcal{P}(\sigma) = \max_{1 \leq i \leq n} (x_i - x_{i-1})
+    \]
+\end{definition}
+
+\begin{definition}[Upper and Lower Darboux Sums]
+    Let $f: [a, b] \to \mathbb{R}$ be a continuous function and $\sigma = \{x_0 = a < x_1 < x_2 < \cdots < x_n = b\}$ be a partition of the interval $[a, b]$.
+    The upper Darboux sum $\bar{S}_{\sigma}(f)$ of $f$ relative to $\sigma$ and lower Darboux sum $\underline{S}_{\sigma}(f)$ of $f$ relative to $\sigma$ are defined as:
+    \[
+        \bar{S}_{\sigma}(f) = \sum_{i=1}^{n} M_i (x_i - x_{i-1}), \quad \underline{S}_{\sigma}(f) = \sum_{i=1}^{n} m_i (x_i - x_{i-1})
+    \]
+    where $M_i = \max_{x \in [x_{i-1}, x_i]} f(x)$ and $m_i = \min_{x \in [x_{i-1}, x_i]} f(x)$.
+\end{definition}
+% TODO: add graphical representation of upper and lower sums
+Remark that the following inequality can be extracted from the definitions:
+\[
+    m (b-a) \leq \underline{S}_{\sigma}(f) \leq \bar{S}_{\sigma}(f) \leq M (b-a)
+\]
+where $m = \min_{x \in [a, b]} f(x)$ and $M = \max_{x \in [a, b]} f(x)$. Also note that if $\sigma_1 \subset \sigma_2$, then:
+\[
+    \underline{S}_{\sigma_1}(f) \leq \underline{S}_{\sigma_2}(f) \quad \text{and} \quad \bar{S}_{\sigma_1}(f) \geq \bar{S}_{\sigma_2}(f)
+\]
+Remark that the supremum and infimum of the sets of lower and upper Darboux sums can be defined as:
+\[
+    \underline{S}(f) = \inf \{\underline{S}_\sigma, \sigma \text{ subdivision of } [a,b]\} \quad \text{and} \quad \bar{S}(f) = \sup \{\bar{S}_\sigma, \sigma \text{ subdivision of } [a,b]\}
+\]
+
+\begin{theorem}
+    Let $f: [a, b] \to \mathbb{R}$ be a continuous function. Then $\underline{S}(f) = \bar{S}(f)$.
+\end{theorem}
+
+\begin{definition}[Riemann Integral]
+    Let $f: [a, b] \to \mathbb{R}$ be a continuous function such that $\underline{S}(f) = \bar{S}(f)$. The Riemann integral of $f$ over the interval $[a, b]$ is defined as:
+    \[
+        \int_a^b f(x) \, dx = \underline{S}(f) = \bar{S}(f)
+    \]
+\end{definition}
+Note that if $b < a$ then we define:
+\[
+    \int_a^b f(x) \, dx = -\int_b^a f(x) \, dx
+\]
+and if $a = b$ then:
+\[
+    \int_a^a f(x) \, dx = 0
+\]
+
+\begin{eg}
+    Let's compute, using Darboux sums, the integral:
+    \[
+        \int_0^3 x \, dx
+    \]
+    Let $\sigma_n = \{0, 3/n, 6/n, \ldots, 3\}$ be a regular partition of the interval $[0, 3]$ with step $\mathcal{P}(\sigma_n) = 3/n$. We have:
+    \[
+        M_i = \max_{x \in [\frac{3(i-1)}{n}, \frac{3i}{n}]} x = \frac{3i}{n} \quad \text{and} \quad m_i = \min_{x \in [\frac{3(i-1)}{n}, \frac{3i}{n}]} x = \frac{3(i-1)}{n}
+    \]
+    Thus:
+    \[
+        \bar{S}_{\sigma_n}(f) = \sum_{i=1}^{n} \frac{3i}{n} \cdot \frac{3}{n} = \frac{9}{n^2} \sum_{i=1}^{n} i = \frac{9}{n^2} \cdot \frac{n(n+1)}{2} = \frac{9(n+1)}{2n}
+    \]
+    and
+    \[        \underline{S}_{\sigma_n}(f) = \sum_{i=1}^{n} \frac{3(i-1)}{n} \cdot \frac{3}{n} = \frac{9}{n^2} \sum_{i=1}^{n} (i-1) = \frac{9}{n^2} \cdot \frac{(n-1)n}{2} = \frac{9(n-1)}{2n}
+    \]
+    Therefore, we have:
+    \[        \underline{S}(f) = \lim_{n \to \infty} \underline{S}_{\sigma_n}(f) = \lim_{n \to \infty} \frac{9(n-1)}{2n} = \frac{9}{2}
+    \]
+    and:
+    \[
+        \bar{S}(f) = \lim_{n \to \infty} \bar{S}_{\sigma_n}(f) = \lim_{n \to \infty} \frac{9(n+1)}{2n} = \frac{9}{2}
+    \]
+    Thus, we conclude that:
+    \[        \int_0^3 x \, dx = \frac{9}{2}
+    \]
+\end{eg}
+
+\subsection{Average Value Theorem for Integrals}
+Let $f: [a,b] \to \mathbb{R}$ be a continuous function. The following properties of the Riemann integral can be easily derived from its definition:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Let $c \in [a,b]$. Then:
+    \[
+        \int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx
+    \]
+    \item Since $m(b-a) \leq \underline{S}(f) \leq \overline{S}(f) \leq M (b-a)$, then:
+    \[
+        m(b-a) \leq \int_a^b f(x) \, dx \leq M(b-a)
+    \]
+\end{itemize}
+
+\begin{theorem}[Average Value Theorem for Integrals]
+    Let $f: [a,b] \to \mathbb{R}$ be a continuous function. Then, there exists $c \in [a,b]$ such that:
+    \[
+        \int_a^b f(x) \, dx = f(c) (b-a)
+    \]
+\end{theorem}
+\begin{proof}
+    Since $f$ is continuous on the interval $[a,b]$, by the Extreme Value Theorem, there exist points $x_m, x_M \in [a,b]$ such that:
+    \[
+        f(x_m) = m = \min_{x \in [a,b]} f(x) \quad \text{and} \quad f(x_M) = M = \max_{x \in [a,b]} f(x)
+    \]
+    From the properties of the Riemann integral, we have:
+    \[
+        m(b-a) \leq \int_a^b f(x) \, dx \leq M(b-a)
+    \]
+    Dividing the entire inequality by $(b-a)$ (assuming $b > a$), we get:
+    \[
+        m \leq \frac{1}{b-a} \int_a^b f(x) \, dx \leq M
+    \]
+    By the Intermediate Value Theorem, since $f$ is continuous on $[a,b]$, there exists $c \in [a,b]$ such that:
+    \[
+        f(c) = \frac{1}{b-a} \int_a^b f(x) \, dx
+    \]
+    Multiplying both sides by $(b-a)$ gives:
+    \[
+        \int_a^b f(x) \, dx = f(c) (b-a)
+    \]
+    This completes the proof.
+\end{proof}
+
+\subsection{Relation Between Integral and Primitive}
+The previous chapter defined the notion of primitive of a function, now let's add these notions on top of it.
+
+\begin{theorem}
+    Let $a < b$ and $f$ a continuous function on $[a,b]$. Then:
+    \[
+        F(x) = \int_a^x f(t) \, dt
+    \]
+    is a primitive of $f$ on $[a,b]$ such that $F(a) = 0$.
+\end{theorem}
+\begin{proof}
+    Let $x \in [a,b]$ and $h \neq 0$ such that $x + h \in [a,b]$. We have:
+    \begin{align*}
+        \frac{F(x+h) - F(x)}{h} &= \frac{1}{h} \left( \int_a^{x+h} f(t) \, dt - \int_a^x f(t) \, dt \right) \\
+        &= \frac{1}{h} \left( \int_a^{x} f(t) \, dt + \int_x^{x+h} f(t) \, dt - \int_a^x f(t) \, dt \right) \\
+        &= \frac{1}{h} \int_x^{x+h} f(t) \, dt
+    \end{align*}
+    By the Average Value Theorem for Integrals, there exists $c_h \in [x, x+h]$ such that:
+    \[
+        \frac{1}{h} \int_x^{x+h} f(t) \, dt = f(c_h)
+    \]
+    As $h$ approaches $0$, $c_h$ approaches $x$. Since $f$ is continuous at $x$, we have:
+    \[
+        \lim_{h \to 0} f(c_h) = f(x)
+    \]
+    Therefore:
+    \[
+        F'(x) = \lim_{h \to 0} \frac{F(x+h) - F(x)}{h} = f(x)
+    \]
+    This shows that $F$ is a primitive of $f$ on $[a,b]$. Additionally, by definition:
+    \[
+        F(a) = \int_a^a f(t) \, dt = 0
+    \]
+    Thus, the theorem is proved.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+    Let $f: [a,b] \to \mathbb{R}$ be a continuous function and $F$ be any primitive of $f$ on $[a,b]$. Then:
+    \[
+        \int_a^b f(x) \, dx = F(b) - F(a)
+    \]
+\end{theorem}
+\begin{proof}
+    Let $G(x) = \int_a^x f(t) \, dt$. From the previous theorem, we know that $G$ is a primitive of $f$ on $[a,b]$. Since $F$ is also a primitive of $f$, there exists a constant $C$ such that:
+    \[
+        F(x) = G(x) + C
+    \]
+    for all $x \in [a,b]$. Evaluating this at $x = a$, we have:
+    \[
+        F(a) = G(a) + C = 0 + C \implies C = F(a)
+    \]
+    Therefore, we can express $F(x)$ as:
+    \[
+        F(x) = G(x) + F(a)
+    \]
+    Now, evaluating at $x = b$, we get:
+    \[
+        F(b) = G(b) + F(a)
+    \]
+    Rearranging this gives:
+    \[
+        G(b) = F(b) - F(a)
+    \]
+    But by definition of $G$, we have:
+    \[
+        G(b) = \int_a^b f(t) \, dt
+    \]
+    Thus, we conclude that:
+    \[
+        \int_a^b f(x) \, dx = F(b) - F(a)
+    \]
+    This completes the proof.
+\end{proof}
+
+\subsection{List of Basic Integrals}
+Here is a list, based on the one from the previous chapter, of some basic integrals:
+\vskip0.3cm
+\begin{center}
+    \begin{tabular}{p{0.45\textwidth} | p{0.45\textwidth}}
+        \\ {\centering \textbf{$f(x)$} \par} & {\centering \textbf{$F(x)$} \par} \\ \\ \hline \\
+        {\centering$e^x$ \par} & {\centering $e^x + C$ \par} \\ \\
+        {\centering $\sin(x)$ \par} & {\centering $- \cos(x) + C$ \par} \\ \\
+        {\centering$\cos(x)$ \par} & {\centering $\sin(x) + C$ \par} \\ \\
+        {\centering$\cosh(x)$ \par} & {\centering $\sinh(x) + C$ \par} \\ \\
+        {\centering$\sinh(x)$ \par} & {\centering $\cosh(x) + C$ \par} \\ \\
+        {\centering$a^x$, ($a>0, a \neq 1$) \par} & {\centering $\frac{a^x}{\ln(a)} + C$ \par} \\ \\
+        {\centering$\frac{1}{x}$ ($x \neq 0$) \par} & {\centering $\ln|x| + C$\par} \\ \\
+        {\centering$x^k$ \par} & {\centering $\frac{x^{k+1}}{k+1} + C$ ($k \neq -1$) \par} \\ \\
+        {\centering$\frac{1}{\cos^2(x)}$ \par} & {\centering $\tan(x) + C$ \par} \\ \\
+        {\centering$\frac{1}{\sin^2(x)}$ \par} & {\centering $- \cot(x) + C$ \par} \\ \\
+        {\centering$\frac{1}{1 + x^2}$ \par} & {\centering $\arctan(x) + C$ \par} \\ \\
+        {\centering$\frac{1}{\sqrt{1 - x^2}}$ \par} & {\centering $\arcsin(x) + C$ \par} \\ \\
+    \end{tabular}
+\end{center}
+
+\begin{eg}
+    Let compute the integral:
+    \[
+        \int_0^\pi \sin(x) \, dx
+    \]
+    We know that a primitive of $\sin(x)$ is $-\cos(x) + C$. Thus, by the Fundamental Theorem of Calculus, we have:
+    \[        \int_0^\pi \sin(x) \, dx = -\cos(x) \Big|_0^\pi = -\cos(\pi) + \cos(0) = 2
+    \]
+\end{eg}
+
+\subsection{Properties of Integrals}
+Let $f, g: [a,b] \to \mathbb{R}$ be two continuous functions. The following properties hold:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Linearity:
+    \[
+        \int_a^b (\alpha f(x) + \beta g(x)) \, dx = \alpha \int_a^b f(x) \, dx + \beta \int_a^b g(x) \, dx
+    \]
+    \item If $f(x) \geq 0$ for all $x \in [a,b]$ and $c \in (a,b)$ then:
+    \[
+        \int_a^b f(x) \, dx \geq \int_a^c f(x) \, dx \geq 0
+    \]
+    \item If $f(x) \leq g(x)$ for all $x \in [a,b]$ then:
+    \[
+        \int_a^b f(x) \, dx \leq \int_a^b g(x) \, dx
+    \]
+    \item Let $h,m: I \to [a, b]$ differentiable functions on $I$ then:
+    \[
+        \frac{d}{dx} \left( \int_{h(x)}^{m(x)} f(t) \, dt \right) = f(m(x)) \cdot m'(x) - f(h(x)) \cdot h'(x)
+    \]
+\end{itemize}
+
+\begin{eg}
+    Let's compute:
+    \[
+        \frac{d}{dx} \left( \int_1^{3x^2 + 3} e^{t^2} \, dt \right)
+    \]
+    By the last property, we have:
+    \[
+        \frac{d}{dx} \left( \int_1^{3x^2 + 3} e^{t^2} \, dt \right) = e^{(3x^2 + 3)^2} \cdot 6x
+    \]
+\end{eg}
+
+\section{Techniques of Integration}
+This section presents some techniques to compute integrals.
+
+\subsection{Integration by Change of Variables}
+\begin{theorem}[Integration by Change of Variables]
+    Let $f: [a,b] \to \mathbb{R}$ be a continuous function and $\varphi: [c,d] \to [a,b]$ be a differentiable function such that $\varphi([c,d]) \subseteq [a,b]$. Then:
+    \[
+        \int_{\varphi(c)}^{\varphi(d)} f(x) \, dx = \int_c^d f(\varphi(t)) \cdot \varphi'(t) \, dt
+    \]
+    where $x = \varphi(t)$ is the change of variable.
+\end{theorem}
+\begin{proof}
+    Let $F$ be a primitive of $f$ on $[a,b]$. By the Fundamental Theorem of Calculus, we have:
+    \[
+        \int_{\varphi(c)}^{\varphi(d)} f(x) \, dx = F(\varphi(d)) - F(\varphi(c))
+    \]
+    Now, consider the function $G(t) = F(\varphi(t))$. By the Chain Rule, we have:
+    \[
+        G'(t) = F'(\varphi(t)) \cdot \varphi'(t) = f(\varphi(t)) \cdot \varphi'(t)
+    \]
+    Thus, $G$ is a primitive of the function $f(\varphi(t)) \cdot \varphi'(t)$ on $[c,d]$. Applying the Fundamental Theorem of Calculus again, we get:
+    \[
+        \int_c^d f(\varphi(t)) \cdot \varphi'(t) \, dt = G(d) - G(c) = F(\varphi(d)) - F(\varphi(c))
+    \]
+    Therefore, we conclude that:
+    \[
+        \int_{\varphi(c)}^{\varphi(d)} f(x) \, dx = \int_c^d f(\varphi(t)) \cdot \varphi'(t) \, dt
+    \]
+    This completes the proof.
+\end{proof}
+
+\begin{eg}
+    Let's compute the integral:
+    \[
+        \int_1^2 x e^{x^2} \, dx
+    \]
+    Let $x = \varphi(t) = \sqrt{t}$, thus $t = \varphi^{-1}(x) = x^2$ and $\varphi'(t) = \frac{1}{2\sqrt{t}}$. When $x = 1$, $t = 1$ and when $x = 2$, $t = 4$. Therefore:
+    \[        \int_1^2 x e^{x^2} \, dx = \int_1^4 \sqrt{t} \cdot e^t \cdot \frac{1}{2\sqrt{t}} \, dt = \frac{1}{2} \int_1^4 e^t \, dt = \frac{1}{2} (e^4 - e)
+    \]
+\end{eg}
+Another more direct approaches:
+
+\begin{eg}
+    Let's compute the same integral:
+    \[
+        \int_1^2 x e^{x^2} \, dx
+    \]
+    Let $u = x^2$, thus $du = 2x \, dx$ or $\frac{du}{2} = x \, dx$. When $x = 1$, $u = 1$ and when $x = 2$, $u = 4$. Therefore:
+    \[        \int_1^2 x e^{x^2} \, dx = \int_1^4 e^u \cdot \frac{du}{2} = \frac{1}{2} \int_1^4 e^u \, du = \frac{1}{2} (e^4 - e)
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the integral:
+    \[
+        \int_{1/8}^{1/3} \sqrt{\frac{x + 1}{x}} \cdot \frac{1}{x^2} \, dx
+    \]
+    Let $u = \frac{x + 1}{x} = 1 + \frac{1}{x}$, thus $du = -\frac{1}{x^2} \, dx$ or $-du = \frac{1}{x^2} \, dx$. When $x = \frac{1}{8}$, $u = 9$ and when $x = \frac{1}{3}$, $u = 4$. Therefore:
+    \[        \int_{1/8}^{1/3} \sqrt{\frac{x + 1}{x}} \cdot \frac{1}{x^2} \, dx = \int_9^4 \sqrt{u} \cdot (-du) = \int_4^9 \sqrt{u} \, du = \frac{2}{3} u^{3/2} \Big|_4^9 = \frac{2}{3} (27 - 8) = \frac{38}{3}
+    \]
+\end{eg}
