@@ -225,5 +225,150 @@ Remark that $A$ has to be symmetric for this to work. If $A = Q D Q^T$ where $D$
             \frac{1}{2} \\ -2 \\ -\frac{1}{2}
         \end{bmatrix}
     \end{aligned}\]
-    Now we can normalize them to get an orthonormal basis.
+    Now we can normalize them to get an orthonormal basis. Thus we have:
+    \[
+        A = P D P^{-1} = P D P^T
+    \]
+    Since the columns of $P$ are orthonormal, we have $P^{-1} = P^T$. Where:
+    \[
+        D = \begin{bmatrix}
+            7 & 0 & 0 \\
+            0 & 7 & 0 \\
+            0 & 0 & -2
+        \end{bmatrix}, \quad P = \begin{bmatrix}
+            | & | & | \\
+            u_1 & u_2 & u_3 \\
+            | & | & |
+        \end{bmatrix}
+    \]
+\end{eg}
+
+\begin{theorem}[Spectral Decomposition]
+    Let $A$ be a symmetric matrix with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$ and corresponding orthonormal eigenvectors $u_1, u_2, \ldots, u_n$. Then, $A$ can be expressed as:
+    \[
+        A = \sum_{i=1}^{n} \lambda_i u_i u_i^T
+    \]
+    where $u_i u_i^T$ is the outer product of $u_i$ with itself.
+\end{theorem}
+\begin{proof}
+    Since $A$ is symmetric, by the Spectral Theorem, it can be diagonalized as:
+    \[
+        A = Q D Q^T
+    \]
+    where $Q$ is the orthogonal matrix whose columns are the orthonormal eigenvectors $u_1, u_2, \ldots, u_n$, and $D$ is the diagonal matrix with the eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$ on its diagonal. We can express $D$ as:
+    \[
+        D = \begin{bmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{bmatrix}
+    \]
+    Thus, we can write:
+    \begin{align*}
+        A &= \begin{bmatrix}
+            | & | & \cdots & | \\
+            u_1 & u_2 & \cdots & u_n \\
+            | & | & \cdots & |
+        \end{bmatrix} \begin{bmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{bmatrix} \begin{bmatrix}
+            - & u_1^T & - \\
+            - & u_2^T & - \\
+            \vdots & \vdots & \vdots \\
+            - & u_n^T & -
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            | & | & \cdots & | \\
+            \lambda_1 u_1 & \lambda_2 u_2 & \cdots & \lambda_n u_n \\
+            | & | & \cdots & |
+        \end{bmatrix} \begin{bmatrix}
+            - & u_1^T & - \\
+            - & u_2^T & - \\
+            \vdots & \vdots & \vdots \\
+            - & u_n^T & -
+        \end{bmatrix} \\
+        &= \sum_{i=1}^{n} \lambda_i u_i u_i^T
+    \end{align*}
+\end{proof}
+
+\section{Singular Value Decomposition (SVD)}
+
+\begin{theorem}[Singular Value Decomposition]
+    For any matrix $A \in \mathbb{R}^{m \times n}$, there exist orthogonal matrices $U \in \mathbb{R}^{m \times m}$ and $V \in \mathbb{R}^{n \times n}$, and a diagonal matrix $\Sigma \in \mathbb{R}^{m \times n}$ with non-negative real numbers on the diagonal, such that:
+    \[
+        A = U \Sigma V^T
+    \]
+    The diagonal entries of $\Sigma$ are called the singular values of $A$, and the columns of $U$ and $V$ are called the left and right singular vectors of $A$, respectively.
+\end{theorem}
+
+\begin{eg}
+    Let $A = \begin{bmatrix}
+        4 & 11 & 14 \\ 8 & 7 & -2
+    \end{bmatrix}$. Since $A$ is not symmetric, we cannot use the spectral theorem to diagonalize it but $A^T A$ is symmetric. Let's compute $A^T A$:
+    \[
+        A^T A = \begin{bmatrix}
+            80 & 100 & 40 \\ 100 & 170 & 140 \\ 40 & 140 & 200
+        \end{bmatrix}
+    \]
+    Thus we can diagonalize $A^T A$. Let's compute its characteristic polynomial:
+    \[
+        \det(A^T A - \lambda I) = -\lambda (\lambda^2 -450 \lambda + 32400)
+    \]
+    Thus, the eigenvalues of $A^T A$ are $\lambda_1 = 360$, $\lambda_2 = 90$ and $\lambda_3 = 0$. We can compute the eigenvectors corresponding to each eigenvalue (for brevity, we skip the calculations):
+    \[\begin{aligned}
+        v_1 &= \begin{bmatrix}
+            1/3 \\ 2/3 \\ 2/3
+        \end{bmatrix}, \quad v_2 = \begin{bmatrix}
+            -2/3 \\ -1/3 \\ 2/3
+        \end{bmatrix}, \quad v_3 = \begin{bmatrix}
+            2/3 \\ -2/3 \\ 1/3
+        \end{bmatrix}
+    \end{aligned}\]
+    Note that $v_1$, $v_2$ and $v_3$ are orthonormal. Now, let's compute $A \vec{v}_i$ for each $i$ and it's norm:
+    \[
+        A \vec{v_1} = \begin{bmatrix}
+        4 & 11 & 14 \\ 8 & 7 & -2
+        \end{bmatrix} \begin{bmatrix}
+            1/3 \\ 2/3 \\ 2/3
+        \end{bmatrix} = \begin{bmatrix}
+            18 \\ 6
+        \end{bmatrix}, \quad \|A v_1\|^2 = 360 = \lambda_1
+    \]
+    \[
+        A \vec{v_2} = \begin{bmatrix}
+        4 & 11 & 14 \\ 8 & 7 & -2
+        \end{bmatrix} \begin{bmatrix}
+            -2/3 \\ -1/3 \\ 2/3
+        \end{bmatrix} = \begin{bmatrix}
+            3 \\ -9
+        \end{bmatrix}, \quad \|A v_2\|^2 = 90 = \lambda_2
+    \]
+    \[
+        A \vec{v_3} = \begin{bmatrix}
+        4 & 11 & 14 \\ 8 & 7 & -2
+        \end{bmatrix} \begin{bmatrix}
+            2/3 \\ -2/3 \\ 1/3
+        \end{bmatrix} = \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix}, \quad \|A v_3\|^2 = 0 = \lambda_3
+    \]
+    Remark that this is not a coincidence because we have:
+    \[
+        \|A v_i\|^2 = v_i^T A^T A v_i = v_i^T (\lambda_i v_i) = \lambda_i (v_i^T v_i) = \lambda_i
+    \]
+    Let's now observe that the vectors $A \vec{v_i}$ and $A \vec{v_j}$ are orthogonal for $i \neq j$:
+    \[\begin{aligned}
+        (A v_1) \cdot (A v_2) = 0 \\
+        (A v_1) \cdot (A v_3) = 0 \\
+        (A v_2) \cdot (A v_3) = 0
+    \end{aligned}\]
+    Remark that here again this is not a coincidence because:
+    \[\begin{aligned}
+        (A v_i) \cdot (A v_j) &= (A v_i)^T (A v_j) = v_i^T A^T A v_j = v_i^T (\lambda_j v_j) = \lambda_j (v_i^T v_j) = 0
+    \end{aligned}\]
+    since $v_i$ and $v_j$ are orthogonal. Now, we can
 \end{eg}
