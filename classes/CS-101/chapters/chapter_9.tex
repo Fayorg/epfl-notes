@@ -307,3 +307,318 @@ The Laplace definition of probability is limited to situations where all outcome
         \]
     \end{itemize}
 \end{eg}
+
+\begin{definition}[Independent Events]
+    Two events \( A \) and \( B \) are said to be independent if the occurrence of one event does not affect the probability of the occurrence of the other event. Mathematically, this is expressed as:
+    \[
+        P(A|B) = P(A) \quad \text{or equivalently} \quad P(B|A) = P(B)
+    \]
+    This can also be expressed in terms of joint probability:
+    \[
+        P(A \cap B) = P(A) \cdot P(B)
+    \]
+\end{definition}
+
+\begin{eg}
+    If $P(E) = \frac{1}{2}$ and $P(E \cap F) = \frac{1}{4}$ under which condition are $E$ and $F$ independent? \\
+    By the definition of independent events, we have:
+    \[
+        P(E \cap F) = P(E) \cdot P(F)
+    \]
+    Substituting the given values, we get:
+    \[
+        \frac{1}{4} = \frac{1}{2} \cdot P(F) \quad \implies \quad P(F) = \frac{1}{2}
+    \]
+\end{eg}
+
+\begin{eg}
+    Assume that each of the four ways that a family can have two children is equally likely: $\{GG, GB,BG,BB\}$. Are the events $E$ that a family with two children has both girls and boys and $F$ that a family with two children has at most one boy, independent? \\
+    We have:
+    \[
+        E = \{GB, BG\}, \quad F = \{GG, GB, BG\}
+    \]
+    Thus:
+    \[
+        P(E) = \frac{2}{4} = \frac{1}{2}, \quad P(F) = \frac{3}{4}
+    \]
+    and:
+    \[
+        E \cap F = \{GB, BG\}
+    \]
+    Therefore:
+    \[
+        P(E \cap F) = \frac{2}{4} = \frac{1}{2}
+    \]
+    Now, we check if:
+    \[
+        P(E) \cdot P(F) = \frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8} \neq P(E \cap F)
+    \]
+    Since \( P(E) \cdot P(F) \neq P(E \cap F) \), the events \( E \) and \( F \) are not independent.
+\end{eg}
+
+\begin{definition}[Pairwise Independent Events]
+    A set of events \( E_1, E_2, \ldots, E_n \) are said to be pairwise independent if every pair of events \( (E_i, E_j) \) for \( i \neq j \) are independent. This means that for every pair \( (E_i, E_j) \):
+    \[
+        P(E_i \cap E_j) = P(E_i) \cdot P(E_j)
+    \]
+\end{definition}
+
+\begin{definition}[Mutually Independent Events]
+    A set of events \( E_1, E_2, \ldots, E_n \) are said to be mutually independent if for every subset of events \( \{E_{i_1}, E_{i_2}, \ldots, E_{i_k}\} \) where \( 2 \leq k \leq n \), the following condition holds:
+    \[
+        P(E_{i_1} \cap E_{i_2} \cap \ldots \cap E_{i_k}) = P(E_{i_1}) \cdot P(E_{i_2}) \cdot \ldots \cdot P(E_{i_k})
+    \]
+\end{definition}
+Remark that mutual independence implies pairwise independence, but the converse is not necessarily true.
+
+\begin{eg}
+    Toss a fair coin twice with a sample space:
+    \[
+        S = \{HH, HT, TH, TT\}
+    \]
+    With the events:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $E_1$ = "first toss is heads" = $\{HH, HT\}$
+        \item $E_2$ = "second toss is heads" = $\{HH, TH\}$
+        \item $E_3$ = "the two outcomes are different" = $\{HT, TH\}$
+    \end{itemize}
+    We have:
+    \[
+        P(E_1) = P(E_2) = P(E_3) = \frac{1}{2}
+    \]
+    And:
+    \[
+        P(E_1 \cap E_2) = P(\{HH\}) = \frac{1}{4} = P(E_1) \cdot P(E_2)
+    \]
+    \[
+        P(E_1 \cap E_3) = P(\{HT\}) = \frac{1}{4} = P(E_1) \cdot P(E_3)
+    \]
+    \[
+        P(E_2 \cap E_3) = P(\{TH\}) = \frac{1}{4} = P(E_2) \cdot P(E_3)
+    \]
+    Thus, the events \( E_1, E_2, E_3 \) are pairwise independent. However:
+    \[
+        P(E_1 \cap E_2 \cap E_3) = P(\emptyset) = 0 \neq P(E_1) \cdot P(E_2) \cdot P(E_3) = \frac{1}{8}
+    \]
+    Therefore, the events \( E_1, E_2, E_3 \) are not mutually independent.
+\end{eg}
+
+\begin{eg}
+    Consider the following:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Two dice are tossed remotely.
+        \item An observer tells you a preperty of the rolls.
+        \item Depending on the answer, you decide whether you bet that the sum of the two dice is $7$.
+    \end{itemize}
+    Let's first check the case where the observer does not tell you anything. The possible outcomes for the sum of two dice are:
+    \[
+        E = \{16, 25, 34, 43, 52, 61\}
+    \]
+    Thus, the probability of getting a sum of $7$ is:
+    \[
+        P(E) = \frac{6}{36} = \frac{1}{6}
+    \]
+    Now, let's consider the case where the observer tells you that at least one of the dice shows a $6$. The possible outcomes are:
+    \[
+        F = \{(6,1), (6,2), (6,3), (6,4), (6,5), (6,6), (1,6), (2,6), (3,6), (4,6), (5,6)\}
+    \]
+    with:
+    \[
+        P(F) = \frac{11}{36}
+    \]
+    And:
+    \[
+        E \cap F = \{(6,1), (1,6)\} \quad \implies \quad P(E \cap F) = \frac{2}{36}
+    \]
+    Therefore, the conditional probability of getting a sum of $7$ given that at least one die shows a $6$ is:
+    \[
+        P(E|F) = \frac{P(E \cap F)}{P(F)} = \frac{\frac{2}{36}}{\frac{11}{36}} = \frac{2}{11}
+    \]
+    Which is greater than the initial probability of \( \frac{1}{6} \).
+\end{eg}
+
+\begin{definition}[Bernoulli Trial]
+    A Bernoulli trial is a random experiment that has exactly two possible outcomes, typically referred to as "success" and "failure". The probability of success is denoted by \( p \), and the probability of failure is denoted by \( q = 1 - p \).
+\end{definition}
+A frequent question regarding Bernoulli trials is: If we perform \( n \) mutually independent Bernoulli trials, what is the probability of getting exactly \( k \) successes?
+
+\begin{eg}
+    A coin is biased such that the probability of heads is \( \frac{2}{3} \) and the probability of tails is \( \frac{1}{3} \). What is the probability that exactly $4$ heads occur when the coin is flipped $7$ times? \\
+    Let \( p = \frac{2}{3} \) be the probability of heads and \( q = \frac{1}{3} \) be the probability of tails. The number of ways to choose \( 4 \) heads out of \( 7 \) flips is given by the binomial coefficient \( \binom{7}{4} \). The probability of getting exactly \( 4 \) heads is given by:
+    \[
+        P(X = 4) = \binom{7}{4} p^4 q^{7-4} = \binom{7}{4} \left(\frac{2}{3}\right)^4 \left(\frac{1}{3}\right)^3
+    \]
+\end{eg}
+
+\begin{theorem}[Independent Bernoulli Trials]
+    If a Bernoulli trial with probability of success \( p \) is repeated \( n \) times independently, the probability of getting exactly \( k \) successes is given by:
+    \[
+        P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+    \]
+\end{theorem}
+\begin{proof}
+    The number of ways to choose \( k \) successes out of \( n \) trials is given by the binomial coefficient \( \binom{n}{k} \). Each specific sequence of \( k \) successes and \( n - k \) failures has a probability of \( p^k (1 - p)^{n - k} \). Therefore, the total probability of getting exactly \( k \) successes is:
+    \[
+        P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+    \]
+\end{proof}
+Remark that the sum of the probabilities for all possible values of \( k \) (from \( 0 \) to \( n \)) is equal to \( 1 \):
+\[
+    \sum_{k=0}^{n} P(X = k) = \sum_{k=0}^{n} \binom{n}{k} p^k (1 - p)^{n - k} = (p + (1 - p))^n = 1^n = 1
+\]
+
+\begin{eg}
+    When planting $7$ seeds, what's the probability that at least $3$ will sprout, if each seed has a $25\%$ chance of sprouting? \\
+    Let \( p = 0.25 \) be the probability of a seed sprouting and \( q = 0.75 \) be the probability of a seed not sprouting. The probability of at least \( 3 \) seeds sprouting is given by:
+    \[
+        P(X \geq 3) = 1 - P(X < 3) = 1 - (P(X = 0) + P(X = 1) + P(X = 2))
+    \]
+    We calculate each term:
+    \[
+        P(X = 0) = \binom{7}{0} (0.25)^0 (0.75)^7 = (0.75)^7
+    \]
+    \[
+        P(X = 1) = \binom{7}{1} (0.25)^1 (0.75)^6 = 7 \cdot 0.25 \cdot (0.75)^6
+    \]
+    \[
+        P(X = 2) = \binom{7}{2} (0.25)^2 (0.75)^5 = 21 \cdot (0.25)^2 \cdot (0.75)^5
+    \]
+    Therefore, the probability of at least \( 3 \) seeds sprouting is:
+    \[
+        P(X \geq 3) = 1 - \left( (0.75)^7 + 7 \cdot 0.25 \cdot (0.75)^6 + 21 \cdot (0.25)^2 \cdot (0.75)^5 \right)
+    \]
+    We could also have computed it directly as:
+    \[
+        P(X \geq 3) = \sum_{k=3}^{7} \binom{7}{k} (0.25)^k (0.75)^{7 - k}
+    \]
+\end{eg}
+
+\begin{eg}
+    A group of six people play the game of "odd person out" to determine who will buy refreshments. Each person flips a fair coin. If there is a person whose outcome is not the same as that of any other memeber of the group, this person has to buy the refreshments. What is the probability that there is an odd person out after the coins are flipped? \\
+    There could either be 5 tails and 1 head, or 5 heads and 1 tail. Let \( E \) be the event "there is an odd person out". The number of ways to choose 1 person out of 6 to be the odd person is \( \binom{6}{1} = 6 \). The probability of getting 5 tails and 1 head is:
+    \[
+        P(\text{5 tails, 1 head}) = \binom{6}{1} \left(\frac{1}{2}\right)^5 \cdot \frac{1}{2}
+    \]
+    Similarly, the probability of getting 5 heads and 1 tail is given by:
+    \[
+        P(\text{5 heads, 1 tail}) = \binom{6}{5} \frac{1}{2} \cdot \left(\frac{1}{2}\right)^5
+    \]
+    \[
+        P(E) = \binom{6}{1} \left(\frac{1}{2}\right)^5 \cdot \frac{1}{2} + \binom{6}{5} \frac{1}{2} \cdot \left(\frac{1}{2}\right)^5
+    \]
+\end{eg}
+
+\begin{theorem}[Law of Total Probability]
+    Let \( B_1, B_2, \ldots, B_n \) be a partition of the sample space \( S \) such that \( P(B_i) > 0 \) for all \( i \). For any event \( A \) in \( S \), the probability of \( A \) can be expressed as:
+    \[
+        P(A) = \sum_{i=1}^{n} P(A \cap B_i) = \sum_{i=1}^{n} P(A|B_i) P(B_i)
+    \]
+\end{theorem}
+\begin{proof}
+    Since \( B_1, B_2, \ldots, B_n \) form a partition of the sample space \( S \), we have:
+    \[
+        A = (A \cap B_1) \cup (A \cap B_2) \cup \ldots \cup (A \cap B_n)
+    \]
+    and the events \( A \cap B_i \) are mutually exclusive. Therefore, the probability of \( A \) is:
+    \[
+        P(A) = P(A \cap B_1) + P(A \cap B_2) + \ldots + P(A \cap B_n)
+    \]
+    Using the definition of conditional probability, we can express each term as:
+    \[
+        P(A \cap B_i) = P(A|B_i) P(B_i)
+    \]
+    Substituting this into the equation for \( P(A) \), we get:
+    \[
+        P(A) = \sum_{i=1}^{n} P(A|B_i) P(B_i)
+    \]
+\end{proof}
+
+\subsection{Bayes' Theorem}
+Bayes' Theorem allows us to use probabilities to answer questions such as the following:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Given that a patient tests positive for a disease, what is the probability that they actually have the disease?
+    \item Given that a student answered a question correctly, what is the probability that they studied the relevant material?
+\end{itemize}
+It has applications in various fields, including medical diagnosis, spam filtering, machine learning and many others.
+
+\begin{theorem}[Bayes' Theorem]
+    Let $E$ and $F$ be two events in the sample space $S$ with $P(F) \neq 0$ and $P(E) \neq 0$. Then:
+    \[
+        P(F|E) = \frac{P(E|F) \cdot P(F)}{P(E)} = \frac{P(E|F) \cdot P(F)}{P(E|F) \cdot P(F) + P(E|\bar{F}) \cdot P(\bar{F})}
+    \]
+    where $\bar{F} \cup F = S$ and $\bar{F} \cap F = \emptyset$.
+\end{theorem}
+Let's introduce some notation with an example:
+\begin{eg}
+    Let the following events be defined as:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $E$ = "Testing positive on Corona"
+        \item $F$ = "Having Corona"
+    \end{itemize}
+    Then we have:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $P(F)$ = Probability of having Corona (without any additional knowledge) - \textbf{prior probability}
+        \item $P(E)$ = Probability of testing positive on Corona - \textbf{evidence}
+        \item $P(E|F)$ = Probability of testing positive given that you have Corona - \textbf{likelihood}
+        \item $P(F|E)$ = Probability of having Corona given that you tested positive - \textbf{posterior probability}
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    Suppose that $2$ persons in $100$ have a Covid-19. There is a test for the disease that gives a positive result $95\%$ of the time when given to someone with the disease. When given to someone without the disease, $98\%$ of the time it gives a negative result.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item What is the probability that a person who tests positive actually has the disease?
+        \item What is the probability that a person who tests negative does not have the disease?
+    \end{itemize}
+    Let's define the events:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $E$ = "Testing positive"
+        \item $F$ = "Having Covid-19"
+    \end{itemize}
+    We have:
+    \[
+        P(F) = \frac{2}{100} = 0.02, \quad P(E|F) = 0.95, \quad P(\bar{E}|\bar{F}) = 0.98
+    \]
+    Therefore:
+    \[
+        P(F|E) = \frac{P(E|F) \cdot P(F)}{P(E|F) \cdot P(F) + P(E|\bar{F}) \cdot P(\bar{F})} 
+    \]
+    where:
+    \[
+        P(E|\bar{F}) = 1 - P(\bar{E}|\bar{F}) = 1 - 0.98 = 0.02, \quad P(\bar{F}) = 1 - P(F) = 0.98
+    \]
+    Substituting the values, we get:
+    \[
+        P(F|E) = \frac{0.95 \cdot 0.02}{0.95 \cdot 0.02 + 0.02 \cdot 0.98} = \frac{0.019}{0.019 + 0.0196} = \frac{0.019}{0.0386} \approx 0.4922
+    \]
+    Thus, the probability that a person who tests positive actually has the disease is approximately \(49.22\% \).
+\end{eg}
+
+\begin{eg}
+    We have two boxes. The first box contains two green balls and seven red balls. The second contains four green balls and three red balls.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Bob selects one of the boxes at random.
+        \item Then he selects a ball from that box at random.
+    \end{itemize}
+    If he has a red ball, what is the probability that he selected that ball from the first box? \\
+    Let's define the events:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $R$ = "Selecting a red ball"
+        \item $B$ = "Selecting from the first box"
+    \end{itemize}
+    We have:
+    \[
+        P(B|R) = \frac{P(R|B) \cdot P(B)}{P(R)} = \frac{P(R|B) \cdot P(B)}{P(R|B) \cdot P(B) + P(R|\bar{B}) \cdot P(\bar{B})}
+    \]
+    where:
+    \[
+        P(B) = \frac{1}{2}, \quad P(\bar{B}) = \frac{1}{2}
+    \]
+    \[
+        P(R|B) = \frac{7}{9}, \quad P(R|\bar{B}) = \frac{3}{7}
+    \]
+    Substituting the values, we get:
+    \[
+        P(B|R) = \frac{\frac{7}{9} \cdot \frac{1}{2}}{\frac{7}{9} \cdot \frac{1}{2} + \frac{3}{7} \cdot \frac{1}{2}} = \frac{\frac{7}{18}}{\frac{7}{18} + \frac{3}{14}} = \frac{\frac{7}{18}}{\frac{49}{126} + \frac{27}{126}} = \frac{\frac{7}{18}}{\frac{76}{126}} = \frac{7}{18} \cdot \frac{126}{76} = \frac{49}{76}
+    \]
+\end{eg}
