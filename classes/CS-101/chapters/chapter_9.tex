@@ -622,3 +622,235 @@ Let's introduce some notation with an example:
         P(B|R) = \frac{\frac{7}{9} \cdot \frac{1}{2}}{\frac{7}{9} \cdot \frac{1}{2} + \frac{3}{7} \cdot \frac{1}{2}} = \frac{\frac{7}{18}}{\frac{7}{18} + \frac{3}{14}} = \frac{\frac{7}{18}}{\frac{49}{126} + \frac{27}{126}} = \frac{\frac{7}{18}}{\frac{76}{126}} = \frac{7}{18} \cdot \frac{126}{76} = \frac{49}{76}
     \]
 \end{eg}
+
+\begin{definition}[Probability Trees]
+    A probability tree is a graphical representation used to visualize and calculate the probabilities of different outcomes in a sequence of events. Each branch of the tree represents a possible outcome, and the probabilities associated with each outcome are indicated along the branches. Probability trees are particularly useful for solving problems involving conditional probabilities and multiple stages of events.
+\end{definition}
+
+\begin{eg}
+    Given a bag with 3 black and 2 white marbles. What is the probability of drawing 3 black marbles in a row? \\
+    We can represent the situation using a probability tree:
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            % First draw
+            \node (start) at (0,0) {Start};
+            \node (B1) at (-3,-2) {B (3/5)};
+            \node (W1) at (3,-2) {W (2/5)};
+            \draw[->] (start) -- (B1);
+            \draw[->] (start) -- (W1);
+
+            % Second draw after first black
+            \node (B2a) at (-4,-4) {B (2/4)};
+            \node (W2a) at (-2,-4) {W (2/4)};
+            \draw[->] (B1) -- (B2a);
+            \draw[->] (B1) -- (W2a);
+
+            % Second draw after first white
+            \node (B2b) at (4,-4) {B (3/4)};
+            \node (W2b) at (2,-4) {W (1/4)};
+            \draw[->] (W1) -- (B2b);
+            \draw[->] (W1) -- (W2b);
+
+            % Third draw after second black
+            \node (B3a) at (-5,-6) {B (1/3)};
+            \node (W3a) at (-3,-6) {W (2/3)};
+            \draw[->] (B2a) -- (B3a);
+            \draw[->] (B2a) -- (W3a);
+
+            % Third draw after second white
+            \node (B3b) at (-1,-6) {B (2/3)};
+            \node (W3b) at (1,-6) {W (1/3)};
+            \draw[->] (W2a) -- (B3b);
+            \draw[->] (W2a) -- (W3b);
+
+            % Third draw after second black from first white
+            \node (B3c) at (5,-6) {B (2/3)};
+            \node (W3c) at (3,-6) {W (1/3)};
+            \draw[->] (B2b) -- (B3c);
+            \draw[->] (B2b) -- (W3c);
+        \end{tikzpicture}
+    \end{center}
+    The probability of drawing 3 black marbles in a row is calculated by multiplying the probabilities along the branches leading to that outcome:
+    \[
+        P(\text{3 black}) = \frac{3}{5} \cdot \frac{2}{4} \cdot \frac{1}{3} = \frac{1}{10}
+    \]
+\end{eg}
+
+\begin{eg}[Monty Hall Problem]
+    In a game show, a contestant is presented with three doors: behind one door is a car (the prize), and behind the other two doors are goats. The contestant picks one door. The host, who knows what is behind each door, opens one of the remaining doors, revealing a goat. The contestant is then given the option to switch their choice to the other unopened door or stick with their original choice. What should the contestant do to maximize their chances of winning the car? \\
+    Let's define the events:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $C$ = "The car is behind the initially chosen door"
+        \item $S$ = "The contestant switches doors"
+    \end{itemize}
+    The probability of winning the car if the contestant sticks with their original choice is:
+    \[
+        P(\text{win} | \text{stick}) = P(C) = \frac{1}{3}
+    \]
+    If the contestant switches doors, the probability of winning the car is:
+    \[
+        P(\text{win} | S) = P(\bar{C}) = \frac{2}{3}
+    \]
+    Therefore, to maximize their chances of winning the car, the contestant should always switch doors.
+\end{eg}
+
+\section{Random Variables}
+Often e are not interested in the outcomes of an experiment per se, but some function of those outcomes. For examples:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The sum of the values of two dices.
+    \item The money we win when rolling two dices summing up to 7.
+    \item The number of $6$ we roll in $10$ rolls.
+    \item The grade we obtain in an exam when guessing the answers.
+\end{itemize}
+
+\begin{definition}
+    A random variable $X$ is a function $X: S \to \mathbb{R}$ from the sample space $S$ of an experiment to the set of real numbers $\mathbb{R}$. (note that it is not a variable in the usual sense, but rather a mapping and it is not random either).
+\end{definition}
+
+\begin{eg}
+    Suppose that a coin is flipped three times. Let the sample space be:
+    \[
+        S = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}
+    \]
+    Define the random variable \( X \) as the number of heads obtained in the three flips. The mapping of \( X \) is as follows:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item \( X(HHH) = 3 \)
+        \item \( X(HHT) = 2 \)
+        \item \( X(HTH) = 2 \)
+        \item \( X(HTT) = 1 \)
+        \item \( X(THH) = 2 \)
+        \item \( X(THT) = 1 \)
+        \item \( X(TTH) = 1 \)
+        \item \( X(TTT) = 0 \)
+    \end{itemize}
+\end{eg}
+
+\subsection{Random Variables vs. Events}
+In the context of a random variable \( X \), events can be expressed in terms of the values that \( X \) takes. For example, if we are interested in the event that \( X \) takes on a specific value \( x \), we can denote this event as:
+\[    E_x = \{ s \in S : X(s) = x \} \]
+This event \( E_x \) consists of all outcomes in the sample space \( S \) for which the random variable \( X \) equals \( x \). This can be denoted as:
+\[    P(X = x) = P(E_x)
+\]
+Note that instead of $=$, we could also use other relational operators such as \( <, \leq, >, \geq \) to define events based on the values of the random variable \( X \).
+
+\begin{eg}
+    Consider the same example as above where a coin is flipped three times and the random variable \( X \) represents the number of heads obtained.
+    \[
+        \begin{array}{cccc}
+            \\ \text{Event} & \text{Outcomes} & \text{Meaning} & \text{Probability Statement} \\ \\
+            \hline \\
+            X = 1 & \{HTT, THT, TTH\} & X \text{ takes on the value } 1 & P(X = 1) \\ \\
+            X < 2 & \{HTT, THT, TTH, TTT\} & X \text{ takes on values $0$ or $1$ } & P(X < 2) \\ \\
+            X \geq 2 & \{HHT, HTH, THH, HHH\} & X \text{ takes on values $2$ or $3$ } & P(X \geq 2) \\ \\
+            X = x & \ldots & X \text{ takes on the value } x & P(X = x) \\ \\
+        \end{array}
+    \]
+\end{eg}
+
+\subsection{Distribution of a Random Variable}
+
+\begin{definition}[Distribution]
+    The distribution of a random variable $X$ on a sample space $S$ is the list of all possible values $r$ that $X$ can take on together with the probabilities $P(X = r)$ for all $r \in X(S)$ where $P(X = r)$ is the probability that $X$ takes the value $r$.
+    \[
+        P(X = r) = \sum_{s \in S : X(s) = r} P(s)
+    \]
+\end{definition}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item If the range of the function $X$ is countable, then $P(X = r)$ can be interpreted as a function $P: X(S) \to \mathbb{R}$.
+    \item This function $P$ is called the probability mass function (PMF) and it is a probability distribution over the sample space $X(S)$.
+\end{itemize}
+Note that in this class, we will only consider this case:
+\[
+    \sum_{r \in X(S)} P(X = r) = \sum_{r \in X(S)} \sum_{s \in S : X(s) = r} P(s) = \sum_{s \in S} P(s) = 1
+\]
+
+\begin{eg}
+    Consider that two fair dice are rolled. Let the random variable \( X \) be defined as the sum of the numbers appearing on the two dice. The possible values of \( X \) range from \( 2 \) to \( 12 \). The distribution of \( X \) is as follows:
+    \[
+        \begin{array}{c|c}
+            \text{Value of } X & P(X = r) \\ \hline
+            2 & \frac{1}{36} \\
+            3 & \frac{2}{36} \\
+            4 & \frac{3}{36} \\
+            5 & \frac{4}{36} \\
+            6 & \frac{5}{36} \\
+            7 & \frac{6}{36} \\
+            8 & \frac{5}{36} \\
+            9 & \frac{4}{36} \\
+            10 & \frac{3}{36} \\
+            11 & \frac{2}{36} \\
+            12 & \frac{1}{36} \\
+        \end{array}
+    \]
+    Graphically, the distribution can be represented as follows:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+            % \draw[->] (0,-3) -- (0,3) node[above] {$y$};
+
+            \foreach \x in {2,3,4,5,6,7,8,9,10,11,12} {
+                \ifnum\x>7\relax
+                    \pgfmathsetmacro{\yt}{13-\x}
+                    \pgfmathsetmacro{\y}{(1/36)*\yt*15} % Calculate the height based on the distribution
+                \else
+                    \pgfmathsetmacro{\yt}{\x-1}
+                    \pgfmathsetmacro{\y}{(1/36)*\yt*15} % Calculate the height based on the distribution
+                \fi
+
+                % \pgfmathsetmacro{\y}{(1/36)*(\x-1)*10} % Calculate the height based on the distribution
+                \draw[fill=secondary] (\x-7,-0.1) rectangle (\x-6,\y); % Draw the bar
+                \node[above] at (\x-6.5,\y+0.3) {$\frac{\pgfmathprintnumber[fixed,precision=0]{\yt}}{36}$}; % Label the height with a int precision of 0 decimal
+                \node[below] at (\x-6.5,-0.3) {\x}; % Label the x-axis
+            }
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\begin{eg}
+    Suppose that a coin is flipped three times. Let $X(s)$ be the random variable that equals the number of heads that appear when $s$ is the outcome. What is the probability of $P(X = 1)$? \\
+    The sample space is:
+    \[
+        S = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}
+    \]
+    The outcomes where \( X = 1 \) are:
+    \[
+        E = \{HTT, THT, TTH\}
+    \]
+    Therefore:
+    \[
+        P(X = 1) = P(E) = \frac{3}{8}
+    \]
+\end{eg}
+Note this example could be solved using Bernoulli Trials where \( n = 3 \), \( k = 1 \), and \( p = \frac{1}{2} \):
+\[
+    P(X = 1) = \binom{3}{1} \left(\frac{1}{2}\right)^1 \left(\frac{1}{2}\right)^{3-1} = 3 \cdot \frac{1}{2} \cdot \frac{1}{4} = \frac{3}{8}
+\]
+Thus generalized, the number of successes $k$ in \( n \) Bernoulli trials with probability of success \( p \) is a random variable \( X \) with distribution:
+\[
+    P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+\]
+
+\subsection{Expected Value}
+\begin{definition}[Expected Value]
+    The expected value (or mean) of a discrete random variable \( X \) on the sample space $S$ is equal to:
+    \[
+        E(X) = \sum_{s \in X(S)} P(s) \cdot X(s) = \sum_{r \in X(s)} \left(\sum_{s \in S : X(s) = r} P(s) \cdot X(s)\right) = \sum_{r \in X(S)} P(X = r) \cdot r
+    \]
+\end{definition}
+
+\begin{eg}
+    Let $X$ be the number of points obtained in a multiple choice question with $1$ correct answer out of $4$ options. Choosing the correct option results in $1$ point, while choosing one of the incorrect options will result in $-\frac{1}{3}$ points. What is the expected number of points when guessing? \\
+    The possible outcomes for \( X \) are:
+    \[
+        X(S) = \left\{ 1, -\frac{1}{3} \right\}
+    \]
+    The probabilities are:
+    \[
+        P(X = 1) = \frac{1}{4}, \quad P\left(X = -\frac{1}{3}\right) = \frac{3}{4}
+    \]
+    Therefore, the expected value of \( X \) is:
+    \[
+        E(X) = P(X = 1) \cdot 1 + P\left(X = -\frac{1}{3}\right) \cdot \left(-\frac{1}{3}\right) = \frac{1}{4} \cdot 1 + \frac{3}{4} \cdot \left(-\frac{1}{3}\right) = \frac{1}{4} - \frac{1}{4} = 0
+    \]
+\end{eg}
