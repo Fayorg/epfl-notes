@@ -831,6 +831,21 @@ Thus generalized, the number of successes $k$ in \( n \) Bernoulli trials with p
     P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
 \]
 
+\begin{definition}[Marginalization of a Random Variable]
+    Let \( X \) and \( Y \) be two random variables defined on the same sample space \( S \). The marginal distribution of \( X \) is obtained by summing over all possible values of \( Y \):
+    \[
+        P(X = x) = \sum_{y} P(X = x, Y = y)
+    \]
+    where \( P(X = x, Y = y) \) is the joint probability distribution of \( X \) and \( Y \).
+\end{definition}
+
+\begin{definition}[Joint Distribution of Random Variables]
+    Let \( X \) and \( Y \) be two random variables defined on the same sample space \( S \). The joint distribution of \( X \) and \( Y \) is the probability distribution that gives the probability of each possible pair of values \( (x, y) \):
+    \[
+        P(X = x, Y = y)
+    \]
+\end{definition}
+
 \subsection{Expected Value}
 \begin{definition}[Expected Value]
     The expected value (or mean) of a discrete random variable \( X \) on the sample space $S$ is equal to:
@@ -838,6 +853,12 @@ Thus generalized, the number of successes $k$ in \( n \) Bernoulli trials with p
         E(X) = \sum_{s \in X(S)} P(s) \cdot X(s) = \sum_{r \in X(s)} \left(\sum_{s \in S : X(s) = r} P(s) \cdot X(s)\right) = \sum_{r \in X(S)} P(X = r) \cdot r
     \]
 \end{definition}
+Some notations remarks:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item Random variable is typically written with capital letters such as \( X, Y, Z \).
+    \item The values a random variable takes on is typically written with lower case letters such as \( x, y, z \).
+    \item The set of values a random variable takes on is typically written with script letters such as \( \mathcal{X}, \mathcal{Y}, \mathcal{Z} \) (so far we wrote $X(S)$).
+\end{itemize}
 
 \begin{eg}
     Let $X$ be the number of points obtained in a multiple choice question with $1$ correct answer out of $4$ options. Choosing the correct option results in $1$ point, while choosing one of the incorrect options will result in $-\frac{1}{3}$ points. What is the expected number of points when guessing? \\
@@ -853,4 +874,279 @@ Thus generalized, the number of successes $k$ in \( n \) Bernoulli trials with p
     \[
         E(X) = P(X = 1) \cdot 1 + P\left(X = -\frac{1}{3}\right) \cdot \left(-\frac{1}{3}\right) = \frac{1}{4} \cdot 1 + \frac{3}{4} \cdot \left(-\frac{1}{3}\right) = \frac{1}{4} - \frac{1}{4} = 0
     \]
+\end{eg}
+
+\begin{theorem}[Linearity of Expectation]
+    If $X_i$ for $i = 1, 2, \ldots, n$ with $n$ a positive integer, are random variables on the sample space $S$, and if $a$ and $b$ are real numbers, then:
+    \[
+        E(X_1 + X_2 + \ldots + X_n) = E(X_1) + E(X_2) + \ldots + E(X_n)
+    \]
+    \[
+        E(a \cdot X_i + b) = a \cdot E(X_i) + b
+    \]
+    This property holds regardless of whether the random variables are independent or not.
+\end{theorem}
+\begin{proof}
+    % explain the first part using marginalization and joint distribution
+    For the first part, we have:
+    \[
+        E(X_1 + X_2 + \ldots + X_n) = \sum_{s \in S} P(s) \cdot (X_1(s) + X_2(s) + \ldots + X_n(s))
+    \]
+    By distributing the sum, we get:
+    \[
+        E(X_1 + X_2 + \ldots + X_n) = \sum_{s \in S} P(s) \cdot X_1(s) + \sum_{s \in S} P(s) \cdot X_2(s) + \ldots + \sum_{s \in S} P(s) \cdot X_n(s)
+    \]
+    Which simplifies to:
+    \[
+        E(X_1 + X_2 + \ldots + X_n) = E(X_1) + E(X_2) + \ldots + E(X_n)
+    \]
+    For the second part, we have:
+    \[
+        E(a \cdot X_i + b) = \sum_{s \in S} P(s) \cdot (a \cdot X_i(s) + b)
+    \]
+    By distributing the sum, we get:
+    \[
+        E(a \cdot X_i + b) = a \cdot \sum_{s \in S} P(s) \cdot X_i(s) + b \underbrace{\cdot \sum_{s \in S} P(s)}_{=1}
+    \]
+    Which simplifies to:
+    \[
+        E(a \cdot X_i + b) = a \cdot E(X_i) + b
+    \]
+\end{proof}
+
+\begin{eg}
+    Let $X$ be the random variable equal to the sum of the numbers that appear when a pair of fair dice is rolled. What is the expected value of $X$ when the pair of dice is rolled once? \\
+    Let $X_1$ and $X_2$ be the random variables equal to the numbers that appear on the first and second die, respectively. Then we have:
+    \[
+        X = X_1 + X_2
+    \]
+    By the linearity of expectation, we have:
+    \[
+        E(X) = E(X_1 + X_2) = E(X_1) + E(X_2)
+    \]
+    Since each die is fair, the expected value of each die is:
+    \[
+        E(X_1) = E(X_2) = \frac{1 + 2 + 3 + 4 + 5 + 6}{6} = \frac{21}{6} = 3.5
+    \]
+    Therefore, the expected value of \( X \) is:
+    \[
+        E(X) = E(X_1) + E(X_2) = 3.5 + 3.5 = 7
+    \]
+\end{eg}
+
+\begin{theorem}[Expected Value of Bernoulli Trials]
+    If a Bernoulli trial with probability of success \( p \) is repeated \( n \) times independently, the expected number of successes is given by:
+    \[
+        E(X) = n \cdot p
+    \]
+\end{theorem}
+\begin{proof}
+    Let \( X_i \) be the random variable that equals \( 1 \) if the \( i \)-th trial is a success and \( 0 \) otherwise. Then the total number of successes \( X \) can be expressed as:
+    \[
+        X = X_1 + X_2 + \ldots + X_n
+    \]
+    By the linearity of expectation, we have:
+    \[
+        E(X) = E(X_1 + X_2 + \ldots + X_n) = E(X_1) + E(X_2) + \ldots + E(X_n)
+    \]
+    Since each trial is independent and has the same probability of success \( p \), we have:
+    \[
+        E(X_i) = 1 \cdot p + 0 \cdot (1 - p) = p
+    \]
+    Therefore, the expected number of successes is:
+    \[
+        E(X) = n \cdot p
+    \]
+\end{proof}
+
+\begin{eg}
+    During $10$ different nature walks, you look for a specific bird that has a $25\%$ chance of appearing. How many times are you expecting to see the bird? \\
+    Let \( n = 10 \) be the number of nature walks and \( p = 0.25 \) be the probability of seeing the bird on each walk. The expected number of times you see the bird is given by:
+    \[
+        E(X) = n \cdot p = 10 \cdot 0.25 = 2.5
+    \]
+\end{eg}
+
+\begin{eg}
+    Suppose that the probability that a coin comes up tails is $p$. This coin is flipped repeatedly until it comes up tails. What is the expected number of flips until this coin comes up tails? \\
+    Let \( X \) be the random variable representing the number of flips until the first tails. The possible values of \( X \) are \( 1, 2, 3, \ldots \). The probability that the first tails appears on the \( k \)-th flip is:
+    \[
+        P(X = k) = (1 - p)^{k - 1} \cdot p
+    \]
+    The expected value of \( X \) is given by:
+    \[
+        E(X) = \sum_{k=1}^{\infty} k \cdot P(X = k) = \sum_{k=1}^{\infty} k \cdot (1 - p)^{k - 1} \cdot p
+    \]
+    This series can be evaluated using the formula for the sum of an infinite geometric series and its derivative, i.e:
+    \[
+        \sum_{k=0}^{\infty} x^k = \frac{1}{1 - x} \quad \text{for } |x| < 1
+    \]
+    with its derivative:
+    \[
+        \sum_{k=1}^{\infty} k x^{k-1} = \frac{1}{(1 - x)^2} \quad \text{for } |x| < 1
+    \]
+    Letting \( x = 1 - p \), we have:
+    \[
+        \sum_{k=1}^{\infty} k (1 - p)^{k - 1} = \frac{1}{(1 - (1 - p))^2} = \frac{1}{p^2}
+    \]
+    Therefore:
+    \[
+        E(X) = p \cdot \frac{1}{p^2} = \frac{1}{p}
+    \]
+\end{eg}
+
+\begin{definition}[Independent Random Variables]
+    Two random variables \( X \) and \( Y \) defined on the same sample space \( S \) are said to be independent if for all values \( x \) in the range of \( X \) and \( y \) in the range of \( Y \), the following condition holds:
+    \[
+        P(X = x \text{ and } Y = y) = P(X = x) \cdot P(Y = y)
+    \]
+\end{definition}
+
+\begin{theorem}[Expected Value of Independent Random Variables]
+    If \( X \) and \( Y \) are independent random variables defined on the same sample space \( S \), then the expected value of their product is equal to the product of their expected values:
+    \[
+        E(X \cdot Y) = E(X) \cdot E(Y)
+    \]
+\end{theorem}
+\begin{proof}
+    By the definition of expected value, we have:
+    \[
+        E(X \cdot Y) = \sum_{s \in S} P(s) \cdot X(s) \cdot Y(s)
+    \]
+    We can rewrite this sum by grouping terms based on the values of \( X \) and \( Y \):
+    \[
+        E(X \cdot Y) = \sum_{x} \sum_{y} x \cdot y \cdot P(X = x \text{ and } Y = y)
+    \]
+    Since \( X \) and \( Y \) are independent, we can substitute \( P(X = x \text{ and } Y = y) \) with \( P(X = x) \cdot P(Y = y) \):
+    \[
+        E(X \cdot Y) = \sum_{x} \sum_{y} x \cdot y \cdot P(X = x) \cdot P(Y = y)
+    \]
+    We can separate the sums:
+    \[
+        E(X \cdot Y) = \left( \sum_{x} x \cdot P(X = x) \right) \cdot \left( \sum_{y} y \cdot P(Y = y) \right)
+    \]
+    Recognizing these sums as the expected values of \( X \) and \( Y \), we have:
+    \[
+        E(X \cdot Y) = E(X) \cdot E(Y)
+    \]
+\end{proof}
+
+\subsection{Variance and Standard Deviation}
+\begin{definition}[Variance]
+    Let $X$ be a random variable on the sample space $S$. The variance of $X$, denoted by $V(X)$ is:
+    \[
+        V(X) = \sum_{s \in S}(X(s) - E(X))^2 \cdot P(S) = \sum_{r \in X(S)}(r - E(X))^2 \cdot P(X = r)
+    \]
+\end{definition}
+
+\begin{definition}[Standard Deviation]
+    The standard deviation of a random variable $X$, denoted by $\sigma(X)$ is the square root of the variance:
+    \[
+        \sigma(X) = \sqrt{V(X)}
+    \]
+\end{definition}
+Note that the variance and the standard deviation are used to quantify how widely a random variable is distributed.
+
+\begin{eg}
+    We again look into rolling a die. Let the following hold:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Let $X$ and $Y$ be random variables on $S = \{1,2,3,4,5,6\}$
+        \item Let $X(s) = 0$ all $s \in S$.
+        \item Let $Y(s) = -1$ for $s \in \{1,2,3\}$ and $Y(s) = 1$ for $s \in \{4,5,6\}$.
+    \end{itemize}
+    First, we compute the expected values:
+    \[
+        E(X) = \sum_{s \in S} P(s) \cdot X(s) = \sum_{s \in S} \frac{1}{6} \cdot 0 = 0
+    \]
+    \[
+        E(Y) = \sum_{s \in S} P(s) \cdot Y(s) = \sum_{s \in \{1,2,3\}} \frac{1}{6} \cdot (-1) + \sum_{s \in \{4,5,6\}} \frac{1}{6} \cdot 1 = \frac{3}{6} \cdot (-1) + \frac{3}{6} \cdot 1 = 0
+    \]
+    Next, we compute the variances:
+    \[
+        V(X) = \sum_{s \in S} (X(s) - E(X))^2 \cdot P(s) = \sum_{s \in S} (0 - 0)^2 \cdot \frac{1}{6} = 0
+    \]
+    \[
+        V(Y) = \sum_{s \in S} (Y(s) - E(Y))^2 \cdot P(s) = \sum_{s \in \{1,2,3\}} (-1 - 0)^2 \cdot \frac{1}{6} + \sum_{s \in \{4,5,6\}} (1 - 0)^2 \cdot \frac{1}{6} = \frac{3}{6} \cdot 1 + \frac{3}{6} \cdot 1 = 1
+    \]
+    Finally, we compute the standard deviations:
+    \[
+        \sigma(X) = \sqrt{V(X)} = \sqrt{0} = 0
+    \]
+    \[
+        \sigma(Y) = \sqrt{V(Y)} = \sqrt{1} = 1
+    \]
+\end{eg}
+
+\begin{theorem}[Characterization of Variance]
+    Let $X$ be a random variable on the sample space $S$. The variance of $X$ can also be computed using the formula:
+    \[
+        V(X) = E(X^2) - (E(X))^2
+    \]
+    where \( E(X^2) \) is the expected value of the square of the random variable \( X \).
+\end{theorem}
+\begin{proof}
+    By the definition of variance, we have:
+    \[
+        V(X) = \sum_{s \in S} (X(s) - E(X))^2 \cdot P(s)
+    \]
+    Expanding the square, we get:
+    \[
+        V(X) = \sum_{s \in S} (X(s)^2 - 2X(s)E(X) + (E(X))^2) \cdot P(s)
+    \]
+    Distributing the sum, we have:
+    \[
+        V(X) = \sum_{s \in S} X(s)^2 \cdot P(s) - 2E(X) \sum_{s \in S} X(s) \cdot P(s) + (E(X))^2 \sum_{s \in S} P(s)
+    \]
+    Recognizing the sums as expected values, we get:
+    \[
+        V(X) = E(X^2) - 2E(X)E(X) + (E(X))^2
+    \]
+    Simplifying, we find:
+    \[
+        V(X) = E(X^2) - (E(X))^2
+    \]
+\end{proof}
+Remark that if $X$ is a random variable on the sample space $S$ and $E(X) = \mu$, then $V(X) = E((X - \mu)^2)$.
+
+\begin{eg}
+    Using the characterization of variance, it is often easier to compute the variance of a random variable. Consider the last example, where we had to compute the variance of the random variable $Y$. We already computed that $E(Y) = 0$. Now, we compute $E(Y^2)$:
+    \[
+        E(Y^2) = \sum_{s \in S} P(s) \cdot Y(s)^2 = \sum_{s \in \{1,2,3\}} \frac{1}{6} \cdot (-1)^2 + \sum_{s \in \{4,5,6\}} \frac{1}{6} \cdot 1^2 = \frac{3}{6} \cdot 1 + \frac{3}{6} \cdot 1 = 1
+    \]
+    Therefore, using the characterization of variance, we have:
+    \[
+        V(Y) = E(Y^2) - (E(Y))^2 = 1 - 0^2 = 1
+    \]
+\end{eg}
+
+\subsection{Law of the Unconscious Statistician}
+\begin{theorem}[Law of the Unconscious Statistician]
+    Let $X$ be a random variable on the sample space $S$, and let $g: \mathbb{R} \to \mathbb{R}$ be a real-valued function. The expected value of the random variable $g(X)$ is given by:
+    \[
+        E(g(X)) = \sum_{s \in S} P(s) \cdot g(X(s)) = \sum_{r \in X(S)} g(r) \cdot P(X = r) = \sum_{r \in g(X(S))} P(g(X) = r) \cdot r
+    \]
+\end{theorem}
+
+\section{Why Randomness is Useful}
+
+\begin{eg}
+    Assume that you have two very large files of length $n$, call them $A$ and $B$, where $A_i$ denotes the i-th symbol of the file $A$ and $B_i$ denotes the i-th symbol of the file $B$. You want to ensure that they are exactly the same. A straightforward way to do this is to compare each symbol of $A$ with the corresponding symbol of $B$. However, this approach requires $O(n)$ time, which can be inefficient for very large files. Instead, if you can create a random variable that is uniform over $\{1, \ldots, n\}$ then you can do it much faster and ensure that you are correct with high probability.
+\end{eg}
+
+\begin{eg}[Buffon's Needle Problem]
+    A needle of length \( l \) is dropped onto a floor with equally spaced parallel lines that are a distance \( d \) apart, where \( l \leq d \). What is the probability that the needle will cross one of the lines? \\
+    Let \( \theta \) be the angle between the needle and the lines, and let \( x \) be the distance from the center of the needle to the nearest line. The needle crosses a line if:
+    \[
+        x \leq \frac{l}{2} \sin(\theta)
+    \]
+    The angle \( \theta \) is uniformly distributed between \( 0 \) and \( \frac{\pi}{2} \), and the distance \( x \) is uniformly distributed between \( 0 \) and \( \frac{d}{2} \). The probability that the needle crosses a line can be calculated as:
+    \[
+        P(\text{cross}) = \frac{2}{\pi} \int_{0}^{\frac{\pi}{2}} \frac{l}{d} \sin(\theta) d\theta = \frac{2l}{\pi d}
+    \]
+    This result shows that the probability of crossing a line depends on the ratio of the length of the needle to the distance between the lines. This could be used to estimate the value of \( \pi \) by conducting an experiment where a needle is dropped multiple times and counting the number of times it crosses a line.
+\end{eg}
+
+\begin{eg}
+    Assume you have an object in n-dimensional real space that is very irregularly shaped. Given a point $x$ in n-dimensional real soace, you have a way of determining if $x$ is inside or outside of the object. You want to determinate the volume of this object. \\
+    If you can create a random point $x$ that is inside a box that is known to contain the object you want to measure and where $x$ is uniformly distributed insted the box then you can approximate the volume by checking for many random instances if $x$ is inside the object or not.
 \end{eg}
