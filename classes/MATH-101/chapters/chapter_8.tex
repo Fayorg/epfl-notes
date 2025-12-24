@@ -327,3 +327,276 @@ Another more direct approaches:
     \[        \int_{1/8}^{1/3} \sqrt{\frac{x + 1}{x}} \cdot \frac{1}{x^2} \, dx = \int_9^4 \sqrt{u} \cdot (-du) = \int_4^9 \sqrt{u} \, du = \frac{2}{3} u^{3/2} \Big|_4^9 = \frac{2}{3} (27 - 8) = \frac{38}{3}
     \]
 \end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{x}{\sqrt{1-x^2}} \, dx
+    \]
+    Let $u = 1 - x^2$, thus $du = -2x \, dx$ or $-\frac{du}{2} = x \, dx$. Therefore:
+    \[        \int \frac{x}{\sqrt{1-x^2}} \, dx = \int \frac{-\frac{du}{2}}{\sqrt{u}} = -\frac{1}{2} \int u^{-1/2} \, du = -\frac{1}{2} \cdot 2 u^{1/2} + C = -\sqrt{1 - x^2} + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{1}{\sin x} \, dx
+    \]
+    Let's multiply by $\frac{\sin x}{\sin x}$:
+    \[        \int \frac{1}{\sin x} \, dx = \int \frac{\sin x}{\sin^2 x} \, dx = \int \frac{\sin x}{1 - \cos^2 x} \, dx
+    \]
+    Let $u = \cos x$, thus $du = -\sin x \, dx$ or $-du = \sin x \, dx$. Therefore:
+    \[        \int \frac{1}{\sin x} \, dx = \int \frac{-du}{1 - u^2} = -\int \frac{1}{(1 - u)(1 + u)} \, du
+    \]
+    Using partial fraction decomposition, we have:
+    \[        \frac{1}{(1 - u)(1 + u)} = \frac{A}{1 - u} + \frac{B}{1 + u}
+    \]
+    Solving for $A$ and $B$, we find $A = \frac{1}{2}$ and $B = \frac{1}{2}$. Thus:
+    \[        \int \frac{1}{\sin x} \, dx = -\frac{1}{2} \int \frac{1}{1 - u} \, du - \frac{1}{2} \int \frac{1}{1 + u} \, du
+    \]
+    \[        = -\frac{1}{2} (-\ln|1 - u|) - \frac{1}{2} (\ln|1 + u|) + C = \frac{1}{2} \ln|1 - \cos x| - \frac{1}{2} \ln|1 + \cos x| + C
+    \]
+    \[        = \frac{1}{2} \ln \left| \frac{1 - \cos x}{1 + \cos x} \right| + C = \frac{1}{2} \ln \left| \tan^2 \left( \frac{x}{2} \right) \right| + C = \ln \left| \tan \left( \frac{x}{2} \right) \right| + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Taking the same integral as the previous example:
+    \[        \int \frac{1}{\sin x} \, dx
+    \]
+    Using trigonometric identities, we have:
+    \[        \int \frac{1}{\sin x} \, dx = \int \frac{\left(\sin \left(\frac{x}{2}\right)\right)^2 + \left(\cos \left(\frac{x}{2}\right)\right)^2}{2 \sin \left(\frac{x}{2}\right) \cos \left(\frac{x}{2}\right)} \, dx
+    \]
+    \[        = \frac{1}{2} \int \frac{\sin \left(\frac{x}{2}\right)}{\cos \left(\frac{x}{2}\right)} \, dx + \frac{1}{2} \int \frac{\cos \left(\frac{x}{2}\right)}{\sin \left(\frac{x}{2}\right)} \, dx
+    \]
+    Let's compute each integral separately. For the first one, let $u = \cos \left(\frac{x}{2}\right)$, thus $du = -\frac{1}{2} \sin \left(\frac{x}{2}\right) \, dx$ or $-2 du = \sin \left(\frac{x}{2}\right) \, dx$. Therefore:
+    \[        \frac{1}{2} \int \frac{\sin \left(\frac{x}{2}\right)}{\cos \left(\frac{x}{2}\right)} \, dx = \frac{1}{2} \int \frac{-2 du}{u} = -\int \frac{1}{u} \, du = -\ln|u| + C = -\ln \left| \cos \left(\frac{x}{2}\right) \right| + C
+    \]
+    For the second integral, let $v = \sin \left(\frac{x}{2}\right)$, thus $dv = \frac{1}{2} \cos \left(\frac{x}{2}\right) \, dx$ or $2 dv = \cos \left(\frac{x}{2}\right) \, dx$. Therefore:
+    \[        \frac{1}{2} \int \frac{\cos \left(\frac{x}{2}\right)}{\sin \left(\frac{x}{2}\right)} \, dx = \frac{1}{2} \int \frac{2 dv}{v} = \int \frac{1}{v} \, dv = \ln|v| + C = \ln \left| \sin \left(\frac{x}{2}\right) \right| + C
+    \]
+    Combining both results, we have:
+    \[        \int \frac{1}{\sin x} \, dx = -\ln \left| \cos \left(\frac{x}{2}\right) \right| + \ln \left| \sin \left(\frac{x}{2}\right) \right| + C = \ln \left| \tan \left(\frac{x}{2}\right) \right| + C
+    \]
+\end{eg}
+Remark that some integrals can be computed using multiple techniques, and thus the resulting expressions for the primitive may look different but are equivalent up to an additive constant i.e:
+\[
+    \ln 5x + C_1 \quad \text{and} \quad \ln x + \ln 5 + C_2
+\]
+\[
+    \frac{1}{\left(\cos x\right)^2} + C_1 \quad \text{and} \quad \left(\tan x\right)^2 + C_2 \quad \left(\left(\tan x\right)^2 = \frac{1 - \left(\cos x\right)^2}{\left(\cos x\right)^2} = \frac{1}{\left(\cos x\right)^2} - 1\right)
+\]
+
+\subsection{Integration by Parts}
+\begin{theorem}[Integration by Parts]
+    Let $f, g: [a,b] \to \mathbb{R}$ be two differentiable functions. Then:
+    \[
+        \int_a^b f(x) g'(x) \, dx = f(x) g(x) \Big|_a^b - \int_a^b f'(x) g(x) \, dx
+    \]
+\end{theorem}
+\begin{proof}
+    By the Product Rule, we have:
+    \[
+        \frac{d}{dx} [f(x) g(x)] = f'(x) g(x) + f(x) g'(x)
+    \]
+    Integrating both sides from $a$ to $b$, we get:
+    \[
+        \int_a^b \frac{d}{dx} [f(x) g(x)] \, dx = \int_a^b f'(x) g(x) \, dx + \int_a^b f(x) g'(x) \, dx
+    \]
+    The left-hand side simplifies to:
+    \[
+        f(x) g(x) \Big|_a^b = f(b) g(b) - f(a) g(a)
+    \]
+    Therefore, we have:
+    \[
+        f(b) g(b) - f(a) g(a) = \int_a^b f'(x) g(x) \, dx + \int_a^b f(x) g'(x) \, dx
+    \]
+    Rearranging this equation gives:
+    \[
+        \int_a^b f(x) g'(x) \, dx = f(b) g(b) - f(a) g(a) - \int_a^b f'(x) g(x) \, dx
+    \]
+    This completes the proof.
+\end{proof}
+
+\begin{eg}
+    Let's compute the integral:
+    \[
+        \int_1^2 x^2 \ln x \, dx
+    \]
+    Let $f(x) = \ln x$ and $g'(x) = x^2$. Thus, $f'(x) = \frac{1}{x}$ and $g(x) = \frac{x^3}{3}$. By the Integration by Parts theorem, we have:
+    \[        \int_1^2 x^2 \ln x \, dx = \ln x \cdot \frac{x^3}{3} \Big|_1^2 - \int_1^2 \frac{1}{x} \cdot \frac{x^3}{3} \, dx
+    \]
+    \[        = \frac{8}{3} \ln 2 - 0 - \frac{1}{3} \int_1^2 x^2 \, dx = \frac{8}{3} \ln 2 - \frac{1}{3} \cdot \frac{x^3}{3} \Big|_1^2 = \frac{8}{3} \ln 2 - \frac{1}{3} \left( \frac{8}{3} - \frac{1}{3} \right) = \frac{8}{3} \ln 2 - \frac{7}{9}
+    \]
+\end{eg}
+Remark that the Integration by Parts usually works well for:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\int e^{ax} P(n) \, dx$
+    \item $\int \left(\ln x\right)^k P(n) \, dx$
+    \item $\int \left\{\sin x, \cos x\right\} P(n) \, dx$
+    \item $\int e^{ax} \left\{\sin x, \cos x\right\} \, dx$
+\end{itemize}
+where $P(n)$ is a polynomial.
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \sin x e^x \, dx
+    \]
+    Let $f(x) = \sin x$ and $g'(x) = e^x$. Thus, $f'(x) = \cos x$ and $g(x) = e^x$. By the Integration by Parts theorem, we have:
+    \[        \int \sin x e^x \, dx = \sin x \cdot e^x - \int \cos x \cdot e^x \, dx
+    \]
+    Now, let's compute $\int \cos x \cdot e^x \, dx$ using Integration by Parts again. Let $f(x) = \cos x$ and $g'(x) = e^x$. Thus, $f'(x) = -\sin x$ and $g(x) = e^x$. We have:
+    \[        \int \cos x \cdot e^x \, dx = \cos x \cdot e^x - \int -\sin x \cdot e^x \, dx = \cos x \cdot e^x + \int \sin x \cdot e^x \, dx
+    \]
+    Therefore, we have:
+    \[        \int \sin x e^x \, dx = \sin x \cdot e^x - \left( \cos x \cdot e^x + \int \sin x \cdot e^x \, dx \right)
+    \]
+    \[        = \sin x \cdot e^x - \cos x \cdot e^x - \int \sin x \cdot e^x \, dx
+    \]
+    Rearranging this equation gives:
+    \[        2 \int \sin x e^x \, dx = e^x (\sin x - \cos x)
+    \]
+    Thus, we conclude that:
+    \[        \int \sin x e^x \, dx = \frac{e^x (\sin x - \cos x)}{2} + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \ln (1 + \sqrt{1 + x}) \, dx
+    \]
+    Let $f(x) = \ln (1 + \sqrt{1 + x})$ and $g'(x) = 1$. Thus, $f'(x) = \frac{1}{(1 + \sqrt{1 + x})} \cdot \frac{1}{2\sqrt{1 + x}}$ and $g(x) = x$. By the Integration by Parts theorem, we have:
+    \[        \int \ln (1 + \sqrt{1 + x}) \, dx = x \ln (1 + \sqrt{1 + x}) - \int x \cdot \frac{1}{(1 + \sqrt{1 + x})} \cdot \frac{1}{2\sqrt{1 + x}} \, dx
+    \]
+    \[        = x \ln (1 + \sqrt{1 + x}) - \frac{1}{2} \int \frac{x}{\sqrt{1 + x} (1 + \sqrt{1 + x})} \, dx
+    \]
+    Let $u = \sqrt{1 + x}$, thus $x = u^2 - 1$ and $dx = 2u \, du$. Therefore:
+    \[        \int \ln (1 + \sqrt{1 + x}) \, dx = x \ln (1 + \sqrt{1 + x}) - \frac{1}{2} \int \frac{u^2 - 1}{u (1 + u)} \cdot 2u \, du
+    \]
+    \[        = x \ln (1 + \sqrt{1 + x}) - \int \frac{u^2 - 1}{1 + u} \, du = x \ln (1 + \sqrt{1 + x}) - \int (u - 1) \, du
+    \]
+    \[        = x \ln (1 + \sqrt{1 + x}) - \left( \frac{u^2}{2} - u \right) + C = x \ln (1 + \sqrt{1 + x}) - \left( \frac{1 + x}{2} - \sqrt{1 + x} \right) + C
+    \]
+\end{eg}
+
+\subsection{Integrals of Rational Functions}
+Remark that any rational function $\frac{P(x)}{Q(x)}$ where $P$ and $Q$ are polynomials can be expressed in terms of elementary functions i.e:
+\[
+    \frac{f(x)}{g(x)} = p(x) + \sum_{i} \frac{f_i(x)}{g_i(x)}
+\]
+where $p(x)$ is a polynomial and:
+\[
+    g_i(x) = \begin{cases}
+        (ax + b)^k & \text{if } f_i(x) = A_i \\
+        (ax^2 + bx + c)^k & \text{if } f_i(x) = A_i x + B_i, \quad b^2 - 4ac < 0
+    \end{cases}
+\]
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{1}{ax + b} \, dx
+    \]
+    where $a \neq 0$. Let $u = ax + b$, thus $du = a \, dx$ or $\frac{du}{a} = dx$. Therefore:
+    \[        \int \frac{1}{ax + b} \, dx = \int \frac{1}{u} \cdot \frac{du}{a} = \frac{1}{a} \int \frac{1}{u} \, du = \frac{1}{a} \ln|u| + C = \frac{1}{a} \ln|ax + b| + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{(cx + d)}{(x - a)(x - b)} \, dx
+    \]
+    where $a \neq b$. Using partial fraction decomposition, we have:
+    \[        \frac{cx + d}{(x - a)(x - b)} = \frac{A}{x - a} + \frac{B}{x - b}
+    \]
+    Solving for $A$ and $B$, we find:
+    \[        A = \frac{ca + d}{a - b} \quad \text{and} \quad B = \frac{cb + d}{b - a}
+    \]
+    Thus:
+    \[        \int \frac{(cx + d)}{(x - a)(x - b)} \, dx = \int \frac{ca + d}{a - b} \cdot \frac{1}{x - a} \, dx + \int \frac{cb + d}{b - a} \cdot \frac{1}{x - b} \, dx
+    \]
+    \[        = \frac{ca + d}{a - b} \ln|x - a| + \frac{cb + d}{b - a} \ln|x - b| + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{1}{(ax + b)^k} \, dx
+    \]
+    where $a \neq 0$ and $k \geq 2$. Let $u = ax + b$, thus $du = a \, dx$ or $\frac{du}{a} = dx$. Therefore:
+    \[        \int \frac{1}{(ax + b)^k} \, dx = \int \frac{1}{u^k} \cdot \frac{du}{a} = \frac{1}{a} \int u^{-k} \, du = \frac{1}{a} \cdot \frac{u^{-k+1}}{-k + 1} + C = \frac{1}{a(1 - k)} \cdot \frac{1}{(ax + b)^{k - 1}} + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{1}{x^2 + c^2} \, dx
+    \]
+    where $c \neq 0$. Let $u = \frac{x}{c}$, thus $x = cu$ and $dx = c \, du$. Therefore:
+    \begin{align*}
+        \int \frac{1}{x^2 + c^2} \, dx &= \int \frac{1}{c^2 u^2 + c^2} \cdot c \, du = \int \frac{1}{c(u^2 + 1)} \, du \\
+        &= \frac{1}{c} \int \frac{1}{u^2 + 1} \, du = \frac{1}{c} \arctan(u) + C \\
+        &= \frac{1}{c} \arctan\left(\frac{x}{c}\right) + C
+    \end{align*}
+\end{eg}
+Remark that for:
+\[
+    \int \frac{1}{x^2 + px + q} \, dx
+\]
+where $p^2 - 4q < 0$, we can complete the square:
+\[    x^2 + px + q = \left(x + \frac{p}{2}\right)^2 + \left(q - \frac{p^2}{4}\right)
+\]
+and then use the previous result.
+
+\begin{eg}
+    Let's compute the indefinite integral:
+    \[
+        \int \frac{x}{x^2 + c^2} \, dx
+    \]
+    where $c \neq 0$. Let $u = x^2 + c^2$, thus $du = 2x \, dx$ or $\frac{du}{2} = x \, dx$. Therefore:
+    \[        \int \frac{x}{x^2 + c^2} \, dx = \int \frac{1}{u} \cdot \frac{du}{2} = \frac{1}{2} \int \frac{1}{u} \, du = \frac{1}{2} \ln|u| + C = \frac{1}{2} \ln|x^2 + c^2| + C
+    \]
+\end{eg}
+
+\begin{eg}
+    Let's compute the integral:
+    \[
+        \int_0^1 \frac{1}{x^2 + x - 6} \, dx
+    \]
+    We can factor the denominator:
+    \[        x^2 + x - 6 = (x - 2)(x + 3)
+    \]
+    Using partial fraction decomposition, we have:
+    \[        \frac{1}{(x - 2)(x + 3)} = \frac{A}{x - 2} + \frac{B}{x + 3}
+    \]
+    Solving for $A$ and $B$, we find:
+    \[        A = \frac{1}{5} \quad \text{and} \quad B = -\frac{1}{5}
+    \]
+    Thus:
+    \begin{align*}
+        \int_0^1 \frac{1}{x^2 + x - 6} \, dx &= \int_0^1 \frac{1}{5} \cdot \frac{1}{x - 2} \, dx - \int_0^1 \frac{1}{5} \cdot \frac{1}{x + 3} \, dx \\
+        &= \frac{1}{5} \ln|x - 2| \Big|_0^1 - \frac{1}{5} \ln|x + 3| \Big|_0^1 = \frac{1}{5} (\ln 1 - \ln 2) - \frac{1}{5} (\ln 4 - \ln 3) \\
+        &= \frac{1}{5} (\ln 3 - \ln 8) = \frac{1}{5} \ln \left( \frac{3}{8} \right)
+    \end{align*}
+\end{eg}
+
+\begin{eg}
+    Let's compute the integral:
+    \[
+        \int_{-2}^0 \frac{1}{x^2 + 4x + 8} \, dx
+    \]
+    We can complete the square in the denominator:
+    \[        x^2 + 4x + 8 = (x + 2)^2 + 4
+    \]
+    Let $u = \frac{x + 2}{2}$, thus $x = 2u - 2$ and $dx = 2 \, du$. When $x = -2$, $u = 0$ and when $x = 0$, $u = 1$. Therefore:
+    \begin{align*}
+        \int_{-2}^0 \frac{1}{x^2 + 4x + 8} \, dx &= \int_0^1 \frac{1}{4u^2 + 4} \cdot 2 \, du = \int_0^1 \frac{1}{2(u^2 + 1)} \, du \\
+        &= \frac{1}{2} \int_0^1 \frac{1}{u^2 + 1} \, du = \frac{1}{2} \arctan(u) \Big|_0^1 = \frac{1}{2} \left( \frac{\pi}{4} - 0 \right) = \frac{\pi}{8}
+    \end{align*}
+\end{eg}
