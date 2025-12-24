@@ -1,0 +1,265 @@
+\chapter{Generalized Integrals}
+
+\section{Generalized Integrals on a Bounded Interval}
+
+\begin{definition}[Generalized Integral on a Semi-Open Interval]
+    Let $a < b$ and $f: [a,b) \to \mathbb{R}$ be a continuous function. We say that the generalized integral of $f$ on $[a,b)$ converges to a limit $L \in \mathbb{R}$ if
+    \[\lim_{t \to b^-} \int_a^t f(x) \, dx = L.\]
+    In this case, we write
+    \[\int_a^{b^-} f(x) \, dx = L.\]
+    If the limit does not exist or is infinite, we say that the generalized integral diverges. \\
+    Similarly, for $f: (a,b] \to \mathbb{R}$ continuous, we say that the generalized integral of $f$ on $(a,b]$ converges to a limit $L \in \mathbb{R}$ if
+    \[\lim_{t \to a^+} \int_t^b f(x) \, dx = L.\]
+    In this case, we write
+    \[\int_{a^+}^{b} f(x) \, dx = L.\]
+    If the limit does not exist or is infinite, we say that the generalized integral diverges.
+\end{definition}
+
+\begin{eg}
+    Consider the function:
+    \[
+        f(x) = \frac{1}{\sqrt{x}}, \quad x \in (0,1]
+    \]
+    We want to study the convergence of the generalized integral:
+    \[\int_{0^+}^1 \frac{1}{\sqrt{x}} \,dx\]
+    We compute:
+    \[
+        \int_t^1 \frac{1}{\sqrt{x}} \, dx = \left[ 2\sqrt{x} \right]_t^1 = 2 - 2\sqrt{t}
+    \]
+    Now, we take the limit as $t \to 0^+$:
+    \[\lim_{t \to 0^+} \int_t^1 \frac{1}{\sqrt{x}} \, dx = \lim_{t \to 0^+} (2 - 2\sqrt{t}) = 2\]
+    Therefore, the generalized integral converges and we have:
+    \[\int_{0^+}^1 \frac{1}{\sqrt{x}} \, dx = 2\]
+\end{eg}
+
+\begin{eg}
+    Consider the function:
+    \[
+        f(x) = \frac{1}{x}, \quad x \in (0,1]
+    \]
+    We want to study the convergence of the generalized integral:
+    \[\int_{0^+}^1 \frac{1}{x} \,dx\]
+    We compute:
+    \[
+        \int_t^1 \frac{1}{x} \, dx = \left[ \ln|x| \right]_t^1 = \ln(1) - \ln(t) = -\ln(t)
+    \]
+    Now, we take the limit as $t \to 0^+$:
+    \[\lim_{t \to 0^+} \int_t^1 \frac{1}{x} \, dx = \lim_{t \to 0^+} (-\ln(t)) = +\infty\]
+    Therefore, the generalized integral diverges.
+\end{eg}
+
+\subsection{Comparison Test for Generalized Integrals}
+
+\begin{theorem}[Comparison Test]
+    Let $a < b$ and let $f, g: [a,b) \to \mathbb{R}$ be continuous functions such that there exists a point $c \in (a,b)$ with $0 \leq f(x) \leq g(x)$ for all $x \in [c,b)$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $\int_a^{b^-} g(x) \, dx$ converges, then $\int_a^{b^-} f(x) \, dx$ also converges.
+        \item If $\int_a^{b^-} f(x) \, dx$ diverges, then $\int_a^{b^-} g(x) \, dx$ also diverges.
+    \end{itemize}
+\end{theorem}
+Remark that a similar theorem holds for functions defined on $(a,b]$.
+
+\begin{eg}
+    Let's determine the convergence of the generalized integral:
+    \[
+        \int_a^{b^-} \frac{1}{(b - x)^\alpha} \, dx
+    \]
+    where $\alpha \neq 1$. We make a change of variable:
+    \[t = b - x \implies dt = -dx\]
+    Thus, the integral becomes:
+    \[\int_{b - a}^{0^+} \frac{1}{t^\alpha} (-dt) = \int_{0^+}^{b - a} \frac{1}{t^\alpha} \, dt\]
+    We now analyze the convergence of:
+    \[\int_{0^+}^{b - a} \frac{1}{t^\alpha} \, dt\]
+    We compute:
+    \[\int_t^{b - a} \frac{1}{x^\alpha} \, dx = \left[ \frac{x^{1 - \alpha}}{1 - \alpha} \right]_t^{b - a} = \frac{(b - a)^{1 - \alpha}}{1 - \alpha} - \frac{t^{1 - \alpha}}{1 - \alpha}\]
+    Now, we take the limit as $t \to 0^+$:
+    \[\lim_{t \to 0^+} \int_t^{b - a} \frac{1}{x^\alpha} \, dx = \begin{cases}
+        \frac{(b - a)^{1 - \alpha}}{1 - \alpha} & \text{if } \alpha < 1 \\
+        +\infty & \text{if } \alpha > 1
+    \end{cases}\]
+    Let's now consider the case where $\alpha = 1$:
+    \[\int_{0^+}^{b - a} \frac{1}{t} \, dt\]
+    We compute:
+    \[\int_t^{b - a} \frac{1}{x} \, dx = \left[ \ln|x| \right]_t^{b - a} = \ln(b - a) - \ln(t) = \ln\left(\frac{b - a}{t}\right)\]
+    Now, we take the limit as $t \to 0^+$:
+    \[\lim_{t \to 0^+} \int_t^{b - a} \frac{1}{x} \, dx = \lim_{t \to 0^+} \ln\left(\frac{b - a}{t}\right) = +\infty\]
+    Therefore, we conclude that the generalized integral $\int_a^{b^-} \frac{1}{(b - x)^\alpha} \, dx$ converges if and only if $\alpha < 1$ and diverges otherwise.
+\end{eg}
+
+\begin{theorem}
+    Let $f: [a, b) \to \mathbb{R}$ continuous and suppose there exists $\alpha \in \mathbb{R}$ such that:
+    \[\lim_{x \to b^-} (b - x)^\alpha f(x) = L \in \mathbb{R} \setminus \{0\}\]
+    Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $\alpha < 1$, the generalized integral $\int_a^{b^-} f(x) \, dx$ converges.
+        \item If $\alpha \geq 1$, the generalized integral $\int_a^{b^-} f(x) \, dx$ diverges.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Since $\lim_{x \to b^-} (b - x)^\alpha f(x) = L \neq 0$, there exists $c \in (a,b)$ and $M > 0$ such that for all $x \in [c,b)$:
+    \[\frac{|L|}{2} \leq |(b - x)^\alpha f(x)| \leq \frac{3|L|}{2}\]
+    Thus, for all $x \in [c,b)$:
+    \[\frac{|L|}{2} \cdot \frac{1}{(b - x)^\alpha} \leq |f(x)| \leq \frac{3|L|}{2} \cdot \frac{1}{(b - x)^\alpha}\]
+    We now analyze the two cases:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $\alpha < 1$, we know from the previous example that $\int_a^{b^-} \frac{1}{(b - x)^\alpha} \, dx$ converges. By the Comparison Test, $\int_a^{b^-} |f(x)| \, dx$ also converges, hence $\int_a^{b^-} f(x) \, dx$ converges.
+        \item If $\alpha \geq 1$, we know from the previous example that $\int_a^{b^-} \frac{1}{(b - x)^\alpha} \, dx$ diverges. By the Comparison Test, $\int_a^{b^-} |f(x)| \, dx$ also diverges, hence $\int_a^{b^-} f(x) \, dx$ diverges.
+    \end{itemize}
+\end{proof}
+A similar theorem holds for functions defined on $(a,b]$.
+
+\begin{eg}
+    Let's if the following integral converges or diverges:
+    \[
+        \int_{0}^{1^-} \frac{1}{\sqrt{1 - t^3}} \, dt
+    \]
+    Using the theorem, we compute:
+    \[\lim_{t \to 1^-} (1 - t)^{1/2} \cdot \frac{1}{\sqrt{1 - t^3}} = \lim_{t \to 1^-} \frac{(1 - t)^{1/2}}{(1 - t)(1 + t + t^2)^{1/2}} = \lim_{t \to 1^-} \frac{1}{(1 + t + t^2)^{1/2}} = \frac{1}{\sqrt{3}}\]
+    Since the limit is a non-zero real number and $\alpha = \frac{1}{2} < 1$, we conclude that the integral converges.
+\end{eg}
+
+\begin{definition}[Generalized Integral on a Open Interval]
+    Let $a < b$ and $f: (a,b) \to \mathbb{R}$ be a continuous function. We say that the generalized integral of $f$ on $(a,b)$ converges to a limit $L \in \mathbb{R}$ if both generalized integrals
+    \[\int_{a^+}^c f(x) \, dx \quad \text{and} \quad \int_c^{b^-} f(x) \, dx\]
+    converge for some (and hence for all) $c \in (a,b)$, and
+    \[\int_{a^+}^{b^-} f(x) \, dx = \int_{a^+}^c f(x) \, dx + \int_c^{b^-} f(x) \, dx = L.\]
+    If either of the integrals diverge, we say that the generalized integral diverges.    
+\end{definition}
+
+\begin{eg}
+    Let's determine the convergence of the generalized integral:
+    \[
+        \int_{0^+}^{1^-} \frac{1}{x^r (1-x)^s} \, dx
+    \]
+    We analyze the two parts separately:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For the first part, we study the convergence of:
+        \[\int_{0^+}^{1/2} \frac{1}{x^r (1-x)^s} \, dx\]
+        We have:
+        \[\lim_{x \to 0^+} x^r \cdot \frac{1}{x^r (1-x)^s} = \lim_{x \to 0^+} \frac{1}{(1-x)^s} = 1\]
+        Since the limit is a non-zero real number, by the previous theorem, the integral converges if and only if $r < 1$.
+        \item For the second part, we study the convergence of:
+        \[\int_{1/2}^{1^-} \frac{1}{x^r (1-x)^s} \, dx\]
+        We have:
+        \[\lim_{x \to 1^-} (1 - x)^s \cdot \frac{1}{x^r (1-x)^s} = \lim_{x \to 1^-} \frac{1}{x^r} = 1\]
+        Since the limit is a non-zero real number, by the previous theorem, the integral converges if and only if $s < 1$, which is never true.
+    \end{itemize}
+    Therefore, the generalized integral $\int_{0^+}^{1^-} \frac{1}{x^r (1-x)^s} \, dx$ converges if and only if $r < 1$ and $s < 1$.
+\end{eg}
+
+\section{Generalized Integrals on an Unbounded Interval}
+
+\begin{definition}[Generalized Integral on an Unbounded Interval]
+    Let $a \in \mathbb{R}$ and $f: [a, +\infty) \to \mathbb{R}$ be a continuous function. We say that the generalized integral of $f$ on $[a, +\infty)$ converges to a limit $L \in \mathbb{R}$ if
+    \[\lim_{t \to +\infty} \int_a^t f(x) \, dx = L.\]
+    In this case, we write
+    \[\int_a^{+\infty} f(x) \, dx = L.\]
+    If the limit does not exist or is infinite, we say that the generalized integral diverges. \\
+    Similarly, for $f: (-\infty, b] \to \mathbb{R}$ continuous, we say that the generalized integral of $f$ on $(-\infty, b]$ converges to a limit $L \in \mathbb{R}$ if
+    \[\lim_{t \to -\infty} \int_t^b f(x) \, dx = L.\]
+    In this case, we write
+    \[\int_{-\infty}^{b} f(x) \, dx = L.\]
+    If the limit does not exist or is infinite, we say that the generalized integral diverges.
+\end{definition}
+
+\begin{eg}
+    Consider the function:
+    \[
+        f(x) = \frac{1}{x \ln x}, \quad x \in [e, +\infty)
+    \]
+    We want to study the convergence of the generalized integral:
+    \[\int_e^{+\infty} \frac{1}{x \ln x} \,dx\]
+    We compute:
+    \[\int_e^t \frac{1}{x \ln x} \, dx = \left[ \ln(\ln x) \right]_e^t = \ln(\ln t) - \ln(\ln e) = \ln(\ln t)\]
+    Now, we take the limit as $t \to +\infty$:
+    \[\lim_{t \to +\infty} \int_e^t \frac{1}{x \ln x} \, dx = \lim_{t \to +\infty} \ln(\ln t) = +\infty\]
+    Therefore, the generalized integral diverges.
+\end{eg}
+
+\begin{eg}
+    Consider the function:
+    \[
+        f(x) = \frac{1}{x \left(\ln x\right)^2}, \quad x \in [e, +\infty)
+    \]
+    We want to study the convergence of the generalized integral:
+    \[\int_e^{+\infty} \frac{1}{x (\ln x)^2} \,dx\]
+    We compute:
+    \[\int_e^t \frac{1}{x (\ln x)^2} \, dx = \left[ -\frac{1}{\ln x} \right]_e^t = -\frac{1}{\ln t} + \frac{1}{\ln e} = 1 - \frac{1}{\ln t}\]
+    Now, we take the limit as $t \to +\infty$:
+    \[\lim_{t \to +\infty} \int_e^t \frac{1}{x (\ln x)^2} \, dx = \lim_{t \to +\infty} \left(1 - \frac{1}{\ln t}\right) = 1\]
+    Therefore, the generalized integral converges and we have:
+    \[\int_e^{+\infty} \frac{1}{x (\ln x)^2} \, dx = 1\]
+\end{eg}
+
+\subsection{Comparison Test for Generalized Integrals on an Unbounded Interval}
+
+\begin{theorem}[Comparison Test]
+    Let $a \in \mathbb{R}$ and let $f, g: [a, +\infty) \to \mathbb{R}$ be continuous functions such that there exists $M > 0$ with $0 \leq f(x) \leq g(x)$ for all $x \geq M$. Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $\int_a^{+\infty} g(x) \, dx$ converges, then $\int_a^{+\infty} f(x) \, dx$ also converges.
+        \item If $\int_a^{+\infty} f(x) \, dx$ diverges, then $\int_a^{+\infty} g(x) \, dx$ also diverges.
+    \end{itemize}
+\end{theorem}
+
+\begin{eg}
+    Let's compute the convergence of the generalized integral:
+    \[
+        \int_{1}^{\infty} \frac{1}{x^\beta} \, dx
+    \]
+    where $\beta \neq 1$. We compute:
+    \[\int_1^t \frac{1}{x^\beta} \,dx = \left[ \frac{x^{1 - \beta}}{1 - \beta} \right]_1^t = \frac{t^{1 - \beta}}{1 - \beta} - \frac{1}{1 - \beta}\]
+    Now, we take the limit as $t \to +\infty$:
+    \[\lim_{t \to +\infty} \int_1^t \frac{1}{x^\beta} \, dx = \begin{cases}
+        \frac{1}{\beta - 1} & \text{if } \beta > 1 \\
+        +\infty & \text{if } \beta < 1
+    \end{cases}\]
+    Let's now consider the case where $\beta = 1$:
+    \[\int_{1}^{\infty} \frac{1}{x} \, dx\]
+    We compute:
+    \[\int_1^t \frac{1}{x} \, dx = \left[ \ln|x| \right]_1^t = \ln(t) - \ln(1) = \ln(t)\]
+    Now, we take the limit as $t \to +\infty$:
+    \[\lim_{t \to +\infty} \int_1^t \frac{1}{x} \, dx = \lim_{t \to +\infty} \ln(t) = +\infty\]
+    Therefore, we conclude that the generalized integral $\int_{1}^{\infty} \frac{1}{x^\beta} \, dx$ converges if and only if $\beta > 1$ and diverges otherwise.
+\end{eg}
+Remark that a similar calculation can be made for the integral $\int_{0^+}^{1} \frac{1}{x^\alpha} \, dx$ to show that it converges if and only if $\alpha < 1$.
+
+\begin{theorem}
+    Let $f: [a, +\infty) \to \mathbb{R}$ continuous and suppose there exists $\beta \in \mathbb{R}$ such that:
+    \[\lim_{x \to +\infty} x^\beta f(x) = L \in \mathbb{R} \setminus \{0\}\]
+    Then:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item If $\beta > 1$, the generalized integral $\int_a^{+\infty} f(x) \, dx$ converges.
+        \item If $\beta \leq 1$, the generalized integral $\int_a^{+\infty} f(x) \, dx$ diverges.
+    \end{itemize}
+\end{theorem}
+
+\begin{eg}
+    Let's determine if the following integral converges or diverges:
+    \[
+        \int_{1}^{\infty} \frac{1}{\sqrt{x^3 + 1}} \, dx
+    \]
+    Using the theorem, we compute:
+    \[\lim_{x \to +\infty} x^{3/2} \cdot \frac{1}{\sqrt{x^3 + 1}} = \lim_{x \to +\infty} \frac{x^{3/2}}{(x^3 + 1)^{1/2}} = \lim_{x \to +\infty} \frac{1}{\left(1 + \frac{1}{x^3}\right)^{1/2}} = 1\]
+    Since the limit is a non-zero real number and $\beta = \frac{3}{2} > 1$, we conclude that the integral converges.
+\end{eg}
+
+\begin{definition}[Generalized Integral on an Unbounded Open Interval]
+    Let $f: (-a, +\infty) \to \mathbb{R}$ be a continuous function. We say that the generalized integral of $f$ on $(-a, +\infty)$ converges to a limit $L \in \mathbb{R}$ if both generalized integrals
+    \[\int_{-a}^{c} f(x) \, dx \quad \text{and} \quad \int_{c}^{+\infty} f(x) \,dx\]
+    converge for some (and hence for all) $c \in (-a, +\infty)$, and
+    \[\int_{-a}^{+\infty} f(x) \, dx = \int_{-a}^{c} f(x) \, dx + \int_{c}^{+\infty} f(x) \, dx = L.\]
+    If either of the integrals diverge, we say that the generalized integral diverges.
+\end{definition}
+Similarly, we can define generalized integrals on $(-\infty, b)$ or $(-\infty, +\infty)$.
+
+\begin{eg}
+    Let's compute the convergence of the generalized integral:
+    \[
+        \int_{0^+}^{\frac{\pi}{2}} \frac{1}{\left(\sin x\right)^2} \, dx
+    \]
+    Let's use the comparison test:
+    \[
+        \lim_{x \to 0^+} x^2 \cdot \frac{1}{(\sin x)^2} = \lim_{x \to 0^+} \left(\frac{x}{\sin x}\right)^2 = 1
+    \]
+    Since the limit is a non-zero real number, by the previous theorem, the integral converges if and only if $2 < 1$, which is never true. Therefore, the integral diverges.
+\end{eg}
