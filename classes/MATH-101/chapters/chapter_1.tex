@@ -1,3 +1,428 @@
 \chapter{Real Numbers}
 
-\section{The Field of Real Numbers}
+\section{Sets}
+\begin{definition}[Set]
+    A set is a collection of distinct objects, considered as an object in its own right.
+\end{definition}
+Remark that in this course, we will only consider the sets of well-defined objects (like numbers, functions, etc.).
+
+\begin{eg}
+    Examples of sets include:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item The set of natural numbers: $\mathbb{N} = \{0, 1, 2, 3, \ldots\}$
+        \item The set of integers: $\mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\}$
+        \item The set of rational numbers: $\mathbb{Q} = \left\{\frac{a}{b} \mid a, b \in \mathbb{Z}, b \neq 0\right\}$
+        \item The set of real numbers: $\mathbb{R}$
+        \item The set of complex numbers: $\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}, i^2 = -1\}$
+    \end{itemize}
+\end{eg}
+
+\begin{definition}[Empty Set]
+    The empty set, denoted by $\emptyset$ or $\{\}$, is the unique set that contains no elements. It is a subset of every set.
+\end{definition}
+Remark that for any set $X$, we have $X \subseteq X$ and $\emptyset \subseteq X$.
+
+\subsection{Subsets}
+\begin{definition}[Subsets]
+    A set $A$ is a subset of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is also an element of $B$. Formally,
+    \[ A \subseteq B \quad \iff \quad \forall x (x \in A \implies x \in B) \]
+\end{definition}
+
+\begin{definition}[Equal Sets]
+    Two sets $A$ and $B$ are equal, denoted by $A = B$, if they contain the same elements. Formally,
+    \[ A = B \quad \iff \quad (A \subseteq B \text{ and } B \subseteq A) \]
+\end{definition}
+
+\subsection{Set Operations}
+\begin{definition}[Union]
+    The union of two sets $A$ and $B$, denoted by $A \cup B$, is the set of all elements that are in $A$, in $B$, or in both. Formally,
+    \[ A \cup B = \{x \mid x \in A \text{ or } x \in B\} \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \fill[secondary!40,opacity=.3] (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the union of $A$ and $B$ is:
+    \[ A \cup B = \{1, 2, 3, 4, 5\} \]
+    where $5 = |A \cup B| \leq |A| + |B| = 3 + 3 = 6$.
+\end{eg}
+
+\begin{definition}[Intersection]
+    The intersection of two sets $A$ and $B$, denoted by $A \cap B$, is the set of all elements that are in both $A$ and $B$. Formally,
+    \[ A \cap B = \{x \mid x \in A \text{ and } x \in B\} \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \fill[secondary!40,opacity=.3] (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the intersection of $A$ and $B$ is:
+    \[ A \cap B = \{3\} \]
+    where $|A \cap B| = 1 \leq \min(|A|, |B|) = \min(3, 3) = 3$.
+\end{eg}
+\begin{definition}[Cardinality of Set Union]
+    The cardinality of the union of two sets $A$ and $B$ is given by the formula:
+    \[ |A \cup B| = |A| + |B| - |A \cap B| \]
+\end{definition}
+\begin{definition}[Difference]
+    The difference of two sets $A$ and $B$, denoted by $A - B$ or $A \setminus B$, is the set of all elements that are in $A$ but not in $B$. Formally,
+    \[ A - B = \{x \mid x \in A \text{ and } x \notin B\} \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \begin{scope}
+                \clip (-1,-.3) circle (2);
+                \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+            \end{scope}
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the difference of $A$ and $B$ is:
+    \[ A - B = \{1, 2\} \]
+    where $|A - B| = 2$.
+\end{eg}
+
+\begin{definition}[Complement]
+    The complement of a set $A$ with respect to a universal set $U$, denoted by $A^c$ or $\overline{A}$, is the set of all elements in $U$ that are not in $A$. Formally,
+    \[ A^c = \{x \in U \mid x \notin A\} \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-4, -2.5) rectangle (4, 2.5)
+                (-1,-.3) circle (2);
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+Note that the complement of the complement of $A$ is $A$ itself, i.e., $(A^c)^c = A$.
+\begin{eg}
+    If the universal set $U = \{1, 2, 3, 4, 5\}$ and $A = \{1, 2, 3\}$, then the complement of $A$ is:
+    \[ A^c = \{4, 5\} \]
+    where $|A^c| = 2$.
+\end{eg}
+
+\begin{definition}[Symmetric Difference]
+    The symmetric difference of two sets $A$ and $B$, denoted by $A \oplus B$ or $A \Delta B$, is the set of elements that are in either $A$ or $B$ but not in both. Formally,
+    \[ A \oplus B = (A - B) \cup (B - A) = (A \cup B) - (A \cap B) \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw[] (-4, -2.5) rectangle (4, 2.5) node[below left] {U};
+            \path[fill=secondary!40,opacity=.3, even odd rule]
+                (-1,-.3) circle (2)
+                (1,-.3) circle (2);
+
+            % Outlines
+            \draw[] (-1,-.3) circle (2) node[above=2cm] {$A$};
+            \draw[] (1,-.3) circle (2) node[above=2cm] {$B$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+\begin{eg}
+    If $A = \{1, 2, 3\}$ and $B = \{3, 4, 5\}$, then the symmetric difference of $A$ and $B$ is:
+    \[ A \oplus B = \{1, 2, 4, 5\} \]
+    where $|A \oplus B| = 4$.
+\end{eg}
+
+\begin{eg}
+    Let's prove that:
+    \[
+        A - (B - C) = (A - B) \cup (A \cap C)
+    \]
+    To prove this, we will "transform" the left-hand side into the right-hand side using set definitions and properties.
+    \begin{align*}
+        A - (B - C) & = \{x \mid x \in A \text{ and } x \notin (B - C)\} \\
+                    & = \{x \mid x \in A \text{ and } \neg(x \in B \text{ and } x \notin C)\} \\
+                    & = \{x \mid x \in A \text{ and } (x \notin B \text{ or } x \in C)\} \\
+                    & = \{x \mid (x \in A \text{ and } x \notin B) \text{ or } (x \in A \text{ and } x \in C)\} \\
+                    & = (A - B) \cup (A \cap C)
+    \end{align*}
+    Thus proving the equality.
+\end{eg}
+
+\section{Natural, Rational and Real Numbers}
+
+\subsection{Natural Numbers}
+\begin{definition}[Natural Numbers]
+    The set of natural numbers, denoted by $\mathbb{N}$, is defined as the set of non-negative integers:
+    \[ \mathbb{N} = \{0, 1, 2, 3, \ldots\} \]
+\end{definition}
+
+\begin{definition}[Well Ordering Principle]
+    Every non-empty subset of $\mathbb{N}$ has a least element. Formally, if $S \subseteq \mathbb{N}$ and $S \neq \emptyset$, then there exists an element $m \in S$ such that for all $s \in S$, $m \leq s$.
+\end{definition}
+
+\begin{definition}[Reucrsion Principle]
+    Let $A$ be a set, $a_0 \in A$, and let $f: A \to A$ be a function. Then there exists a unique function $g: \mathbb{N} \to A$ such that:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $g(0) = a_0$
+        \item For all $n \in \mathbb{N}$, $g(n+1) = f(g(n))$
+    \end{itemize}
+\end{definition}
+
+\begin{eg}
+    If $S \subseteq \mathbb{N}$ is defined as:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $0 \in S$
+        \item If $n \in S$, then $n + 1 \in S$
+    \end{itemize}
+    Then by the Recursion Principle, we have $S = \mathbb{N}$.
+\end{eg}
+
+\begin{definition}[Integers]
+    The set of integers, denoted by $\mathbb{Z}$, is defined as:
+    \[ \mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\} \]
+\end{definition}
+Remark that for all $x \in \mathbb{Z}$ there exists an additive inverse $-x \in \mathbb{Z}$ such that $x + (-x) = 0$.
+
+\subsection{Rational Numbers}
+\begin{definition}[Rational Numbers]
+    The set of rational numbers, denoted by $\mathbb{Q}$, is defined as:
+    \[ \mathbb{Q} = \left\{\frac{a}{b} \mid a, b \in \mathbb{Z}, b \neq 0\right\} \]
+\end{definition}
+Remark that for all $x \in \mathbb{Q}$ there exists a multiplicative inverse $x^{-1} \in \mathbb{Q}$ such that $x \cdot x^{-1} = 1$, provided that $x \neq 0$. The inverse is also called reciprocal of $x$ since:
+\[
+    \frac{1}{x} = x^{-1}
+\]
+Also note that $\frac{p}{q} = \frac{r}{s}$ if and only if $ps = rq$.
+
+\section{Real Numbers}
+Some equations have no solutions in $\mathbb{Q}$. For example, the equation $x^2 = 2$ has no solution in $\mathbb{Q}$.
+\begin{proof}
+    Assume for contradiction that there exists $x \in \mathbb{Q}$ such that $x^2 = 2$. Then we can write $x = \frac{p}{q}$ where $p, q \in \mathbb{Z}$, $q \neq 0$, and $\gcd(p, q) = 1$. Substituting this into the equation gives:
+    \[
+        \left(\frac{p}{q}\right)^2 = 2 \implies p^2 = 2q^2
+    \]
+    This implies that $p^2$ is even, which means that $p$ must also be even (since the square of an odd number is odd). Let $p = 2k$ for some $k \in \mathbb{Z}$. Substituting back gives:
+    \[
+        (2k)^2 = 2q^2 \implies 4k^2 = 2q^2 \implies 2k^2 = q^2
+    \]
+    This implies that $q^2$ is also even, and thus $q$ must be even as well. However, this contradicts our initial assumption that $\gcd(p, q) = 1$, since both $p$ and $q$ are even. Therefore, our assumption is false, and there is no rational number $x$ such that $x^2 = 2$.
+\end{proof}
+
+\subsection{Axioms of Real Numbers}
+\begin{definition}[Field Axioms]
+    The set of real numbers $\mathbb{R}$, equipped with the operations of addition and multiplication, satisfies the following field axioms:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item (Closure) For all $a, b \in \mathbb{R}$, both $a + b$ and $a \cdot b$ are in $\mathbb{R}$.
+        \item (Associativity) For all $a, b, c \in \mathbb{R}$,
+        \[
+            (a + b) + c = a + (b + c) \quad \text{and} \quad (a \cdot b) \cdot c = a \cdot (b \cdot c)
+        \]
+        \item (Commutativity) For all $a, b \in \mathbb{R}$,
+        \[
+            a + b = b + a \quad \text{and} \quad a \cdot b = b \cdot a
+        \]
+        \item (Identity Elements) There exist elements $0, 1 \in \mathbb{R}$ such that for all $a \in \mathbb{R}$,
+        \[
+            a + 0 = a \quad \text{and} \quad a \cdot 1 = a
+        \]
+        \item (Additive Inverses) For every $a \in \mathbb{R}$, there exists an element $-a \in \mathbb{R}$ such that
+        \[
+            a + (-a) = 0
+        \]
+        \item (Multiplicative Inverses) For every $a \in \mathbb{R}$ with $a \neq 0$, there exists an element $a^{-1} \in \mathbb{R}$ such that
+        \[
+            a \cdot a^{-1} = 1
+        \]
+        \item (Distributivity) For all $a, b, c \in \mathbb{R}$,
+        \[
+            a \cdot (b + c) = a \cdot b + a \cdot c
+        \]
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Order Axioms]
+    The set of real numbers $\mathbb{R}$ is equipped with a total order relation $\leq$ that satisfies the following order axioms:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item (Totality) For all $a, b \in \mathbb{R}$, either $a \leq b$ or $b \leq a$.
+        \item (Transitivity) For all $a, b, c \in \mathbb{R}$, if $a \leq b$ and $b \leq c$, then $a \leq c$.
+        \item (Antisymmetry) For all $a, b \in \mathbb{R}$, if $a \leq b$ and $b \leq a$, then $a = b$.
+        \item (Addition) For all $a, b, c \in \mathbb{R}$, if $a \leq b$, then $a + c \leq b + c$.
+        \item (Multiplication) For all $a, b, c \in \mathbb{R}$, if $0 \leq a$ and $0 \leq b$, then $0 \leq a \cdot b$.
+    \end{itemize}
+\end{definition}
+
+\section{Bounds and Intervals}
+\subsection{Lower and Upper Bound}
+\begin{definition}[Lower and Upper Bound]
+    Let $S \subseteq \mathbb{R}$. A number $a \in \mathbb{R}$ ($b \in \mathbb{R}$) is called an upper bound (lower bound) of $S$ if for all $s \in S$, $a \leq s$ ($s \leq b$).
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (0,0) -- (6.5,0) node[right] {$\mathbb{R}$};
+
+            % Set S
+            \fill[primary!40,opacity=.7] (2,-0.25) -- (3,-0.25) -- (3,0.25) -- (2,0.25) -- cycle;
+            \fill[primary!40,opacity=.7] (3.5,-0.25) -- (4,-0.25) -- (4,0.25) -- (3.5,0.25) -- cycle;
+            \fill[primary!40,opacity=.7] (5,-0.25) -- (5.5,-0.25) -- (5.5,0.25) -- (5,0.25) -- cycle;
+            \node[primary] at (3.75, 0.5) {$S$};
+
+            % Upper bound a
+            \draw[dashed] (1,-0.25) -- (1,0.25);
+            \node at (1,0.5) {$b$};
+
+            % Lower bound b
+            \draw[dashed] (5.75,-0.25) -- (5.75,0.25);
+            \node at (5.75,0.5) {$a$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+\begin{definition}[Supremum and Infimum]
+    Let $S \subseteq \mathbb{R}$. A number $a \in \mathbb{R}$ ($b \in \mathbb{R}$) is called the supremum (infimum) or least upper bound (greatest lower bound) of $S$, denoted by $\sup S$ ($\inf S$), if:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item For all $s \in S$, $a \leq s$ ($s \leq b$)
+        \item For all $\epsilon > 0$, there exists $s \in S$ such that $s < a + \epsilon$ ($s > b - \epsilon$)
+    \end{itemize}
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            \draw[->] (-0.5,0) -- (6,0) node[right] {$\mathbb{R}$};
+
+            % Set S
+            \fill[primary!40,opacity=.7] (0.5,-0.25) -- (3,-0.25) -- (3,0.25) -- (0.5,0.25) -- cycle;
+            \fill[primary!40,opacity=.7] (3.5,-0.25) -- (4,-0.25) -- (4,0.25) -- (3.5,0.25) -- cycle;
+            \fill[primary!40,opacity=.7] (5,-0.25) -- (5.5,-0.25) -- (5.5,0.25) -- (5,0.25) -- cycle;
+            \node[primary] at (3.75, 0.5) {$S$};
+
+            % Least lower bound a
+            \draw[dashed] (0.5,-0.25) -- (0.5,0.25);
+            \node at (0.5,0.5) {$a$};
+
+            % Least lower bound a + epsilon
+            \draw[dashed] (2,-0.25) -- (2,0.25);
+            \node at (2,0.5) {$a + \epsilon$};
+
+            % Epsilon
+            \draw[<->] (0.5, -0.5) -- (2, -0.5) node[midway, below] {$\epsilon$};
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+\begin{eg}
+    Let $S = \{\frac{1}{n} : n \in \mathbb{N}^*\}$ be a subset of $\mathbb{R}$. Let's find the supremum and infimum of $S$. We have:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\sup S = 1$ since for all $n \in \mathbb{N}^*$, $\frac{1}{n} \leq 1$ and for any $\epsilon > 0$, we can choose $n = 1$ such that $\frac{1}{1} = 1 > 1 - \epsilon$.
+        \item $\inf S = 0$ since for all $n \in \mathbb{N}^*$, $\frac{1}{n} \geq 0$ and for any $\epsilon > 0$, we can choose $n > \frac{1}{\epsilon}$ such that $\frac{1}{n} < \epsilon$.
+    \end{itemize}
+\end{eg}
+
+\begin{theorem}[Completeness Axiom]
+    Every non-empty subset of $\mathbb{R}$ that is bounded above has a unique supremum in $\mathbb{R}$. Similarly, every non-empty subset of $\mathbb{R}$ that is bounded below has a unique infimum in $\mathbb{R}$.
+\end{theorem}
+Remark that $\mathbb{R}$ is complete, commutative and ordered.
+
+\subsection{Intervals}
+\begin{definition}[Intervals]
+    An interval is a subset of $\mathbb{R}$ that contains all real numbers between any two numbers in the set. Intervals can be classified into the following types:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Closed Interval: $[a, b] = \{x \in \mathbb{R} \mid a \leq x \leq b\}$
+        \item Open Interval: $(a, b) = \{x \in \mathbb{R} \mid a < x < b\}$
+        \item Half-Open Interval: $[a, b) = \{x \in \mathbb{R} \mid a \leq x < b\}$ and $(a, b] = \{x \in \mathbb{R} \mid a < x \leq b\}$
+        \item Unbounded Intervals: $(-\infty, a) = \{x \in \mathbb{R} \mid x < a\}$ and $(a, +\infty) = \{x \in \mathbb{R} \mid x > a\}$
+    \end{itemize}
+\end{definition}
+Remark that:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item $\mathbb{R} = (-\infty, +\infty) = \mathbb{R}_+ \cup \mathbb{R}_- \cup \{0\}$
+    \item $\mathbb{R}^* = \mathbb{R} \setminus \{0\} = \mathbb{R}_+^* \cup \mathbb{R}_-^* = \{x \in \mathbb{R}: x \neq 0\}$
+    \item $\mathbb{R}_+ = [0, +\infty)$ and $\mathbb{R}_- = (-\infty, 0]$
+    \item $\mathbb{R}_+^* = (0, +\infty)$ and $\mathbb{R}_-^* = (-\infty, 0)$
+\end{itemize}
+
+\begin{eg}
+    Let's find the supremum and infimum of an interval $(a, b]$. We have:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\sup (a, b] = b$ and $b \in (a, b]$.
+        \item $\inf (a, b] = a$ but $a \notin (a, b]$.
+    \end{itemize}
+\end{eg}
+
+\begin{eg}
+    Let's find the supremum and infimum of the interval defined as:
+    \[
+        S = \{x \in \mathbb{R}_+^*: \sin x > \cos x\}
+    \]
+    If $\sin x = \cos x$ with ($x > 0$), then $\cos x \neq 0$ and thus:
+    \[
+        \frac{\sin x}{\cos x} = \tan x = 1 \implies x = \frac{\pi}{4} + k\pi, \quad k \in \mathbb{N}
+    \]
+    Therefore, we have:
+    \[ S = \bigcup_{k=0}^{\infty} \left(\frac{\pi}{4} + k\pi, \frac{5\pi}{4} + k\pi\right) \]
+    Thus, we can conclude that:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item $\inf S = \frac{\pi}{4}$ but $\frac{\pi}{4} \notin S$.
+        \item $\sup S = +\infty$.
+    \end{itemize}
+\end{eg}
+
+\section{Archimedean and Density Property}
+\begin{theorem}[Archimedean Property]
+    For any pair of real numbers $(x, y)$ such that $x > 0$ and $y \geq 0$ there exists a natural number $n \in \mathbb{N}^*$ such that:
+    \[ nx > y \]
+\end{theorem}
+\begin{proof}
+    Assume for contradiction that for all $n \in \mathbb{N}^*$, we have $nx \leq y$. Then the set $S = \{nx : n \in \mathbb{N}^*\}$ is bounded above by $y$. By the Completeness Axiom, $S$ has a supremum, denoted by $\sup S = s$. Since $x > 0$, we have $s - x < s$. By the definition of supremum, there exists some $m \in \mathbb{N}^*$ such that:
+    \[ mx > s - x \implies (m + 1)x > s \]
+    But this contradicts the fact that $s$ is an upper bound of $S$. Therefore, our assumption is false, and there exists a natural number $n \in \mathbb{N}^*$ such that $nx > y$.
+\end{proof}
+
+\begin{theorem}[Density of Rational Numbers]
+    Between any two real numbers $a$ and $b$ such that $a < b$, there exists a rational number $r \in \mathbb{Q}$ such that:
+    \[ a < r < b \]
+\end{theorem}
+\begin{proof}
+    Since $b - a > 0$, by the Archimedean Property, there exists a natural number $n \in \mathbb{N}^*$ such that:
+    \[ n(b - a) > 1 \implies nb - na > 1 \]
+    Now, consider the set of integers $m$ such that:
+    \[ m > na \]
+    Let $m_0$ be the smallest integer satisfying this condition. Then we have:
+    \[ m_0 - 1 \leq na < m_0 \]
+    Dividing the inequalities by $n$ gives:
+    \[ \frac{m_0 - 1}{n} \leq a < \frac{m_0}{n} \]
+    Since $nb - na > 1$, we have:
+    \[ m_0 \leq na + 1 < nb \implies \frac{m_0}{n} < b \]
+    And thus:
+    \[ \frac{m_0}{n} < b \]
+    Therefore, we can conclude that:
+    \[ a < \frac{m_0}{n} < b \]
+    Thus, the rational number $r = \frac{m_0}{n}$ lies between $a$ and $b$.
+\end{proof}
+
+\section{Exercices}
+This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and 
