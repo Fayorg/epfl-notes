@@ -1,0 +1,128 @@
+\begin{exercise}[Week 3 Assignment, Exercise 3]
+    Let's find the real and imaginary parts of the complex number:
+    \[
+        \frac{1}{1 + i} + \frac{1}{1 + 2i} + \frac{1}{1 + 3i}
+    \]
+    \Answer
+    We start by rationalizing each term:
+    \begin{align*}
+        \frac{1}{1 + i} &= \frac{1 - i}{(1 + i)(1 - i)} = \frac{1 - i}{1 + 1} = \frac{1}{2} - \frac{i}{2} \\
+        \frac{1}{1 + 2i} &= \frac{1 - 2i}{(1 + 2i)(1 - 2i)} = \frac{1 - 2i}{1 + 4} = \frac{1}{5} - \frac{2i}{5} \\
+        \frac{1}{1 + 3i} &= \frac{1 - 3i}{(1 + 3i)(1 - 3i)} = \frac{1 - 3i}{1 + 9} = \frac{1}{10} - \frac{3i}{10}
+    \end{align*}
+    Now, we can sum the real and imaginary parts separately:
+    \begin{align*}
+        \text{Real part} &= \frac{1}{2} + \frac{1}{5} + \frac{1}{10} = \frac{5}{10} + \frac{2}{10} + \frac{1}{10} = \frac{8}{10} = \frac{4}{5} \\
+        \text{Imaginary part} &= -\frac{1}{2} - \frac{2}{5} - \frac{3}{10} = -\frac{5}{10} - \frac{4}{10} - \frac{3}{10} = -\frac{12}{10} = -\frac{6}{5}
+    \end{align*}
+    Therefore, the complex number can be expressed as:
+    \[
+        \frac{4}{5} - \frac{6i}{5}
+    \]
+\end{exercise}
+
+\begin{exercise}[Week 3 Assignment, Exercise 5]
+    Let's solve the equation in $\mathbb{C}$:
+    \[
+        z^2 = 5 + 2 \sqrt{6}i
+    \]
+    \Answer
+    We quickly remark that the argument is not a standard angle making it hard to use the polar form directly. Thus, we use the standard form $z = a + bi$ with $a,b \in \mathbb{R}$:
+    \begin{align*}
+        z^2 &= (a + bi)^2 = a^2 + 2abi - b^2 \\
+        &= (a^2 - b^2) + 2abi
+    \end{align*}
+    By identifying the real and imaginary parts, we get the system:
+    \begin{align*}
+        a^2 - b^2 &= 5 \\
+        2ab &= 2 \sqrt{6}
+    \end{align*}
+    We can express $b$ in terms of $a$:
+    \[
+        b = \frac{\sqrt{6}}{a}
+    \]
+    We substitute this into the first equation:
+    \[
+        a^2 - \left(\frac{\sqrt{6}}{a}\right)^2 = 5
+    \]
+    This simplifies to:
+    \[
+        a^2 - \frac{6}{a^2} = 5
+    \]
+    Multiplying through by $a^2$ to eliminate the denominator, we get:
+    \[
+        a^4 - 6 = 5a^2
+    \]
+    Rearranging gives us a quadratic in $a^2$:
+    \[
+        a^4 - 5a^2 - 6 = 0
+    \]
+    Letting $x = a^2$, we have:
+    \[
+        x^2 - 5x - 6 = 0
+    \]
+    We can solve this quadratic using the quadratic formula:
+    \[
+        x = \frac{5 \pm \sqrt{25 + 24}}{2} = \frac{5 \pm 7}{2}
+    \]
+    This gives us two solutions for $x$:
+    \[
+        x_1 = 6 \quad \text{and} \quad x_2 = -1
+    \]
+    Since $x = a^2$ must be non-negative, we discard $x_2 = -1$ and keep $x_1 = 6$. Thus:
+    \[
+        a^2 = 6 \quad \implies \quad a = \pm \sqrt{6}
+    \]
+    We substitute back to find $b$:
+    \[
+        b = \frac{\sqrt{6}}{\pm \sqrt{6}} = \pm 1
+    \]
+    Therefore, we have two possible solutions for $z$:
+    \[
+        z_1 = \sqrt{6} + i \quad \text{and} \quad z_2 = -\sqrt{6} - i
+    \]
+\end{exercise}
+
+\begin{exercise}[Week 3 Assignment, Exercise 10]
+    Are the following questions true or false? Justify your answer.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Let $z_1, \ldots, z_n$ be complex roots of a polynomial $P(x) = z^n + a_{n - 1}z^{n - 1} + \cdots + a_1 z + a_0$. Is it true that $\Pi_{k=1}^n z_k = (-1)^n a_0$?
+        \item There exists an integer $n \in \mathbb{N}^*$ such that $(2 + 2i \sqrt{3})^n$ is a real number.
+    \end{itemize}
+    \Answer
+    Both statements are true.
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
+        \item Since $z_1, \ldots, z_n$ are roots of the polynomial $P(x)$, we have:
+        \[
+            z^n + a_{n-1}z^{n -1} + \cdots + a_1 z + a_0 = (z - z_1)(z - z_2) \cdots (z - z_n)
+        \]
+        By expanding the right-hand side, the constant term (the term without $z$) is given by:
+        \[
+            (-1)^n z_1 z_2 \cdots z_n
+        \]
+        Equating this to the constant term $a_0$ on the left-hand side, we get:
+        \[
+            (-1)^n z_1 z_2 \cdots z_n = a_0
+        \]
+        Thus, we conclude that:
+        \[            \Pi_{k=1}^n z_k = (-1)^n a_0
+        \]
+        \item We start by expressing the complex number in polar form:
+        \[
+            2 + 2i \sqrt{3} = 4 \left( \cos\left(\frac{\pi}{3}\right) + i \sin\left(\frac{\pi}{3}\right) \right) = 4 e^{i \frac{\pi}{3}}
+        \]
+        Now, we can express $(2 + 2i \sqrt{3})^n$ using De Moivre's theorem:
+        \[
+            (2 + 2i \sqrt{3})^n = 4^n e^{i n \frac{\pi}{3}} = 4^n \left( \cos\left(n \frac{\pi}{3}\right) + i \sin\left(n \frac{\pi}{3}\right) \right)
+        \]
+        For this expression to be a real number, the imaginary part must be zero, which occurs when:
+        \[
+            \sin\left(n \frac{\pi}{3}\right) = 0
+        \]
+        This happens when:
+        \[
+            n \frac{\pi}{3} = k \pi \quad \implies \quad n = 3k \quad \text{for some } k \in \mathbb{Z}
+        \]
+        Therefore, by choosing $n$ as a multiple of 3 (e.g., $n = 3$), we ensure that $(2 + 2i \sqrt{3})^n$ is a real number.
+    \end{itemize}
+\end{exercise}

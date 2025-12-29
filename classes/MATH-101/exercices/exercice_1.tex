@@ -1,0 +1,20 @@
+\begin{exercise}[Week 2 Assignment, Exercise 1]
+    Let $A, B, C \subset \mathbb{R}$ be non-empty sets. Let's show that:
+    \[
+        (A \cap B) - C = (A \cap B) - (B \cap C)
+    \]
+    \Answer
+    Let extends both side using set definitions (or set builder notation):
+    \[
+        (A \cap B) - C = \{ x \in \mathbb{R} \mid x \in A \text{ and } x \in B \text{ and } x \notin C \}
+    \]
+    and:
+    \begin{align*}
+        (A \cap B) - (B \cap C) &= \{x \in \mathbb{R} \mid (x \in A \text{ and } x \in B) \text{ and } \neg(x \in B \text{ and } x \in C)\} \\
+        &= \{ x \in \mathbb{R} \mid x \in A \text{ and } x \in B \text{ and } (x \notin B \text{ or } x \notin C) \}
+    \end{align*}
+    We can see that both sets are equal, since in the second set, the condition $x \notin B$ is impossible due to the $x \in B$ condition. Thus, both sets are equal to:
+    \[        \{ x \in \mathbb{R} \mid x \in A \text{ and } x \in B \text{ and } x \notin C \}
+    \]
+\end{exercise}
+    
