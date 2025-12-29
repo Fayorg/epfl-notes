@@ -2,13 +2,14 @@
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily\color{definition-header-text}, bodyfont=\normalfont,
     postheadhook={},
+    % preheadhook=\Needspace{4\baselineskip}, // aded to all boxes in header.tex
 	mdframed={
-			linewidth=2pt,
-			rightline=false, topline=false, bottomline=false,
-            roundcorner=3pt,
-			linecolor=ForestGreen, backgroundcolor=definition-background, fontcolor=definition-body-text,
-			nobreak=false
-		}
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        roundcorner=3pt,
+        linecolor=ForestGreen, backgroundcolor=definition-background, fontcolor=definition-body-text,
+        nobreak=false
+	}
 ]{thmgreenbox}
 
 \declaretheorem[style=thmgreenbox, name=Definition, numberwithin=section]{definitionbase}
