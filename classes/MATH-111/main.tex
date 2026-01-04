@@ -22,5 +22,12 @@
     \IfFileExists{chapters/chapter_\c.tex} {
         \input{chapters/chapter_\c.tex}
     }{}
+
+    \IfFileExists{exercices/exercices_\c.tex}{
+        \section{Exercices}
+        This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+        \input{exercices/exercices_\c.tex}
+    }{}
 }  
 \end{document}
