@@ -370,5 +370,131 @@ Remark that $A$ has to be symmetric for this to work. If $A = Q D Q^T$ where $D$
     \[\begin{aligned}
         (A v_i) \cdot (A v_j) &= (A v_i)^T (A v_j) = v_i^T A^T A v_j = v_i^T (\lambda_j v_j) = \lambda_j (v_i^T v_j) = 0
     \end{aligned}\]
-    since $v_i$ and $v_j$ are orthogonal. Now, we can
+    since $v_i$ and $v_j$ (for $i \neq j$) are orthogonal. Now, we can normalize the vectors $A v_i$ that are not zero, to get an orthonormal basis:
+    \[\begin{aligned}
+        u_1 &= \frac{1}{\|A v_1\|} A v_1 = \frac{1}{\sqrt{360}} \begin{bmatrix}
+            18 \\ 6
+        \end{bmatrix} = \begin{bmatrix}
+            \frac{3}{\sqrt{10}} \\ \frac{1}{\sqrt{10}}
+        \end{bmatrix} \\
+        u_2 &= \frac{1}{\|A v_2\|} A v_2 = \frac{1}{\sqrt{90}} \begin{bmatrix}
+            3 \\ -9
+        \end{bmatrix} = \begin{bmatrix}
+            \frac{1}{\sqrt{10}} \\ -\frac{3}{\sqrt{10}}
+        \end{bmatrix}
+    \end{aligned}\]
+    Now, we can find the singular values of $A$:
+    \[\begin{aligned}
+        \sigma_1 &= \|A v_1\| = \sqrt{360} = 6 \sqrt{10} \\
+        \sigma_2 &= \|A v_2\| = \sqrt{90} = 3 \sqrt{10} \\
+    \end{aligned}\]
+    Thus, we have:
+    \[
+        A \vec{v_1} = \sigma_1 \vec{u_1}, \quad A \vec{v_2} = \sigma_2 \vec{u_2}, \quad A \vec{v_3} = 0
+    \]
+    We can now form the matrices:
+    \[\begin{aligned}
+        U &= \begin{bmatrix}
+            | & | \\
+            \vec{u_1} & \vec{u_2} \\
+            | & |
+        \end{bmatrix} = \frac{1}{\sqrt{10}}\begin{bmatrix}
+            3 & 1 \\
+            1 & -3
+        \end{bmatrix} \\
+        V &= \begin{bmatrix}
+            | & | & | \\
+            \vec{v_1} & \vec{v_2} & \vec{v_3} \\
+            | & | & |
+        \end{bmatrix} = \frac{1}{3}\begin{bmatrix}
+            1 & -2 & 2 \\
+            2 & -1 & -2 \\
+            2 & 2 & 1
+        \end{bmatrix} \\
+        \Sigma &= \begin{bmatrix}
+            \sigma_1 & 0 & 0 \\
+            0 & \sigma_2 & 0
+        \end{bmatrix} = \begin{bmatrix}
+            6 \sqrt{10} & 0 & 0 \\
+            0 & 3 \sqrt{10} & 0
+        \end{bmatrix}
+    \end{aligned}\]
+    Thus, we have:
+    \[
+        AV = A \begin{bmatrix}
+            | & | & | \\
+            \vec{v_1} & \vec{v_2} & \vec{v_3} \\
+            | & | & |
+        \end{bmatrix} = \begin{bmatrix}
+            | & | & | \\
+            A\vec{v_1} & A\vec{v_2} & A\vec{v_3} \\
+            | & | & |
+        \end{bmatrix} = \begin{bmatrix}
+            | & | & | \\
+            \sigma_1 \vec{u_1} & \sigma_2 \vec{u_2} & 0 \\
+            | & | & |
+        \end{bmatrix} = U \Sigma
+    \]
+    Since $V$ is orthogonal, we have $V^T V = I$. Thus, we can write:
+    \[
+        A = U \Sigma V^T
+    \]
 \end{eg}
+More generally, if $A$ is an $m \times n$ matrix of rank $r$, then:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The symmetric matrix $A^T A$ of size $n \times n$ has $n$ real non-negative eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$ (counting multiplicities) and corresponding orthonormal eigenvectors $v_1, v_2, \ldots, v_n$ (let's choose to order the eigenvalues such that $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n \geq 0$).
+    \item Since the eigenvalues are non-negative, we can define the singular values of $A$ as $\sigma_i = \sqrt{\lambda_i}$ for $i = 1, 2, \ldots, n$.
+    \item It is possible that some of the singular values are zero. In fact, since the rank of $A$ is $r$, we have $\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_r > 0$ and $\sigma_{r+1} = \sigma_{r+2} = \ldots = \sigma_n = 0$.
+    \item For each $i = 1, 2, \ldots, r$, we can compute the vectors $u_i = \frac{1}{\sigma_i} A v_i$. The vectors $u_1, u_2, \ldots, u_r$ are orthonormal.
+    \item We can extend the set $\{u_1, u_2, \ldots, u_r\}$ to an orthonormal basis of $\mathbb{R}^m$ by adding vectors $u_{r+1}, u_{r+2}, \ldots, u_m$ (note that we can use the Gram-Schmidt process).
+    \item We can then form the matrices:
+    \[\begin{aligned}
+        U &= \begin{bmatrix}
+            | & | & & | \\
+            u_1 & u_2 & \cdots & u_m \\
+            | & | & & |
+        \end{bmatrix} \in \mathbb{R}^{m \times m} \\
+        V &= \begin{bmatrix}
+            | & | & & | \\
+            v_1 & v_2 & \cdots & v_n \\
+            | & | & & |
+        \end{bmatrix} \in \mathbb{R}^{n \times n} \\
+        \Sigma &= \begin{bmatrix}
+            \sigma_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+            0 & \sigma_2 & \cdots & 0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots & & \vdots \\
+            0 & 0 & \cdots & \sigma_r & 0 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0 & 0 & \cdots & 0
+        \end{bmatrix} \in \mathbb{R}^{m \times n}
+    \end{aligned}\]
+    \item Finally, we have:
+    \[
+        A = U \Sigma V^T
+    \]
+\end{itemize}
+Remark that the decomposition can also be written as:
+\[
+    A = U \Sigma V^T = \sum_{i=1}^{r} \sigma_i \vec{u_i} \vec{v_i}^T
+\]
+Thus for any $\vec{x} \in \mathbb{R}^n$, we have:
+\[
+    A \vec{x} = \sum_{i=1}^{r} \sigma_i \vec{u_i} (\vec{v_i}^T \vec{x}) = \sum_{i=1}^{r} \sigma_i (\vec{v_i} \cdot \vec{x}) \vec{u_i}
+\]
+This shows that the image of $A$ is spanned by the left singular vectors $\vec{u_1}, \vec{u_2}, \ldots, \vec{u_r}$ (i.e. $\text{Im} A \subseteq \{\vec{u_1}, \vec{u_2}, \ldots, \vec{u_r} \}$). The inclusion can be shown to be an equality since for every $i$ in $1, 2, \ldots, r$, we have:
+\[
+    \vec{u_i} = \frac{1}{\sigma_i}A \vec{v_i} = A \left(\frac{1}{\sigma_i} \vec{v_i}\right)
+\]
+Thus, $\vec{u_i} \in \text{Im} A$ for every $i$ in $1, 2, \ldots, r$. We can conclude that the set $\{\vec{u_1}, \vec{u_2}, \ldots, \vec{u_r} \}$ forms an orthonormal basis of $\text{Im} A$.
+
+\subsection{Consequences of SVD}
+When decomposing $A$ as $A = U \Sigma V^T$, we have:
+\begin{itemize}[itemsep=1pt,label=$\circ$]
+    \item The set of vectors $\{\vec{u_1}, \ldots, \vec{u_r}\}$ forms an orthonormal basis of $\text{Im} A$.
+    \item $\text{rank} A = r =$ number of non-zero singular values of $A$.
+    \item The set of vectors $\{\vec{u_{r + 1}}, \ldots, \vec{u_{m}}\}$ forms an orthonormal basis of $\text{Ker} A^T = (\text{Im A})^\perp$.
+    \item $A = \sum_{i=1}^{r} \sigma_i \vec{u_i} \vec{v_i}^T$, thus $A^T = \sum_{i=1}^{r} \sigma_i \vec{v_i} \vec{u_i}^T$.
+    \item The set of vectors $\{\vec{v_1}, \ldots, \vec{v_r}\}$ forms an orthonormal basis of $\text{Im} A^T = (\text{Ker A})^\perp$.
+    \item The set of vectors $\{\vec{v_{r + 1}}, \ldots, \vec{v_{n}}\}$ forms an orthonormal basis of $\text{Ker} A = (\text{Im} A^T)^\perp$.
+\end{itemize}
