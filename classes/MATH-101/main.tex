@@ -13,6 +13,18 @@
 
 \input{../../template/theme.tex}
 
+% To starts chapters on even pages
+% \makeatletter
+% \pretocmd{\chapter}{\cleartoevenpage}{}{}
+% \makeatother
+
+% \newcommand{\cleartoevenpage}{
+%   \clearpage
+%   \ifodd\value{page}
+%     \hbox{}\newpage
+%   \fi
+% }
+
 \begin{document}
 
 \input{title}
