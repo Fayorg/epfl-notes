@@ -498,3 +498,85 @@ When decomposing $A$ as $A = U \Sigma V^T$, we have:
     \item The set of vectors $\{\vec{v_1}, \ldots, \vec{v_r}\}$ forms an orthonormal basis of $\text{Im} A^T = (\text{Ker A})^\perp$.
     \item The set of vectors $\{\vec{v_{r + 1}}, \ldots, \vec{v_{n}}\}$ forms an orthonormal basis of $\text{Ker} A = (\text{Im} A^T)^\perp$.
 \end{itemize}
+
+\subsection{General Cases with SVD Decomposition}
+In all the next examples, the matrix $A$ is decomposed as $A = U \Sigma V^T$ using the SVD decomposition.
+
+\begin{eg}
+    In the most general case, where no condition is put on $A$, we have:
+    \[
+        A\vec{x} = \vec{b} \quad \iff \quad U \Sigma V^T \vec{x} = \vec{b} \quad \iff \quad \Sigma \underbrace{(V^T \vec{x})}_{\vec{y}} = \underbrace{(U^T \vec{b})}_{\vec{c}} \quad \iff \quad \Sigma \vec{y} = \vec{c} \text{ and } \vec{x} = V \vec{y}
+    \]
+    We can write this as a system of equations:
+    \[
+        \begin{cases*}
+            \sigma_1 y_1 = c_1 \\
+            \sigma_2 y_2 = c_2 \\
+            \vdots \\
+            \sigma_r y_r = c_r \\
+            0 = c_{r+1} \\
+            \vdots \\
+            0 = c_m
+        \end{cases*}
+    \]
+    Thus, a solution exists if and only if $c_{r+1} = c_{r+2} = \ldots = c_m = 0$ (i.e. $\vec{b} \in \text{Im} A$). In this case, we can find a particular solution $\vec{y_p}$ by setting:
+    \[\begin{aligned}
+        y_i &= \frac{c_i}{\sigma_i} \quad \text{for } i = 1, 2, \ldots, r \\
+        y_i &= 0 \quad \text{for } i = r+1, r+2, \ldots, n
+    \end{aligned}\]
+    The general solution is then given by:
+    \[
+        \vec{x} = V \vec{y_p} + \vec{w}
+    \]
+    where $\vec{w} \in \text{Ker} A$ (i.e. $\vec{w}$ is any linear combination of the vectors $\vec{v_{r+1}}, \vec{v_{r+2}}, \ldots, \vec{v_n}$).
+\end{eg}
+
+\begin{eg}
+    Let's now consider the case with least squares solutions. We want to solve:
+    \[
+        A^T A \vec{x} = A^T \vec{b} \quad \iff \quad V \Sigma^T U^T U \Sigma V^T \vec{x} = V \Sigma^T U^T \vec{b} \quad \iff \quad \Sigma^T \Sigma \underbrace{V^T \vec{x}}_{\vec{y}} = \Sigma^T \underbrace{U^T \vec{b}}_{\vec{c}}
+    \]
+    We can write this as a system of equations:
+    \[
+        \begin{cases*}
+            \sigma_1^2 y_1 = \sigma_1 c_1 \\
+            \sigma_2^2 y_2 = \sigma_2 c_2 \\
+            \vdots \\
+            \sigma_r^2 y_r = \sigma_r c_r \\
+            0 = 0 \\
+            \vdots \\
+            0 = 0
+        \end{cases*}
+    \]
+    Thus, we can find a particular solution $\vec{y_p}$ by setting:
+    \[\begin{aligned}
+        y_i &= \frac{c_i}{\sigma_i} \quad \text{for } i = 1, 2, \ldots, r \\
+        y_i &= 0 \quad \text{for } i = r+1, r+2, \ldots, n
+    \end{aligned}\]
+    The general solution is then given by:
+    \[
+        \vec{x} = V \vec{y_p} + \vec{w}
+    \]
+    where $\vec{w} \in \text{Ker} A$ (i.e. $\vec{w}$ is any linear combination of the vectors $\vec{v_{r+1}}, \vec{v_{r+2}}, \ldots, \vec{v_n}$).
+\end{eg}
+
+\begin{eg}
+    Let's now consider the case where $A$ is a square matrix. We can compute its determinant:
+    \[
+        \det(A) = \det(U \Sigma V^T) = \det(U) \det(\Sigma) \det(V^T) = \det(U) \det(V) \prod_{i=1}^{n} \sigma_i = \pm \prod_{i=1}^{n} \sigma_i
+    \]
+    since both $U$ and $V$ are orthogonal matrices (thus their determinants are either $1$ or $-1$). We can conclude that $A$ is invertible if and only if all its singular values are non-zero (i.e. $\sigma_i \neq 0$ for all $i = 1, 2, \ldots, n$). In this case, we can compute the inverse of $A$:
+    \[
+        A^{-1} = (U \Sigma V^T)^{-1} = V \Sigma^{-1} U^T
+    \]
+    where:
+    \[
+        \Sigma^{-1} = \begin{bmatrix}
+            \frac{1}{\sigma_1} & 0 & \cdots & 0 \\
+            0 & \frac{1}{\sigma_2} & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \frac{1}{\sigma_n}
+        \end{bmatrix}
+    \]
+    and thus the singular values of $A^{-1}$ are $\frac{1}{\sigma_1}, \frac{1}{\sigma_2}, \ldots, \frac{1}{\sigma_n}$.
+\end{eg}
