@@ -1,0 +1,33 @@
+\documentclass[a4paper]{report}
+\def\theme{dark}
+
+\input{../../template/header.tex}
+
+\author{Elie Baier}
+\title{Advanced Information, Computation and Communication II}
+
+\thispagestyle{empty}
+
+\usepackage{adjustbox}
+\usepackage{centernot}
+
+\input{../../template/theme.tex}
+
+\begin{document}
+
+\input{title}
+\tableofcontents
+
+\foreach \c in {1,...,10}{
+    \IfFileExists{chapters/chapter_\c.tex} {
+        \input{chapters/chapter_\c.tex}
+    }{}
+
+    \IfFileExists{exercises/exercises_\c.tex}{
+        \section{Exercises}
+        This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
+
+        \input{exercises/exercises_\c.tex}
+    }{}
+}  
+\end{document}
