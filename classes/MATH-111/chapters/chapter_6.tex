@@ -1,4 +1,4 @@
-\chapter{Orthogonality and the least squares method}
+\chapter{Orthogonality and the Least Squares Method}
 Let's consider the following system of linear equations:
 \[
     A \vec{x} = \vec{b}
@@ -313,8 +313,8 @@ Graphically, if $W$ is a line in $\mathbb{R}^3$, then $W^{\perp}$ is the plane o
     If $W = \text{span}(\vec{w_1}, \vec{w_2}, \ldots, \vec{w_k})$, then $\vec{u} \in W^{\perp}$ if and only if $\vec{u} \cdot \vec{w_i} = 0$ for all $i = 1, 2, \ldots, k$.
 \end{theorem}
 \begin{proof}
-    \textbf{($\Rightarrow$)} Let $\vec{u} \in W^{\perp}$. Then, for any $\vec{w} \in W$, we have $\vec{u} \cdot \vec{w} = 0$. In particular, for each basis vector $\vec{w_i}$, we have $\vec{u} \cdot \vec{w_i} = 0$. \\
-    \textbf{($\Leftarrow$)} Let $\vec{u}$ be such that $\vec{u} \cdot \vec{w_i} = 0$ for all $i = 1, 2, \ldots, k$. Any vector $\vec{w} \in W$ can be expressed as a linear combination of the basis vectors:
+    ($\Rightarrow$) Let $\vec{u} \in W^{\perp}$. Then, for any $\vec{w} \in W$, we have $\vec{u} \cdot \vec{w} = 0$. In particular, for each basis vector $\vec{w_i}$, we have $\vec{u} \cdot \vec{w_i} = 0$. \\
+    ($\Leftarrow$) Let $\vec{u}$ be such that $\vec{u} \cdot \vec{w_i} = 0$ for all $i = 1, 2, \ldots, k$. Any vector $\vec{w} \in W$ can be expressed as a linear combination of the basis vectors:
     \[
         \vec{w} = c_1 \vec{w_1} + c_2 \vec{w_2} + \ldots + c_k \vec{w_k}
     \]
@@ -1073,13 +1073,13 @@ Remark that the system of normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$ a
 \end{theorem}
 \begin{proof}
     We will prove the equivalence of the three statements in a cyclic manner. \\
-    \textbf{(1) $\implies$ (2)}: If the columns of $A$ are linearly independent, then $\ker(A) = \{\vec{0}\}$. This implies that $A^T A$ is positive definite and thus invertible. \\
-    \textbf{(2) $\implies$ (3)}: If $A^T A$ is invertible, then for any $\vec{b} \in \mathbb{R}^m$, the normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$ have a unique solution given by:
+    (1) $\implies$ (2): If the columns of $A$ are linearly independent, then $\ker(A) = \{\vec{0}\}$. This implies that $A^T A$ is positive definite and thus invertible. \\
+    (2) $\implies$ (3): If $A^T A$ is invertible, then for any $\vec{b} \in \mathbb{R}^m$, the normal equations $A^T A \vec{\hat{x}} = A^T \vec{b}$ have a unique solution given by:
     \[
         \vec{\hat{x}} = (A^T A)^{-1} A^T \vec{b}
     \]
     Thus, the equation $A \vec{x} = \vec{b}$ has a unique least squares solution. \\
-    \textbf{(3) $\implies$ (1)}: If the equation $A \vec{x} = \vec{b}$ has a unique least squares solution for every $\vec{b} \in \mathbb{R}^m$, then $\ker(A)$ must be trivial. If there were a non-zero vector $\vec{v} \in \ker(A)$, then for any least squares solution $\vec{\hat{x}}$, the vector $\vec{\hat{x}} + \vec{v}$ would also be a least squares solution, contradicting the uniqueness. Therefore, the columns of $A$ are linearly independent. \\
+    (3) $\implies$ (1): If the equation $A \vec{x} = \vec{b}$ has a unique least squares solution for every $\vec{b} \in \mathbb{R}^m$, then $\ker(A)$ must be trivial. If there were a non-zero vector $\vec{v} \in \ker(A)$, then for any least squares solution $\vec{\hat{x}}$, the vector $\vec{\hat{x}} + \vec{v}$ would also be a least squares solution, contradicting the uniqueness. Therefore, the columns of $A$ are linearly independent. \\
     Thus, all three statements are equivalent.
 \end{proof}
 

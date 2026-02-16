@@ -1,6 +1,5 @@
 \chapter{Eigenvalues and Eigenvectors}
 Some vectors have the special property that when a linear transformation is applied to them, the resulting vector is simply a scalar multiple of the original vector i.e. $A \vec{x} = \lambda \vec{x}$.
-
 \begin{eg}
     Let $A = \begin{bmatrix}
         3 & -2 \\
@@ -37,6 +36,7 @@ Some vectors have the special property that when a linear transformation is appl
     \]
 \end{eg}
 
+\section{Definition and Examples}
 \begin{definition}[Eigenvalues and Eigenvectors]
     Let $A$ be an $n \times n$ matrix. A non-zero vector $\vec{x} \in \mathbb{R}^n$ is called an eigenvector of $A$ if there exists a scalar $\lambda \in \mathbb{R}$ such that:
     \[
@@ -52,7 +52,7 @@ Some vectors have the special property that when a linear transformation is appl
         6 \\ -5
     \end{bmatrix}$ and $\vec{y} = \begin{bmatrix}
         3 \\ -2
-    \end{bmatrix}$ an eigenvector of $A$? If so, find the corresponding eigenvalue. We compute:
+    \end{bmatrix}$ eigenvectors of $A$? If so, find the corresponding eigenvalue. We compute:
     \[A \vec{x} = \begin{bmatrix}
         1 & 6 \\ 5 & 2
     \end{bmatrix} \begin{bmatrix}
@@ -113,7 +113,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
     Setting this equal to zero, we have:
     \[\lambda^2 - 3 \lambda - 28 = 0 \quad \implies \quad (\lambda - 7)(\lambda + 4) = 0\]
     Thus, the eigenvalues of $A$ are $7$ and $-4$. We can find the eigenvectors corresponding to each eigenvalue as follows: \\
-    \textbf{For $\lambda = 7$:}
+    For $\lambda = 7$:
     \[\begin{bmatrix}
         1 - 7 & 6 \\ 5 & 2 - 7
     \end{bmatrix} = \begin{bmatrix}
@@ -124,7 +124,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
     Thus, any non-zero scalar multiple of $\begin{bmatrix}
         1 \\ 1
     \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $7$. \\
-    \textbf{For $\lambda = -4$:}
+    For $\lambda = -4$:
     \[\begin{bmatrix}
         1 + 4 & 6 \\ 5 & 2 + 4
     \end{bmatrix} = \begin{bmatrix}
@@ -165,7 +165,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
         &= -(\lambda - 9)(\lambda - 2)^2
     \end{align*}
     Thus, the eigenvalues of $A$ are $9$ and $2$ (with a multiplicity of $2$). Let's find the eigenspaces corresponding to each eigenvalue: \\
-    \textbf{For $\lambda = 9$:}
+    For $\lambda = 9$:
     \[\begin{bmatrix}
         4 - 9 & -1 & 6 \\
         2 & 1 - 9 & 6 \\
@@ -182,7 +182,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
     Thus, any non-zero scalar multiple of $\begin{bmatrix}
         1 \\ 1 \\ 1
     \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $9$. \\
-    \textbf{For $\lambda = 2$:}
+    For $\lambda = 2$:
     \[\begin{bmatrix}
         4 - 2 & -1 & 6 \\
         2 & 1 - 2 & 6 \\
@@ -265,7 +265,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
         -\lambda & 1 \\ 1 & 1 - \lambda
     \end{bmatrix} = \lambda^2 - \lambda - 1 = 0 \quad \implies \quad (\lambda - \frac{1 + \sqrt{5}}{2})(\lambda - \frac{1 - \sqrt{5}}{2}) = 0\]
     Thus, the eigenvalues of $A$ are $\lambda_1 = \frac{1 + \sqrt{5}}{2} = \phi$ and $\lambda_2 = \frac{1 - \sqrt{5}}{2} = \bar{\phi}$, where $\phi$ is the golden ratio, $\phi = \frac{1 + \sqrt{5}}{2} \approx 1.618$. Let's find the eigenvectors corresponding to each eigenvalue: \\
-    \textbf{For $\lambda_1 = \frac{1 + \sqrt{5}}{2}$:}
+    For $\lambda_1 = \frac{1 + \sqrt{5}}{2}$:
     \[\begin{bmatrix}
         -\frac{1 + \sqrt{5}}{2} & 1 \\ 1 & 1 - \frac{1 + \sqrt{5}}{2}
     \end{bmatrix} \sim \begin{bmatrix}
@@ -276,7 +276,7 @@ More generally, for a matrix $A$ and a scalar $\lambda$, all of the propositions
     \end{bmatrix} = \begin{bmatrix}
         1 \\ \phi
     \end{bmatrix} = \vec{v_1}$ is an eigenvector corresponding to the eigenvalue $\frac{1 + \sqrt{5}}{2}$. \\
-    \textbf{For $\lambda_2 = \frac{1 - \sqrt{5}}{2}$:}
+    For $\lambda_2 = \frac{1 - \sqrt{5}}{2}$:
     \[\begin{bmatrix}
         -\frac{1 - \sqrt{5}}{2} & 1 \\ 1 & 1 - \frac{1 - \sqrt{5}}{2}
     \end{bmatrix} \sim \begin{bmatrix}
@@ -414,15 +414,15 @@ Remark that similarity of matrices is an equivalence relation, i.e. for any $n \
     \item If $A$ is similar to $B$ and $B$ is similar to $C$, then $A$ is similar to $C$ (transitivity).
 \end{itemize}
 \begin{proof}
-    \textbf{1. Property}: Let $A$ be an $n \times n$ matrix. We have:
+    1. Property: Let $A$ be an $n \times n$ matrix. We have:
     \[A = I_n A I_n\]
     where $I_n$ is the identity matrix of size $n \times n$, which is invertible. Thus, $A$ is similar to itself. \\
-    \textbf{2. Property}: Let $A$ and $B$ be two $n \times n$ matrices such that $A$ is similar to $B$. Then, there exists an invertible matrix $P$ such that:
+    2. Property: Let $A$ and $B$ be two $n \times n$ matrices such that $A$ is similar to $B$. Then, there exists an invertible matrix $P$ such that:
     \[B = P^{-1} A P\]
     Multiplying both sides by $P$ on the left and by $P^{-1}$ on the right, we have:
     \[A = P B P^{-1}\]
     Thus, $B$ is similar to $A$. \\
-    \textbf{3. Property}: Let $A$, $B$, and $C$ be three $n \times n$ matrices such that $A$ is similar to $B$ and $B$ is similar to $C$. Then, there exist invertible matrices $P$ and $Q$ such that:
+    3. Property: Let $A$, $B$, and $C$ be three $n \times n$ matrices such that $A$ is similar to $B$ and $B$ is similar to $C$. Then, there exist invertible matrices $P$ and $Q$ such that:
     \[B = P^{-1} A P \quad \text{and} \quad C = Q^{-1} B Q\]
     Substituting the first equation into the second, we have:
     \[C = Q^{-1} (P^{-1} A P) Q = (Q^{-1} P^{-1}) A (P Q)\]
@@ -568,14 +568,14 @@ Remark that the columns of the matrix $P$ used to diagonalize $A$ are the eigenv
     An $n \times n$ matrix $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors.
 \end{theorem}
 \begin{proof}
-    \textbf{($\Rightarrow$) Direction}: Suppose that $A$ is diagonalizable. Then, there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
+    ($\Rightarrow$) Direction: Suppose that $A$ is diagonalizable. Then, there exists an invertible matrix $P$ and a diagonal matrix $D$ such that:
     \[A = P D P^{-1}\]
     Let the columns of $P$ be denoted as $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$. Since $P$ is invertible, the set $\{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}\}$ is linearly independent. Now, we have:
     \[A P = P D\]
     which implies that:
     \[A \vec{v_i} = d_{ii} \vec{v_i}\]
     for each $i = 1, 2, \ldots, n$, where $d_{ii}$ is the $i$-th diagonal entry of $D$. Thus, each $\vec{v_i}$ is an eigenvector of $A$ corresponding to the eigenvalue $d_{ii}$. Therefore, $A$ has $n$ linearly independent eigenvectors. \\
-    \textbf{($\Leftarrow$) Direction}: Suppose that $A$ has $n$ linearly independent eigenvectors $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$ corresponding to eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$. Let $P$ be the matrix whose columns are the eigenvectors of $A$:
+    ($\Leftarrow$) Direction: Suppose that $A$ has $n$ linearly independent eigenvectors $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$ corresponding to eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$. Let $P$ be the matrix whose columns are the eigenvectors of $A$:
     \[P = [\vec{v_1} \quad \vec{v_2} \quad \cdots \quad \vec{v_n}]\]
     Since the eigenvectors are linearly independent, $P$ is invertible. Now, let $D$ be the diagonal matrix with the eigenvalues on the main diagonal:
     \[D = \begin{bmatrix}
@@ -615,7 +615,7 @@ Remark that both $P$ and $D$ can be constructed from the eigenvectors and eigenv
         1 - \lambda & 3 & 3 \\ -3 & -5 - \lambda & -3 \\ 3 & 3 & 1 - \lambda
     \end{bmatrix} = (1 - \lambda)(2 + \lambda)^2\]
     Thus, the eigenvalues of $A$ are $\lambda_1 = 1$ and $\lambda_2 = -2$ (with a multiplicity of $2$). Let's find the eigenvectors corresponding to each eigenvalue: \\
-    \textbf{For $\lambda = 1$:}
+    For $\lambda = 1$:
     \[\begin{bmatrix}
         1 - 1 & 3 & 3 \\ -3 & -5 - 1 & -3 \\ 3 & 3 & 1 - 1
     \end{bmatrix} = \begin{bmatrix}
@@ -626,7 +626,7 @@ Remark that both $P$ and $D$ can be constructed from the eigenvectors and eigenv
     Thus, any non-zero scalar multiple of $\begin{bmatrix}
         1 \\ -1 \\ 1
     \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $1$. \\
-    \textbf{For $\lambda = -2$:}
+    For $\lambda = -2$:
     \[\begin{bmatrix}
         1 + 2 & 3 & 3 \\ -3 & -5 + 2 & -3 \\ 3 & 3 & 1 + 2
     \end{bmatrix} = \begin{bmatrix}
@@ -655,7 +655,7 @@ Remark that both $P$ and $D$ can be constructed from the eigenvectors and eigenv
         2 - \lambda & 4 & 3 \\ -4 & -6 - \lambda & -3 \\ 3 & 3 & 1 - \lambda
     \end{bmatrix} = (1 - \lambda)^2 ( 2 + \lambda )\]
     Thus, the eigenvalues of $A$ are $\lambda_1 = 1$ (with a multiplicity of $2$) and $\lambda_2 = -2$. Let's find the eigenvectors corresponding to each eigenvalue: \\
-    \textbf{For $\lambda = 1$:}
+    For $\lambda = 1$:
     \[\begin{bmatrix}
         2 - 1 & 4 & 3 \\ -4 & -6 - 1 & -3 \\ 3 & 3 & 1 - 1
     \end{bmatrix} = \begin{bmatrix}
@@ -666,7 +666,7 @@ Remark that both $P$ and $D$ can be constructed from the eigenvectors and eigenv
     Thus, any non-zero scalar multiple of $\begin{bmatrix}
         1 \\ -1 \\ 1
     \end{bmatrix}$ is an eigenvector corresponding to the eigenvalue $1$. \\
-    \textbf{For $\lambda = -2$:}
+    For $\lambda = -2$:
     \[\begin{bmatrix}
         2 + 2 & 4 & 3 \\ -4 & -6 + 2 & -3 \\ 3 & 3 & 1 + 2
     \end{bmatrix} = \begin{bmatrix}
@@ -730,7 +730,7 @@ Or equivalently, if and only if the geometric multiplicity of each eigenvalue is
         5 - \lambda & 0 & 0 & 0 \\ 0 & 5 - \lambda & 0 & 0 \\ 1 & 4 & -3 - \lambda & 0 \\ -1 & -2 & 0 & -3 - \lambda
     \end{bmatrix} = (5 - \lambda)^2 (-3 - \lambda)^2\]
     Thus, the eigenvalues of $A$ are $\lambda_1 = 5$ (with a multiplicity of $2$) and $\lambda_2 = -3$ (with a multiplicity of $2$). Let's find the eigenvectors corresponding to each eigenvalue: \\
-    \textbf{For $\lambda = 5$:}
+    For $\lambda = 5$:
     \[\begin{bmatrix}
         5 - 5 & 0 & 0 & 0 \\ 0 & 5 - 5 & 0 & 0 \\ 1 & 4 & -3 - 5 & 0 \\ -1 & -2 & 0 & -3 - 5
     \end{bmatrix} = \begin{bmatrix}
@@ -741,7 +741,7 @@ Or equivalently, if and only if the geometric multiplicity of each eigenvalue is
     \end{bmatrix}$ and $\begin{bmatrix}
         0 \\ 4 \\ 2 \\ -1
     \end{bmatrix}$ are eigenvectors corresponding to the eigenvalue $5$. \\
-    \textbf{For $\lambda = -3$:}
+    For $\lambda = -3$:
     \[\begin{bmatrix}
         5 + 3 & 0 & 0 & 0 \\ 0 & 5 + 3 & 0 & 0 \\ 1 & 4 & -3 + 3 & 0 \\ -1 & -2 & 0 & -3 + 3
     \end{bmatrix} = \begin{bmatrix}

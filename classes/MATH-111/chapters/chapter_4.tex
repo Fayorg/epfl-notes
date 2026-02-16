@@ -45,10 +45,10 @@ Instead of working with specific objects like $\mathbb{R}^n$, we can now work wi
         p(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n \quad \text{and} \quad q(x) = b_0 + b_1 x + b_2 x^2 + ... + b_n x^n
     \]
     where $a_0, a_1, ..., a_n, b_0, b_1, ..., b_n \in \mathbb{R}$. \\
-    \textbf{Polynomial Addition:}
+    Polynomial Addition:
     \[(p + q)(x) = p(x) + q(x) = (a_0 + b_0) + (a_1 + b_1)x + (a_2 + b_2)x^2 + ... + (a_n + b_n)x^n\]
     The resulting polynomial $(p + q)(x)$ is also of degree less than or equal to $n$, so it belongs to $P_n$. \\
-    \textbf{Scalar Multiplication:}
+    Scalar Multiplication:
     \[(cp)(x) = c \cdot p(x) = c \cdot (a_0 + a_1 x + a_2 x^2 + ... + a_n x^n) = (c a_0) + (c a_1)x + (c a_2)x^2 + ... + (c a_n)x^n\]
     The resulting polynomial $(cp)(x)$ is also of degree less than or equal to $n$, so it belongs to $P_n$. \\
     Thus both operations are well-defined, and we can easily verify that $P_n$ satisfies all the properties of a vectorial space.
@@ -60,12 +60,12 @@ Instead of working with specific objects like $\mathbb{R}^n$, we can now work wi
         \item Let's assume that there are two vectors $\vec{0}$ and $\vec{0'}$ that both satisfy the property of the additive identity. Then, we have:
         \[\vec{u} + \vec{0} = \vec{u} \quad \text{and} \quad \vec{u} + \vec{0'} = \vec{u}\]
         By subtracting $\vec{u}$ from both sides of the second equation, we get:
-        \[ \vec{u} + \vec{0} = \vec{u} = \vec{u} + \vec{0'} \implies \vec{0'} = \vec{0}\]
+        \[ \vec{u} + \vec{0} = \vec{u} = \vec{u} + \vec{0'} \quad \implies \quad \vec{0'} = \vec{0}\]
         Thus, the zero vector is unique.
         \item Let's assume that there are two vectors $\vec{v}$ and $\vec{v'}$ that both satisfy the property of the additive inverse for a vector $\vec{u}$. Then, we have:
         \[\vec{u} + \vec{v} = \vec{0} \quad \text{and} \quad \vec{u} + \vec{v'} = \vec{0}\]
         By subtracting $\vec{u}$ from both sides of the second equation, we get:
-        \[ \vec{u} + \vec{v} = \vec{0} = \vec{u} + \vec{v'} \implies \vec{v'} = \vec{v}\]
+        \[ \vec{u} + \vec{v} = \vec{0} = \vec{u} + \vec{v'} \quad \implies \quad \vec{v'} = \vec{v}\]
         Thus, the additive inverse of each vector is unique.
         \item To show that $0 \vec{u} = \vec{0}$, we can use the distributive property of scalar multiplication over scalar addition:
         \[0 \vec{u} = (0 + 0) \vec{u} = 0 \vec{u} + 0 \vec{u}\]
@@ -176,7 +176,7 @@ Note that $\mathbb{R}^2$ is not a subspace of $\mathbb{R}^3$ since it is not a s
 \end{definition}
 
 \begin{eg}
-    Let $V$ be a vectorial space. Let $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$ vectors of $V$ and the set $H = Span\{v_1,v_2,v_3\}$ of all linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$. This set is a subset of $V$. Let's show that $H$ is a subspace of $V$:
+    Let $V$ be a vectorial space. Let $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$ vectors of $V$ and the set $H = \text{Span}\{v_1,v_2,v_3\}$ of all linear combinations of $\vec{v_1}, \vec{v_2}, \vec{v_3}$. This set is a subset of $V$. Let's show that $H$ is a subspace of $V$:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item The zero vector $\vec{0}$ is in $H$ since we can write it as a linear combination of $\vec{v_1}, \vec{v_2}, \vec{v_3}$ with all coefficients equal to $0$:
         \[ \vec{0} = 0\vec{v_1} + 0\vec{v_2} + 0\vec{v_3} \]
@@ -195,16 +195,16 @@ Note that $\mathbb{R}^2$ is not a subspace of $\mathbb{R}^3$ since it is not a s
 \end{eg}
 
 \begin{theorem}
-    Let $\vec{v_1}, v_2, \ldots, v_p$ be vectors in a vector space $V$. Then, the set $H = Span\{v_1, v_2, \ldots, v_p\}$ is a subspace of $V$.
+    Let $\vec{v_1}, v_2, \ldots, v_p$ be vectors in a vector space $V$. Then, the set $H = \text{Span}\{v_1, v_2, \ldots, v_p\}$ is a subspace of $V$.
 \end{theorem}
 
 \begin{eg}
     Let $V = \mathbb{R}^3$ and $\vec{v_1}, \vec{v_2}, \vec{v_3} \in V$. We have:
-    \begin{itemize}
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item The origin $\{(0,0,0)\}$ is a subspace of $V$.
-        \item Any line through the origin ($Span(\vec{v_1}), \vec{v_1} \neq \vec{0}$) is a subspace of $V$.
-        \item Any plane through the origin ($Span(\vec{v_1}, \vec{v_2})$ and $\vec{v_1}, \vec{v_2}$ linearly independent) is a subspace of $V$.
-        \item The whole space $V$ is a subspace of $V$ ($Span(\vec{v_1}, \vec{v_2}, \vec{v_3})$ and $\vec{v_1}, \vec{v_2}, \vec{v_3}$ linearly independent).
+        \item Any line through the origin ($\text{Span}(\vec{v_1}), \vec{v_1} \neq \vec{0}$) is a subspace of $V$.
+        \item Any plane through the origin ($\text{Span}(\vec{v_1}, \vec{v_2})$ and $\vec{v_1}, \vec{v_2}$ linearly independent) is a subspace of $V$.
+        \item The whole space $V$ is a subspace of $V$ ($\text{Span}(\vec{v_1}, \vec{v_2}, \vec{v_3})$ and $\vec{v_1}, \vec{v_2}, \vec{v_3}$ linearly independent).
     \end{itemize}
 \end{eg}
 
@@ -242,7 +242,7 @@ Let $A \in \mathbb{R}^{m \times n}$.
     \[ \text{Im}(A) = \{ \vec{y} \in \mathbb{R}^m \mid \exists \vec{x} \in \mathbb{R}^n, A\vec{x} = \vec{y} \} \]
     The image is a subspace of $\mathbb{R}^m$.
 \end{definition}
-The Image of $T$ is also called the column space of $A$ since it is spanned by the columns of $A$.
+The image of $A$ is also called the column space of $A$ since it is spanned by the columns of $A$.
 
 \begin{eg}
     Let $A = \begin{bmatrix}
@@ -279,20 +279,20 @@ The Image of $T$ is also called the column space of $A$ since it is spanned by t
     \end{bmatrix} + x_5 \begin{bmatrix}
         -3 \\ 0 \\ 2 \\ 0 \\ 1
     \end{bmatrix} \]
-    % Thus, a basis for the kernel of $T$ is given by:
-    % \[ \left\{ \begin{bmatrix}
-    %     2 \\ 1 \\ 0 \\ 0 \\ 0
-    % \end{bmatrix}, \begin{bmatrix}
-    %     1 \\ 0 \\ -2 \\ 1 \\ 0
-    % \end{bmatrix}, \begin{bmatrix}
-    %     -3 \\ 0 \\ 2 \\ 0 \\ 1
-    % \end{bmatrix} \right\} \]
-    % To find a basis for the image of $T$, we can look at the pivot columns of the original matrix $A$. The pivot columns are the first and third columns. Thus, a basis for the image of $T$ is given by:
-    % \[ \left\{ \begin{bmatrix}
-    %     -3 \\ 1 \\ 2
-    % \end{bmatrix}, \begin{bmatrix}
-    %     -1 \\ 2 \\ 5
-    % \end{bmatrix} \right\} \]
+    Thus, a basis for the kernel of $T$ is given by:
+    \[ \left\{ \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ 0 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        1 \\ 0 \\ -2 \\ 1 \\ 0
+    \end{bmatrix}, \begin{bmatrix}
+        -3 \\ 0 \\ 2 \\ 0 \\ 1
+    \end{bmatrix} \right\} \]
+    To find a basis for the image of $T$, we can look at the pivot columns of the original matrix $A$. The pivot columns are the first and third columns. Thus, a basis for the image of $T$ is given by:
+    \[ \left\{ \begin{bmatrix}
+        -3 \\ 1 \\ 2
+    \end{bmatrix}, \begin{bmatrix}
+        -1 \\ 2 \\ 5
+    \end{bmatrix} \right\} \]
 \end{eg}
 
 \subsection{Differences between the Kernel and the Image}
@@ -375,7 +375,7 @@ Again we can define the kernel and the image of a linear transformation.
     \[ p_1(x) = 1, \quad p_2(x) = x, \quad p_3(x) = 4 - x \]
     We want to determine if this set is linearly independent or dependent. We need to solve the equation:
     \[
-        c_1 p_1(x) + c_2 p_2(x) + c_3 p_3(x) = 0 \implies c_1 (1) + c_2 (x) + c_3 (4 - x) = 0
+        c_1 p_1(x) + c_2 p_2(x) + c_3 p_3(x) = 0 \quad \implies \quad c_1 (1) + c_2 (x) + c_3 (4 - x) = 0
     \]
     This simplifies to:
     \[ (c_1 + 4c_3) + (c_2 - c_3)x = 0 \]
@@ -401,8 +401,8 @@ Again we can define the kernel and the image of a linear transformation.
 \end{definition}
 Remark that:
 \begin{itemize}[itemsep=1pt,label=$\circ$]
-    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ are linearly independent then they form a basis for $Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
-    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ form a basis for $H \subseteq V$, then $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}$ are in $H$ because $H = Span\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
+    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ are linearly independent then they form a basis for $\text{Span}\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
+    \item If $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p} \in V$ form a basis for $H \subseteq V$, then $\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}$ are in $H$ because $H = \text{Span}\{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_p}\}$.
 \end{itemize}
 
 \begin{eg}
@@ -460,7 +460,7 @@ Note that if $A$ is not invertible, then the columns of $A$ do not form a basis 
         1 \\ 1
     \end{pmatrix}$ and $\vec{v_2} = \begin{pmatrix}
         -2 \\ -2
-    \end{pmatrix}$. We want to find a basis for $H = Span\{\vec{v_1}, \vec{v_2}\}$. Since $\vec{v_2} = -2\vec{v_1}$, the set $\{\vec{v_1}, \vec{v_2}\}$ is linearly dependent. Thus, we can remove $\vec{v_2}$ and keep only $\vec{v_1}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}\}$ (or another basis could be $\{\vec{v_2}\}$).
+    \end{pmatrix}$. We want to find a basis for $H = \text{Span}\{\vec{v_1}, \vec{v_2}\}$. Since $\vec{v_2} = -2\vec{v_1}$, the set $\{\vec{v_1}, \vec{v_2}\}$ is linearly dependent. Thus, we can remove $\vec{v_2}$ and keep only $\vec{v_1}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}\}$ (or another basis could be $\{\vec{v_2}\}$).
 \end{eg}
 
 \begin{eg}
@@ -472,16 +472,16 @@ Note that if $A$ is not invertible, then the columns of $A$ do not form a basis 
         6 \\ 16 \\ -5
     \end{pmatrix}$ be linearly dependent vectors in $\mathbb{R}^3$ since:
     \[ 5\vec{v_1} + 3\vec{v_2} = \vec{v_3} \]
-    For any $\vec{v}$ that is in $H = Span\{\vec{v_1}, \vec{v_2}, \vec{v_3}\}$, we can write:
+    For any $\vec{v}$ that is in $H = \text{Span}\{\vec{v_1}, \vec{v_2}, \vec{v_3}\}$, we can write:
     \[ \vec{v} = c_1 \vec{v_1} + c_2 \vec{v_2} + c_3 \vec{v_3} \]
     Substituting $\vec{v_3}$, we get:
     \[ \vec{v} = c_1 \vec{v_1} + c_2 \vec{v_2} + c_3 (5\vec{v_1} + 3\vec{v_2}) = (c_1 + 5c_3)\vec{v_1} + (c_2 + 3c_3)\vec{v_2} \]
-    Thus, we can express $\vec{v}$ as a linear combination of only $\vec{v_1}$ and $\vec{v_2}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}, \vec{v_2}\}$ and thus $Span\{\vec{v_1}, \vec{v_2}, \vec{v_3}\} = Span\{\vec{v_1}, \vec{v_2}\} = H$.
+    Thus, we can express $\vec{v}$ as a linear combination of only $\vec{v_1}$ and $\vec{v_2}$. Therefore, a basis for $H$ is given by $\{\vec{v_1}, \vec{v_2}\}$ and thus $\text{Span}\{\vec{v_1}, \vec{v_2}, \vec{v_3}\} = \text{Span}\{\vec{v_1}, \vec{v_2}\} = H$.
 \end{eg}
 
 \begin{theorem}
-    Let $F = (\vec{v_1, \ldots, \vec{v_p}})$ be a set of vectors in a vector space $V$ and $H = Span\{\vec{v_1}, \ldots, \vec{v_p}\}$. We have:
-    \begin{itemize}
+    Let $F = (\vec{v_1}, \ldots, \vec{v_p})$ be a set of vectors in a vector space $V$ and $H = \text{Span}\{\vec{v_1}, \ldots, \vec{v_p}\}$. We have:
+    \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item If any vector $\vec{v_k} \in F$ is a linear combination of the other vectors in $F$, then we can remove $\vec{v_k}$ from $F$ without changing the span of $H$.
         \item If $H \neq \{\vec{0}\}$, then we can remove vectors from $F$ until we obtain a basis for $H$.
     \end{itemize}
@@ -494,7 +494,7 @@ Note that if $A$ is not invertible, then the columns of $A$ do not form a basis 
         1 & -2 & 2 & 3 & -1 \\
         2 & -4 & 5 & 8 & -4
     \end{bmatrix}$ the same matrix as in another example. We had found that the kernel of $A$ is given by:
-    \[ \text{Ker}(A) = Span\left\{ \begin{bmatrix}
+    \[ \text{Ker}(A) = \text{Span}\left\{ \begin{bmatrix}
         2 \\ 1 \\ 0 \\ 0 \\ 0
     \end{bmatrix}, \begin{bmatrix}
         1 \\ 0 \\ -2 \\ 1 \\ 0
@@ -538,9 +538,9 @@ Note that if $A$ is not invertible, then the columns of $A$ do not form a basis 
 \end{theorem}
 \begin{proof}
     Let's prove that the representation exists and is unique. \\
-    \textbf{Existence:} Since $B$ is a basis for $V$, it spans $V$. Therefore, for any vector $\vec{v} \in V$, there exist scalars $c_1, c_2, \ldots, c_n$ such that:
+    Existence: Since $B$ is a basis for $V$, it spans $V$. Therefore, for any vector $\vec{v} \in V$, there exist scalars $c_1, c_2, \ldots, c_n$ such that:
     \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
-    \textbf{Uniqueness:} Suppose there are two different representations of $\vec{v}$:
+    Uniqueness: Suppose there are two different representations of $\vec{v}$:
     \[ \vec{v} = c_1 \vec{b_1} + c_2 \vec{b_2} + \ldots + c_n \vec{b_n} \]
     and
     \[ \vec{v} = d_1 \vec{b_1} + d_2 \vec{b_2} + \ldots + d_n \vec{b_n} \]
@@ -586,7 +586,7 @@ More generally, if $V = \mathbb{R}^n$ and $\mathcal{E} = (\vec{e_1}, \vec{e_2}, 
     Now let $[\vec{u}]_{\mathcal{E}} = \begin{bmatrix}
         u_1 \\ u_2
     \end{bmatrix}$. We want to find the coordinates of $\vec{u}$ relative to the basis $\mathcal{B}$. We need to solve the equation:
-    \[ \vec{u} = c_1 \vec{b_1} + c_2 \vec{b_2} \iff  \begin{bmatrix}
+    \[ \vec{u} = c_1 \vec{b_1} + c_2 \vec{b_2} \quad \iff \quad  \begin{bmatrix}
         1 & 1 \\
         0 & 2
     \end{bmatrix} \begin{bmatrix}
@@ -749,7 +749,7 @@ Let $H$ be a subspace of $V$ (dim$(V) = p$). Some remarks:
         0 & 0 & 0 & 0 & 0
     \end{bmatrix} \]
     We had found that the kernel of $A$ is given by:
-    \[ \text{Ker}(A) = Span\left\{ \begin{bmatrix}
+    \[ \text{Ker}(A) = \text{Span}\left\{ \begin{bmatrix}
         2 \\ 1 \\ 0 \\ 0 \\ 0
     \end{bmatrix}, \begin{bmatrix}
         1 \\ 0 \\ -2 \\ 1 \\ 0
@@ -757,7 +757,7 @@ Let $H$ be a subspace of $V$ (dim$(V) = p$). Some remarks:
         -3 \\ 0 \\ 2 \\ 0 \\ 1
     \end{bmatrix} \right\} \]
     And a basis for the image of $A$ is given by the columns $\vec{a_1}$ and $\vec{a_3}$:
-    \[ \text{Im}(A) = Span\left\{ \begin{bmatrix}
+    \[ \text{Im}(A) = \text{Span}\left\{ \begin{bmatrix}
         -3 \\ 1 \\ 2
     \end{bmatrix}, \begin{bmatrix}
         -1 \\ 2 \\ 5
@@ -783,9 +783,9 @@ and:
 
 \subsection{Row Space}
 \begin{definition}[Row Space]
-    The row space of a matrix $A$, denoted by Row$(A)$, is the subspace of $\mathbb{R}^n$ spanned by the row vectors of $A$.
+    The row space of a matrix $A \in \mathbb{R}^{m \times n}$, denoted by Row$(A)$, is the subspace of $\mathbb{R}^n$ spanned by the row vectors of $A$.
     \[
-        \text{Row}(A) = \text{Im}(A^T) = Span\{\text{row}_1(A), \text{row}_2(A), \ldots, \text{row}_m(A)\}
+        \text{Row}(A) = \text{Im}(A^T) = \text{Span}\{\text{row}_1(A), \text{row}_2(A), \ldots, \text{row}_m(A)\}
     \]
 \end{definition}
 
@@ -794,7 +794,7 @@ and:
         1 & 2 & 3 \\
         4 & 5 & 6
     \end{bmatrix}$. The row space of $A$ is given by:
-    \[ \text{Row}(A) = Span\left\{ \begin{bmatrix}
+    \[ \text{Row}(A) = \text{Span}\left\{ \begin{bmatrix}
         1 & 2 & 3
     \end{bmatrix}, \begin{bmatrix}
         4 & 5 & 6
@@ -859,14 +859,14 @@ Let $A$ be a matrix and $B$ be an invertible matrix of appropriate size, then:
         3 & 6
     \end{bmatrix} \]
     The row space of $A$ is given by:
-    \[ \text{Row}(A) = Span\left\{ \begin{bmatrix}
+    \[ \text{Row}(A) = \text{Span}\left\{ \begin{bmatrix}
         1 & 2 & 3
     \end{bmatrix}, \begin{bmatrix}
         4 & 5 & 6
     \end{bmatrix} \right\} \]
     A basis for Row$(A)$ is given by the two row vectors since they are linearly independent. Thus, dim(Row$(A)$) = 2. \\
     The image of $A^T$ is given by:
-    \[ \text{Im}(A^T) = Span\left\{ \begin{bmatrix}
+    \[ \text{Im}(A^T) = \text{Span}\left\{ \begin{bmatrix}
         1 \\ 4
     \end{bmatrix}, \begin{bmatrix}
         2 \\ 5

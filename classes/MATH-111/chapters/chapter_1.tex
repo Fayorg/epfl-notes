@@ -619,7 +619,7 @@ Let $\vec{v_1}, ..., \vec{v_n}$ be linearly independent vectors and $\vec{w}$ be
 \section{Transformations}
 A matrix $A$ of size $m \times n$ defines a transformation (or function) for each vector $\vec{x} \in \mathbb{R}^n$ to a vector $A \cdot \vec{x} \in \mathbb{R}^m$.
 
-\begin{definition}[transformation]
+\begin{definition}[Transformation]
     A transformation $T$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ is a rule that assigns to each vector $\vec{x} \in \mathbb{R}^n$ a vector $T(\vec{x}) \in \mathbb{R}^m$. We can define it as:
     \[
         T: \mathbb{R}^n \to \mathbb{R}^m, \quad \vec{x} \mapsto T(\vec{x})
@@ -627,16 +627,16 @@ A matrix $A$ of size $m \times n$ defines a transformation (or function) for eac
 \end{definition}
 For $x$ in $\mathbb{R}^n$, $T(\vec{x})$ is called the image of $\vec{x}$ under the transformation $T$. The set of all images of vectors in $\mathbb{R}^n$ is called the range of $T$.
 
-\subsection{Matrix transformations}
-\begin{definition}[Matrix transformation]
+\subsection{Matrix Transformations}
+\begin{definition}[Matrix Transformation]
     A matrix transformation is a transformation $T$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ such that there exists a matrix $A$ of size $m \times n$ such that for every vector $\vec{x} \in \mathbb{R}^n$, $T(\vec{x}) = A \cdot \vec{x}$.
 \end{definition}
 
 \begin{eg}
     Let $A = \begin{bmatrix}
-        1 \\ -3
-        3 \\ 5
-        -1 \\ 7
+        1 & -3 \\
+        3 & 5 \\
+        -1 & 7
     \end{bmatrix}, T: \mathbb{R}^2 \to \mathbb{R}^3$ be the matrix transformation defined by $T$. Then:
     \[
         T(\vec{x}) = A \cdot \vec{x} = \begin{bmatrix}
@@ -764,10 +764,10 @@ For $x$ in $\mathbb{R}^n$, $T(\vec{x})$ is called the image of $\vec{x}$ under t
     \end{center}
 \end{eg}
 
-\subsection{Linear transformations}
+\subsection{Linear Transformations}
 % A matrix transformation follows the same rules as matrix multiplication, thus it preserves vector addition and scalar multiplication. It will be proven later that the converse is also true: any transformation that preserves vector addition and scalar multiplication can be represented by a matrix transformation.
-\begin{definition}[Linear transformation]
-    A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be linear if for all vectors $\vec{u}, \vec{v} \in \mathbb{R}^n$ and all scalars $c \in \mathbb{R}$, the following properties hold:
+\begin{definition}[Linear Transformation]
+    A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be linear if for all vectors $\vec{u}, \vec{v} \in \mathbb{R}^n$ and a scalar $c \in \mathbb{R}$, the following properties hold:
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item Additivity: $T(\vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v})$
         \item Homogeneity: $T(c \vec{u}) = c T(\vec{u})$
@@ -869,7 +869,7 @@ Two properties can be deduced from the two above:
 \end{eg}
 % For all linear transformations $T: \mathbb{R}^n \to \mathbb{R}^m$, there exists a matrix $A$ of size $m \times n$ such that $T(\vec{x}) = A \cdot \vec{x}$ for all $\vec{x} \in \mathbb{R}^n$. The columns of $A$ are the images of the columns of the identity matrix $I_n$ under the transformation $T$.
 
-\subsection{Matrix representation of linear transformations}
+\subsection{Matrix Representation of Linear Transformations}
 \begin{theorem}
     Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation. Then there exists a unique matrix $A$ of size $m \times n$ such that for every vector $\vec{x} \in \mathbb{R}^n$, $T(\vec{x}) = A \cdot \vec{x}$. Where $A$ is given by:
     \[
@@ -933,7 +933,7 @@ Two properties can be deduced from the two above:
     \]
 \end{eg}
 
-\section{Type of transformations}
+\section{Type of Transformations}
 For all the examples below, the starting graph would be a unit square defined by the vectors $\vec{u} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ in $\mathbb{R}^2$.
 \begin{center}
     \begin{tikzpicture}[scale=2.5]
@@ -950,8 +950,8 @@ For all the examples below, the starting graph would be a unit square defined by
     \end{tikzpicture}
 \end{center}
 
-\subsection{Scaling transformations}
-\begin{definition}[Scaling transformation]
+\subsection{Scaling Transformations}
+\begin{definition}[Scaling Transformation]
     A scaling transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^n$ defined by $T(\vec{x}) = r \cdot \vec{x}$ for some scalar $r \in \mathbb{R}$.
     \begin{itemize}[itemsep=1pt,label=$\circ$]
         \item If $r = 1$, it is called the identity transformation;
@@ -993,8 +993,8 @@ For all the examples below, the starting graph would be a unit square defined by
     and the graph would be contracted or expanded in the $x_2$ direction.
 \end{eg}
 
-\subsection{Reflection transformations}
-\begin{definition}[Reflection transformation]
+\subsection{Reflection Transformations}
+\begin{definition}[Reflection Transformation]
     A reflection transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^n$ defined by $T(\vec{x}) = -\vec{x}$ in the case of reflection across the origin. Its associated matrix is $A = -I_n$, where $I_n$ is the identity matrix of size $n$.
 \end{definition}
 
@@ -1039,8 +1039,8 @@ For all the examples below, the starting graph would be a unit square defined by
     Reflection can be done across any line through the origin in $\mathbb{R}^2$ or any plane through the origin in $\mathbb{R}^3$, but the associated matrices would be more complex.
 \end{eg}
 
-\subsection{Transversion transformations}
-\begin{definition}[Transversion transformation]
+\subsection{Transversion Transformations}
+\begin{definition}[Transversion Transformation]
     A transvection keeps all points on a certain line (the “axis” of the transvection) fixed, and “slides” everything else parallel to that line. It's associated matrix in the case of $\mathbb{R}^2$ is of the form:
     \[
         A = \begin{bmatrix}
@@ -1087,8 +1087,8 @@ For all the examples below, the starting graph would be a unit square defined by
     and the graph would be sheared vertically.
 \end{eg}
 
-\subsection{Projection transformations}
-\begin{definition}[Projection transformation]
+\subsection{Projection Transformations}
+\begin{definition}[Projection Transformation]
     A projection transformation is a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ defined by projecting every vector in $\mathbb{R}^n$ onto a subspace of $\mathbb{R}^m$.
 \end{definition}
 \begin{eg}
@@ -1121,12 +1121,12 @@ For all the examples below, the starting graph would be a unit square defined by
     and the graph would be projected onto the $x_2$ axis.
 \end{eg}
 
-\section{Injectivity, surjectivity and bijectivity}
-\begin{definition}[Injective transformation]
+\section{Injectivity, Surjectivity and Bijectivity}
+\begin{definition}[Injective Transformation]
     A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be injective (or one-to-one) if for every vector $\vec{y} \in \mathbb{R}^m$, there is at most one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$.
 \end{definition}
 
-\begin{definition}[Surjective transformation]
+\begin{definition}[Surjective Transformation]
     A transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ is said to be surjective (or onto) if for every vector $\vec{y} \in \mathbb{R}^m$, there is at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$.
 \end{definition}
 
@@ -1155,14 +1155,8 @@ For all the examples below, the starting graph would be a unit square defined by
 \end{theorem}
 \begin{proof}
     Let $T: \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation and $A$ be its associated matrix. We have $T(\vec{x}) = A \cdot \vec{x}$ for all $\vec{x} \in \mathbb{R}^n$. \\ \\
-    $\circ$ In the case of injectivity: \\
     ($\Rightarrow$) Suppose $T$ is injective. By the previous theorem, the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. This means that the null space of $A$ contains only the zero vector, which implies that the columns of $A$ are linearly independent. Therefore, $A$ has a pivot in every column. \\
     ($\Leftarrow$) Suppose the columns of $A$ are linearly independent (i.e., $A$ has a pivot in every column). This means that the null space of $A$ contains only the zero vector, which implies that the equation $T(\vec{x}) = \vec{0}$ has only the trivial solution $\vec{x} = \vec{0}$. By the previous theorem, this means that $T$ is injective. \\ \\
-    $\circ$ In the case of surjectivity: \\
     ($\Rightarrow$) Suppose $T$ is surjective. This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. This implies that the range of $A$ is $\mathbb{R}^m$, which means that the columns of $A$ span $\mathbb{R}^m$. Therefore, $A$ has a pivot in every row. \\
     ($\Leftarrow$) Suppose the columns of $A$ span $\mathbb{R}^m$ (i.e., $A$ has a pivot in every row). This means that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $A \cdot \vec{x} = \vec{y}$. This implies that for every vector $\vec{y} \in \mathbb{R}^m$, there exists at least one vector $\vec{x} \in \mathbb{R}^n$ such that $T(\vec{x}) = \vec{y}$. Therefore, $T$ is surjective.
 \end{proof}
-
-% \section{Exercises}
-% This section gathers a selection of exercises related to Chapter \thechapter, taken from weekly assignments, past exams, textbooks, and other sources. The origin of each exercise will be indicated at its beginning.
-% % maybe exercise at the end of w3c1 classe
