@@ -7,11 +7,20 @@ They are also available on my portfolio, in a nicely formatted and automatically
 
 ## Contents
 
--   **MATH-101: Analysis I**  
-    PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101-dark.pdf)) • [TEX](/classes/MATH-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14840)
+- **MATH-101: Analysis I**  
+  PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-101-dark.pdf)) • [TEX](/classes/MATH-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=14840)
 
--   **MATH-111: Linear Algebra I**  
-    PDF ([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-111.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-111-dark.pdf)) • [TEX](/classes/MATH-111/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=18502)
+- **MATH-111: Linear Algebra I**  
+  PDF ([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-111.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-111-dark.pdf)) • [TEX](/classes/MATH-111/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=18502)
 
--   **CS-101: Advanced Information, Computation and Communication I**  
-    PDF ([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-101.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-101-dark.pdf)) • [TEX](/classes/CS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15272)
+- **CS-101: Advanced Information, Computation and Communication I**  
+  PDF ([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-101.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-101-dark.pdf)) • [TEX](/classes/CS-101/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15272)
+
+- **MATH-106: Analysis II**  
+  PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-106.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/MATH-106-dark.pdf)) • [TEX](/classes/MATH-106/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15027)
+
+- **CS-173: Fundamentals of Digital Systems**  
+  PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-173.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/CS-173-dark.pdf)) • [TEX](/classes/CS-173/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=18418)
+
+- **COM-102: Advanced Information, Computation and Communication II**  
+  PDF([Bright](https://eliebaier.fra1.digitaloceanspaces.com/notes/COM-102.pdf)/[Dark](https://eliebaier.fra1.digitaloceanspaces.com/notes/COM-102-dark.pdf)) • [TEX](/classes/COM-102/main.tex) • [EPFL](https://moodle.epfl.ch/course/view.php?id=15838)
