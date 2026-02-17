@@ -1,0 +1,211 @@
+\chapter{Differential Equations}
+
+\section{Ordinary Differential Equations}
+\subsection{Definitions and Examples}
+\begin{definition}[Ordinary Differential Equation]
+    An ordinary differential equation (ODE) is an equation that relates a function \( y(t) \) of a single variable \( t \) to its derivatives. The general form of an ODE can be expressed as:
+    \[
+    F\left(t, y(t), y'(t), y''(t), \ldots, y^{(n)}(t)\right) = 0,
+    \]
+    where \( F \) is a given function and \( n \in \mathbb{N}_+ \) is the order of the ODE.
+\end{definition}
+
+\begin{definition}[Solution of an ODE]
+    A solution of the differential equation is a function $y: I \to \mathbb{R}$ of class $C^n$ defined on a open interval $I \subset \mathbb{R}$ such that when substituted into the ODE, it satisfies the equation for all $t \in I$.
+\end{definition}
+
+\begin{definition}[General Solution]
+    The general solution of an ODE is a family of solutions that contains all possible solutions of the ODE. It typically includes arbitrary constants that can be adjusted to fit specific initial conditions or boundary conditions.
+\end{definition}
+
+\begin{eg}
+    Let $y = y(x)$, $x \in \mathbb{R}$ such that $y' = 0$ for all $x \in \mathbb{R}$. Then $y$ is a constant function, i.e., $y(x) = C$ for some constant $C \in \mathbb{R}$. This is the general solution of the ODE $y' = 0$. A particular solution can be obtained by specifying an initial condition, for example, if we set $y(0) = 5$, then the particular solution is $y(x) = 5$ for all $x \in \mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+    Let $y'' = 3$ be the ODE. Integrating once, we get $y' = 3x + C_1$ for some constant $C_1 \in \mathbb{R}$. Integrating again, we obtain $y = \frac{3}{2}x^2 + C_1 x + C_2$ for some constant $C_2 \in \mathbb{R}$. Thus, the general solution of the ODE $y'' = 3$ is given by:
+    \[
+        y(x) = \frac{3}{2}x^2 + C_1 x + C_2,
+    \]
+    where $C_1$ and $C_2$ are arbitrary constants. A particular solution can be found by specifying initial conditions, for example, if we set $y(0) = 2$ and $y'(0) = 1$, we can determine the constants $C_1$ and $C_2$ to find the specific solution that satisfies these conditions.
+\end{eg}
+
+\begin{eg}
+    Let $y + y' = 0$ be the ODE. We can rearrange this equation to get $y' = -y$. We easily verify that the function $y(x) = Ce^{-x}$, where $C$ is an arbitrary constant, is a solution to this ODE on $\mathbb{R}$. Indeed, we have:
+    \[
+        y'(x) = -Ce^{-x} = -y(x),
+    \]
+    which satisfies the ODE. Thus, the general solution of the ODE $y + y' = 0$ is given by:
+    \[
+        y(x) = Ce^{-x},
+    \]
+    where $C$ is an arbitrary constant.
+\end{eg}
+
+\subsection{Terminology and Notation}
+Let $E(x, y, \ldots, y^{(n)}) = 0$ be a differential equation.
+
+\begin{definition}[Order of a Differential Equation]
+    The order of a differential equation is the highest order of the derivative that appears in the equation.
+\end{definition}
+In the given equation, if $y^{(n)}$ is the highest derivative present, then the order of the differential equation is $n$.
+
+\begin{definition}[Linear Differential Equation]
+    A differential equation is said to be linear if it can be expressed in the form:
+    \[
+    a_n(x) y^{(n)} + a_{n-1}(x) y^{(n-1)} + \ldots + a_1(x) y' + a_0(x) y = g(x),
+    \]
+    where $a_n(x), a_{n-1}(x), \ldots, a_0(x)$ and $g(x)$ are given functions of $x$ that are continuous.
+\end{definition}
+
+\begin{definition}[Autonomous Differential Equation]
+    A differential equation is called autonomous if it does not explicitly depend on the independent variable.
+\end{definition}
+
+\begin{eg}
+    Let's classify the following differential equations:
+    \begin{citemize}
+        \item $(2 \sin x) y + x^2 y' = \cos x$ is a first-order linear non-autonomous ODE.
+        \item $y^2 - y'' + y = 0$ is a second-order nonlinear autonomous ODE.
+        \item $y''' + 3x^2y = e^x$ is a third-order linear non-autonomous ODE.
+        \item $2xy = \sin y + y'$ is a first-order nonlinear non-autonomous ODE.
+    \end{citemize}
+\end{eg}
+
+\section{Separable Differential Equations}
+\begin{definition}[Separable Differential Equation]
+    A first-order ordinary differential equation is called separable if it can be expressed in the form:
+    \[
+        f(y) y' = g(x)
+    \]
+    where $f: I \to \mathbb{R}$ and $g: J \to \mathbb{R}$ are continuous functions defined on intervals $I$ and $J$ respectively.
+\end{definition}
+Note that a solution $y$ of a separable differential equation is a function $y: J' \subset J \to I$ of class $C^1$.
+
+\begin{eg}
+    Let's come back to the previous equations $y' = -y$. This is a separable ODE since we can rewrite it as:
+    \[
+        \underbrace{-\frac{1}{y}}_{f(y)}y' = \underbrace{1}_{g(x)} \Implies \frac{1}{y} \frac{dy}{dx} = -1 
+    \]
+    We then can integrate both side to find the general solution:
+    \[
+        \int \frac{1}{y} dy = \int -1 dx \Implies \ln |y| + C_1 = -x + C_2 \Implies |y| = e^{-x + C} = \underbrace{e^C}_{= C_3 > 0} e^{-x},
+    \]
+    where $C = C_2 - C_1$ is an arbitrary constant. Thus:
+    \[
+        y = \underbrace{\pm C_3}_{\neq 0} e^{-x}
+    \]
+    but we found in the previous example that $y = 0$ is also a solution of the ODE. Therefore, the general solution of the ODE $y' = -y$ is given by:
+    \[
+        y(x) = Ce^{-x},
+    \]
+    where $C$ is an arbitrary constant that can take any real value, including zero.
+\end{eg}
+
+\section{Cauchy's Problem}
+\begin{definition}[Cauchy's Problem]
+    Cauchy's problem, also known as the initial value problem, is a type of problem in the theory of ordinary differential equations. It consists of finding a solution to a given ordinary differential equation that satisfies specified initial conditions. Formally, given an ODE of the form:
+    \[
+        F\left(t, y(t), y'(t), y''(t), \ldots, y^{(n)}(t)\right) = 0,
+    \]
+    and initial conditions:
+    \[
+        y(t_0) = y_0, \quad y'(t_0) = y_1, \quad \ldots, \quad y^{(n-1)}(t_0) = y_{n-1},
+    \]
+    where \( t_0 \) is the initial time and \( y_0, y_1, \ldots, y_{n-1} \) are given constants, the goal is to find a function \( y(t) \) and it's interval of definition that satisfies both the ODE and the initial conditions.
+\end{definition}
+
+\begin{definition}[Maximal Solution]
+    A solution of an ODE is called maximal if there is no other bigger interval on which the function can be defined as a solution of the ODE.
+\end{definition}
+
+\begin{eg}
+    Let's solve $y'' = 0$ with $y(0) = 1$ and $y'(0) = 2$. Integrating once, we get $y' = C_1$ for some constant $C_1 \in \mathbb{R}$. Integrating again, we obtain $y = C_1 x + C_2$ for some constant $C_2 \in \mathbb{R}$. Applying the initial conditions, we have:
+    \[
+        y(0) = C_2 = 1,
+    \]
+    and
+    \[
+        y'(0) = C_1 = 2.
+    \]
+    Thus, the particular solution that satisfies the initial conditions is given by:
+    \[
+        y(x) = 2x + 1.
+    \]
+    for all $x \in \mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+    Let's solve $y'' = 0$ with $y(0) = 3$ and $y(4) = 1$. Integrating once, we get $y' = C_1$ for some constant $C_1 \in \mathbb{R}$. Integrating again, we obtain $y = C_1 x + C_2$ for some constant $C_2 \in \mathbb{R}$. Applying the initial conditions, we have:
+    \[
+        y(0) = C_2 = 3,
+    \]
+    and
+    \[
+        y(4) = 4C_1 + C_2 = 1 \Implies C_1 = -\frac{1}{2}.
+    \]
+    Thus, the particular solution that satisfies the initial conditions is given by:
+    \[
+        y(x) = -\frac{1}{2}x + 3,
+    \]
+    for all $x \in \mathbb{R}$.
+\end{eg}
+
+\begin{theorem}[Existence and Uniqueness Theorem for Separable ODEs]
+    Let $f: I \to \mathbb{R}$ be a continuous function such that $f(y) \neq 0$ for all $y \in I$ and $g: J \to \mathbb{R}$ continuous. The for any couple $(x_0 \in J, b_0 \in I)$ the equation:
+    \[
+        f(y) y' = g(x)
+    \]
+    has a solution $y: J' \subset J \to I$ verifying the initial condition $y(x_0) = b_0$. Moreover, if $y_1$ and $y_2$ are two solutions verifying the same initial condition, then $y_1 = y_2$ on the intersection of their domains.
+\end{theorem}
+
+\begin{eg}
+    Let's solve $x^2y' = e^y$ with $y(-2) = 0$. We can rewrite the equation as:
+    \[
+        \underbrace{e^{-y}}_{f(y)} y' = \underbrace{\frac{1}{x^2}}_{g(x)} \Implies e^{-y} \frac{dy}{dx} = \frac{1}{x^2}
+    \]
+    we have that $f(y)$ is not equal to $0$ for all $y \in \mathbb{R}$ and $g(x)$ is continuous on $\mathbb{R} \setminus \{0\}$. We can then integrate both sides to find the solution:
+    \[
+        \int e^{-y} dy = \int \frac{1}{x^2} dx \Implies -e^{-y} = -\frac{1}{x} + C \Implies -y = \ln\left(\frac{1}{x} - C\right)
+    \]
+    Thus:
+    \[
+        y(x) = -\ln\left(\frac{1}{x} - C\right)
+    \]
+    For this solution to exist, we need $\frac{1}{x} - C > 0$, which implies $C < \frac{1}{x}$. Let's find the intervals on which the solution is defined. We have three cases:
+    \begin{citemize}
+        \item If $C > 0$, then:
+        \[
+            \frac{1}{x} > C \Implies x > 0 \Implies x < \frac{1}{C} \quad \text{and} \quad x > 0 \Implies x \in \left(0, \frac{1}{C}\right)
+        \]
+        \item If $C = 0$, then:
+        \[
+            \frac{1}{x} > 0 \Implies x > 0 \Implies x \in (0, \infty)
+        \]
+        \item If $C < 0$, then:
+        \[
+            \frac{1}{x} \cdot \frac{1}{C} < 1 \Implies \begin{cases*}
+                x > 0 \Implies x > \frac{1}{C} \Implies x \in (0, \infty) \\
+                x < 0 \Implies x < \frac{1}{C} \Implies x \in \left(-\infty, \frac{1}{C}\right)
+            \end{cases*}
+        \]
+    \end{citemize}
+    Thus the general solution of the ODE $x^2y' = e^y$ is given by:
+    \[
+        \begin{cases}
+            y = -\ln(\frac{1}{x}) = \ln x, & x \in (0, \infty) \\
+            y = -\ln(\frac{1}{x} - C), & x \in \left(0, \frac{1}{C}\right), C > 0 \\
+            y = -\ln(\frac{1}{x} - C), & x \in (0, \infty), C < 0 \\
+            y = -\ln(\frac{1}{x} - C), & x \in \left(-\infty, \frac{1}{C}\right), C < 0
+        \end{cases}
+    \]
+    Applying the initial condition $y(-2) = 0$, we have:
+    \[
+        0 = -\ln\left(\frac{1}{-2} - C\right) \Implies \frac{1}{-2} - C = 1 \Implies C = -\frac{3}{2}.
+    \]
+    Thus, the particular solution that satisfies the initial condition is given by:
+    \[
+        y(x) = -\ln\left(\frac{1}{x} + \frac{3}{2}\right),
+    \]
+    which is defined on the interval $\left(-\infty, -\frac{2}{3}\right)$.
+\end{eg}
