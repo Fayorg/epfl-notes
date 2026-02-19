@@ -1,0 +1,69 @@
+\begin{exercise}[Course 2, Quizz]
+    The differential equation $2yy' = 4x^3$ with the initial condition $y(0) = 0$ has:
+    \begin{citemize}
+        \item No solution on $\mathbb{R}$.
+        \item A unique solution on $\mathbb{R}$.
+        \item Two distinct solutions on $\mathbb{R}$.
+        \item Four distinct solutions on $\mathbb{R}$.
+    \end{citemize}
+
+    \Answer
+    The correct answer is the fourth one, $4$ distinct solutions on $\mathbb{R}$. Let's solve the equation. We can rewrite it as:
+    \[
+        \int 2y \, dy = \int 4x^3 \, dx \Implies y^2 = x^4 + C \Implies y = \pm \sqrt{x^4 + C}
+    \]
+    with $C \in \mathbb{R}$. Now, we need to determine the value of $C$ using the initial condition $y(0) = 0$. We have:
+    \[
+        0 = y(0) = \pm \sqrt{0^4 + C} \Implies C = 0
+    \]
+    Therefore, the solutions to the initial value problem are:
+    \[
+        y(x) = \pm \sqrt{x^4} = \pm x^2
+    \]
+    There are four functions that satisfy the equation and the initial condition:
+    \[
+        y_1(x) = x^2 \quad y_2(x) = -x^2 \quad y_3(x) = \begin{cases}
+            -x^2 & \text{if } x \leq 0 \\
+            x^2 & \text{if } x > 0
+        \end{cases} \quad y_4(x) = \begin{cases}
+            x^2 & \text{if } x \leq 0 \\
+            -x^2 & \text{if } x > 0
+        \end{cases}
+    \]
+    % Graphically:
+    % \begin{center}
+    %     \begin{tikzpicture}[node distance=10mm]
+    %     \node (a) {
+    %         \begin{tikzpicture}
+    %         \begin{axis}[width=6cm,height=6cm]
+    %             \addplot {x^2} node[pos=0.5, pin={\footnotesize $y_1$}] {};
+    %         \end{axis}
+    %         \end{tikzpicture}
+    %     };
+
+    %     \node (b) [right=of a] {
+    %         \begin{tikzpicture}
+    %         \begin{axis}[width=6cm,height=6cm]
+    %             \addplot {-x^2} node[pos=0.5, pin={\footnotesize $y_2$}] {};
+    %         \end{axis}
+    %         \end{tikzpicture}
+    %     };
+
+    %     \node (c) [below=of a] {
+    %         \begin{tikzpicture}
+    %         \begin{axis}[width=6cm,height=6cm]
+    %             \addplot {x^2};
+    %         \end{axis}
+    %         \end{tikzpicture}
+    %     };
+
+    %     \node (d) [right=of c] {
+    %         \begin{tikzpicture}
+    %         \begin{axis}[width=6cm,height=6cm]
+    %             \addplot {cos(deg(x))};
+    %         \end{axis}
+    %         \end{tikzpicture}
+    %     };
+    %     \end{tikzpicture}
+    % \end{center}
+\end{exercise}
