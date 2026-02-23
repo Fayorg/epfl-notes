@@ -402,3 +402,104 @@ To solve a first order linear differential equation of the form $y' + p(x) y = f
     \]
     where $C$ is an arbitrary constant.
 \end{eg}
+
+\begin{eg}
+    Let's find the general solution of the equation:
+    \[
+        y' - \frac{2}{x}y = x^3 + 1
+    \]
+    First, let's find the interval of definition of the functions $p(x) = -\frac{2}{x}$ and $f(x) = x^3 + 1$. Since $p(x) = -\frac{2}{x}$ is undefined at $x = 0$, the interval of definition is either $(-\infty, 0)$ or $(0, \infty)$. Let's compute $P(x)$, a primitive of $p(x)$:
+    \[
+        P(x) = \int -\frac{2}{x} dx = -2 \ln |x| = -\ln \left(x^2\right)
+    \]
+    Thus, the general solution of the associated homogeneous equation $y' - \frac{2}{x} y = 0$ is given by:
+    \[
+        y(x) = Ce^{- (-\ln \left(x^2\right))} = Cx^2
+    \]
+    Let's check that this is indeed a solution of the homogeneous equation:
+    \[
+        y' - \frac{2}{x} y = 2Cx - \frac{2}{x} Cx^2 = 0
+    \]
+    Next, we find a particular solution of the original equation using the method of variation of parameters. We have:
+    \[
+        \int f(x) e^{P(x)} dx = \int (x^3 + 1) e^{-\ln \left(x^2\right)} dx = \int (x^3 + 1) \frac{1}{x^2} dx = \int \left(x + \frac{1}{x^2}\right) dx = \frac{x^2}{2} - \frac{1}{x}
+    \]
+    Thus, a particular solution of the original equation is given by:
+    \[
+        y(x) = \left(\frac{x^2}{2} - \frac{1}{x}\right) e^{\ln \left(x^2\right)} = \frac{1}{2} x^4 - x
+    \]
+    We can verify that this is indeed a solution of the original equation by substituting it back into the equation:
+    \begin{align*}
+        y' - \frac{2}{x} y & = \left(\frac{1}{2} x^4 - x\right)' - \frac{2}{x} \left(\frac{1}{2} x^4 - x\right) \\
+        & = 2x^3 - 1 - \frac{2}{x} \left(\frac{1}{2} x^4 - x\right) \\
+        & = 2x^3 - 1 - \left(x^3 - 2\right) \\
+        & = x^3 + 1
+    \end{align*}
+    Thus, the general solution of the original equation is given by:
+    \[
+        y(x) = \frac{1}{2} x^4 - x + Cx^2
+    \]
+    where $C$ is an arbitrary constant, for all $x \in (-\infty, 0)$ or for all $x \in (0, \infty)$.
+\end{eg}
+Note that if, instead, we were considering the equation $xy' - 2y = x^4 + x$, the general solution would be given by:
+\[
+    y(x) = \begin{cases}
+        C_1 x^2 + \frac{1}{2}x^4 - x, & x \geq 0 \\
+        C_2 x^2 + \frac{1}{2}x^4 - x, & x < 0 \\
+    \end{cases}
+\]
+for all $x \in \mathbb{R}$, where $C_1$ and $C_2$ are arbitrary constants. This is because the function is defined at $x = 0$ and it's derivative at $x = 0$ is $-1$ for all $C \in \mathbb{R}$. Thus, we can choose any value of $C$ for the solution defined on the interval $(-\infty, 0)$ and any value of $C$ for the solution defined on the interval $(0, \infty)$.
+
+\begin{eg}
+    Let's solve the equation:
+    \[
+        y' - (\tan x)y = \cos x
+    \]
+    with the initial condition $y(0) = 3$. First, let's find the interval of definition of the functions $p(x) = -\tan x$ and $f(x) = \cos x$. Since $\tan x$ is undefined at $x = (2k + 1) \frac{\pi}{2}$ for all $k \in \mathbb{Z}$, we take the interval of definition that contains $0$, which is $I = \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$. Let's compute $P(x)$, a primitive of $p(x)$:
+    \[
+        P(x) = \int -\tan x dx = \ln |\cos x| = \ln (\cos x)
+    \]
+    Thus, the general solution of the associated homogeneous equation $y' - (\tan x) y = 0$ is given by:
+    \[
+        y(x) = Ce^{-\ln (\cos x)} = \frac{C}{\cos x}
+    \]
+    Let's check that this is indeed a solution of the homogeneous equation:
+    \[
+        y' - (\tan x) y = \frac{C \sin x}{\cos^2 x} - \frac{C \sin x}{\cos^2 x} = 0
+    \]
+    Next, we find a particular solution of the original equation using the method of variation of parameters. We have:
+    \[
+        \int f(x) e^{P(x)} dx = \int \cos x e^{\ln (\cos x)} dx = \int \cos^2 x dx
+    \]
+    We can rewrite the integrand as:
+    \[
+        \cos^2 x = \frac{1 + \cos (2x)}{2}
+    \]
+    Thus, we have:
+    \[
+        \int \cos^2 x dx = \int \frac{1 + \cos (2x)}{2} dx = \frac{x}{2} + \frac{\sin (2x)}{4}
+    \]
+    Thus, a particular solution of the original equation is given by:
+    \[
+        y(x) = \left(\frac{x}{2} + \frac{\sin (2x)}{4}\right) e^{-\ln (\cos x)} = \left(\frac{x}{2} + \frac{\sin (2x)}{4}\right) \frac{1}{\cos x} = \frac{x}{2 \cos x} + \frac{\sin x}{2}
+    \]
+    We can verify that this is indeed a solution of the original equation by substituting it back into the equation:
+    \begin{align*}
+        y' - (\tan x) y & = \left(\frac{x}{2 \cos x} + \frac{\sin x}{2}\right)' - (\tan x) \left(\frac{x}{2 \cos x} + \frac{\sin x}{2}\right) \\
+        & = \ldots \\
+        & = \cos x
+    \end{align*}
+    Thus, the general solution of the original equation is given by:
+    \[
+        y(x) = \frac{x}{2 \cos x} + \frac{\sin x}{2} + \frac{C}{\cos x}
+    \]
+    where $C$ is an arbitrary constant, for all $x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$. Applying the initial condition $y(0) = 3$, we have:
+    \[
+        3 = \frac{0}{2 \cdot 1} + \frac{0}{2} + \frac{C}{1} \Implies C = 3
+    \]
+    Thus, the particular solution that satisfies the initial condition is given by:
+    \[
+        y(x) = \frac{x}{2 \cos x} + \frac{\sin x}{2} + \frac{3}{\cos x}
+    \]
+    for all $x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$.
+\end{eg}
