@@ -503,3 +503,195 @@ for all $x \in \mathbb{R}$, where $C_1$ and $C_2$ are arbitrary constants. This 
     \]
     for all $x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$.
 \end{eg}
+
+\section{Linear Differential Equations of Second Order}
+\begin{definition}[Linear Differential Equation of Second Order]
+    Let $I \subset \mathbb{R}$ be an open interval. A linear differential equation of second order is an equation of the form:
+    \[
+        y'' + p(x) y' + q(x) y = f(x)
+    \]
+    where $p, q, f: I \to \mathbb{R}$ are continuous functions defined on $I$.
+\end{definition}
+Note that again, if $f(x) = 0$ for all $x \in I$, (i.e. the equation is $y'' + p(x) y' + q(x) y = 0$) then the equation is called homogeneous, otherwise it is called non-homogeneous.
+
+\begin{eg}
+    Let's solve the equation:
+    \[
+        y'' = 5
+    \]
+    Integrating once, we get $y' = 5x + C_1$ for some constant $C_1 \in \mathbb{R}$. Integrating again, we obtain $y = \frac{5}{2} x^2 + C_1 x + C_2$ for some constant $C_2 \in \mathbb{R}$. Thus, the general solution of the equation is given by:
+    \[
+        y(x) = \frac{5}{2} x^2 + C_1 x + C_2
+    \]
+    for all $x \in \mathbb{R}$, where $C_1$ and $C_2$ are arbitrary constants.
+\end{eg}
+
+\subsection{Equation with Constant Coefficients}
+\begin{definition}[Linear Differential Equation of Second Order with Constant Coefficients]
+    A linear differential equation of second order with constant coefficients is an equation of the form:
+    \[
+        y'' + py' + qy = 0
+    \]
+    where $p, q \in \mathbb{R}$ are constants.
+\end{definition}
+
+\begin{definition}[Characteristic Polynomial]
+    The characteristic polynomial of the linear differential equation of second order with constant coefficients $y'' + py' + qy = 0$ is the polynomial:
+    \[
+        P(\lambda) = \lambda^2 + p\lambda + q = 0
+    \]
+\end{definition}
+Thus to solve a linear differential equation of second order with constant coefficients, we need to find the roots of the characteristic polynomial:
+\[
+    (\lambda - a) (\lambda - b) = \lambda^2 - (a + b) \lambda + ab = 0
+\]
+where $a,b \in \mathbb{C}$. Thus the equation can be rewritten as:
+\[
+    y''(x) - (a + b)y'(x) + aby(x) = 0 \Implies \underbrace{(y'(x) - ay(x))'}_{z'(x)} - b\underbrace{(y'(x)-ay(x))}_{z(x)} = 0
+\]
+Thus, we have $z'(x) - bz(x) = 0$, which is a first order linear differential equation whose general solution is given by $z(x) = C e^{bx}$ for some constant $C \in \mathbb{R}$. Thus, we have:
+\[
+    y'(x) - ay(x) = C e^{bx} \Implies y'(x) - ay(x) = C e^{bx}
+\]
+which is a first order linear differential equation. We can solve it using the method of variation of parameters. We have:
+\[
+    P(x) = \int -a dx = -ax
+\]
+Thus, the general solution of the associated homogeneous equation $y' - ay = 0$ is given by:
+\[
+    y(x) = C_1e^{-P(x)} = C_1e^{ax}
+\]
+Next, we find a particular solution of the original equation using the method of variation of parameters. We have:
+\[
+    c(x) = \int f(x) e^{P(x)} dx = \int C e^{bx} e^{-ax} dx = \int C e^{(b - a)x} dx = \begin{cases}
+    \frac{C}{b - a} e^{(b - a)x}, & a \neq b \\
+    Cx, & a = b
+    \end{cases}
+\]
+Thus, a particular solution of the original equation is given by:
+\[
+    y(x) = c(x) e^{-P(x)} = \begin{cases}
+    \frac{C}{b - a} e^{bx} = K e^{bx}, & a \neq b \\
+    Cx e^{ax}, & a = b
+    \end{cases}
+\]
+where $K = \frac{C}{b - a}$ is an arbitrary constant. Thus, the general solution of the original equation is given by:
+\[
+    y(x) = \begin{cases}
+    C_1 e^{ax} + K e^{bx}, & a \neq b \\
+    C_1 e^{ax} + C x e^{ax}, & a = b
+    \end{cases}
+\]
+where $C$ and $C_1$ are arbitrary constants. Note that if $a,b \notin \mathbb{R}$, then $b = \overline{a}$ since $p,q \in \mathbb{R}$. Let $a = \alpha + i\beta$ where $\beta \neq 0$, then we have:
+\[
+    y(x) = Ce^{ax} + \overline{C} e^{\overline{a}x}
+\]
+where $C = \frac{1}{2}(C_2 - i C_3)$, we get:
+\[
+    y(x) = \frac{1}{2} (C_2 - i C_3) e^{\alpha x} e^{i \beta x} + \frac{1}{2} (C_2 + i C_3) e^{\alpha x} e^{-i \beta x} = e^{\alpha x} \left(C_2 \cos (\beta x) + C_3 \sin (\beta x)\right)
+\]
+where $C_2$ and $C_3$ are arbitrary constants. Thus, the general solution of the original equation is given by:
+\[
+    y(x) = \begin{cases}
+    C_1 e^{ax} + K e^{bx}, & a \neq b, a,b \in \mathbb{R} \\
+    C_1 e^{ax} + C x e^{ax}, & a = b, a,b \in \mathbb{R} \\
+    e^{\alpha x} \left(C_2 \cos (\beta x) + C_3 \sin (\beta x)\right), & a,b = \alpha \pm i \beta \notin \mathbb{R}
+    \end{cases}
+\]
+where $C, C_1, C_2$ and $C_3$ are arbitrary constants.
+
+\begin{eg}
+    Let's find the general solution of the equation:
+    \[
+        y'' + 9y = 0
+    \]
+    The characteristic polynomial of this equation is given by:
+    \[
+        P(\lambda) = \lambda^2 + 9 = 0
+    \]
+    which has the roots $3i$ and $-3i$. Thus, the general solution of the equation is given by:
+    \[
+        y(x) = e^{0 \cdot x} \left(C_1 \cos (3x) + C_2 \sin (3x)\right) = C_1 \cos (3x) + C_2 \sin (3x)
+    \]
+    where $C_1$ and $C_2$ are arbitrary constants, for all $x \in \mathbb{R}$. To verify that this is indeed a solution of the equation, we can substitute it back into the equation:
+    \begin{align*}
+        y'' + 9y & = -9C_1 \cos (3x) - 9C_2 \sin (3x) + 9C_1 \cos (3x) + 9C_2 \sin (3x) \\
+        & = 0
+    \end{align*}
+\end{eg}
+
+\begin{eg}
+    Let's solve the equation:
+    \[
+        y'' - 6y' + 9y = 0
+    \]
+    The characteristic polynomial of this equation is given by:
+    \[
+        P(\lambda) = \lambda^2 - 6\lambda + 9 = 0
+    \]
+    which has the root $3$ with multiplicity $2$. Thus, the general solution of the equation is given by:
+    \[
+        y(x) = C_1 e^{3x} + C_2 x e^{3x}
+    \]
+    where $C_1$ and $C_2$ are arbitrary constants, for all $x \in \mathbb{R}$.
+\end{eg}
+
+\subsection{General Homogeneous Linear Differential Equations of Second Order}
+Let's consider the general homogeneous linear differential equation of second order:
+\[
+    y'' + p(x) y' + q(x) y = 0
+\]
+where $p, q: I \to \mathbb{R}$ are continuous functions defined on an open interval $I$. \\
+Remark that the principal of superposition still holds for the general homogeneous linear differential equation of second order. Thus, if $y_1$ and $y_2$ are two solutions of the equation, then for all $C_1, C_2 \in \mathbb{R}$, the function $y = C_1 y_1 + C_2 y_2$ is also a solution of the equation.
+\begin{theorem}
+    A linear differential equation of the second order has a unique solution $y(x)$ of class $C^2$ that satisfies the initial conditions $y(x_0) = y_0$ and $y'(x_0) = y_1$ for all $x_0 \in I$ and for all $y_0, y_1 \in \mathbb{R}$.
+\end{theorem}
+By the theorem, we have the the vector space of solutions of the equation is of dimension $2$. There is no known formula to find the general solution of the equation, but if we have one solution $v_1(x) \neq 0$ of the equation, we can find a second solution $v_2$ that is linearly independent of $v_1$ using the following formula:
+\[
+    v_2(x) = c(x) v_1(x)
+\]
+such that $c(x)$ is not a constant function. We have:
+\begin{align*}
+    v_2' & = c'(x) v_1 + c(x) v_1' \\
+    v_2'' & = c''(x) v_1 + 2 c'(x) v_1' + c(x) v_1''
+\end{align*}
+Substituting $v_2$ into the equation, we get:
+\[
+    c''(x) v_1(x) + 2c'(x) v_1'(x) + p(x) c'(x) v_1(x) = 0
+\]
+Let's suppose that $v_1(x) \neq 0$ for all $x \in I$ and that $c'(x) \neq 0$ for all $x \in I$, then we have:
+\[
+    \frac{c''(x)}{c'(x)} = -p(x)-2\frac{v_1'(x)}{v_1(x)}
+\]
+Integrating both sides, we get:
+\[
+    \ln |c'(x)| = -\int p(x) dx - 2\int \frac{v_1'(x)}{v_1(x)} dx = \ln (e^{-P(x)}) - 2 \ln |v_1(x)| + \ln K = \ln \left(\frac{Ke^{-P(x)}}{v_1^2(x)}\right)
+\]
+where $P$ is a primitive of $p$ and $K$ is an arbitrary constant. Thus, we have:
+\[
+    c'(x) = \pm \frac{Ke^{-P(x)}}{v_1^2(x)} = \frac{K_2e^{-P(x)}}{v_1^2(x)} \Implies c(x) =\int K_2 \frac{e^{-P(x)}}{v_1^2(x)} dx + K_3
+\]
+where $K_2$ and $K_3$ are arbitrary constants. Thus, a second solution of the equation that is linearly independent of $v_1$ is given by:
+\[
+    v_2(x) = c(x) v_1(x) = v_1(x) \int\frac{e^{-P(x)}}{v_1^2(x)} dx
+\]
+where $K_3 = 0$ and $K_2 = 1$.
+
+\begin{eg}
+    Let's find a second solution to the previous equation $y'' - 6y' + 9y = 0$ given that $v_1(x) = e^{3x}$ is a solution of the equation. We have:
+\[    P(x) = \int -6 dx = -6x
+\]
+We have:
+\[
+    c(x) = \int \frac{e^{-P(x)}}{v_1^2(x)} dx = \int \frac{e^{6x}}{e^{6x}} dx = \int 1 dx = x
+\]
+Thus, a second solution of the equation that is linearly independent of $v_1$ is given by:
+\[
+    v_2(x) = c(x) v_1(x) = x e^{3x}
+\]
+and the general solution of the equation is given by:
+\[
+    y(x) = C_1 e^{3x} + C_2 x e^{3x}
+\]
+where $C_1$ and $C_2$ are arbitrary constants, for all $x \in \mathbb{R}$.
+\end{eg}
