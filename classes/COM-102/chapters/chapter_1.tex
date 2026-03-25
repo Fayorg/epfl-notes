@@ -340,3 +340,94 @@ This definition can be generalized to $n$ random variables $X_1, X_2, \dots, X_n
 \[
     P_{X_1, X_2, \dots, X_n}(x_1, x_2, \dots, x_n) = P_{X_1}(x_1)P_{X_2}(x_2) \cdots P_{X_n}(x_n)
 \]
+
+\begin{definition}[Conditional Distribution]
+    Let $X$ and $Y$ be two random variables defined on the same sample space $\Omega$. The conditional distribution of $X$ given $Y = y$ is the probability distribution of $X$ restricted to the event $\{Y = y\}$. Formally, it is defined as:
+    \[
+        P_{X|Y}(x|y) = P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)}
+    \]
+    provided that $P(Y = y) \neq 0$.
+\end{definition}
+Note that if $x$ cannot happen (i.e. $P(X = x) = 0$), then the conditional distribution $P_{X|Y}(x|y)$ is not defined, since we cannot condition on an event that cannot happen.
+
+\begin{eg}
+    Let's show that the expected value of a product of two independent random variables is NOT always the product of the expected values. Consider $X = Y \in \{-1, 1\}$, uniformly distributed. We have:
+    \[
+        \mathbb{E}[XY] = 1 \quad \text{and} \quad \mathbb{E}[X]\mathbb{E}[Y] = 0
+    \]
+    However, if $X$ and $Y$ are independent, then we have:
+    \[
+        \mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]
+    \]
+\end{eg}
+
+\section{Sources and Entropy}
+In the digital world, we communicate by revealing the value of a sequence of variables that we call (information) symbols. For example, the $i$-th symbol might represent:
+\begin{citemize}
+    \item the intensity of the pixel at position $i$ of a black and white image,
+    \item your score in your $i$-th exam,
+    \item the $i$-th letter of a text,
+\end{citemize}
+
+\subsection{Entropy}
+In an article published in 1928 by Hartley (Bell Labs), he wrote that the value of a symbol provides information only if the symbol is a (non-constant) random variable. He the gives a tentative answer to the question, how much information is carried by a symbol such as $S$:
+\begin{citemize}
+    \item Suppose that $S \in \mathcal{A}$ is a symbol that can take $|\mathcal{A}|$ different values.
+    \item The amount of information conveyed by $n$ such symbols should be $n$ times the information conveyed by one symbol.
+    \item There are $|\mathcal{A}|^n$ possible values for the $n$ symbols.
+    \item This suggest that $\log|\mathcal{A}|^n = n \log |\mathcal{A}|$ is the appropriate measure for information, where we are free to choose the base for the logarithm.
+\end{citemize}
+
+\begin{eg}
+    In a village that has $8$ telephones, we can assign a different three-digit binary number, such as $001$, to each phone. \\
+    Hence it takes $3$ bits of information to identify a phone. Mathematically, the phones are represented by a uniformly distributed random variable $S \in \mathcal{A} = \{1,2, \ldots, 8\}$.
+\end{eg}
+
+\begin{eg}
+    The world population in 2024 is estimated to be $8.1$ billion. \\
+    Hence it takes $\log_2(8.1 \cdot 10^9) = 32.9$ bits of information to identify a person. A person is represented by a uniformly distributed random variable $S \in \mathcal{A} = \{1, 2, \ldots, 8.1 \cdot 10^9\}$.
+\end{eg}
+Another example shows that something is not right with Hartley's measure of information:
+
+\begin{eg}
+    Suppose that $S_n = \{\text{sunny}, \text{rainy}\}$ is the weather prognosis for day $n + 1$, revealed on day $n$. Suppose that $S_n = \text{rainy}$ has a probability of $\frac{5}{365}$. \\
+    Hartley's measure assings $\log_2(2) = 1$ bits of information to both, $S_n = \text{sunny}$ and $S_n = \text{rainy}$.
+\end{eg}
+It seems intuitively obvious that the amount of information provided by $S_n = \text{rainy}$ is much higher than that provided by $S_n = \text{sunny}$ since the likelyhood of rain might be very low. In an article that appeared in 1948, Shannon fixes the problem by defining the notion of uncertainty or entropy $H(S)$ associated to a discrete random variable $S$.
+
+\begin{definition}[Entropy]
+    The entropy (or uncertainty) is defined as follows:
+    \[
+        H_b(S) = - \sum_{s \in supp(P_S)} P_S(s) \log_b(P_S(s))
+    \]
+    where $supp(P_S) = \{s: P_S(s) > 0\}$.
+\end{definition}
+The support ($supp$) is to remove the event with a probability of $0$, since $\log$ of $0$ is not defined. Another way to see it more simply is to defined $P_S(s)\log_b(P_S(s)) = 0$ when $P_S(s) = 0$. This convention allows us to simplify the notation to:
+\[
+    H_b(S) = - \sum_{s \in \mathcal{A}} P_S(s) \log_b(P_S(s))
+\]
+Note that typically $b = 2$ and in this case the unit is the bit.
+
+\begin{eg}
+    When $P_S$ is the uniform distribution over the alphabet $\mathcal{A}$, $P_S(s) = \frac{1}{|\mathcal{A}|}$ and we have:
+    \[
+        - \log (P_S(s)) = \log |\mathcal{A}|
+    \]
+    which is constant. In this case, we have:
+    \[
+        H(s) = \mathbb{E}[\log |\mathcal{A}|] = \log |\mathcal{A}|
+    \]
+    which is Hartley's information measure.
+\end{eg}
+Hence Shannon's entropy equals Hartley's measure of information if and only if the random variable has uniform distribution.
+
+\begin{eg}
+    A sequence of $4$ decimal digits representing the number to open Anne's lock can be seen as the output of a source $S \in \mathcal{A} = \{1, 2, \ldots, 9998, 9999\}$. If Anne picks the number at random, then we have:
+    \[
+        P(s) = \frac{1}{10^4} \quad \text{for all $4$-digit numbers}
+    \]
+    Since the distribution is uniform over the alphabet, we have:
+    \[
+        H(S) = \log_2 |\mathcal{A}| = \log_2 10^4 \approx 13.3 \text{ bits}
+    \]
+\end{eg}
