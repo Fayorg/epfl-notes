@@ -369,7 +369,7 @@ In the digital world, we communicate by revealing the value of a sequence of var
     \item the $i$-th letter of a text,
 \end{citemize}
 
-\subsection{Entropy}
+\subsection{Primitive Definitions of Entropy}
 In an article published in 1928 by Hartley (Bell Labs), he wrote that the value of a symbol provides information only if the symbol is a (non-constant) random variable. He the gives a tentative answer to the question, how much information is carried by a symbol such as $S$:
 \begin{citemize}
     \item Suppose that $S \in \mathcal{A}$ is a symbol that can take $|\mathcal{A}|$ different values.
@@ -429,5 +429,141 @@ Hence Shannon's entropy equals Hartley's measure of information if and only if t
     Since the distribution is uniform over the alphabet, we have:
     \[
         H(S) = \log_2 |\mathcal{A}| = \log_2 10^4 \approx 13.3 \text{ bits}
+    \]
+\end{eg}
+
+\begin{definition}[Binary Entropy Function]
+    When $|\mathcal{A}| = 2$, $P_S$ has only two possible values, say $p$ and $(1-p)$. The corresponding entropy is $H(S) = h(p)$ where:
+    \[
+        h(p) = -p \log_2 p - (1-p)\log_2 (1-p)
+    \]
+    $h(p)$ is called the binary entropy function.
+\end{definition}
+Note that:
+\begin{citemize}
+    \item For $p = 0$ and for $p = 1$, $h(p) = 0$.
+    \item For $p = \frac{1}{2}$, $h(p) = 1$.
+    \item For $p \in \{0.000001, 0.99999\}$, $H(S) \approx 0.001$.
+\end{citemize}
+% TODO: maybe add graph (see slide 76)
+
+\begin{eg}
+    Let $S_n$ be, like in the previous example, the weather forecast. The probability of $S_n$ are $p = \frac{5}{365}$ and $(1-p) = \frac{360}{365}$. We have:
+    \[
+        H_2(S_n) = h(\frac{5}{365}) = - \frac{5}{365} \log_2 \frac{5}{365} - \frac{360}{365} \log_2 \frac{360}{365} \approx 0.072 \text{ bits}
+    \]
+\end{eg}
+
+\begin{eg}
+    Taking the previous example, with Anne's lock, the answer to the question "Is $6767$ the lock's number?" can only be $S \in \{\text{YES}, \text{NO}\}$ which is a binary random variable with $P_S(\text{YES}) = \frac{1}{10^4}$. Hence:
+    \[
+        H(S) = h\left(\frac{1}{10^4}\right) \approx 0.001 \text{ bits}
+    \]
+\end{eg}
+This can be also view as, the answer to the question gives us almost no more information since there is still $9999$ possible combinations.
+
+\begin{definition}[Crazy Distribution]
+    The Crazy Distribution is, for a given $a \in \mathcal{A}$:
+    \[
+        P_S (a) = 1 \quad \text{and} \quad P_S(s) = 0 \text{ for all $s \neq a$}
+    \]
+\end{definition}
+Remark that often, we use the crazy distribution or the uniform distribution as edge cases.
+
+\subsection{Entropy Bounds and Information-Theory Inequality}
+
+\begin{theorem}[IT Inequality]
+    For a positive real number $r$, we have:
+    \[
+        \log_b r \leq (r - 1) \log_b(e)
+    \]
+    with equality if and only if $r = 1$.
+\end{theorem}
+\begin{proof}
+    Since:
+    \[
+        \log_b (r) = \ln (r) \log_b(e)
+    \]
+    we can simply show that $\ln(r) \leq (r - 1)$ with equality if $r = 1$. Graphically this is easy to prove since:
+    \begin{citemize}
+        \item the function $\ln r$ and $r -1$ coincide at $r = 1$,
+        \item the function $r - 1$ has a slope $1$ throughout,
+        \item $\frac{d}{dr} \ln(r) = \frac{1}{r} < 1$, for $r > 1$,
+        \item $\frac{d}{dr} \ln(r) = \frac{1}{r} > 1$, for $r < 1$.
+    \end{citemize}
+\end{proof}
+% TODO: add graph of ln(r) and (r - 1)
+
+\begin{theorem}[Entropy Bounds]
+    The entropy of a discrete random variable $S \in |\mathcal{A}|$ satisfies:
+    \[
+        0 \leq H_b(S) \leq \log_b |\mathcal{A}|
+    \]
+    with equality on the left side if and only if $P_S(s) = 1$ for some $s$ (Crazy Distribution), and with equality on the right side if and only if $P_S(s) = \frac{1}{|\mathcal{A}|}$ for all $s$.
+\end{theorem}
+\begin{proof}
+    Let's prove the left side first. Recall that:
+    \[
+        H(S) = \sum_{s \in |\mathcal{A}|} - P_S(s) \log_b (P_S(s))
+    \]
+    and we have:
+    \[
+        -P_S(s) \log_b (P_S(s)) = \begin{cases*}
+            0, & if $P_S(s) \in \{0,1\}$ \\
+            > 0, & if $0 < P_S(s) < 1$
+        \end{cases*}
+    \]
+    Thus we have that $H(S) \geq 0$, with equality if and only if $P_S(s) \in \{0,1\}$ for all $s \in |\mathcal{A}|$. \\
+    To prove the right side, we use a trick that often works in inequalities involving entropies. To prove $A \leq B$ we prove that $A - B \leq 0$ by using the IT Inequality. Thus we have:
+    \begin{align*}
+        H(S) - \log |\mathcal{A}| &= \mathbb{E}\left[- \log P_S(S)\right] - \log |\mathcal{A}| \\
+        &= \mathbb{E}\left[- \log P_S(S) - \log |\mathcal{A}|\right] \\
+        &= \mathbb{E}\left[\log \frac{1}{P_S(s) |\mathcal{A}|}\right] \\
+        &= \sum_{s \in \mathcal{A}} P_S(s) \left[\log \frac{1}{P_S(s) |\mathcal{A}|}\right] \\
+        &\leq \sum_{s \in \mathcal{A}} P_S(s) \left[\frac{1}{P_S(s) |\mathcal{A}|} - 1\right] \log(e) \\
+        &= \log(e) \sum_{s \in \mathcal{A}} \left[\frac{1}{|\mathcal{A}|} - P_S(s)\right] \\
+        &= \log(e)(1-1) = 0
+    \end{align*}
+    with equality if and only if $P_S(s) |\mathcal{A}| = 1$ for all $s$.
+\end{proof}
+
+\begin{eg}
+    Let $S$ be Anne's lock number. Its entropy is maximized if Anne chooses at random over all $10^4$ possibilities. In this case, and only in this case:
+    \[
+        H(S) = \log |\mathcal{A}| = \log 10^4 \approx 13.3 \text{ bits}
+    \]
+\end{eg}
+
+\subsection{Entropy of Multiple Random Variables}
+The formula for the entropy of a random variable can be extended to any number of random variables. If $X$ and $Y$ are two discrete random variable, with (joint) probability distribution $P_{X,Y}$ then:
+\[
+    H(X, Y) = \mathbb{E}\left[- \log P_{X, Y}(X,Y)\right]
+\]
+which means:
+\[
+    H(X,Y) = - \sum_{(x, y) \in \mathcal{X} \times \mathcal{Y}} P_{X, Y}(x, y) \log P_{X, Y}(x,y)
+\]
+
+\begin{eg}
+    Let $P_{X,Y}$ be given by:
+    \[
+        P_{X,Y}(0,0) = \frac{1}{8}, \quad P_{X,Y}(0,1) = \frac{3}{8}, \quad P_{X,Y}(1,0) = \frac{1}{4}, \quad P_{X,Y}(1,1) = \frac{1}{4}
+    \]
+    Thus we can compute the entropy:
+    \[
+        H(X,Y) = -\frac{1}{8} \log_2\frac{1}{8} - \frac{3}{8} \log_2 \frac{3}{8} - \frac{1}{4} \log_2 \frac{1}{4} - \frac{1}{4} - \log_2 \frac{1}{4}
+    \]
+\end{eg}
+We are mainly intrested in sources that emit a large number of random variables. The sequence of random variables can be:
+\begin{citemize}
+    \item Finite, like in $(S_1, \ldots, S_n)$ (random vector).
+    \item Infinite, like in $S_1, S_2, \ldots$ (random sequence, random process), also denoted by $\{S_i\}_{i = 1}^\infty$.
+    \item Sometimes it is convenient to consider $\ldots, S_{-1}, S_0, S_1, \ldots$, also denoted by $\{S_i\}$.
+\end{citemize}
+
+\begin{eg}
+    A sequence of coin flips can be seen as the output of a source $S_1, S_2, \ldots, S_n$ with $S_i \in \mathcal{A} = \{\text{H}, \text{T}\}$, where H stands for head, and T for tail, for $i = 1,\ldots, n$. If the coin is fair, all sequence are equally likely:
+    \[
+        P(s_1, s_2, \ldots, s_n) = \prod_{i}P(s_i) = \frac{1}{2^n} \text{ for all } (s_1, s_2, \ldots, s_n) \in \mathcal{A}^n
     \]
 \end{eg}
