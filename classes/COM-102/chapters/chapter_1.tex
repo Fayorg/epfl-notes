@@ -567,3 +567,314 @@ We are mainly intrested in sources that emit a large number of random variables.
         P(s_1, s_2, \ldots, s_n) = \prod_{i}P(s_i) = \frac{1}{2^n} \text{ for all } (s_1, s_2, \ldots, s_n) \in \mathcal{A}^n
     \]
 \end{eg}
+
+\section{The Fundamental Compression Theorem}
+Our first concrete application of the notion of entropy is in source coding (i.e. data compression). Source coding is the art of representing the output of a source (i.e. a sequence of random variables) using as few bits as possible. 
+
+\begin{definition}[Source]
+    The source is specified by the source alphabet $\mathcal{A}$ and by the distribution statistics.
+\end{definition}
+
+\begin{eg}
+    The source alphabet is $\mathcal{A} = \{a, \ldots, z, 0, \ldots, 9\}$ and the source symbol are independent and identically distributed (i.i.d.) over $\mathcal{A}$.
+\end{eg}
+
+\begin{definition}[Encoder]
+    An encoder is specified by:
+    \begin{citemize}
+        \item the input alphabet $\mathcal{A}$ (the same as the source alphabet),
+        \item the output alphabet $\mathcal{D}$ (typically $\mathcal{D} = \{0, 1\}$),
+        \item the codebook $\mathcal{C}$ which consists of a finite sequence over $\mathcal{C}$,
+        \item by the one-to-one encoding map (encoding function) $\Gamma: \mathcal{A}^k \to \mathcal{C}$, where $k$ is a positive integer. 
+    \end{citemize}
+\end{definition}
+For now, $k = 1$.
+
+\begin{eg}
+    The source alphabet is $\mathcal{A} = \{a,b,c,d\}$, with the following encoding maps:
+    \[
+        \Gamma_O(a) = 00, \quad \Gamma_O(b) = 01, \quad \Gamma_O(c) = 10, \quad \Gamma_O(d) = 11
+    \]
+    \[
+        \Gamma_A(a) = 0, \quad \Gamma_A(b) = 01, \quad \Gamma_A(c) = 10, \quad \Gamma_A(d) = 11
+    \]
+    \[
+        \Gamma_B(a) = 0, \quad \Gamma_B(b) = 10, \quad \Gamma_B(c) = 110, \quad \Gamma_B(d) = 1110
+    \]
+    \[
+        \Gamma_C(a) = 0, \quad \Gamma_C(b) = 01, \quad \Gamma_C(c) = 011, \quad \Gamma_C(d) = 0111
+    \]
+    Thus for example, if we want to encode the word "dac", we have:
+    \[
+        \Gamma_O(dac) = 111010, \quad \Gamma_A(dac) = 11010, \quad \Gamma_B(dac) = 11100110, \quad \Gamma_C(dac) = 01110011
+    \]
+    The source alphabet $\mathcal{A}$, the $k$, the code alphabet $\mathcal{D}$ and the codebook $\mathcal{C}$ are implicitly defined by the encoding maps $\Gamma_O, \Gamma_A, \Gamma_B, \Gamma_C$.
+\end{eg}
+
+\subsection{Decodability}
+We want to avoid the following situation.
+\begin{eg}
+    If we use the encoding map $\Gamma_A$ from the previous example, the word "cbaad" is encoded as $10010011$ which can be decoded as "cbaad" but also as "cacad". 
+\end{eg}
+
+\begin{definition}[Uniquely Decodable Code]
+    The code is uniquely decodable if every concatenation of codewords has a unique parsing into a sequence of codewords.
+\end{definition}
+Uniquely decodable codes allow us to store (or transmit) a sequence of symbols without ambiguity and without separators between codewords.
+
+\begin{eg}
+    The code $\Gamma_A$ is not uniquely decodable since:
+    \[
+        \Gamma_A(bc) = 0110 = \Gamma_A(ada)
+    \]
+    the same happens for $0100$.
+\end{eg}
+
+\begin{eg}
+    The code $\Gamma_B$ is uniquely decodable since every $0$ marks the end of a codeword (i.e. the $0$ plays the role of a separator). The same can be said for $\Gamma_C$ since every codeword starts with $0$.
+\end{eg}
+
+\begin{eg}
+    The code $\Gamma_O$ is uniquely decodable. A fixed-length code is always uniquely decodable.
+\end{eg}
+
+\begin{definition}[Prefix-Free Code]
+    If no codeword is a prefix of another codeword, then the code is called prefix-free.
+\end{definition}
+
+\begin{eg}
+    The codeword $01$ is a prefix of the codeword $011$ hence $\Gamma_C$ is not prefix-free. On the other hand, $10$ is not a prefix of $110$.
+\end{eg}
+Note that:
+\begin{citemize}
+    \item A prefix-free code is always uniquely decodable,
+    \item A uniquely decodable code is not necessarily prefix-free.
+\end{citemize}
+
+\begin{eg}
+    The code $\Gamma_C$ is not prefix-free (since $01$ is a prefix of $011$) but it is uniquely decodable since every codeword starts with $0$. It's reverse (i.e. $\Gamma_B$) is prefix-free.
+\end{eg}
+Remark that a code is uniquely decodable if and only if its reverse is uniquely decodable. A prefix-free code is also called instantaneous code since it can be decoded as soon as the last bit of a codeword is received. 
+
+\subsection{Codes for One Random Variable}
+We start by considering codes that encode one single random variable $S \in \mathcal{A}$. To encode a sequence $S_1, S_2, \ldots$ of random variables, we encode one random variable at a time.
+
+\subsection{Tree of a Code}
+
+\begin{eg}
+    The codes $\Gamma_O$ and $\Gamma_A$, on the alphabet $\mathcal{A} = \{a,b,c,d\}$, where:
+    \[
+        \Gamma_O(a) = 00, \quad \Gamma_O(b) = 01, \quad \Gamma_O(c) = 10, \quad \Gamma_O(d) = 11
+    \]
+    \[
+        \Gamma_A(a) = 0, \quad \Gamma_A(b) = 01, \quad \Gamma_A(c) = 10, \quad \Gamma_A(d) = 11
+    \]
+    They can be represented by the following trees:
+    % TODO: make the trees
+\end{eg}
+
+\begin{definition}[Decoding Tree]
+    A decoding tree can be constructed from a complete tree by keeping only the branches that form a codeword.
+\end{definition}
+
+\begin{definition}[Codeword Length]
+    The length of a codeword is the number of branches that we need to follow in the decoding tree to reach the codeword.
+\end{definition}
+% TODO: add example of codeword length for the previous example
+
+\subsection{Kraft-McMillan}
+
+\begin{theorem}[Kraft Inequality]
+    If a $D$-ary code is uniquely decodable then its codeword lengths $l_1, \ldots, l_M$ satisfy:
+    \[
+        D^{-l_1} + \ldots + D^{-l_M} \leq 1
+    \]
+\end{theorem}
+% \begin{proof}
+%     We will prove a slightly weaker result, namely that the codeword lengths of prefix-free codes satisfy the Kraft inequality.
+% \end{proof}
+Note that the Kraft inequality is a necessary condition for unique decodability but not a sufficient condition.
+
+\begin{eg}
+    For the code $\Gamma_O$, we have:
+    \[
+        2^{-2} + 2^{-2} + 2^{-2} + 2^{-2} = 1
+    \]
+    Hence Kraft's inequality is fulfilled with equality.
+\end{eg}
+
+\begin{eg}
+    For the code $\Gamma_C$, which is given by:
+    \[
+        \Gamma_C(a) = 0, \quad \Gamma_C(b) = 01, \quad \Gamma_C(c) = 011, \quad \Gamma_C(d) = 0111
+    \]
+    the codeword lengths are $l_a = 1$, $l_b = 2$, $l_c = 3$ and $l_d = 4$. Hence we have:
+    \[
+        2^{-1} + 2^{-2} + 2^{-3} + 2^{-4} = \frac{15}{16} = 0.9375 < 1
+    \]
+    Thus Kraft's inequality is fulfilled but $\Gamma_C$ is not uniquely decodable.
+\end{eg}
+Note that the contrapositive of Kraft's inequality is a sufficient condition to prove that a code is not uniquely decodable. 
+
+\begin{eg}
+    For the code $\Gamma_A$, which is given by:
+    \[
+        \Gamma_A(a) = 0, \quad \Gamma_A(b) = 01, \quad \Gamma_A(c) = 10, \quad \Gamma_A(d) = 11
+    \]
+    the codeword lengths are $l_a = 1$, $l_b = 2$, $l_c = 2$ and $l_d = 2$. Hence we have:
+    \[
+        2^{-1} + 2^{-2} + 2^{-2} + 2^{-2} = \frac{5}{4} = 1.25 > 1
+    \]
+    Thus Kraft's inequality is not fulfilled and there exists no uniquely decodable code with the same codeword lengths as $\Gamma_A$.
+\end{eg}
+
+\begin{theorem}[Kraft-McMillan Theorem]
+    For a given set of codeword lengths $l_1, \ldots, l_M$, there exists a uniquely decodable code with these codeword lengths if and only if the Kraft inequality is satisfied i.e. if and only if:
+    \[
+        D^{-l_1} + \ldots + D^{-l_M} \leq 1
+    \]
+\end{theorem}
+
+\begin{eg}
+    Let $l_1 = 1$, $l_2 = 2$, $l_3 = 3$ and $l_4 = 4$. We have:
+    \[
+        2^{-1} + 2^{-2} + 2^{-3} + 2^{-4} = \frac{15}{16} < 1
+    \]
+    Hence there exists a uniquely decodable code with these codeword lengths. For example, we can use the code $\Gamma_C$ from the previous example, which is given by:
+    \[
+        \Gamma_C(a) = 0, \quad \Gamma_C(b) = 01, \quad \Gamma_C(c) = 011, \quad \Gamma_C(d) = 0111
+    \]
+\end{eg}
+
+\subsection{Average Codeword Length}
+The typical use of a code is the encode a sequence of random variables into the corresponding codeword sequence. We are interested in minimizing the average number of bits per symbol in the codeword sequence.
+
+\begin{definition}[Average Codeword Length]
+    Let $l(\Gamma(s))$ be the length of the codeword $\Gamma(s)$ corresponding to the symbol $s$. The average codeword length is defined as:
+    \[
+        L(S, \Gamma) = \sum_{s \in \mathcal{A}} P_S(s) l(\Gamma(s))
+    \]
+\end{definition}
+The units of $L(S, \Gamma)$ are code symbols, when $D = 2$ the units are bits.
+
+\begin{eg}
+    For the following codes:
+    \[
+        \Gamma_O(a) = 00, \quad \Gamma_O(b) = 01, \quad \Gamma_O(c) = 10, \quad \Gamma_O(d) = 11
+    \]
+    \[
+        \Gamma_B(a) = 0, \quad \Gamma_B(b) = 10, \quad \Gamma_B(c) = 110, \quad \Gamma_B(d) = 1110
+    \]
+    \[
+        \Gamma_B(a) = 1110, \quad \Gamma_B(b) = 110, \quad \Gamma_B(c) = 10, \quad \Gamma_B(d) = 0
+    \]
+    \[
+        \Gamma_{B'}(a) = 0, \quad \Gamma_{B'}(b) = 10, \quad \Gamma_{B'}(c) = 110, \quad \Gamma_{B'}(d) = 1110
+    \]
+    associated to the alphabet $\mathcal{A} = \{a,b,c,d\}$, with the following probabilities:
+    \[
+        P_S(a) = 0.05, \quad P_S(b) = 0.05, \quad P_S(c) = 0.1, \quad P_S(d) = 0.8
+    \]
+    we have:
+    \[
+        L(S, \Gamma_B) = 0.05 \cdot 1 + 0.05 \cdot 2 + 0.1 \cdot 3 + 0.8 \cdot 4 = 3.65
+    \]
+    \[
+        L(S, \Gamma_{B'}) = 0.05 \cdot 4 + 0.05 \cdot 3 + 0.1 \cdot 2 + 0.8 \cdot 1 = 1.35
+    \]
+    Thus we have:
+    \[
+        L(\Gamma_{B'}) < L(\Gamma_O) < L(\Gamma_B)
+    \]
+\end{eg}
+We now want to find a lower bound on the average codeword length. 
+
+\begin{theorem}
+    Let $\Gamma: \mathcal{A} \to \mathcal{C}$ be the encoding map of a D-ary code for the random variable $S \in \mathcal{A}$. If the code is uniquely decodable, then the average codeword length is lower bounded by the entropy of $S$, namely:
+    \[
+        H_D(S) \leq L(S, \Gamma)
+    \]
+    with equality if and only if $P_S(s) = D^{-l(\Gamma(s))}$ for all $s \in \mathcal{A}$. An equivalent condition is $l(\Gamma(s)) = \log_D \frac{1}{P_S(s)}$.
+\end{theorem}
+\begin{proof}
+    We have:
+    \begin{align*}
+        H_D(S) - L(S, \Gamma) &= \sum_{i} P_i \log_D \frac{1}{P_i} - \sum_{i} P_i \log_D D^{l_i} \\
+        &= \sum_{i} P_i \log_D \frac{1}{P_i D^{l_i}} \\
+        &\leq \log_D (e) \sum_{i} P_i \left(\frac{1}{P_i D^{l_i}} - 1\right) & \text{(IT inequality)} \\
+        &= \log_D (e) \sum_{i} \left(\frac{1}{D^{l_i}} - P_i\right) \\
+        &= \log_D (e) \left(\sum_{i} \frac{1}{D^{l_i}} - 1\right) \\
+        &\leq 0 & \text{(Kraft's inequality)}
+    \end{align*}
+    The first inequalities hold with equality if and only if, for all $i$, we have:
+    \[
+        P_i = \frac{1}{D^{l_i}}
+    \]
+    When this is the case, the second inequality holds with equality.
+\end{proof}
+
+\begin{eg}
+    Using the same codes as in the previous example, we have:
+    \[
+        H(S) = -2 \cdot 0.05 \log_2 0.05 - 0.1 \log_2 0.1 - 0.8 \log_2 0.8 \approx 1.022 \text{ bits}
+    \]
+    Hence we have:
+    \[
+        H(S) < L(S, \Gamma_{B'}) < L(S, \Gamma_O) < L(S, \Gamma_B)
+    \]
+\end{eg}
+
+\subsection{Shannon-Fanno Codes}
+A good observation from the previous theorem is that the right side of both equations are similar:
+\[
+    L(S, \Gamma) = \sum_{s \in \mathcal{A}} P_S(s) l(\Gamma(s)) \quad \text{and} \quad H_D(S) = \sum_{s \in \mathcal{A}} P_S(s) \log_D \frac{1}{P_S(s)}
+\]
+and thus are equal if and only if $l(\Gamma(s)) = \log_D \frac{1}{P_S(s)}$ for all $s \in \mathcal{A}$.
+
+\begin{definition}[Shannon-Fano Code]
+    A Shannon-Fano code is a code such that for all $s \in \mathcal{A}$, we have:
+    \[
+        l(\Gamma(s)) = \lceil \log_D \frac{1}{P_S(s)} \rceil
+    \]
+\end{definition}
+
+\begin{eg}
+    Let's build a Shannon-Fano code for the random variable $S \in \mathcal{A} = \{a,b,c,d\}$ with the following probabilities:
+    \[
+        P_S(a) = 0.05, \quad P_S(b) = 0.05, \quad P_S(c) = 0.1, \quad P_S(d) = 0.8
+    \]
+    We have:
+    \[
+        l(\Gamma(a)) = \lceil \log_2 \frac{1}{0.05} \rceil = 5, \quad l(\Gamma(b)) = \lceil \log_2 \frac{1}{0.05} \rceil = 5
+    \]
+    \[
+        l(\Gamma(c)) = \lceil \log_2 \frac{1}{0.1} \rceil = 4, \quad l(\Gamma(d)) = \lceil \log_2 \frac{1}{0.8} \rceil = 1
+    \]
+    Hence we can use the following code:
+    \[
+        \Gamma(a) = 00000, \quad \Gamma(b) = 00001, \quad \Gamma(c) = 0001, \quad \Gamma(d) = 1
+    \]
+\end{eg}
+Note that the Shannon-Fano code is not necessarily optimal, since it does not necessarily minimize the average codeword length.
+
+\begin{theorem}
+    The average codeword length of a Shannon-Fano code for the random variable $S$ furfills:
+    \[
+        H_D(S) \leq L(S, \Gamma_{SF}) < H_D(S) + 1
+    \]
+\end{theorem}
+\begin{proof}
+    We will only prove the upper bound, since the lower bound is trivial. We have that:
+    \[
+        l_i = \lceil \log_D \frac{1}{P_i} \rceil < \log_D \frac{1}{P_i} + 1
+    \]
+    Hence we have:
+    \begin{align*}
+        L(S, \Gamma_{SF}) &= \sum_{i} P_i l_i \\
+        &< \sum_{i} P_i \left(\log_D \frac{1}{P_i} + 1\right) \\
+        &= H_D(S) + 1
+    \end{align*}
+\end{proof}
+
+\subsection{Huffman Codes}
+Unlike Shannon-Fano codes, Huffman codes are optimal, meaning that they minimize the average codeword length. To build a Huffman code, we start
