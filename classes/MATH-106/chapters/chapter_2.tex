@@ -1,0 +1,211 @@
+\chapter{$\mathbb{R}^n$ Space}
+Topology is a mathematical discipline that studies the properties of geometric objects that are preserved under continuous transformations (i.e. Studying the object without making "holes" or "destroying" the object). 
+
+\section{$\mathbb{R}^n$ is a Normed Vector Space}
+\begin{definition}[$\mathbb{R}^n$ Space]
+    $\Rn$ is the set of all ordered n-tuples of real numbers. A point (or element) $\bar{x} \in \Rn$ is denoted as:
+    \[
+        \bar{x} = (x_1, x_2, \ldots, x_n) = \begin{bmatrix}
+            x_1 \\
+            x_2 \\
+            \vdots \\
+            x_n
+        \end{bmatrix}
+    \]
+\end{definition}
+Let $\bar{x} = (x_1, x_2, \ldots, x_n)$, $\bar{y} = (y_1, y_2, \ldots, y_n)$ and $\lambda \in \Rn$. We give $\Rn$ two operations:
+\begin{citemize}
+    \item Addition: $\bar{x} + \bar{y} = (x_1 + y_1, x_2 + y_2, \ldots, x_n + y_n)$
+    \item Scalar multiplication: $\lambda \bar{x} = (\lambda x_1, \lambda x_2, \ldots, \lambda x_n)$
+\end{citemize}
+These operations satisfy the following properties for all $\bar{x}, \bar{y} \in \Rn$ and $\lambda, \lambda_1, \lambda_2 \in \R$:
+\begin{citemize}
+    \item $(\lambda_1 \lambda_2) \bar{x} = \lambda_1(\lambda_2 \bar{x}) = \lambda_2 (\lambda_1 \bar{x})$
+    \item $1 \cdot \bar{x} = \bar{x}$
+    \item $(\lambda_1 + \lambda_2) \bar{x} = \lambda_1 \bar{x} + \lambda_2 \bar{x}$
+    \item $\lambda (\bar{x} + \bar{y}) = \lambda \bar{x} + \lambda \bar{y}$
+\end{citemize}
+There exists a basis of the vector space $\Rn$ called the standard basis, which consists of the vectors:
+\[
+    \bar{e}_1 = (1, 0, \ldots, 0), \quad \bar{e}_2 = (0, 1, \ldots, 0), \quad \ldots, \quad \bar{e}_n = (0, 0, \ldots, 1)
+\]
+Any vector $\bar{x} \in \Rn$ can be expressed as a linear combination of the standard basis vectors:
+\[
+    \sum_{i=1}^n x_i \bar{e}_i = (x_1, x_2, \ldots, x_n)
+\]
+
+\subsection{Scalar Product, Euclidean Norm and Cauchy-Schwarz}
+\begin{definition}[Scalar Product]
+    The scalar product (or dot product) of two vectors $\bar{x}, \bar{y} \in \Rn$ is defined as:
+    \[
+        \langle \bar{x}, \bar{y} \rangle = \sum_{i=1}^n x_i y_i = x_1 y_1 + x_2 y_2 + \ldots + x_n y_n
+    \]
+\end{definition}
+
+\begin{definition}[Euclidean Norm]
+    The Euclidean norm (or length) of a vector $\bar{x} \in \Rn$ is defined as:
+    \[
+        \|\bar{x}\| = \sqrt{\langle \bar{x}, \bar{x} \rangle} = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2}
+    \]
+\end{definition}
+We can extract the following properties of the Euclidean norm:
+\begin{citemize}
+    \item $\|\bar{x} \| \geq 0$ and $\|\bar{x} \| = 0$ if and only if $\bar{x} = \bar{0} = (0, 0, \ldots, 0)$ (the zero vector)
+    \item $\|\lambda \bar{x} \| = |\lambda| \|\bar{x} \|$ for all $\lambda \in \R$ and $\bar{x} \in \Rn$
+\end{citemize}
+Thus $\Rn$ is a normed vector space.
+
+\begin{theorem}[Cauchy-Schwarz Inequality]
+    For all $\bar{x}, \bar{y} \in \Rn$, we have:
+    \[
+        |\langle \bar{x}, \bar{y} \rangle| \leq \|\bar{x}\| \cdot \|\bar{y}\|
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\bar{x}, \bar{y} \in \Rn$ and $\lambda \in \R$. We consider the sum:
+    \[
+        S = \sum_{i=1}^n (\lambda x_i + y_i)^2
+    \]
+    We have $S \geq 0$. Expanding $S$, we get:
+    \[
+        0 \leq S = \lambda^2 \sum_{i=1}^n x_i^2 + 2\lambda \sum_{i=1}^n x_i y_i + \sum_{i=1}^n y_i^2 = a\lambda^2 + b\lambda + c
+    \]
+    Since $S \geq 0$ for all $\lambda \in \R$, the discriminant of the quadratic polynomial $a\lambda^2 + b\lambda + c$ must be non-positive:
+    \[
+        b^2 - 4ac = 4 \left(\sum_{i = 1}^{n} x_i y_i\right)^2 - 4 \left(\sum_{i = 1}^{n} x_i^2\right) \left(\sum_{i = 1}^{n} y_i^2\right) \leq 0
+    \]
+    Which implies:
+    \[
+        4 \|\bar{x}\|^2 \|\bar{y}\|^2 \geq 4 \langle \bar{x}, \bar{y} \rangle^2
+    \]
+    Hence:
+    \[
+        |\langle \bar{x}, \bar{y} \rangle| \leq \|\bar{x}\| \cdot \|\bar{y}\|
+    \]
+\end{proof}
+
+\begin{theorem}[Triangle Inequalities]
+    For all $\bar{x}, \bar{y} \in \Rn$, we have:
+    \[
+        \|\bar{x} + \bar{y}\| \leq \|\bar{x}\| + \|\bar{y}\|
+    \]
+    and \[
+        |\|\bar{x}\| - \|\bar{y}\|| \leq \|\bar{x} - \bar{y}\|
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\bar{x}, \bar{y} \in \Rn$. We have:
+    \[
+        \|\bar{x} + \bar{y}\|^2 = \langle \bar{x} + \bar{y}, \bar{x} + \bar{y} \rangle = \|\bar{x}\|^2 + 2\langle \bar{x}, \bar{y} \rangle + \|\bar{y}\|^2
+    \]
+    Using the Cauchy-Schwarz inequality, we get:
+    \[
+        \|\bar{x} + \bar{y}\|^2 \leq (\|\bar{x}\| + \|\bar{y}\|)^2
+    \]
+    Hence:
+    \[
+        \|\bar{x} + \bar{y}\| \leq \|\bar{x}\| + \|\bar{y}\|
+    \]
+    For the second inequality, we have:
+    \[
+        |\|\bar{x}\| - \|\bar{y}\|| = |\|\bar{x}\| - \|\bar{y}\|| = |\|\bar{x}\| - \|\bar{y}\|| \leq \|\|\bar{x}\| - \|\bar{y}\|| + \|\bar{y}\| = \|\bar{x}\| \leq \|\bar{x} - \bar{y}\|
+    \]
+\end{proof}
+
+\subsection{Distance in $\mathbb{R}^n$}
+\begin{definition}[Distance]
+    The distance between two points $\bar{x}, \bar{y} \in \Rn$ is defined as:
+    \[
+        d(\bar{x}, \bar{y}) = \|\bar{x} - \bar{y}\|
+    \]
+\end{definition}
+The distance function $d$ satisfies the following properties for all $\bar{x}, \bar{y}, \bar{z} \in \Rn$:
+\begin{citemize}
+    \item $d(\bar{x}, \bar{y}) = 0$ if and only if $\bar{x} = \bar{y}$
+    \item $d(\bar{x}, \bar{y}) = d(\bar{y}, \bar{x})$ (symmetry)
+    \item $d(\bar{x}, \bar{z}) \leq d(\bar{x}, \bar{y}) + d(\bar{y}, \bar{z})$ (triangle inequality)
+\end{citemize}
+
+\section{Open and Close Subsets of $\mathbb{R}^n$}
+\begin{definition}[Open Ball]
+    For all $\bar{x} \in \Rn$ and $\delta > 0$, the open ball centered at $\bar{x}$ with radius $\delta$ is defined as:
+    \[
+        B(\bar{x}, \delta) = \{\bar{y} \in \Rn : d(\bar{x}, \bar{y}) < \delta\} = \{\bar{y} \in \Rn : \|\bar{x} - \bar{y}\| < \delta\}
+    \]
+\end{definition}
+
+\begin{definition}[Open Subset of $\mathbb{R}^n$]
+    A subset $A \subseteq \Rn$ is called open if:
+    \begin{citemize}
+        \item $A = \emptyset$, or
+        \item For all $\bar{x} \in A$, there exists $\delta > 0$ such that $B(\bar{x}, \delta) \subset A$
+    \end{citemize}
+\end{definition}
+
+\begin{eg}
+    Let there be an open ball in $\R$. We have:
+    \[
+        B(\bar{x}, \delta) = \{\bar{y} \in \R : \|\bar{x} - \bar{y}\| < \delta\} = (\bar{x} - \delta, \bar{x} + \delta) 
+    \]
+    Which is an open interval in $\R$. Hence, the open balls in $\R$ are the open intervals.
+\end{eg}
+
+\begin{definition}[Interior Point]
+    Let $A \subseteq \Rn$ and $\bar{x} \in A$. We say that $\bar{x}$ is an interior point of $A$ if there exists $\delta > 0$ such that $B(\bar{x}, \delta) \subset A$.
+\end{definition}
+The set of all interior points of $A$ is called the interior of $A$ and is denoted by $\mathring{A}$. We clearly have that $\mathring{A} \subset A$ and a set A is open if and only if $A = \mathring{A}$.
+
+\begin{eg}
+    Every open ball $B(\bar{x}, \delta) \subset \Rn$ is an open set. Let $\bar{y} \in B(\bar{x}, \delta)$. We have:
+    \[
+        \|\bar{x} - \bar{y}\| < \delta
+    \]
+    Let $\epsilon = \frac{1}{2} \left(\delta - \|\bar{x} - \bar{y}\|\right) > 0$. We have:
+    \[
+        B(\bar{y}, \epsilon) \subset B(\bar{x}, \delta)
+    \]
+    Which implies that $\bar{y}$ is an interior point of $B(\bar{x}, \delta)$. Since $\bar{y}$ was arbitrary, we conclude that $B(\bar{x}, \delta)$ is an open set.
+\end{eg}
+
+\begin{eg}
+    The set $E = \{\bar{x} \in \Rn : x_i > 0, \forall i = 1, \ldots, n\}$ is open. Let $\bar{y} \in E$. We have:
+    \[
+        B(\bar{y}, \frac{1}{2} \min(y_i)) \subset E
+    \]
+    Which implies that $\bar{y}$ is an interior point of $E$. Since $\bar{y}$ was arbitrary, we conclude that $E$ is an open set.
+\end{eg}
+The empty set $\emptyset$ and the whole space $\Rn$ are open sets.
+
+\begin{eg}
+    Let $n \geq 2$ and $E = \{\bar{x} \in \Rn : x_1 = 0, x_i > 0, i = 2, \ldots, n\}$. We have $\bar{y} = (0, y_2, y_3, \ldots, y_n) \in E$. For all $\delta > 0$, we have:
+    \[
+        \left(\frac{\delta}{2}, y_2, y_3, \ldots, y_n\right) \in B(\bar{y}, \delta) \quad \text{and} \quad \left(\frac{\delta}{2}, y_2, y_3, \ldots, y_n\right) \notin E
+    \]
+    Which implies that $\bar{y}$ is not an interior point of $E$. Since $\bar{y}$ was arbitrary, we conclude that $E$ has no interior points and is not an open set.
+\end{eg}
+The following properties holds for open sets in $\Rn$:
+\begin{citemize}
+    \item The union of any collection of open sets in $\Rn$ is an open set in $\Rn$.
+    \[
+        \bar{x} \in \bigcup_{i \in I} E_i \Implies \exists j : \bar{x} \in E_j \text{ open } \Implies \exists \delta > 0 : B(\bar{x}, \delta) \subset E_j \subset \bigcup_{i \in I} E_i = E
+    \]
+    \item The intersection of a finite number of open sets in $\Rn$ is an open set in $\Rn$.
+    \[
+        \bar{x} \in \bigcap_{i = 1}^n E_i \Implies \forall j : \bar{x} \in E_j \text{ open } \Implies \exists \delta_j > 0 : B(\bar{x}, \delta_j) \subset E_j
+    \]
+    \[
+        \Implies B(\bar{x}, \min(\delta_j)) \subset E_j \forall j \Implies B(\bar{x}, \min(\delta_j)) \subset \bigcap_{i = 1}^n E_i = E
+    \]
+\end{citemize}
+Remark that the intersection of an infinite number of open sets in $\Rn$ is not necessarily an open set in $\Rn$.
+\begin{eg}
+    Let $E$ be the intersection of the open sets $E_n = B(\bar{0}, \frac{1}{n})$ for $n \geq 1$. We have:
+    \[
+        E = \bigcap_{n = 1}^{\infty} E_n = \{\bar{0}\} \subseteq \Rn
+    \]
+    Which is not an open set in $\Rn$.
+\end{eg}
+
+\section{The closure and the boundary of a subset of $\mathbb{R}^n$}
+
+\section{Sequence of Elements of $\mathbb{R}^n$ and Topology of $\mathbb{R}^n$}
