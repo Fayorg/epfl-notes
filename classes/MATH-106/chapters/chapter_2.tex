@@ -201,10 +201,59 @@ Remark that the intersection of an infinite number of open sets in $\Rn$ is not 
 \begin{eg}
     Let $E$ be the intersection of the open sets $E_n = B(\bar{0}, \frac{1}{n})$ for $n \geq 1$. We have:
     \[
-        E = \bigcap_{n = 1}^{\infty} E_n = \{\bar{0}\} \subseteq \Rn
+        E = \bigcap_{n = 1}^{\infty} E_n = \{\bar{0}\} \subset \Rn
     \]
     Which is not an open set in $\Rn$.
 \end{eg}
+
+\begin{definition}[Closed Subset of $\mathbb{R}^n$]
+    A subset $A \subseteq \Rn$ is called closed if its complement $\complement A$ (or $A^c$) $\complement A = \Rn \setminus A$ is an open set in $\Rn$.
+\end{definition}
+
+\begin{eg}
+    The complementary of an open ball $\complement B(\bar{x}, \delta) = \{\bar{y} \in \Rn : \|\bar{x} - \bar{y} \| \geq \delta\}$ is a closed set in $\Rn$ since the complement of $\complement B(\bar{x}, \delta)$ is the open ball $B(\bar{x}, \delta)$.
+\end{eg}
+
+\begin{eg}
+    The point $E = \{\bar{x}\}$ is closed since the complement of $E$ is the open set $\complement E = \{\bar{y} \in \Rn : \bar{y} \neq \bar{x}\} = \{\bar{y} \in \Rn : \|\bar{y} - \bar{x} \| > 0\}$. Thus we have:
+    \[
+        \forall \bar{y} \in \complement E, \quad \exists \delta = \frac{1}{2} \|\bar{y} - \bar{x}\| > 0 \quad : \quad B(\bar{y}, \delta) \subset \complement E
+    \]
+\end{eg}
+
+\begin{eg}
+    The hyperplane $E = \{\bar{x} \in \Rn : x_1 = 0\}$ is closed since the complement of $E$ is the open set $\complement E = \{\bar{y} \in \Rn : y_1 \neq 0\} = \{\bar{y} \in \Rn : |y_1| > 0\}$. Thus we have:
+    \[
+        \forall \bar{y} \in \complement E, \quad \exists \delta = \frac{1}{2} |y_1| > 0 \quad : \quad B(\bar{y}, \delta) \subset \complement E
+    \]
+\end{eg}
+
+\begin{eg}
+    The set $E = \{\bar{x} \in \Rn : x_1 = 0, x_i > 0 \ \forall i \geq 2\}$ ($n \geq 2$) can be defined as:
+    \[
+        E = \{\bar{x} : x_1 = 0\} \cap \{\bar{x} : x_2 > 0\} \cap \ldots \cap \{\bar{x} : x_n > 0\}
+    \]
+    Hence the complement of $E$ can be defined as:
+    \[
+        \complement E = \{\bar{x} : x_1 \neq 0\} \cup \{\bar{x} : x_2 \leq 0\} \cup \ldots \cup \{\bar{x} : x_n \leq 0\}
+    \]
+    We can take $\bar{y} = (0,0,y_3 > 0, \ldots, y_n > 0) \in \complement E$ and thus for all $\delta > 0$, we have:
+    \[
+        (0, \frac{\delta}{2}, y_3, \ldots, y_n) \in B(\bar{y}, \delta) \quad \text{and} \quad (0, \frac{\delta}{2}, y_3, \ldots, y_n) \notin \complement E
+    \]
+    Which implies that $\bar{y}$ is not an interior point of $\complement E$. Since $\bar{y}$ was arbitrary, we conclude that $\complement E$ is not an open set in $\Rn$ and thus $E$ is not a closed set in $\Rn$ ($E$ is not open and not close).
+\end{eg}
+Remark that the only open and closed sets in $\Rn$ are the empty set $\emptyset$ and the whole space $\Rn$ since the complement of $\emptyset$ is $\Rn$ and the complement of $\Rn$ is $\emptyset$. We also have the following properties:
+\begin{citemize}
+    \item The intersection of any collection of closed sets in $\Rn$ is a closed set in $\Rn$ ($\bigcap_{i \in I} E_i$).
+    \[
+        \complement E = \bigcup_{i \in I} \complement E_i \text{ open } \Implies E = \bigcap_{i \in I} E_i \text{ closed }
+    \]
+    \item The union of a finite number of closed sets in $\Rn$ is a closed set in $\Rn$ ($\bigcup_{i = 1}^n E_i$).
+    \[
+        \complement E = \bigcap_{i = 1}^n \complement E_i \text{ open } \Implies E = \bigcup_{i = 1}^n E_i \text{ closed }
+    \]
+\end{citemize}
 
 \section{The closure and the boundary of a subset of $\mathbb{R}^n$}
 
