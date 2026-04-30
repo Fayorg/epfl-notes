@@ -1,0 +1,119 @@
+\chapter{Reel Functions of Several Reel Variables : limits and continuity}
+
+\section{Definitions and Examples}
+\begin{definition}[Function of Several Variables]
+    Let $E \subset \Rn$ be a non-empty set. A function $f: E \to \R$ is an application that assigns to each point $\bar{x} = (x_1, \ldots, x_n) \in E$ a reel number. $E$ is called the domain of $f$.
+\end{definition}
+
+\begin{eg}
+    Consider the function $f(x,y) = \sqrt{1 - (x^2 + y^2)}$. The domain of $f$ is the set of points $(x,y)$ such that:
+    \[
+        1 - (x^2 + y^2) \geq 0 \Implies x^2 + y^2 \leq 1
+    \]
+    Therefore, the domain of $f$ is the closed unit disk in $\R^2$. We can also express $f$ as:
+    \[
+        z = \sqrt{1 - (x^2 + y^2)} \Iff \begin{cases}
+            z \geq 0 \\
+            z^2 = 1 - x^2 - y^2
+        \end{cases} \Iff \begin{cases*}
+            z \geq 0 \\
+            x^2 + y^2 + z^2 = 1
+        \end{cases*}
+    \]
+    The graph of $f$ is the upper hemisphere of the unit sphere in $\R^3$. Graphically:
+  \begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=box,
+            axis equal image,
+            axis on top,
+            z buffer=sort,
+            view={35}{20},
+            xlabel={$x$},
+            ylabel={$y$},
+            zlabel={$z$},
+            xmin=-1, xmax=1,
+            ymin=-1, ymax=1,
+            zmin=0,  zmax=1,
+            xtick={-1,-0.5,0,0.5,1},
+            ytick={-1,-0.5,0,0.5,1},
+            ztick={0,0.5,1},
+            ticks=both,
+            enlargelimits=false,
+        ]
+
+            \addplot3[
+                surf,
+                domain=0:360,
+                y domain=0:1,
+                samples=40,
+                samples y=20,
+                shader=interp,
+                opacity=0.8,
+                colormap={onlyprimary}{
+                    color=(primary)
+                    color=(secondary)
+                },
+            ]
+            ({y*cos(x)}, {y*sin(x)}, {sqrt(1-y^2)});
+
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+\end{eg}
+
+\begin{eg}
+    Consider the function $f(x,y) = 2x + 1$. The domain of $f$ is $\R^2$, since $f$ is defined for all points $(x,y) \in \R^2$. The graph of $f$ is a plane in $\R^3$ given by the equation:
+    \[
+        z = 2x + 1
+    \]
+    Graphically:
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=box,
+                axis equal image,
+                axis on top,
+                z buffer=sort,
+                view={35}{20},
+                xlabel={$x$},
+                ylabel={$y$},
+                zlabel={$z$},
+                xmin=-5, xmax=5,
+                ymin=-5, ymax=5,
+                zmin=-10,  zmax=10,
+                xtick={-5,0,5},
+                ytick={-5,0,5},
+                ztick={-10,-5,0,5,10},
+                ticks=both,
+                enlargelimits=false,
+                unit vector ratio=1 2 0.5,
+            ]
+
+            \addplot3[
+                surf,
+                domain=-5:5,
+                y domain=-5:5,
+                samples=40,
+                samples y=20,
+                shader=interp,
+                colormap={onlyprimary}{
+                    color=(primary)
+                    color=(secondary)
+                },
+            ]
+            ({x}, {y}, {2*x + 1});
+
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\begin{eg}
+    Consider the function $f(x,y) = ax + by + c$ where $a,b,c \in \R$. If $c = 0$, then we have:
+    \begin{align*}
+        F & = \{(x,y,z) \in \R^3 : \langle(x,y,z),(a,b,-1)\rangle = 0 \} \\
+          & = \{(x,y,z) \in \R^3 : (x,y,z) \perp (a,b,-1)\}
+    \end{align*}
+    Which is a plane in $\R^3$ passing through the origin and orthogonal to the vector $(a,b,-1)$. If $c \in \R$, then we need to move the plane by $c$ units in the direction of the z-axis.
+\end{eg}

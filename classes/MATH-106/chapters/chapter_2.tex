@@ -256,5 +256,204 @@ Remark that the only open and closed sets in $\Rn$ are the empty set $\emptyset$
 \end{citemize}
 
 \section{The closure and the boundary of a subset of $\mathbb{R}^n$}
+\begin{definition}[Closure]
+    Let $E$ be a non-empty subset of $\Rn$, the closure of $E$ is defined as the intersection of all closed sets in $\Rn$ that contain $E$, denoted by $\overline{E}$.
+\end{definition}
+Remark that $E \subset \Rn$ is closed if and only if $E = \overline{E}$.
+
+\begin{definition}[Boundary]
+    Let $E$ be a non-empty and proper subset of $\Rn$. Given a point $\bar{x} \in \Rn$, we say that $\bar{x}$ is a boundary point of $E$ if for all open ball $B(\bar{x}, \delta)$ centered at $\bar{x}$ contains at least one point of $E$ and at least one point of $\complement E$.
+\end{definition}
+Remark that the set of all boundary points of $E$ is called the boundary of $E$ and is denoted by $\partial E$.
+
+\begin{eg}
+    Let $E = \{\bar{x} \in \Rn : x_i > 0, \ i = 1, \ldots, n\}$ an open set in $\Rn$. We have:
+    \[
+        \overline{E} = \{\bar{x} \in \Rn : x_i \geq 0, \ i = 1, \ldots, n\}
+    \]
+    and
+    \[
+        \partial E = \{\bar{x} \in \Rn : \exists i : x_i = 0 \text{ and } \forall j \neq i \implies x_j \geq 0\}
+    \]
+\end{eg}
+Let $E \subset \Rn$ be a non-empty subset of $\Rn$. We have the following properties:
+\begin{citemize}
+    \item $\partial E \cap \mathring{E} = \emptyset$ (where $\mathring{E}$ is the interior of $E$)
+    \item $\mathring{E} \cup \partial E = \bar{E}$ (since $\mathring{E} \cup \partial E$ is closed and contains $E$, it's the smallest closed set that contains $E$)
+    \item $\partial E = \bar{E} - \mathring{E} = \bar{E} \cap \complement \mathring{E}$ and thus $\partial E$ is closed.
+    \item $\partial \emptyset = \emptyset$ and $\partial \Rn = \emptyset$
+\end{citemize}
 
 \section{Sequence of Elements of $\mathbb{R}^n$ and Topology of $\mathbb{R}^n$}
+\begin{definition}[Sequence of Elements of $\mathbb{R}^n$]
+    A sequence of elements of $\Rn$ is a function $f : \N \to \Rn$ such that:
+    \[  
+        f: k \to \bar{x}_k = (x_{k,1}, x_{k,2}, \ldots, x_{k,n} ) \in \Rn
+    \]
+    We denote the sequence by $\{\bar{x}_k\}_{k = 0}^{\infty}$.
+\end{definition}
+
+\begin{definition}[Convergence of a Sequence of Elements of $\mathbb{R}^n$]
+    Let $\{\bar{x}_k\}_{k = 0}^{\infty}$ be a sequence of elements of $\Rn$ and $\bar{x} \in \Rn$. We say that $\{\bar{x}_k\}_{k = 0}^{\infty}$ converges to $\bar{x}$ if for all $\epsilon > 0$, there exists $N \in \N$ such that for all $k \geq N$, we have:
+    \[
+        d(\bar{x}_k, \bar{x}) = \| \bar{x}_k - \bar{x} \| \leq \epsilon
+    \]
+    We denote this by $\lim_{k \to \infty} \bar{x}_k = \bar{x}$ or $\bar{x}_k \to \bar{x}$ as $k \to \infty$.
+\end{definition}
+Let $\bar{x} = (x_1, \ldots, x_n)$ and $\bar{x}_k = (x_{1,k}, \ldots, x_{n,k})$ then $\lim_{k \to \infty} \bar{x}_k = \bar{x}$ if and only if for all $j \in \{1, \ldots, n\}$, $\lim_{k \to \infty} x_{j,k} = x_j$. Indeed:
+\[
+    \| \bar{x}_k - \bar{x} \| = \sqrt{\sum_{j = 1}^{n} (x_{j,k} - x_j)^2}
+\]
+We have:
+\begin{citemize}
+    \item If $\| \bar{x}_k - \bar{x} \| \leq \epsilon$, then for each $j$, we have $|x_{j,k} - x_j| \leq \epsilon$.
+    \item If $|x_{j,k} - x_j | \leq \epsilon$ for all $j$, then we have $\| \bar{x}_k - \bar{x} \| \leq \sqrt{n}\epsilon$.
+\end{citemize}
+
+\begin{definition}[Bounded Sequence of Elements of $\mathbb{R}^n$]
+    A sequence $\{\bar{x}_k\}_{k = 0}^{\infty}$ of elements of $\Rn$ is called bounded if it's contained in a closed ball $B(\bar{0}, M)$ for a given $M > 0$, i.e. if there exists $M > 0$ such that for all $k \in \N$, we have $\|\bar{x}_k\| \leq M$.
+\end{definition}
+We have the following properties of convergence in $\Rn$:
+\begin{citemize}
+    \item The limit of a sequence in $\Rn$ is unique.
+    \item Every convergent sequence in $\Rn$ is bounded.
+\end{citemize}
+
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+    Every bounded sequence in $\Rn$ has a convergent subsequence.
+\end{theorem}
+
+\begin{theorem}
+    Let $E \subset \Rn$ be a non-empty subset. $E$ is closed if and only if for every sequence $\{\bar{x}_k\} \subset E$ that converges to $\bar{x} \in \Rn$ has its limit $\bar{x}$ in $E$.
+\end{theorem}
+\begin{proof}
+    % Let's prove both directions of the equivalence:  \\
+    ($\Rightarrow$) By contradiction, let $E$ be closed and let $\bar{x} = \lim_{k \to \infty} \bar{x}_k$ with $\bar{x}_k \in E$. Suppose that $\bar{x} \notin E$. We have that $\bar{x} \in \complement E$ which is open. Hence there exits $\delta > 0$ such that $B(\bar{x}, \delta) \subset \complement E$. This implies that $\{\bar{x}_k\} \cap B(\bar{x}, \delta) = \emptyset$, which contradicts the fact that $\bar{x}_k$ converges to $\bar{x}$. For example, we can take $k_0 \in \N$ such that for all $k \geq k_0$ we have $\bar{x}_k \in \overline{B(\bar{x}, \delta / 2)} \subset B(\bar{x}, \delta)$. \\
+    ($\Leftarrow$) By contraposition, let $E$ be not closed (then $\complement E$ is not open). There exists $\bar{y} \in \complement E$ such that for all $k \in \N^*$, $B(\bar{y}, 1/k) \cap E \neq \emptyset$. Let $y_k \in B(\bar{y}, 1/k) \cap E$, we can construct a sequence $\{\bar{y}_k\} \subset E$ such that $\bar{y}_k \in B(\bar{y}, 1/k)$. Then $\lim_{k \to \infty} \bar{y}_k = \bar{y}$. Since $\bar{y} \notin E$, we conclude that there exists a sequence $\{\bar{y}_k\} \subset E$ that converges to $\bar{y} \notin E$.
+\end{proof}
+Remark that we can build the closure of a set $E$ by taking the limits of all convergent sequences in $E$.
+
+\begin{definition}[Compact Subset of $\mathbb{R}^n$]
+    A non-empty subset $E \subset \Rn$ is called compact if it is closed and bounded.
+\end{definition}
+
+\begin{eg}
+    A closed ball $\overline{B(\bar{x}, \delta)}$ is compact since it's closed and bounded. Since we have:
+    \[
+        \overline{B(\bar{x}, \delta)} \subset \overline{B(\bar{0}, \| \bar{x} \| + \delta)} 
+    \]
+\end{eg}
+
+\begin{eg}
+    The set $E = \{\bar{x} \in \Rn : n \geq 2, \ x_1 = 0\}$ is closed but not bounded and thus not compact. We can take:
+    \[
+        \{\bar{a}_k = (0, k, 0, \ldots)\}_{k \in \N} \subset E
+    \]
+    but the normes of the elements of this sequence are not bounded since $\|\bar{a}_k\| = k$ for all $k \in \N$.
+\end{eg}
+
+\begin{eg}
+    An open ball $B(\bar{x}, \delta)$ is not compact since it's not closed, but it is bounded since:
+    \[
+        B(\bar{x}, \delta) \subset \overline{B(\bar{0}, \| \bar{x} \| + \delta)}
+    \]
+\end{eg}
+
+\subsection{Heine-Borel Theorem}
+\begin{theorem}[Heine-Borel Theorem]
+    A non-empty subset $E \subset \Rn$ is compact if and only if every collection of open sets in $\Rn$ that covers $E$:
+    \[
+        E \subset \bigcup_{i \in I} E_i \text{ with } E_i \text{ open in } \Rn
+    \]
+    where $I$ can be an infinite (countable or uncountable) index set, has a finite sub-collection that also covers $E$:
+    \[
+        E \subset \bigcup_{i = 1}^n E_{j_i} \text{ with } j_i \in I \text{ for all } i = 1, \ldots, n
+    \]
+\end{theorem}
+
+\begin{eg}
+    A line $E \subset \R^2$ is not compact since it's not bounded. We can take the following collection of open sets that covers $E$:
+    \[
+        E \subset \bigcup_{n \in \Z} B\left(n, \frac{2}{3}\right)
+    \]
+    but it is impossible to find a finite sub-collection of this collection that covers $E$ thus $E$ is not compact.
+\end{eg}
+
+\begin{eg}
+    The open interval $E = (0,1) \subset \R$ is not compact since it's not closed. We can take the following collection of open sets that covers $E$:
+    \[
+        E \subset \bigcup_{n \in \N} \left(0, \frac{n}{n + 1}\right)
+    \]
+    but here again, it is impossible to find a finite sub-collection of this collection that covers $E$ thus $E$ is not compact.
+\end{eg}
+
+\begin{eg}
+    Let $S = \{(x,y) \in \R^2 : \sqrt{y \cdot \ln x} < 1\}$. Is $S$ closed or opened? Bounded or unbounded? We have:
+    \begin{citemize}
+        \item We have $\ln x$ in the formula, thus $x > 0$.
+        \item Let $y = 0$, we have $\{y = 0, x > 0\} \subset S$ and $\{x = 1, y \in \R\} \subset S$.
+        \item Let $y > 0$, we have:
+        \[
+            y \ln x \geq 0 \Implies \ln x \geq 0 \Implies x \geq 1
+        \]
+        Thus:
+        \[
+            y \ln x < 1 \Implies y < \frac{1}{\ln x}
+        \]
+        Hence:
+        \[
+            \left\{y > 0, x > 1, y < \frac{1}{\ln x}\right\} \subset S
+        \]
+        \item Let $y < 0$, we have:
+        \[
+            y \ln x \geq 0 \Implies \ln x \leq 0 \Implies 0 < x \leq 1
+        \]
+        Thus:
+        \[
+            y \ln x < 1 \Implies y > \frac{1}{\ln x}
+        \]
+        Hence:
+        \[
+            \left\{y < 0, 0 < x < 1, y > \frac{1}{\ln x}\right\} \subset S
+        \]
+    \end{citemize}
+    Graphically, we have:
+    % TODO: make graph here
+    \begin{center}
+        \begin{tikzpicture}
+            % \begin{axis}[
+            %     axis lines = middle,
+            %     xlabel = $x$,
+            %     ylabel = $y$,
+            %     xtick={0,1},
+            %     ytick={0},
+            %     ymin=-2, ymax=2,
+            %     xmin=-1, xmax=3,
+            %     legend pos=outer north east
+            % ]
+            % \addplot [
+            %     domain=0.01:3, 
+            %     samples=100, 
+            %     color=blue,
+            % ]
+            % {1/ln(x)};
+            % \addlegendentry{$y = \frac{1}{\ln x}$}
+            
+            % \addplot [
+            %     domain=0.01:3, 
+            %     samples=100, 
+            %     color=red,
+            % ]
+            % {-1/ln(x)};
+            % \addlegendentry{$y = -\frac{1}{\ln x}$}
+            
+            % \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    We can see that:
+    \begin{citemize}
+        \item $S$ is not open since any point on the line $x = 1$ will not have an open ball centered at it that is contained in $S$.
+        \item $\complement S$ is not open since any point on the curve $y = \frac{1}{\ln x}$ will not have an open ball centered at it that is contained in $\complement S$ thus $S$ is not closed.
+        \item $S$ is clearly unbounded since, for example, for $x = 1$ we have $y \in \R$ and thus $S$ contains the line $\{x = 1, y \in \R\}$ which is unbounded.
+    \end{citemize}
+\end{eg}
