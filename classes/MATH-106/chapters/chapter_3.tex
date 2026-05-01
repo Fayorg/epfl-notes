@@ -117,3 +117,278 @@
     \end{align*}
     Which is a plane in $\R^3$ passing through the origin and orthogonal to the vector $(a,b,-1)$. If $c \in \R$, then we need to move the plane by $c$ units in the direction of the z-axis.
 \end{eg}
+
+\begin{definition}[Level Set]
+    Let $f: E \to \R$ and $c \in f(E)$. The set:
+    \[
+        \mathcal{N}_f(c) = \{\bar{x} \in E : f(\bar{x}) = c\} \subset E
+    \]
+    is called the level set of $f$ at level $c$.
+\end{definition}
+
+\begin{eg}
+    Consider the function $f(x,y) = \sin (x^2 + y)$ on $E = \R^2$. The level set of $f$ at level $1$ is given by:
+    \begin{align*}
+        \mathcal{N}_f(1) & = \{(x,y) \in \R^2 : y + x^2 = \frac{\pi}{2} + 2k\pi, k \in \Z\} \\
+        &= \{(x,y) \in \R^2 : y = -x^2 + \frac{\pi}{2} + 2k\pi, k \in \Z\}
+    \end{align*}
+    Graphically, the function $z = \sin(x^2 + y)$ is:
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=box,
+                axis equal image,
+                axis on top,
+                z buffer=sort,
+                view={35}{20},
+                xlabel={$x$},
+                ylabel={$y$},
+                zlabel={$z$},
+                xmin=-3, xmax=3,
+                ymin=-3, ymax=3,
+                zmin=-1,  zmax=1,
+                xtick={-2,0,2},
+                ytick={-2,0,2},
+                ztick={-1,-0.5,0,0.5,1},
+                ticks=both,
+                enlargelimits=false,
+                unit vector ratio=2 2 2,
+            ]
+
+            \addplot3[
+                surf,
+                domain=-3:3,
+                y domain=-3:3,
+                samples=40,
+                samples y=40,
+                shader=interp,
+                colormap={onlyprimary}{
+                    color=(primary)
+                    color=(secondary)
+                },
+            ]
+            ({x}, {y}, {sin(deg(x^2 + y))});
+
+            %  \addplot3[
+            %     thick,
+            %     color=red,
+            %     domain=-5:5,
+            %     samples=100,
+            % ]
+            % ({x}, {-x^2 + pi/2}, {1});
+
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\section{Limits and Continuity}
+\begin{definition}[Limit of a Function at a Point]
+    A function $f$ defined on a neighborhood of a point $\bar{x}_0$ (but maybe not defined at $\bar{x}_0$), has a limit $l \in \R$ when $\bar{x}$ tends to $\bar{x}_0$ if for every $\epsilon > 0$, there exists $\delta > 0$ such that for every $\bar{x} \in E$ and $0 < \| \bar{x} - \bar{x}_0 \| \leq \delta$ we have:
+    \[
+        |f(\bar{x}) - l| \leq \epsilon
+    \]
+    denoted by $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = l$
+\end{definition}
+
+\begin{definition}[Continuity at a Point]
+    Let $\bar{x}_0 \in E$ be an exterior point of $E$. Then $f: E \to \R$ is continuous at:
+    \[
+        \bar{x} = \bar{x}_0 \Iff \lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = f(\bar{x}_0)
+    \]
+\end{definition}
+
+\begin{eg}
+    Consider the function $f(x,y) = x + 2y$ and $(x_0, y_0) \in \R^2$. We have:
+    \[
+        \lim_{(x,y) \to (x_0, y_0)} (x + 2y) = x_0 + 2y_0
+    \]
+    Let's show that this function is continuous on $\R^2$. Let $\epsilon > 0$, we have:
+    \begin{align*}
+        |f(x,y) - f(x_0, y_0)| &= |(x + 2y) - (x_0 + 2y_0)| \leq |x - x_0| + 2|y - y_0| \\
+        & \leq \sqrt{(x - x_0)^2 + (y - y_0)^2} + 2\sqrt{(x - x_0)^2 + (y - y_0)^2} \\
+        &= 3\sqrt{(x - x_0)^2 + (y - y_0)^2} \leq 3 \delta \leq \epsilon
+    \end{align*}
+    If we choose $\delta = \frac{\epsilon}{3}$, then we have shown that $f$ is continuous at $(x_0, y_0)$. Since $(x_0, y_0)$ is arbitrary, we conclude that $f$ is continuous on $\R^2$.
+\end{eg}
+
+\begin{eg}
+    Consider the function $f: \R^2 \to \R$, $(x_0, y_0) \in \R^2$ and $f(x,y) = x \cdot y$. We have: 
+    \[
+        \lim_{(x,y) \to (x_0, y_0)} x \cdot y = x_0 \cdot y_0
+    \]
+    Suppose that $x_0 \neq 0$ (the case $x_0 = 0$ is easy). Let $\epsilon > 0$, we have:
+    \[
+        |f(x,y) - f(x_0, y_0)| = |x \cdot y - x_0 \cdot y_0| = |(x - x_0)y + x_0(y-y_0)| \leq |x - x_0||y| + |x_0||y-y_0|
+    \]
+    Let's bound both terms. We have:
+    \[
+        |y-y_0| |x_0| \leq \sqrt{(x-x_0)^2 + (y-y_0)^2} \cdot |x_0| \leq \delta |x_0| \leq \frac{\epsilon}{2}
+    \]
+    Thus we can choose $\delta = \frac{\epsilon}{2 |x_0|}$ (since $x_0 \neq 0$). Now we need to bound the other term, we have:
+    \[
+        |x - x_0| |y| \leq \sqrt{(x-x_0)^2 + (y-y_0)^2} \cdot \underbrace{|y|}_{\leq |y_0| + \delta} \leq \delta \underbrace{(|y_0| + \delta)}_{\text{we choose } \delta \leq 1} \leq \delta (|y_0| + 1) \leq \frac{\epsilon}{2}
+    \]
+    Thus we can choose $\delta = \min\left(1, \frac{\epsilon}{2(|y_0| + 1)}, \frac{\epsilon}{2 |x_0|}\right)$, which shows that $f$ is continuous at $(x_0, y_0)$. Since $(x_0, y_0)$ is arbitrary, we conclude that $f$ is continuous on $\R^2$.
+\end{eg}
+
+\begin{theorem}[Caracterization of Limits from Sequences]
+    A function $f: E \to \R$ defined in a neighborhood of $\bar{x}_0$ has a limit $l \in \R$ when $\bar{x} \to \bar{x}_0$ if and only if for every sequence $\{\bar{a}_k\}$ in $\{\bar{x} \in E : \bar{x} \neq \bar{x}_0\}$ that converges to $\bar{x}_0$, the sequence $\{f(\bar{a}_k)\}$ converges to $l$.
+\end{theorem}
+\begin{proof}
+    ($\Rightarrow$) Let's suppose that $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = l$. Then for all $\epsilon > 0$, there exists $\delta > 0$ such that, for all $\bar{x}$ we have:
+    \[
+        0 < \|\bar{x} - \bar{x}_0 \| \leq \delta \Implies |f(\bar{x}) - l| \leq \epsilon
+    \]
+    If $\{\bar{a}_k\} \to \bar{x}_0$ for the same $\delta > 0$, then there exists $k_0$ such that, for all $k \geq k_0$ we have: 
+    \[
+        \| \bar{a}_k - \bar{x}_0 \| \leq \delta \Implies |f(\bar{a}_k) - l| \leq \epsilon
+    \]
+    Hence $\{f(\bar{a}_k)\} \to l$. \\
+    ($\Leftarrow$) By contraposition, let's suppose that $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) \neq l$. Then there exits $\epsilon > 0$ such that for all $\delta > 0$ there exists $\bar{x}_\delta$ with $\|\bar{x}_\delta - \bar{x}_0\| \leq \delta$ and $|f(\bar{x}_\delta)| \leq \epsilon$. By choosing $\delta = \frac{1}{k}$ for $k \in \N^*$, we obtain a sequence $\{\bar{x}_k\}$ such that:
+    \[
+        \| \bar{x}_k - \bar{x}_0 \| \leq \frac{1}{k}
+    \]
+    thus $\bar{x}_k \to \bar{x}_0$ but $|f(\bar{x}_k) - l| > \epsilon$ for all $k$. Hence $\{f(\bar{x}_k)\}$ does not converge to $l$.
+\end{proof}
+Let $f,g: E \subset \Rn \to \R$ such that $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = l_1$ and $\lim_{\bar{x} \to \bar{x}_0} g(\bar{x}) = l_2$. The following algebraic operations on limits can be easily deduced from the previous theorem and the corresponding properties of limits of sequences:
+\begin{citemize}
+    \item $\lim_{\bar{x} \to \bar{x}_0} (\alpha f + \beta g)(\bar{x}) = \alpha l_1 + \beta l_2$
+    \item $\lim_{\bar{x} \to \bar{x}_0} (f \cdot g)(\bar{x}) = l_1l_2$ 
+    \item If $l_2 \neq 0$, then $\lim_{\bar{x} \to \bar{x}_0} \left(\frac{f}{f}\right) (\bar{x}) = \frac{l_1}{l_2}$
+\end{citemize}
+Remark that the caracterization of limits from sequences is generally used to show that a limit does not exist. For example, if we can find two sequences $\{\bar{a}_k\}$ and $\{\bar{b}_k\}$ that converge to $\bar{x}_0$ such that $\{f(\bar{a}_k)\}$ and $\{f(\bar{b}_k)\}$ converge to different limits, then we can conclude that $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x})$ does not exist.
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases}
+            \frac{xy}{x^2 + y^2} & \text{if } (x,y) \neq (0,0) \\
+            0 & \text{if } (x,y) = (0,0)
+        \end{cases}
+    \]
+    Let's show that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. We consider two sequences:
+    \[
+        \bar{a}_k = (1/k, 1/k) \to (0,0) \Implies \lim_{k \to \infty} f(\bar{a}_k) = \lim_{k \to \infty} \frac{1/k \cdot 1/k}{1/k^2 + 1/k^2} = \lim_{k \to \infty} \frac{1/k^2}{2/k^2} = \frac{1}{2}
+    \]
+    \[
+        \bar{b}_k = (1/k, 0) \to (0,0) \Implies \lim_{k \to \infty} f(\bar{b}_k) = \lim_{k \to \infty} \frac{1/k \cdot 0}{1/k^2 + 0} = 0
+    \]
+    Since $\{f(\bar{a}_k)\}$ and $\{f(\bar{b}_k)\}$ converge to different limits, we conclude that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist.
+\end{eg}
+
+\begin{theorem}[Limit Criterion from a Curve]
+    Let $f: D \to \R$ defined on a neighborhood of $\bar{x}_0 \in \Rn$. Then $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = l$ if and only if for every curve $\gamma: [a,b] \to \Rn$ such that $\gamma([a,b]) \subset D \cup \{\bar{x}_0\}$ and $\lim_{t \to a^+}\gamma(t) = \bar{x}_0$
+\end{theorem}
+
+\begin{eg}
+    Like in the previous example, we can show that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist by considering the curve $\gamma: [0,1] \to \R^2$ defined by $\gamma(t) = (t,t)$. We have:
+    \[
+        \lim_{t \to 0^+} f(\gamma(t)) = \lim_{t \to 0^+} \frac{t \cdot t}{t^2 + t^2} = \lim_{t \to 0^+} \frac{t^2}{2t^2} = \frac{1}{2}
+    \]
+    On the other hand, if we consider the curve $\gamma: [0,1] \to \R^2$ defined by $\gamma(t) = (t,0)$, we have:
+    \[
+        \lim_{t \to 0^+} f(\gamma(t)) = \lim_{t \to 0^+} \frac{t \cdot 0}{t^2 + 0} = 0
+    \]
+    Since $\lim_{t \to 0^+} f(\gamma(t))$ converges to different limits for different curves, we conclude that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist.
+\end{eg}
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases*}
+            \frac{x^2 - y^2}{x^2 + y^2} & if $(x,y) \neq (0,0)$ \\
+            0 & if $(x,y) = (0,0)$
+        \end{cases*}
+    \]
+    Let's show that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. We consider the curve $\gamma: [0,1] \to \R^2$ defined by $\gamma(t) = (t,t)$. We have:
+    \[
+        \lim_{t \to 0^+} f(\gamma(t)) = \lim_{t \to 0^+} \frac{t^2 - t^2}{t^2 + t^2} = \lim_{t \to 0^+} 0 = 0
+    \]
+    On the other hand, if we consider the curve $\gamma: [0,1] \to \R^2$ defined by $\gamma(t) = (t,0)$, we have:
+    \[
+        \lim_{t \to 0^+} f(\gamma(t)) = \lim_{t \to 0^+} \frac{t^2 - 0}{t^2 + 0} = \lim_{t \to 0^+} 1 = 1
+    \]
+    Since $\lim_{t \to 0^+} f(\gamma(t))$ converges to different limits for different curves, we conclude that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist.
+\end{eg}
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases*}
+            \frac{x^3 + y^3}{x^2 + y^2} & if $(x,y) \neq (0,0)$ \\
+            0 & if $(x,y) = (0,0)$
+        \end{cases*}
+    \]
+    Let's take the curves $\gamma_1(t) = (t,0)$, $\gamma_2(t) = (0, -t)$ and $\gamma_3(t) = (t,t)$. We have:
+    \[
+        \lim_{t \to 0^+} f(\gamma_1(t)) = \lim_{t \to 0^+} \frac{t^3 + 0}{t^2 + 0} = \lim_{t \to 0^+} t = 0
+    \]
+    \[
+        \lim_{t \to 0^+} f(\gamma_2(t)) = \lim_{t \to 0^+} \frac{0 + (-t)^3}{0 + (-t)^2} = \lim_{t \to 0^+} \frac{-t^3}{t^2} = \lim_{t \to 0^+} -t = 0
+    \]
+    \[
+        \lim_{t \to 0^+} f(\gamma_3(t)) = \lim_{t \to 0^+} \frac{t^3 + t^3}{t^2 + t^2} = \lim_{t \to 0^+} \frac{2t^3}{2t^2} = \lim_{t \to 0^+} t = 0
+    \]
+    Since $\lim_{t \to 0^+} f(\gamma_i(t))$ converges to the same limit for all curves, we cannot conclude that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist but it does not necessarily exist (maybe we can find another curve that does not converge to the same limit).
+\end{eg}
+To show that a limit at $(0,0)$ exists, we can use the polar coordinates. We transform:
+\[
+    x = r \cos \theta \quad y = r \sin \theta
+\]
+where $r \in \R^*$ and $\theta \in [0,2\pi)$. Then we have:
+\[
+    \lim_{(x,y) \to (0,0)} f(x,y) = l \Iff \lim_{r \to 0} f(r \cos \theta, r \sin \theta) = l
+\]
+
+\begin{eg}
+    Let's consider the previous example and show that $\lim_{(x,y) \to (0,0)} f(x,y) = 0$. We have:
+    \[
+        f(r \cos \theta, r \sin \theta) = \frac{r^3 \cos^3 \theta + r^3 \sin^3 \theta}{r^2 \cos^2 \theta + r^2 \sin^2 \theta} = \frac{r^3 (\cos^3 \theta + \sin^3 \theta)}{r^2} = r (\cos^3 \theta + \sin^3 \theta)
+    \]
+    Since $|\cos^3 \theta + \sin^3 \theta| \leq |\cos^3 \theta| + |\sin^3 \theta| \leq 2$, we have:
+    \[
+        |f(r \cos \theta, r \sin \theta)| \leq 2r \to 0
+    \]
+    Hence $\lim_{(x,y) \to (0,0)} f(x,y) = 0$.
+\end{eg}
+
+\begin{theorem}[Sandwich Theorem]
+    Let $f,g,h: E \subset \Rn \to \R$ such that:
+    \begin{citemize}
+        \item $\lim_{\bar{x} \to \bar{x}_0} f(\bar{x}) = \lim_{\bar{x} \to \bar{x}_0} g(\bar{x}) = l$
+        \item $\exists \alpha > 0 : \forall \bar{x} \in B(\bar{x}_0, \alpha) - \{\bar{x}_0\}$, $f(\bar{x}) \leq h(\bar{x}) \leq g(\bar{x})$
+    \end{citemize}
+    Then $\lim_{\bar{x} \to \bar{x}_0} h(\bar{x}) = l$.
+\end{theorem}
+
+\begin{theorem}[Sandwitch Theorem in Polar Coordinates]
+    We have that:
+    \[
+        \lim_{(x,y) \to (x_0, y_0)} f(x,y) = l \Iff \exists \delta > 0 \text{ and } \psi : (0, \delta) \to \R
+    \]
+    such that:
+    \begin{citemize}
+        \item $\forall \phi \in [0, 2\pi]$, $\forall r \in (0, \delta)$ we have $|f(x_0 + r \cos \phi, y_0 + r \sin \phi) - l| \leq \psi(r)$ 
+        \item $\lim_{r \to 0^+} \psi(r) = 0$
+    \end{citemize}
+\end{theorem}
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases*}
+            \frac{4xy^2}{x^2 + y^2 + 3y^4} & if $(x,y) \neq (0,0)$ \\
+            0 & if $(x,y) = (0,0)$
+        \end{cases*}
+    \]
+    Let's show that $\lim_{(x,y) \to (0,0)} f(x,y) = 0$. We have:
+    \[
+        f(r \cos \theta, r \sin \theta) = \frac{4r^3 \cos \theta \sin^2 \theta}{r^2 \cos^2 \theta + r^2 \sin^2 \theta + 3r^4 \sin^4 \theta} = \frac{4r^3 \cos \theta \sin^2 \theta}{r^2 + 3r^4 \sin^4 \theta} = \frac{4r \cos \theta \sin^2 \theta}{1 + 3r^2 \sin^4 \theta}
+    \]
+    Since $|\cos \theta \sin^2 \theta| \leq |\cos \theta| |\sin^2 \theta| \leq 1$, we have:
+    \[
+        |f(r \cos \theta, r \sin \theta)| \leq \frac{4r}{1 + 3r^2 \sin^4 \theta} \leq 4r \to 0
+    \]
+    Hence $\lim_{(x,y) \to (0,0)} f(x,y) = 0$.
+\end{eg}
