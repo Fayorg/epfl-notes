@@ -392,3 +392,191 @@ where $r \in \R^*$ and $\theta \in [0,2\pi)$. Then we have:
     \]
     Hence $\lim_{(x,y) \to (0,0)} f(x,y) = 0$.
 \end{eg}
+Remark that in the Sandwich Theorem, we can use expansion to estimate the functions $f$ and $g$. 
+
+\begin{theorem}
+    Let $D \subset \R^2$, $(x_0,y_0) \in D$ and $g: D \to \R$ defined in the neighborhood of $(x_0, y_0)$. If:
+    \begin{citemize}
+        \item $f(x,y) = (\phi \circ g)(x,y) = \phi(g(x,y))$
+        \item $\lim_{(x,y) \to (x_0, y_0)} g(x,y) = l$
+        \item $\lim_{s \to l} \phi (s) = \phi(l)$ (i.e. $\phi$ is continuous at $l$)
+    \end{citemize}
+    Then $\lim_{(x,y) \to (x_0,y_0)} f(x,y) = \phi(l)$
+\end{theorem}
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases*}
+            \frac{\sin(xy)}{xy} & if $xy \neq 0$ \\
+            1 & otherwise
+        \end{cases*}
+    \]
+    We have:
+    \[
+        f(x,y) = h \circ g (x,y) \quad g(x,y) = xy \quad h(s) = \begin{cases*}
+            \frac{\sin s}{s} & if $s \neq 0$ \\
+            1 & otherwise
+        \end{cases*}
+    \]
+    Thus can compute the limits:
+    \[
+        \lim_{(x,y) \to (x_0, 0)} g(x,y) = \lim_{(x,y) \to (0,y_0)} g(x,y) = 0
+    \]
+    \[
+        \lim_{t \to 0} h(t) = \frac{\sin t}{t} = 1
+    \]
+    We have that $h(t)$ is continuous on $\R$ thus we can apply the previous theorem to conclude that:
+    \[
+        \lim_{(x,y) \to (0,0)} f(x,y) = 1
+    \]
+\end{eg}
+
+\begin{eg}
+    Consider the following function:
+    \[
+        f(x,y) = \begin{cases*}
+            xy \ln (|x| + |y|) & if $(x,y) \neq (0,0)$ \\
+            0 & if $(x,y) = (0,0)$
+        \end{cases*}
+    \]
+    We're looking for a function $g(x,y)$ such that $0 \leq |f(x,y) - 0| \leq g(x,y)$ for $(x,y)$ in a neighborhood of $(0,0)$ and $\lim_{(x,y) \to (0,0)} g(x,y) = 0$. Let $(x,y): \sqrt{x^2 + y^2} \leq 1$, we have:
+    \[
+        |xy| = |x| \cdot |y| \leq |x| \cdot \sqrt{x^2 + y^2} \leq |x|
+    \]
+    \[
+        |xy| = |x| \cdot |y| \leq |y| \cdot \sqrt{x^2 + y^2} \leq |y|
+    \]
+    Thus we get:
+    \[
+        |xy| \leq \frac{1}{2} (|x| + |y|)
+    \]
+    Thus we can choose $g(x,y) = \frac{1}{2} (|x| + |y|) |\ln (|x| + |y|)|$. We have:
+    \[
+        \lim_{(x,y) \to (0,0)} g(x,y) = \lim_{t \to 0^+} \frac{1}{2} t |\ln t| = 0
+    \]
+    Hence $\lim_{(x,y) \to (0,0)} f(x,y) = 0$.
+\end{eg}
+
+\begin{eg}
+    Let's compute the following limit:
+    \[
+        \lim_{(x,y) \to (1,0)} \frac{(x-1)^2 \ln x}{(x-1)^2 + y^2}
+    \]
+    Again, we're looking for a function $g(x,y)$ such that $0 \leq \left|\frac{(x-1)^2 \ln x}{(x-1)^2 + y^2}\right| \leq g(x,y)$ for $(x,y)$ in a neighborhood of $(1,0)$ and $\lim_{(x,y) \to (1,0)} g(x,y) = 0$. We have:
+    \[
+        0 \leq |f(x,y) - 0| = \left|\frac{(x-1)^2 \ln x}{(x-1)^2 + y^2}\right| \leq \frac{(x-1)^2}{(x-1)^2} |\ln x| = |\ln x| = g(x,y)
+    \]
+    We have:
+    \[
+        \lim_{(x,y) \to (1,0)} g(x,y) = \lim_{x \to 1} |\ln x| = 0
+    \]
+    Hence $\lim_{(x,y) \to (1,0)} \frac{(x-1)^2 \ln x}{(x-1)^2 + y^2} = 0$.
+\end{eg}
+
+\begin{eg}
+    Let's compute the following limit:
+    \[
+        \lim_{(x,y) \to (0,0)} \frac{x^2 + \ln (1 + 3y^2)}{\sqrt{x^2 + y^2}}
+    \]
+    Using the expansion of $\ln (1 + 3y^2)$, we have:
+    \[
+        \ln (1 + 3y^2) = 3y^2 + 3y^2 \epsilon(3y^2)
+    \]
+    Thus we get:
+    \[
+        \frac{x^2 + \ln (1 + 3y^2)}{\sqrt{x^2 + y^2}} = \frac{x^2 + 3y^2 + 3y^2 \epsilon(3y^2)}{\sqrt{x^2 + y^2}} = \frac{x^2 + 3y^2}{\sqrt{x^2 + y^2}} + \frac{3y^2 \epsilon(3y^2)}{\sqrt{x^2 + y^2}}
+    \]
+    We compute both limits separately. We have:
+    \[
+        \lim_{(x,y) \to (0,0)} \frac{x^2 + 3y^2}{\sqrt{x^2 + y^2}} = \lim_{r \to 0^+} \frac{r^2 \cos^2 \theta + 3r^2 \sin^2 \theta}{r} = \lim_{r \to 0^+} r (\cos^2 \theta + 3 \sin^2 \theta) = 0
+    \]
+    \[
+        0 \leq \left| \frac{3y^2 \epsilon(3y^2)}{\sqrt{x^2 + y^2}} - 0 \right| \leq \frac{3 |x^2 + y^2|}{\sqrt{x^2 + y^2}} | \epsilon(3y^2)| = 3 \sqrt{x^2 + y^2} |\epsilon(3y^2)| = 0
+    \]
+    Hence $\lim_{(x,y) \to (0,0)} \frac{x^2 + \ln (1 + 3y^2)}{\sqrt{x^2 + y^2}} = 0$.
+\end{eg}
+Remark that the fact that $\lim_{t \to 0} f(t,mt) = l$ for all fixed $m \in \R$, or that $\lim_{r \to 0} f(r \cos \phi, r \sin \phi) = l$ for all fixed $\phi \in [0,2\pi)$ does not necessarily imply that $\lim_{(x,y) \to (0,0)} f(x,y) = l$.
+
+\begin{theorem}[Continuity of a Composite Function]
+    Let $A \subset \Rn \underbrace{\to}_{\bar{g}} B \subset \R^p \underbrace{\to}_{f} \R$. If $g_i$ are continuous at $\bar{a}$ and $f$ is continuous at $g(\bar{a})$, then $f \circ g$ is continuous at $\bar{a}$.
+\end{theorem}
+
+\begin{eg}
+    Let:
+    \[
+        h(x,y) = \sin (x^2 - y^2) \cos (x^2 - y^2)
+    \]
+    We can write $h$ as a composite function:
+    \[
+        h(x,y) = f \circ g (x,y) \quad g(x,y) = x^2 - y^2 \quad f(t) = \sin t \cdot \cos t
+    \]
+    Since $g$ is continuous on $\R^2$ and $f$ is continuous on $\R$, we conclude that $h$ is continuous on $\R^2$. Graphically, the function $z = \sin(x^2 - y^2) \cos (x^2 - y^2)$ is:
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=box,
+                axis equal image,
+                axis on top,
+                z buffer=sort,
+                view={35}{20},
+                xlabel={$x$},
+                ylabel={$y$},
+                zlabel={$z$},
+                xmin=-2, xmax=2,
+                ymin=-2, ymax=2,
+                zmin=-0.5,  zmax=0.5,
+                xtick={-1,0,1},
+                ytick={-1,0,1},
+                ztick={-0.5,0,0.5},
+                ticks=both,
+                enlargelimits=false,
+                unit vector ratio=2 2 3,
+            ]
+
+            \addplot3[
+                surf,
+                domain=-2:2,
+                y domain=-2:2,
+                samples=40,
+                samples y=40,
+                shader=interp,
+                colormap={onlyprimary}{
+                    color=(primary)
+                    color=(secondary)
+                },
+            ]
+            ({x}, {y}, {sin(deg(x^2 - y^2)) * cos(deg(x^2 - y^2))});
+
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{eg}
+
+\section{Maximum and Minimum on a Compact}
+\begin{definition}[Maximum and Minimum]
+    $M$ is the maximum (resp. $m$ the minimum) of $f$ on $E$ if $M = f(\bar{a})$ for a given $\bar{a} \in E$ and $f(\bar{x}) \leq M$ (resp. $f(\bar{x}) \geq m$) for all $\bar{x} \in E$.
+\end{definition}
+
+\begin{eg}
+    Let $f: \R^2 \to \R$, defined by $f(x,y) = \sin^2(xy)$. We have $0 \leq f(x,y) \leq 1$ for all $(x,y) \in \R^2$. Moreover, we have $f(0,0) = 0$ and $f(\pi/2, 1) = 1$. Hence the minimum of $f$ on $\R^2$ is $0$ and the maximum of $f$ on $\R^2$ is $1$.
+\end{eg}
+
+\begin{theorem}
+    A continuous function defined on a compact set $E \subset \Rn$ reaches its maximum and minimum.
+    \[
+        \exists \max_{\bar{x} \in E} f(\bar{x}) \quad \text{and} \quad \exists \min_{\bar{x} \in E} f(\bar{x})
+    \]
+\end{theorem}
+\begin{proof}
+    Let's first prove that the function $f(E)$ is bounded. By contradiction, let's suppose that $f(E)$ is not bounded. Then there exists a sequence $(\bar{x}_k) \subset E$ such that $|f(\bar{x}_k) | \geq k$. Since $E$ is compact, it is bounded. Thus by Bolzano-Weierstrass Theorem, there exists a subsequence $(\bar{x}_{k_p})$ that converges to $\bar{x}_0 \in E$. Since $f$ is continuous, we have:
+    \[
+        \lim_{p \to \infty} f(\bar{x}_{k_p}) = f(\bar{x}_0)
+    \]
+    But $|f(\bar{x}_{k_p})| \geq k_p \to \infty$ as $p \to \infty$, which is a contradiction. Hence $f(E)$ is bounded. \\
+    Let's now show that $f$ reaches its maximum (the minimum is similar). Since the set $f(E) \subset \R$ is bounded, there exists $M = \sup f(E)$. By definition of supremum, there exists a sequence $(\bar{b}_k) \subset E$ such that $f(\bar{b}_k) \to M$. Since $(\bar{b}_k) \subset E$ and $E$ is bounded, by Bolzano-Weierstrass Theorem, there exists a subsequence $(\bar{b}_{k_p})$ that converges to $\bar{b} \in E$. Since $f$ is continuous, we have:
+    \[
+        \lim_{p \to \infty} f(\bar{b}_{k_p}) = f(\bar{b})
+    \]
+    and since $(\bar{b}_{k_p}) \subset (\bar{b}_k)$ we have $f(\bar{b}_{k_p}) \subset f(\bar{b}_k)$ and thus $\lim_{p \to \infty} f(\bar{b}_{k_p}) = M$. Hence $f(\bar{b}) = M$ and $f$ reaches its maximum at $\bar{b}$.
+\end{proof}
