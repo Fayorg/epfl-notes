@@ -1,0 +1,118 @@
+\chapter{Differential Calculus of Functions of Several Variables}
+
+\section{Partial Derivatives and the Gradient}
+
+\begin{definition}[Partial Derivative]
+    Let $f: E \to \R$ be a function where $E \subset \Rn$ is an open subset, and let $\bar{a} = (a_1, a_2, \ldots, a_n) \in E$. Define the function of a single variable:
+    \[
+        g(s) = f(a_1, \ldots, \underbrace{s}_{k\text{-th}}, \ldots, a_n)
+    \]
+    on the domain $\{s \in \R : (a_1, \ldots, s, \ldots, a_n) \in E\}$. If $g$ is differentiable at $a_k$, the $k$-th partial derivative of $f$ at $\bar{a}$ exists and is:
+    \[
+        \frac{\partial f}{\partial x_k}(\bar{a}) = D_k f(\bar{a}) = g'(a_k) = \lim_{t \to 0} \frac{f(\bar{a} + t\bar{e}_k) - f(\bar{a})}{t}
+    \]
+    where $\bar{e}_k = (0, \ldots, \underbrace{1}_{k\text{-th}}, \ldots, 0)$ is the $k$-th standard basis vector.
+\end{definition}
+
+\begin{eg}
+    Let $f(x,y) = \sin(xy)$ on $\R^2$. Treating $y_0$ as a parameter and differentiating with respect to $x$:
+    \[
+        \frac{\partial f}{\partial x}(x_0, y_0) = y_0 \cos(x_0 y_0)
+    \]
+    Similarly, treating $x_0$ as a parameter:
+    \[
+        \frac{\partial f}{\partial y}(x_0, y_0) = x_0 \cos(x_0 y_0)
+    \]
+    We can verify the first result from the definition:
+    \begin{align*}
+        \frac{\partial f}{\partial x}(x_0, y_0) &= \lim_{t \to 0} \frac{\sin((x_0 + t)y_0) - \sin(x_0 y_0)}{t} \\
+        &= \lim_{t \to 0} \frac{\sin(x_0 y_0)\cos(ty_0) + \cos(x_0 y_0)\sin(ty_0) - \sin(x_0 y_0)}{t} \\
+        &= \sin(x_0 y_0) \cdot \lim_{t \to 0} \frac{\cos(ty_0) - 1}{t} + \cos(x_0 y_0) \cdot \lim_{t \to 0} \frac{\sin(ty_0)}{t} \\
+        &= 0 + y_0 \cos(x_0 y_0) = y_0 \cos(x_0 y_0)
+    \end{align*}
+\end{eg}
+In practice, $\frac{\partial f}{\partial x}(x,y)$ at $(x_0, y_0)$ is simply the derivative of $f(x, y)$ with respect to $x$ at $x = x_0$, treating $y$ as a parameter.
+
+\begin{definition}[Gradient]
+    If all partial derivatives of $f: E \to \R$ exist at $\bar{a} \in E$, the gradient of $f$ at $\bar{a}$ is defined as the vector:
+    \[
+        \nabla f(\bar{a}) = \left(\frac{\partial f}{\partial x_1}(\bar{a}), \ldots, \frac{\partial f}{\partial x_n}(\bar{a})\right) \in \Rn
+    \]
+\end{definition}
+The gradient $\nabla f: E \to \Rn$ points in the direction of greatest increase of $f$.
+
+\begin{eg}
+    For $f(x,y) = \sin(xy)$:
+    \[
+        \nabla f(x,y) = \bigl(y\cos(xy),\ x\cos(xy)\bigr) \quad \text{for all } (x,y) \in \R^2
+    \]
+\end{eg}
+
+\begin{definition}[Vector Field]
+    An application $F: \Rn \to \Rn$ is called a vector field. In particular, the gradient $\nabla f: E \to \Rn$ defines a vector field.
+\end{definition}
+
+\begin{eg}
+    Let $f(x,y) = x^2 + y^2$. Then:
+    \[
+        \frac{\partial f}{\partial x}(x,y) = 2x, \quad \frac{\partial f}{\partial y}(x,y) = 2y \quad \Implies \quad \nabla f(x,y) = (2x,\ 2y)
+    \]
+\end{eg}
+
+\section{Directional Derivatives}
+
+Let $E \subset \Rn$ be open, $\bar{a} \in E$, and $\bar{v} \in \Rn \setminus \{\bar{0}\}$. The line through $\bar{a}$ in direction $\bar{v}$ is $l(t) = \bar{a} + t\bar{v}$.
+
+\begin{definition}[Directional Derivative]
+    Let $f: E \to \R$. If the function $g(t) = f(\bar{a} + t\bar{v})$ is differentiable at $t = 0$, the directional derivative of $f$ at $\bar{a}$ in direction $\bar{v}$ is:
+    \[
+        Df(\bar{a},\bar{v}) = \frac{\partial f}{\partial \bar{v}}(\bar{a}) = \lim_{t \to 0} \frac{f(\bar{a} + t\bar{v}) - f(\bar{a})}{t}
+    \]
+\end{definition}
+Remark the following properties of the directional derivative:
+\begin{citemize}
+    \item If $\bar{v} = \bar{e}_i$, then $Df(\bar{a}, \bar{e}_i) = \frac{\partial f}{\partial x_i}(\bar{a})$. The partial derivative is the special case of the directional derivative in the direction of a coordinate axis.
+    \item If all directional derivatives exist at $\bar{a}$ (for every $\bar{v} \neq \bar{0}$), then all partial derivatives exist at $\bar{a}$. The converse is false in general.
+    \item Linearity with respect to scalars: $Df(\bar{a}, \varepsilon\bar{v}) = \varepsilon\, Df(\bar{a}, \bar{v})$ for all $\varepsilon \neq 0$, since:
+    \[
+        Df(\bar{a}, \varepsilon\bar{v}) = \lim_{t \to 0} \frac{f(\bar{a} + t\varepsilon\bar{v}) - f(\bar{a})}{t} = \lim_{s \to 0} \frac{f(\bar{a} + s\bar{v}) - f(\bar{a})}{s/\varepsilon} = \varepsilon\, Df(\bar{a}, \bar{v})
+    \]
+    \item Therefore it suffices to consider unit vectors $\|\bar{v}\| = 1$.
+\end{citemize}
+
+\begin{eg}
+    Compute $Df(\bar{a}, \bar{v})$ for $f(x,y) = \ln(x^2 + y)$ with $\bar{a} = (1, 0)$ and $\bar{v} = (1, \sqrt{3})$.
+    Note that $f$ is defined on $\{(x,y) : x^2 + y > 0\}$. By definition:
+    \begin{align*}
+        Df(\bar{a}, \bar{v}) &= \lim_{t \to 0} \frac{f(1+t,\ t\sqrt{3}) - f(1, 0)}{t} = \lim_{t \to 0} \frac{\ln\bigl((1+t)^2 + t\sqrt{3}\bigr) - \ln(1)}{t} \\
+        &= \lim_{t \to 0} \frac{\ln\bigl(1 + (2 + \sqrt{3})t + t^2\bigr)}{t}
+    \end{align*}
+    Using $\ln(1 + u) = u + O(u^2)$ as $u \to 0$:
+    \[
+        = \lim_{t \to 0} \frac{(2 + \sqrt{3})t + O(t^2)}{t} = 2 + \sqrt{3}
+    \]
+\end{eg}
+
+\section{Differentiability and the Differential}
+
+\begin{definition}[Differentiable Function]
+    Let $f: E \to \R$, $E \subset \Rn$ open, $\bar{a} \in E$. We say $f$ is differentiable (or derivable) at $\bar{a}$ if there exists a linear transformation $L_{\bar{a}}: \Rn \to \R$ such that:
+    \[
+        f(\bar{x}) = f(\bar{a}) + L_{\bar{a}}(\bar{x} - \bar{a}) + r(\bar{x}) \quad \text{with} \quad \lim_{\bar{x} \to \bar{a}} \frac{r(\bar{x})}{\|\bar{x} - \bar{a}\|} = 0
+    \]
+    $L_{\bar{a}}$ is called the differential of $f$ at $\bar{a}$, denoted $df(\bar{a})$.
+\end{definition}
+A linear transformation $T: \Rn \to \R$ satisfies:
+\[
+    T(\alpha\bar{x}_1 + \beta\bar{x}_2) = \alpha T(\bar{x}_1) + \beta T(\bar{x}_2) \quad \forall\, \alpha, \beta \in \R,\ \bar{x}_1, \bar{x}_2 \in \Rn
+\]
+In particular, $T(\bar{0}) = 0$. Any linear transformation $L: \Rn \to \R$ can be written as a scalar product. Setting $\bar{l} = (L(\bar{e}_1), \ldots, L(\bar{e}_n)) \in \Rn$, for any $\bar{v} = (v_1, \ldots, v_n) \in \Rn$:
+\[
+    L(\bar{v}) = L(v_1\bar{e}_1 + \cdots + v_n\bar{e}_n) = v_1 L(\bar{e}_1) + \cdots + v_n L(\bar{e}_n) = \sum_{i=1}^n L(\bar{e}_i)\, v_i = \langle \bar{l},\, \bar{v} \rangle
+\]
+Thus the differential can always be written as a scalar product $L(\bar{v}) = \langle \bar{l}, \bar{v} \rangle$.
+% \textbf{Connection with Analysis I.} For $f: \R \to \R$, differentiability at $a$ means there exists a linear transformation $L_a: \R \to \R$ such that:
+% \[
+%     f(x) = f(a) + L_a(x - a) + r(x) \quad \text{with} \quad \lim_{x \to a} \frac{r(x)}{|x - a|} = 0
+% \]
+% Setting $L_a(x - a) = f'(a)(x - a)$ recovers the classical definition of differentiability from Analysis I.
